@@ -1,0 +1,8 @@
+include README.md README.zh-CN.md LICENSE pyproject.toml AGENTS.md governance.toml requirements-dev.lock
+recursive-include dev *.py
+recursive-include skills *.md *.py *.yaml
+include skills/astrofairy/LICENSE
+recursive-include .claude-plugin *.json
+recursive-include docs *.md
+global-exclude *.py[cod]
+global-exclude __pycache__

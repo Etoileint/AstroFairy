@@ -1,0 +1,4 @@
+interface:
+  display_name: "AstroFairy · 星灵"
+  short_description: "Deliver checked results and reusable workflows"
+  default_prompt: "Use $astrofairy to handle this task and return a usable, checked result."

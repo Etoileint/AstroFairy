@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.fairy/
+.test-runs/
+.evaluation/
+.reference/
+.tools/
+.tmp/
+.cache/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/

@@ -1,0 +1,13 @@
+{
+  "name": "astrofairy",
+  "owner": {
+    "name": "Etoileint"
+  },
+  "plugins": [
+    {
+      "name": "astrofairy",
+      "source": "./",
+      "description": "Structured AI task delivery with traceable checks and reusable workflows"
+    }
+  ]
+}

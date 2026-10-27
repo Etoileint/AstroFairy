@@ -1,0 +1,12 @@
+{
+  "name": "astrofairy",
+  "version": "0.1.0-alpha.1",
+  "description": "Structured AI task delivery with traceable checks and reusable workflows",
+  "author": {
+    "name": "Etoileint"
+  },
+  "license": "Apache-2.0",
+  "skills": [
+    "./skills/astrofairy"
+  ]
+}

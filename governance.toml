@@ -1,0 +1,23 @@
+format = 1
+
+[budgets]
+skill_bytes = 6500
+core_lines = 1500
+core_files = ["skills/astrofairy/scripts/astrofairy/_contracts.py", "skills/astrofairy/scripts/astrofairy/_kernel.py", "skills/astrofairy/scripts/astrofairy/_store.py", "skills/astrofairy/scripts/astrofairy/_runtime.py"]
+
+[[tests.surfaces]]
+path = "skills/astrofairy/scripts/astrofairy/tests"
+top = "skills/astrofairy/scripts"
+
+[[tests.surfaces]]
+path = "dev/tests"
+top = "."
+
+[checks]
+commands = [
+  ["dev/sync_metadata.py", "--check"],
+  ["-m", "skills_ref.cli", "validate", "skills/astrofairy"],
+  ["-m", "ruff", "check", "."],
+  ["-m", "ruff", "format", "--check", "."],
+  ["-m", "mypy"],
+]
