@@ -9,12 +9,26 @@ description = "Structured AI task delivery with traceable checks and reusable wo
 readme = "README.md"
 requires-python = ">=3.12"
 authors = [{name = "Etoileint"}]
-dependencies = []
+dependencies = [
+  "attrs==26.1.0",
+  "filelock==4.2.6",
+  "jsonpointer==3.6",
+  "jsonschema==4.26.0",
+  "jsonschema-specifications==2025.9.1",
+  "referencing==0.37.0",
+  "rpds-py==2026.9.1",
+  "typing-extensions==4.16.0",
+]
 license = "Apache-2.0"
 license-files = ["LICENSE"]
 
 [project.scripts]
 astrofairy = "astrofairy._cli:main"
+
+[project.urls]
+Homepage = "https://github.com/Etoileint/AstroFairy"
+Issues = "https://github.com/Etoileint/AstroFairy/issues"
+Releases = "https://github.com/Etoileint/AstroFairy/releases"
 
 [tool.setuptools.dynamic]
 version = {attr = "astrofairy._version.__version__"}
@@ -26,6 +40,9 @@ include-package-data = false
 where = ["skills/astrofairy/scripts"]
 include = ["astrofairy*"]
 exclude = ["astrofairy.tests*"]
+
+[tool.setuptools.package-data]
+astrofairy = ["_runtime_dependencies.json"]
 
 [tool.ruff]
 target-version = "py312"

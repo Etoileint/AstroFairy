@@ -9,6 +9,34 @@ from astrofairy.tests._support import ROOT, WorkshopTest
 
 
 class CliTests(WorkshopTest):
+    def test_missing_dependencies_are_diagnosed_by_both_entrypoints_without_home_creation(self) -> None:
+        module = (
+            "import runpy,sys;sys.path.insert(0,sys.argv[1]);"
+            "sys.argv=['astrofairy',*sys.argv[2:]];runpy.run_module('astrofairy',run_name='__main__')"
+        )
+        entries = [
+            [sys.executable, "-I", "-S", str(ROOT / "skills/astrofairy/scripts/fairy.py")],
+            [sys.executable, "-I", "-S", "-c", module, str(ROOT / "skills/astrofairy/scripts")],
+        ]
+        for index, entry in enumerate(entries):
+            for operation in ("doctor", "schema", "start"):
+                with self.subTest(entry=index, operation=operation):
+                    home = self.home / f"missing-{index}-{operation}"
+                    arguments = [*entry, "--home", str(home), operation]
+                    if operation == "start":
+                        arguments.extend(["--request", "Work"])
+                    result = subprocess.run(arguments, cwd=ROOT, capture_output=True, text=True, check=False)
+                    data = json.loads(result.stdout)
+                    self.assertEqual(result.stderr, "")
+                    self.assertFalse(home.exists())
+                    if operation == "schema":
+                        self.assertEqual(result.returncode, 0)
+                    elif operation == "doctor":
+                        self.assertFalse(data["ready"])
+                        self.assertEqual(data["runtime"]["error"], "runtime_setup_required")
+                    else:
+                        self.assertEqual(data["error"], "runtime_setup_required")
+
     def test_doctor_rejects_a_file_in_the_data_directory_path(self) -> None:
         blocker = self.home / "not-a-directory"
         blocker.write_text("file", encoding="utf-8")

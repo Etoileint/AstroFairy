@@ -1,6 +1,7 @@
 # ADR-0002: Self-contained standard skill, shared distribution sources
 
-Status: Accepted
+Status: Accepted for layout and shared sources; the dependency-free runtime and `-I -S` execution
+decision below are superseded by [ADR-0005](0005-declared-tool-contracts.md). Historical rationale is retained.
 
 ## Problem
 

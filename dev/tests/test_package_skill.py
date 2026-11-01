@@ -26,7 +26,6 @@ class DistributionTests(unittest.TestCase):
                 [
                     sys.executable,
                     "-I",
-                    "-S",
                     str(skill / "scripts/fairy.py"),
                     "--home",
                     str(folder / "data"),
@@ -44,7 +43,7 @@ class DistributionTests(unittest.TestCase):
             self.assertEqual(json.loads(result.stdout)["action"], "produce")
             self.assertTrue((skill / "LICENSE").is_file())
 
-    def test_packaged_skill_runs_without_checkout_or_installed_package(self) -> None:
+    def test_packaged_skill_uses_prepared_runtime_outside_checkout(self) -> None:
         directory = ROOT / ".test-runs"
         directory.mkdir(exist_ok=True)
         with tempfile.TemporaryDirectory(dir=directory) as temporary:
@@ -62,7 +61,6 @@ class DistributionTests(unittest.TestCase):
                 [
                     sys.executable,
                     "-I",
-                    "-S",
                     str(folder / "unpacked/astrofairy/scripts/fairy.py"),
                     "--home",
                     str(folder / "state"),

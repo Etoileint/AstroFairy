@@ -12,22 +12,40 @@ Give it a task, provide the relevant files, and answer an occasional consequenti
 Receive the result, a concise account of its assumptions and limitations, and a detailed receipt
 when you need to inspect the work.
 
-> Early alpha: the local runtime and portable skill are implemented. Native application discovery,
-> plugin management and update behavior have not been verified in every supported installation target.
+> Early alpha · `0.1.0a1`: the local runtime and portable skill are implemented and tested.
+> Native application discovery, plugin management and update behavior have not been verified in every
+> installation target. See the [release notes and validation scope](docs/releases/v0.1.0a1.md).
+
+For a conceptual walkthrough, read [Understanding AstroFairy](docs/guides/understanding-astrofairy.md)
+(Chinese). The [review workspace](docs/reviews/README.md) contains the full architecture/mechanism inventory
+and preparation for evidence-based review; it does not imply those designs have passed review.
 
 ## Install
 
 Requirements:
 
 - An agent application that supports Agent Skills, local commands and file access.
-- Python 3.12+ for the bundled runtime. No third-party Python packages or additional model API key.
-- Node.js/npm for the [skills CLI](https://github.com/vercel-labs/skills) installer.
+- Python 3.12+ and the bundled hash-locked runtime dependencies. No additional model API key.
+- Its SQLite build must support window functions, materialized CTEs, deterministic callbacks and foreign keys;
+  `doctor` checks these capabilities without creating task data.
+- Node.js 22.20.0+ and npm for the verified [skills CLI](https://github.com/vercel-labs/skills)
+  1.7.4 installer ([published requirements](https://www.npmjs.com/package/skills/v/1.7.4)).
+  Future installer versions may change their requirements; manual copying does not require Node.js.
 - A writable, persistent data directory for task history and reusable assets.
+
+The agent prepares a local virtual environment once, following the [runtime preparation guide](skills/astrofairy/references/runtime.md),
+then reuses it. No global package install or silent dependency download is required.
 
 Install from GitHub into the current project:
 
 ```sh
 npx skills@latest add Etoileint/AstroFairy --skill astrofairy --copy
+```
+
+For this exact release with the verified installer, use:
+
+```sh
+npx skills@1.7.4 add https://github.com/Etoileint/AstroFairy/tree/v0.1.0a1 --skill astrofairy --copy
 ```
 
 The installer lets you select the target agent. For an unattended, user-wide installation, specify
@@ -80,9 +98,23 @@ automatic selection depends on the host application.
 3. **Check:** run applicable mechanical checks and review the artifact against its semantic criteria.
 4. **Deliver:** return the artifact and receipt, with an honest complete, partial, failed or cancelled outcome.
 
-Original inputs and output bytes are retained. Reviews bind to the task revision and artifact version,
+Original inputs and output bytes are retained. Reviews bind to the agreement revision and immutable content,
 so a changed result needs fresh checks. Tool observations and model judgments remain distinguishable.
 The receipt records the goal, assumptions, inputs, actions and review basis for inspection.
+Development currently uses protocol/store format 7. Old stores are refused without migration; the agent
+should use a fresh approved state directory for new tasks.
+
+Agent-facing CLI responses have a fixed byte budget. Larger records remain available through immutable
+documents and free selected fragments, so the agent can inspect the relevant details without repeating
+the full history in every response. Snapshots share unchanged blocks. Selected reads authenticate the
+consumed section; a separate full audit checks the whole document. Users do not manage this navigation.
+This does not bound retained
+storage, replay time or the host's whole conversation context.
+
+Write tools may explicitly declare a trusted read reconciler. An authoritative confirmation can settle
+that exact attempt while preserving its original unknown observation; current artifact checks still apply.
+Conflicting positive evidence remains visible, including after historical closure. Unsupported or
+ambiguous recovery retains partial, failed or cancelled outcomes. See the [recovery protocol](skills/astrofairy/references/review.md).
 
 The host supplies the model and task-specific tools. Document creation, rendering, browsing and other
 specialist capabilities depend on the tools available in that host; AstroFairy does not bundle every
@@ -112,10 +144,15 @@ attestation. An interrupted action with an uncertain result blocks complete deli
 Invocation and content budgets are enforced locally; actual model tokens and wall time remain host-managed.
 See the [architecture and enforcement boundary](docs/guides/architecture.md).
 
+Structured work can require more calls and time than a direct answer, especially for small tasks.
+Controlled examples establish feasibility, not a universal quality, speed or cost advantage. Real-user
+experience, long-term learning benefits and resource tradeoffs remain subjects for observation.
+
 ## Development
 
 ```sh
 python -m venv .venv
+.venv/bin/python -m pip install --require-hashes --only-binary=:all: -r skills/astrofairy/scripts/requirements-runtime.lock
 .venv/bin/python -m pip install -r requirements-dev.lock
 .venv/bin/python -m pip install --no-deps --no-build-isolation -e .
 .venv/bin/python dev/check.py
@@ -147,9 +184,14 @@ python -m astrofairy --home .fairy start --request 'Prepare a source-based proje
 The parser owns command fields, `requirements-dev.lock` owns development tool versions, and
 `governance.toml` declares test surfaces and growth budgets. After changing package metadata or the
 root license, run `python dev/sync_metadata.py`; check mode and CI reject stale generated files.
+Package releases use three numeric components with optional a/b/rc prereleases. The development
+generator uses packaging.Version normalization for plugin SemVer; epoch/post/dev/local forms outside
+the declared profile are rejected before generation. See the [version contract](docs/adr/0007-package-to-plugin-version-contract.md).
 Validation is documented in the [initial report](docs/reports/initial-validation.md) and
 [distribution comparison](docs/reports/mattpocock-alignment.md). Operational details are in the
 [operation guide](docs/guides/operation.md).
+The [repair workspace](docs/repairs/README.md) tracks changes and revalidation after the frozen initial review.
+The [release workflow](docs/guides/releasing.md) describes versioning, checks and artifact publication.
 
 ## Acknowledgments and license
 

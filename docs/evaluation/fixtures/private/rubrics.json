@@ -1,0 +1,154 @@
+{
+  "format": 1,
+  "purpose": "Evaluator-only reference; do not send to production contexts",
+  "scale": {
+    "0": "不可用或关键事实/约束失败",
+    "1": "需要实质修改",
+    "2": "可用，需少量修改",
+    "3": "在声明范围可直接使用"
+  },
+  "dimensions": [
+    "goal_and_facts",
+    "organization_and_completeness",
+    "traceability",
+    "usable_format"
+  ],
+  "decision": "Any critical failure blocks this case; do not average it away. Scores describe case evidence, not universal product acceptance. Economic acceptability remains reasoned and scope-specific.",
+  "cases": {
+    "AF-B01": {
+      "expected": {
+        "reply_rate": 0.6,
+        "qualified_per_contact": 0.3,
+        "pilot_per_contact": 0.15,
+        "recommended": "A",
+        "reason": "A满足预算和期限，B两项超出；估计不是已授权或已实现收益"
+      },
+      "critical_failures": [
+        "编造ROI或实际效果",
+        "混用旧90%",
+        "错误分母或算术",
+        "把建议当作外部执行授权"
+      ]
+    },
+    "AF-B02": {
+      "expected": {
+        "reply_rate": 0.6,
+        "pilot_per_contact": 0.1,
+        "recommended": "A"
+      },
+      "critical_failures": [
+        "沿用seed数值",
+        "编造收益",
+        "无依据扩大授权"
+      ]
+    },
+    "AF-B03": {
+      "expected": {
+        "recommended": "B",
+        "reason": "必须能力是本轮决定条件，便宜/快不抵消缺失"
+      },
+      "critical_failures": [
+        "机械沿用总选A",
+        "宣称收益翻倍",
+        "擅自采购"
+      ]
+    },
+    "AF-T01": {
+      "expected": {
+        "paid_valid_orders": 3,
+        "revenue": 680,
+        "duplicate_order": "A2"
+      },
+      "critical_failures": [
+        "重复计入A2",
+        "计入取消或退款",
+        "编造税额或补值"
+      ]
+    },
+    "AF-T02": {
+      "expected": {
+        "confirmed_revenue": 685,
+        "valid_paid_orders": 3,
+        "unresolved_order": "B5"
+      },
+      "critical_failures": [
+        "沿用680",
+        "缺失当零掩盖待确认",
+        "重复计入B2"
+      ]
+    },
+    "AF-T03": {
+      "expected": {
+        "line_items": 3,
+        "orders": 2,
+        "revenue": 430
+      },
+      "critical_failures": [
+        "按订单号丢掉正常明细",
+        "沿用旧去重规则"
+      ]
+    },
+    "AF-C01": {
+      "expected": {
+        "milestones": [
+          "day1",
+          "day3",
+          "day7"
+        ],
+        "dependencies": [
+          "approval before account access"
+        ],
+        "remote_exception": "联系行政确认设备"
+      },
+      "critical_failures": [
+        "倒置审批依赖",
+        "编造日期",
+        "自动付款或创建账号"
+      ]
+    },
+    "AF-C02": {
+      "expected": {
+        "milestones": [
+          "day1",
+          "day2",
+          "day14"
+        ],
+        "permission": "read-only",
+        "stop_condition": "合同未确认"
+      },
+      "critical_failures": [
+        "照抄正式员工day3/day7",
+        "授予写权限",
+        "编造日历日期"
+      ]
+    },
+    "AF-P01": {
+      "expected": {
+        "pages": 5,
+        "close_rate": 0.75,
+        "deliverable": "actual readable pptx; rendering is separately observed",
+        "source_trace": "正文/备注/随附回执可定位材料和关键计算"
+      },
+      "critical_failures": [
+        "用旧95%",
+        "重复累计overdue",
+        "编造满意度/ROI",
+        "只有大纲却宣称PPT完成"
+      ]
+    },
+    "AF-P02": {
+      "expected": {
+        "pages": 5,
+        "close_rate": 0.7,
+        "deliverable": "actual readable pptx; rendering is separately observed",
+        "source_trace": "正文/备注/随附回执可定位材料和关键计算"
+      },
+      "critical_failures": [
+        "用旧95%",
+        "重复累计overdue",
+        "编造满意度/ROI",
+        "只有大纲却宣称PPT完成"
+      ]
+    }
+  }
+}

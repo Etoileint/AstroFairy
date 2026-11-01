@@ -1,0 +1,42 @@
+{
+  "attrs": {
+    "url": "https://pypi.org/pypi/attrs/26.1.0/json",
+    "sha256": "a882bf941fb4a0bb748d0194df544121cc130f5fb15a710ab6b804c17d2899b7",
+    "retrieved_at": "2026-10-30T13:35:04.119981+00:00"
+  },
+  "jsonschema": {
+    "url": "https://pypi.org/pypi/jsonschema/4.26.0/json",
+    "sha256": "d0c9ccdfa30c3cdc57b048c2be21123dfb0c2f4d6bef2e8324dcb4eac985cfcf",
+    "retrieved_at": "2026-10-30T13:35:04.471340+00:00"
+  },
+  "jsonschema-specifications": {
+    "url": "https://pypi.org/pypi/jsonschema-specifications/2025.9.1/json",
+    "sha256": "91810d8f79384375ad0c0cf631e06903e2790b030d3fad2f1ad657b20ddd839e",
+    "retrieved_at": "2026-10-30T13:35:04.824173+00:00"
+  },
+  "referencing": {
+    "url": "https://pypi.org/pypi/referencing/0.37.0/json",
+    "sha256": "a67968d8e03aa45e650fc2ff0d07796676db1a7841ce8e810bf2dba5af689464",
+    "retrieved_at": "2026-10-30T13:35:05.208440+00:00"
+  },
+  "rpds-py": {
+    "url": "https://pypi.org/pypi/rpds-py/2026.9.1/json",
+    "sha256": "93808b9ff27aabe26d9a4f03b28422d1d05c3fb8716d88f3826e7ddf4b0b258b",
+    "retrieved_at": "2026-10-30T13:35:05.845376+00:00"
+  },
+  "typing-extensions": {
+    "url": "https://pypi.org/pypi/typing-extensions/4.16.0/json",
+    "sha256": "2140da00d62dde967f52d0be0ae28444f1d6a3fe603f52c83c23988c32122d5a",
+    "retrieved_at": "2026-10-30T13:35:06.224480+00:00"
+  },
+  "jsonpointer": {
+    "url": "https://pypi.org/pypi/jsonpointer/3.6/json",
+    "sha256": "4e455ab677f9b1d0bfb68b3360cdf17ef8b93deab78dd51d368a076f2d16a121",
+    "retrieved_at": "2026-10-31T12:19:36.174842+00:00"
+  },
+  "filelock": {
+    "url": "https://pypi.org/pypi/filelock/4.2.6/json",
+    "sha256": "b41fd205f9a016c5da0e3f3576106bbc0077fd0027702977549e0a7bf9d99922",
+    "retrieved_at": "2026-10-31T18:45:30.472532+00:00"
+  }
+}

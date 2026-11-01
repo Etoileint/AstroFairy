@@ -1,0 +1,2907 @@
+{
+  "format": 1,
+  "purpose": "Authoritative candidate sources, not conformance conclusions",
+  "sources": [
+    {
+      "id": "S01",
+      "title": "Agent Skills specification",
+      "authority": "Agent Skills maintainers",
+      "kind": "specification",
+      "url": "https://agentskills.io/specification",
+      "use": "目录、元数据、依赖与按需披露",
+      "limit": "共享格式不保证宿主执行或模型质量",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:46.345094+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://agentskills.io/specification",
+          "status": "retrieved",
+          "resolved_url": "https://agentskills.io/specification",
+          "sha256": "6a3b101e5ef288fba13635375ed7b7e1a5b1cd25f75837603a950fc2186628a4",
+          "bytes": 399865,
+          "snapshot": ".reference/review-preparation/S01-0.source"
+        },
+        {
+          "name": "agentskills-integration",
+          "url": "https://agentskills.io/integrate-skills.md",
+          "status": "retrieved",
+          "resolved_url": "https://agentskills.io/client-implementation/adding-skills-support.md",
+          "sha256": "07511caadbe1bad84d81477d0efce87bc2c7eaff562179522c083910586dfb06",
+          "bytes": 20446,
+          "snapshot": ".evaluation/reviews/R06/primary/sources/agentskills-integration.source",
+          "read_scope": "Intro/tiers lines 1–33; activation/resource/context excerpt lines 235–337 (structured wrapping/resource lazy load/context preservation); not full integration guide",
+          "retrieved_at": "2026-10-28T22:20:34.138950+00:00"
+        },
+        {
+          "url": "https://agentskills.io/integrate-skills.md",
+          "resolved_url": "https://agentskills.io/client-implementation/adding-skills-support.md",
+          "sha256": "07511caadbe1bad84d81477d0efce87bc2c7eaff562179522c083910586dfb06",
+          "bytes": 20446,
+          "snapshot": ".evaluation/reviews/R14/primary/sources/agentskills-integration.source",
+          "retrieved_at": "2026-10-29T10:01:30.869643+00:00",
+          "read_scope": "Redirect resolved to current client-implementation/adding-skills-support.md. Lines1–105 and236–316: progressive loading, repository trust, activation/permission responsibility and wrapping. Not full current guide; old integrate-skills URL is not assumed immutable.",
+          "name": "R14-agentskills-integration",
+          "status": "retrieved"
+        },
+        {
+          "url": "https://agentskills.io/client-implementation/adding-skills-support.md",
+          "resolved_url": "https://agentskills.io/client-implementation/adding-skills-support.md",
+          "retrieved_at": "2026-10-29T11:00:31.322821+00:00",
+          "sha256": "07511caadbe1bad84d81477d0efce87bc2c7eaff562179522c083910586dfb06",
+          "bytes": 20446,
+          "snapshot": ".evaluation/reviews/R03/primary/sources/agentskills-integration.source",
+          "read_scope": "Current client implementation original, selected1–33/91–105/236–266 verified against previously read matching page: progressive disclosure, repository trust, model-driven/explicit activation. Native automatic discovery/UI behavior remains untested.",
+          "name": "R03-agentskills-integration",
+          "status": "retrieved"
+        },
+        {
+          "id": "agent-skills",
+          "url": "https://agentskills.io/specification",
+          "resolved_url": "https://agentskills.io/specification",
+          "sha256": "38d8b73bed4d668189be0939b14f664bc780615fe8707349992875276f70ec75",
+          "bytes": 248967,
+          "retrieved_at": "2026-10-29T18:54:56.119075+00:00",
+          "name": "R10-independent-agent-skills",
+          "status": "retrieved",
+          "snapshot": ".evaluation/reviews/R10/independent-resume/sources/agent-skills.source",
+          "derived_text": ".evaluation/reviews/R10/independent-resume/sources/agent-skills.txt",
+          "read_scope": "Independent selected derived range 165-201; attributed to fresh verifier, not root full-source reading or whole standard certification."
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Prior selected integration reading retained; R14 new current entry redirects to client-implementation/adding-skills-support; new selections recorded separately."
+    },
+    {
+      "id": "S02",
+      "title": "Agent Skills reference implementation",
+      "authority": "agentskills/agentskills maintainers",
+      "kind": "implementation",
+      "url": "https://github.com/agentskills/agentskills",
+      "use": "参考校验与元数据解析",
+      "limit": "工具检查范围不等于规范全部语义",
+      "repository": "agentskills/agentskills",
+      "paths": [
+        "skills-ref/README.md",
+        "skills-ref/src/skills_ref/validator.py"
+      ],
+      "retrieved_at": "2026-10-27T22:59:46.346172+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "skills-ref/README.md",
+          "url": "https://raw.githubusercontent.com/agentskills/agentskills/69ef37e9424c0a7ea9dd2293b559e43ec8176379/skills-ref/README.md",
+          "status": "retrieved",
+          "resolved_url": "https://raw.githubusercontent.com/agentskills/agentskills/69ef37e9424c0a7ea9dd2293b559e43ec8176379/skills-ref/README.md",
+          "sha256": "23945a45bd15d18d7da3652cd4ea6ea66950db464613c4810d7026bd0921eb9f",
+          "bytes": 2166,
+          "snapshot": ".reference/review-preparation/S02-0.source"
+        },
+        {
+          "name": "skills-ref/src/skills_ref/validator.py",
+          "url": "https://raw.githubusercontent.com/agentskills/agentskills/69ef37e9424c0a7ea9dd2293b559e43ec8176379/skills-ref/src/skills_ref/validator.py",
+          "status": "retrieved",
+          "resolved_url": "https://raw.githubusercontent.com/agentskills/agentskills/69ef37e9424c0a7ea9dd2293b559e43ec8176379/skills-ref/src/skills_ref/validator.py",
+          "sha256": "b5ee3d8537c83c959c31c2cb080a5227646ede5aea545f1ac835ed3c4645f6c5",
+          "bytes": 5154,
+          "snapshot": ".reference/review-preparation/S02-1.source"
+        }
+      ],
+      "version": "69ef37e9424c0a7ea9dd2293b559e43ec8176379",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S03",
+      "title": "Matt Pocock skills",
+      "authority": "Matt Pocock",
+      "kind": "reference implementation",
+      "url": "https://github.com/mattpocock/skills",
+      "use": "全部参考实践和当前分发实现",
+      "limit": "参考选择不自动成为行业强制标准",
+      "repository": "mattpocock/skills",
+      "paths": [
+        "README.md",
+        "skills/productivity/writing-for-agents/SKILL.md",
+        "skills/productivity/writing-for-agents/SKILL-MECHANICS.md",
+        "skills/productivity/grilling/SKILL.md",
+        "skills/engineering/retro/SKILL.md",
+        "skills/productivity/teach/SKILL.md",
+        ".claude-plugin/plugin.json",
+        ".agents/adr/0002-ship-as-a-claude-code-plugin.md"
+      ],
+      "retrieved_at": "2026-10-27T22:59:46.346723+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "README.md",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/59db609eb1e18aaf59b63284d0e52255aff0c63c/README.md",
+          "status": "retrieved",
+          "resolved_url": "https://raw.githubusercontent.com/mattpocock/skills/59db609eb1e18aaf59b63284d0e52255aff0c63c/README.md",
+          "sha256": "345041d56cf1411b6b3ca1cc54014d26c563890f817f4cb9e2cb193dcd771a3e",
+          "bytes": 16461,
+          "snapshot": ".reference/review-preparation/S03-0.source"
+        },
+        {
+          "name": "skills/productivity/writing-for-agents/SKILL.md",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/59db609eb1e18aaf59b63284d0e52255aff0c63c/skills/productivity/writing-for-agents/SKILL.md",
+          "status": "retrieved",
+          "resolved_url": "https://raw.githubusercontent.com/mattpocock/skills/59db609eb1e18aaf59b63284d0e52255aff0c63c/skills/productivity/writing-for-agents/SKILL.md",
+          "sha256": "551adca942227b44192edba88acd4e8db911f0121ce58ad16944ccf6a896a74a",
+          "bytes": 10886,
+          "snapshot": ".reference/review-preparation/S03-1.source"
+        },
+        {
+          "name": "skills/productivity/writing-for-agents/SKILL-MECHANICS.md",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/59db609eb1e18aaf59b63284d0e52255aff0c63c/skills/productivity/writing-for-agents/SKILL-MECHANICS.md",
+          "status": "retrieved",
+          "resolved_url": "https://raw.githubusercontent.com/mattpocock/skills/59db609eb1e18aaf59b63284d0e52255aff0c63c/skills/productivity/writing-for-agents/SKILL-MECHANICS.md",
+          "sha256": "c768e6307c7c10728c401c213f2c4ba71c542127eeb7ad2956aabd15a0fa0059",
+          "bytes": 2629,
+          "snapshot": ".reference/review-preparation/S03-2.source"
+        },
+        {
+          "name": "skills/productivity/grilling/SKILL.md",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/59db609eb1e18aaf59b63284d0e52255aff0c63c/skills/productivity/grilling/SKILL.md",
+          "status": "retrieved",
+          "resolved_url": "https://raw.githubusercontent.com/mattpocock/skills/59db609eb1e18aaf59b63284d0e52255aff0c63c/skills/productivity/grilling/SKILL.md",
+          "sha256": "befdff1e27a1dfe2a294d5871169ac1afe16d983911daa4f32627514a48c1e15",
+          "bytes": 2049,
+          "snapshot": ".reference/review-preparation/S03-3.source"
+        },
+        {
+          "name": "skills/engineering/retro/SKILL.md",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/59db609eb1e18aaf59b63284d0e52255aff0c63c/skills/engineering/retro/SKILL.md",
+          "status": "retrieved",
+          "resolved_url": "https://raw.githubusercontent.com/mattpocock/skills/59db609eb1e18aaf59b63284d0e52255aff0c63c/skills/engineering/retro/SKILL.md",
+          "sha256": "33fbc28568e3146f20fd908b12998bc0ab30aa4f4c87288199a40793efa94696",
+          "bytes": 4369,
+          "snapshot": ".reference/review-preparation/S03-4.source"
+        },
+        {
+          "name": "skills/productivity/teach/SKILL.md",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/59db609eb1e18aaf59b63284d0e52255aff0c63c/skills/productivity/teach/SKILL.md",
+          "status": "retrieved",
+          "resolved_url": "https://raw.githubusercontent.com/mattpocock/skills/59db609eb1e18aaf59b63284d0e52255aff0c63c/skills/productivity/teach/SKILL.md",
+          "sha256": "550482c2d674b085c9043b87bfdc14a8f2ec453c736119e7fcbb1e9332bffeba",
+          "bytes": 9733,
+          "snapshot": ".reference/review-preparation/S03-5.source"
+        },
+        {
+          "name": ".claude-plugin/plugin.json",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/59db609eb1e18aaf59b63284d0e52255aff0c63c/.claude-plugin/plugin.json",
+          "status": "retrieved",
+          "resolved_url": "https://raw.githubusercontent.com/mattpocock/skills/59db609eb1e18aaf59b63284d0e52255aff0c63c/.claude-plugin/plugin.json",
+          "sha256": "15a5a7227915917856ea019ad82584ee877309b5bc3cabfb86b83b7e2cc6e238",
+          "bytes": 1690,
+          "snapshot": ".reference/review-preparation/S03-6.source"
+        },
+        {
+          "name": ".agents/adr/0002-ship-as-a-claude-code-plugin.md",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/59db609eb1e18aaf59b63284d0e52255aff0c63c/.agents/adr/0002-ship-as-a-claude-code-plugin.md",
+          "status": "retrieved",
+          "resolved_url": "https://raw.githubusercontent.com/mattpocock/skills/59db609eb1e18aaf59b63284d0e52255aff0c63c/.agents/adr/0002-ship-as-a-claude-code-plugin.md",
+          "sha256": "75216252f259880e7121b75bab2b8d9a571dcbd0bc4dafcc014232c73e295fd4",
+          "bytes": 6562,
+          "snapshot": ".reference/review-preparation/S03-7.source"
+        }
+      ],
+      "version": "59db609eb1e18aaf59b63284d0e52255aff0c63c",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S04",
+      "title": "skills installer",
+      "authority": "vercel-labs/skills maintainers",
+      "kind": "implementation",
+      "url": "https://github.com/vercel-labs/skills",
+      "use": "安装发现、复制、目标应用和更新",
+      "limit": "安装器目标列表不证明应用实际兼容",
+      "repository": "vercel-labs/skills",
+      "paths": [
+        "README.md",
+        "docs/agents.md"
+      ],
+      "retrieved_at": "2026-10-27T22:59:46.349051+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "README.md",
+          "url": "https://raw.githubusercontent.com/vercel-labs/skills/d8eca76d5dbe47df2d146d036e32534b74ece57a/README.md",
+          "status": "retrieved",
+          "resolved_url": "https://raw.githubusercontent.com/vercel-labs/skills/d8eca76d5dbe47df2d146d036e32534b74ece57a/README.md",
+          "sha256": "c390c105dcd4e8acd4af3daefc65a095a91ecfc164267da9c985f9d654131f10",
+          "bytes": 4923,
+          "snapshot": ".reference/review-preparation/S04-0.source"
+        },
+        {
+          "name": "docs/agents.md",
+          "url": "https://raw.githubusercontent.com/vercel-labs/skills/d8eca76d5dbe47df2d146d036e32534b74ece57a/docs/agents.md",
+          "status": "retrieved",
+          "resolved_url": "https://raw.githubusercontent.com/vercel-labs/skills/d8eca76d5dbe47df2d146d036e32534b74ece57a/docs/agents.md",
+          "sha256": "27df62d55936de930a04fcd219b926e1053cd94657c6b54ee6b87a32d0d9860a",
+          "bytes": 9638,
+          "snapshot": ".reference/review-preparation/S04-1.source"
+        },
+        {
+          "name": "R12-skills-cli-readme",
+          "url": "https://raw.githubusercontent.com/vercel-labs/skills/d8eca76d5dbe47df2d146d036e32534b74ece57a/README.md",
+          "resolved_url": "https://raw.githubusercontent.com/vercel-labs/skills/d8eca76d5dbe47df2d146d036e32534b74ece57a/README.md",
+          "sha256": "c390c105dcd4e8acd4af3daefc65a095a91ecfc164267da9c985f9d654131f10",
+          "bytes": 4923,
+          "snapshot": ".evaluation/reviews/R12/primary/sources/skills-cli-readme.source",
+          "retrieved_at": "2026-10-29T19:44:38.644425+00:00",
+          "status": "retrieved",
+          "read_scope": "fixed official source selected65–116 package sync and further official command references; not assumed npm1.7.4 source identity"
+        },
+        {
+          "name": "R12-skills-commands",
+          "url": "https://raw.githubusercontent.com/vercel-labs/skills/d8eca76d5dbe47df2d146d036e32534b74ece57a/docs/commands.md",
+          "resolved_url": "https://raw.githubusercontent.com/vercel-labs/skills/d8eca76d5dbe47df2d146d036e32534b74ece57a/docs/commands.md",
+          "sha256": "ae2b2220a7e58e4083758b6a185c0fc48b99c955f93c8acc8153c12f1ef951ef",
+          "bytes": 15747,
+          "snapshot": ".evaluation/reviews/R12/primary/sources/skills-commands.source",
+          "retrieved_at": "2026-10-29T19:47:33.094558+00:00",
+          "status": "retrieved",
+          "read_scope": "selected install/remove/update options, actual bundled1.7.4 behavior separately probed"
+        },
+        {
+          "name": "R12-skills-agents",
+          "url": "https://raw.githubusercontent.com/vercel-labs/skills/d8eca76d5dbe47df2d146d036e32534b74ece57a/docs/agents.md",
+          "resolved_url": "https://raw.githubusercontent.com/vercel-labs/skills/d8eca76d5dbe47df2d146d036e32534b74ece57a/docs/agents.md",
+          "sha256": "27df62d55936de930a04fcd219b926e1053cd94657c6b54ee6b87a32d0d9860a",
+          "bytes": 9638,
+          "snapshot": ".evaluation/reviews/R12/primary/sources/skills-agents.source",
+          "retrieved_at": "2026-10-29T19:47:33.638768+00:00",
+          "status": "retrieved",
+          "read_scope": "selected five target paths and compatibility caveat; not an app execution guarantee"
+        }
+      ],
+      "version": "d8eca76d5dbe47df2d146d036e32534b74ece57a",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S05",
+      "title": "Claude Code skills",
+      "authority": "Anthropic",
+      "kind": "host contract",
+      "url": "https://code.claude.com/docs/en/skills",
+      "use": "技能加载和厂商扩展",
+      "limit": "只约束该宿主及所核验版本",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:46.349575+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://code.claude.com/docs/en/skills",
+          "status": "retrieved",
+          "resolved_url": "https://code.claude.com/docs/en/skills",
+          "sha256": "df7f5916b82a0f1c5dee5b83ebfbac61db232de3fde96b6d5b6eb5b80501407b",
+          "bytes": 1119917,
+          "snapshot": ".reference/review-preparation/S05-0.source"
+        },
+        {
+          "name": "R12-claude-web-open",
+          "url": "https://code.claude.com/docs/en/plugins-reference",
+          "resolved_url": "https://code.claude.com/docs/en/plugins-reference",
+          "status": "retrieved",
+          "sha256": "bc6275679e5b2f5feaf7410d44455349e4d6c6b11bfed32f27028041c787c30d",
+          "bytes": 32444,
+          "snapshot": ".evaluation/reviews/R12/independent/authority/web-open-3.json",
+          "read_scope": "Actual official webpage tool open/find response, not original HTML. Root selected skills238–248/297/383/392; plugin259/507/529/720–721. Independent full reading scope in report.",
+          "time_limit": "See independent authority manifests; current file mtime is not fabricated exact retrieval time"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S06",
+      "title": "Codex skills",
+      "authority": "OpenAI",
+      "kind": "host contract",
+      "url": "https://developers.openai.com/codex/skills/",
+      "use": "技能发现、脚本和可选元数据",
+      "limit": "只约束该宿主及所核验版本",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:46.351667+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://developers.openai.com/codex/skills/",
+          "status": "retrieved",
+          "resolved_url": "https://learn.chatgpt.com/docs/build-skills",
+          "sha256": "e657e0e3fd937024fa6d686b28b6d54f9dfc637279a71eb564e93532d27f3860",
+          "bytes": 417416,
+          "snapshot": ".reference/review-preparation/S06-0.source"
+        },
+        {
+          "name": "R12-openai-skills",
+          "url": "https://developers.openai.com/codex/skills/",
+          "resolved_url": "https://learn.chatgpt.com/docs/build-skills",
+          "status": "retrieved",
+          "sha256": "0c37c0257f879c989505def2497d8c99ee4059e516e26a6afe6443dc02e85fc1",
+          "bytes": 418508,
+          "snapshot": ".evaluation/reviews/R12/primary/sources/openai-skills.source",
+          "observed_file_mtime": "2026-10-29T19:39:51.272818+00:00",
+          "time_limit": "First fetch did not record exact retrieval timestamp; mtime observation only",
+          "read_scope": "derived705–932 native standalone skills, discovery and optional plugin distribution; no model/desktop task executed"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S07",
+      "title": "Cursor skills",
+      "authority": "Cursor",
+      "kind": "host contract",
+      "url": "https://cursor.com/docs/skills",
+      "use": "技能发现与调用",
+      "limit": "实际支持仍需应用内试验",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:47.381764+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://cursor.com/docs/skills",
+          "status": "retrieved",
+          "resolved_url": "https://cursor.com/docs/skills",
+          "sha256": "abb0613a5403df0137472a0828e507f1129d939107876b3cf1657a0c703a2f1d",
+          "bytes": 490061,
+          "snapshot": ".reference/review-preparation/S07-0.source"
+        },
+        {
+          "name": "R12-cursor-skills",
+          "url": "https://cursor.com/docs/skills",
+          "resolved_url": "https://cursor.com/docs/skills",
+          "sha256": "3552947589f97b09b123e4619a55914b31db2709de363249ab7986664f77289d",
+          "bytes": 474425,
+          "snapshot": ".evaluation/reviews/R12/primary/sources/cursor-skills.source",
+          "retrieved_at": "2026-10-29T19:44:35.728458+00:00",
+          "status": "retrieved",
+          "read_scope": "derived394–445,465–507 local roots/discovery and cloud/plugin boundaries"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S08",
+      "title": "VS Code agent skills",
+      "authority": "Microsoft",
+      "kind": "host contract",
+      "url": "https://code.visualstudio.com/docs/copilot/customization/agent-skills",
+      "use": "Copilot 技能发现及集成",
+      "limit": "VS Code 与独立 CLI 的行为分别核验",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:47.461671+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://code.visualstudio.com/docs/copilot/customization/agent-skills",
+          "status": "retrieved",
+          "resolved_url": "https://code.visualstudio.com/docs/agent-customization/agent-skills",
+          "sha256": "f2a28cfb68dd4d33a8250a93ca9c58c03f237167252575b857a586c93002aad7",
+          "bytes": 157102,
+          "snapshot": ".reference/review-preparation/S08-0.source"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S09",
+      "title": "Gemini CLI skills",
+      "authority": "Google Gemini CLI maintainers",
+      "kind": "host contract",
+      "url": "https://geminicli.com/docs/cli/skills/",
+      "use": "技能发现、激活及信任约定",
+      "limit": "实际支持仍需应用内试验",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:48.016505+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://geminicli.com/docs/cli/skills/",
+          "status": "retrieved",
+          "resolved_url": "https://geminicli.com/docs/cli/skills/",
+          "sha256": "b17895012da7cbefb20291d6210a3b016d0680a53d6fbc4eaed703d9b0f98640",
+          "bytes": 114148,
+          "snapshot": ".reference/review-preparation/S09-0.source"
+        },
+        {
+          "name": "R12-gemini-skills",
+          "url": "https://geminicli.com/docs/cli/skills/",
+          "resolved_url": "https://geminicli.com/docs/cli/skills/",
+          "sha256": "b17895012da7cbefb20291d6210a3b016d0680a53d6fbc4eaed703d9b0f98640",
+          "bytes": 114148,
+          "snapshot": ".evaluation/reviews/R12/primary/sources/gemini-skills.source",
+          "retrieved_at": "2026-10-29T19:44:38.042727+00:00",
+          "status": "retrieved",
+          "read_scope": "derived215–303 discovery/activation consent, aliases and management"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S10",
+      "title": "ISO/IEC/IEEE 42010:2022",
+      "authority": "ISO/IEC/IEEE",
+      "kind": "standard catalog",
+      "url": "https://www.iso.org/standard/74393.html",
+      "use": "架构描述对象、关注点与关系",
+      "limit": "目录和摘要不支持全文条款合规判断；不是架构实现质量认证",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:48.127690+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://www.iso.org/standard/74393.html",
+          "status": "retrieved",
+          "resolved_url": "https://www.iso.org/standard/74393.html",
+          "sha256": "e3f6807d679b5170850bfc2102d1732bf17de5bf50426202ea3a570e29c86863",
+          "bytes": 88114,
+          "snapshot": ".reference/review-preparation/S10-0.source"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Official catalog and abstract only; full standard text not obtained."
+    },
+    {
+      "id": "S11",
+      "title": "ISO/IEC 25010:2023",
+      "authority": "ISO/IEC",
+      "kind": "standard catalog",
+      "url": "https://www.iso.org/standard/78176.html",
+      "use": "质量视角覆盖入口",
+      "limit": "目录和摘要不支持全文条款合规判断",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:48.207470+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://www.iso.org/standard/78176.html",
+          "status": "retrieved",
+          "resolved_url": "https://www.iso.org/standard/78176.html",
+          "sha256": "9f28cd09713b43a1b779df7add292c46414de20dcefc59484ba8528a7ccac45d",
+          "bytes": 92525,
+          "snapshot": ".reference/review-preparation/S11-0.source"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Official catalog and abstract only; full standard text not obtained."
+    },
+    {
+      "id": "S12",
+      "title": "SCXML Recommendation",
+      "authority": "W3C",
+      "kind": "specification",
+      "url": "https://www.w3.org/TR/2015/REC-scxml-20150901/",
+      "use": "状态、事件、转移与终止设计",
+      "limit": "比较语义，不要求星灵使用 XML 或声明 SCXML 合规",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:48.231361+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://www.w3.org/TR/2015/REC-scxml-20150901/",
+          "status": "retrieved",
+          "resolved_url": "https://www.w3.org/TR/2015/REC-scxml-20150901/",
+          "sha256": "25da59a4a475e9751ad855b639c933b2d465911bb7eed7d33ffd600196e2a209",
+          "bytes": 298772,
+          "snapshot": ".reference/review-preparation/S12-0.source"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S13",
+      "title": "SQLite transactions",
+      "authority": "SQLite project",
+      "kind": "official documentation",
+      "url": "https://www.sqlite.org/lang_transaction.html",
+      "use": "事务、隔离与并发写入",
+      "limit": "底层事务保证不自动延伸到外部副作用",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:48.579156+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://www.sqlite.org/lang_transaction.html",
+          "status": "retrieved",
+          "resolved_url": "https://www.sqlite.org/lang_transaction.html",
+          "sha256": "b65dc308fd9e0ce471844c97366a4f5ad3a1f42833a3b19486ad7d6555a8e24e",
+          "bytes": 27068,
+          "snapshot": ".reference/review-preparation/S13-0.source"
+        },
+        {
+          "url": "https://www.sqlite.org/lang_transaction.html",
+          "resolved_url": "https://www.sqlite.org/lang_transaction.html",
+          "sha256": "b65dc308fd9e0ce471844c97366a4f5ad3a1f42833a3b19486ad7d6555a8e24e",
+          "bytes": 27068,
+          "snapshot": ".evaluation/reviews/R14/primary/sources/sqlite-transactions.source",
+          "retrieved_at": "2026-10-29T10:01:31.367176+00:00",
+          "read_scope": "Selected110–155 BEGIN IMMEDIATE and busy/write serialization, implicit/explicit transaction lifetime. Not whole SQLite requirements.",
+          "name": "R14-sqlite-transactions",
+          "status": "retrieved"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S14",
+      "title": "SQLite atomic commit",
+      "authority": "SQLite project",
+      "kind": "official documentation",
+      "url": "https://www.sqlite.org/atomiccommit.html",
+      "use": "崩溃一致性、磁盘与文件系统假设",
+      "limit": "需核验当前连接模式及实际故障行为",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:48.599488+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://www.sqlite.org/atomiccommit.html",
+          "status": "retrieved",
+          "resolved_url": "https://www.sqlite.org/atomiccommit.html",
+          "sha256": "5a5be7b660217c9408c8a81eaf2faa2d08832ed3790f895a0a713916ad856ea1",
+          "bytes": 77968,
+          "snapshot": ".reference/review-preparation/S14-0.source"
+        },
+        {
+          "url": "https://www.sqlite.org/atomiccommit.html",
+          "resolved_url": "https://www.sqlite.org/atomiccommit.html",
+          "sha256": "5a5be7b660217c9408c8a81eaf2faa2d08832ed3790f895a0a713916ad856ea1",
+          "bytes": 77968,
+          "snapshot": ".evaluation/reviews/R14/primary/sources/sqlite-atomic.source",
+          "retrieved_at": "2026-10-29T10:01:31.510560+00:00",
+          "read_scope": "Selected155–185 filesystem/VFS buffering and fsync assumptions. Existing R04 transaction evidence referenced, no fresh power-cut proof.",
+          "name": "R14-sqlite-atomic",
+          "status": "retrieved"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S15",
+      "title": "SQLite FTS5",
+      "authority": "SQLite project",
+      "kind": "implementation",
+      "url": "https://www.sqlite.org/fts5.html",
+      "use": "成熟全文检索候选",
+      "limit": "全文检索与语义检索分别评价，需核对扩展可用性",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:48.864238+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://www.sqlite.org/fts5.html",
+          "status": "retrieved",
+          "resolved_url": "https://www.sqlite.org/fts5.html",
+          "sha256": "de3092630358518a6869bf047055b3938e18b476e3fbc54f4e2146d1e593497f",
+          "bytes": 215354,
+          "snapshot": ".reference/review-preparation/S15-0.source"
+        },
+        {
+          "url": "https://www.sqlite.org/fts5.html",
+          "resolved_url": "https://www.sqlite.org/fts5.html",
+          "retrieved_at": "2026-10-29T12:46:52.929979+00:00",
+          "sha256": "de3092630358518a6869bf047055b3938e18b476e3fbc54f4e2146d1e593497f",
+          "bytes": 215354,
+          "snapshot": ".evaluation/reviews/R07/primary/sources/sqlite-fts5.source",
+          "read_scope": "Official current docs selected613–675 Unicode61,712–777 trigram/limits,1236–1268 bm25. Actual local FTS5 metadata benchmarks separate; not full-spec compliance or semantic-retrieval proof.",
+          "name": "R07-sqlite-fts5",
+          "status": "retrieved"
+        },
+        {
+          "url": "https://www.sqlite.org/eqp.html",
+          "resolved_url": "https://www.sqlite.org/eqp.html",
+          "retrieved_at": "2026-10-29T12:46:52.328261+00:00",
+          "sha256": "9bcf6cac4798d8cacd5418da19c8151f7ad613956a51ee1e52a85618fdc590aa",
+          "bytes": 17415,
+          "snapshot": ".evaluation/reviews/R07/primary/sources/sqlite-eqp.source",
+          "read_scope": "Selected95–113 SCAN/SEARCH and174–198 temporary sorting/index comparison. EQP text is diagnostic and version-sensitive; actual trace query plans retained, not universal query complexity proof.",
+          "name": "R07-sqlite-eqp",
+          "status": "retrieved"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S16",
+      "title": "Python 3.12 sqlite3",
+      "authority": "Python Software Foundation",
+      "kind": "official documentation",
+      "url": "https://docs.python.org/3.12/library/sqlite3.html",
+      "use": "连接、事务和异常契约",
+      "limit": "文档接口契约仍需结合实际 SQLite 版本",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:49.201691+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://docs.python.org/3.12/library/sqlite3.html",
+          "status": "retrieved",
+          "resolved_url": "https://docs.python.org/3.12/library/sqlite3.html",
+          "sha256": "cf425fd15be3911c9bffd72332a6cf247afb30edd0ef1d14d3176c812d246ec8",
+          "bytes": 310373,
+          "snapshot": ".reference/review-preparation/S16-0.source"
+        },
+        {
+          "id": "python-sqlite",
+          "url": "https://docs.python.org/3.12/library/sqlite3.html",
+          "resolved_url": "https://docs.python.org/3.12/library/sqlite3.html",
+          "retrieved_at": "2026-10-29T17:33:52.709481+00:00",
+          "sha256": "cf425fd15be3911c9bffd72332a6cf247afb30edd0ef1d14d3176c812d246ec8",
+          "bytes": 310373,
+          "snapshot": ".evaluation/reviews/R10/primary/sources/python-sqlite.source",
+          "status": "retrieved",
+          "read_scope": "Python3.12 selected derived750–790 Connection.backup signature, concurrency claim and examples. API reused locally; no whole sqlite3 manual review.",
+          "derived_text": ".evaluation/reviews/R10/primary/sources/python-sqlite.txt",
+          "derived_text_sha256": "84f1b84c840f7abc696a36e2732a6fdb52fe1ac792c8e479a533c918be128011",
+          "lines": 1761,
+          "name": "R10-python-sqlite"
+        },
+        {
+          "name": "R12-sqlite-python-floor",
+          "url": "https://docs.python.org/3.12/library/sqlite3.html",
+          "resolved_url": "https://docs.python.org/3.12/library/sqlite3.html",
+          "status": "retrieved",
+          "sha256": "cf425fd15be3911c9bffd72332a6cf247afb30edd0ef1d14d3176c812d246ec8",
+          "bytes": 310373,
+          "snapshot": ".evaluation/reviews/R12/independent/authority/python-sqlite.txt",
+          "read_scope": "Root re-read derived513 minimum3.7.15 and current runtime-version meaning; independent selected broader manual.",
+          "time_limit": "See independent authority manifests; current file mtime is not fabricated exact retrieval time"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S17",
+      "title": "Python 3.12 os",
+      "authority": "Python Software Foundation",
+      "kind": "official documentation",
+      "url": "https://docs.python.org/3.12/library/os.html",
+      "use": "文件权限、替换及同步接口",
+      "limit": "原子替换、持久性与竞态隔离分别核验",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:49.994175+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://docs.python.org/3.12/library/os.html",
+          "status": "retrieved",
+          "resolved_url": "https://docs.python.org/3.12/library/os.html",
+          "sha256": "0fcd482cfe5a5998da64c6100b44d5c7eba8ca29e7c40c7ee13d5911db6e1239",
+          "bytes": 682785,
+          "snapshot": ".reference/review-preparation/S17-0.source"
+        },
+        {
+          "url": "https://docs.python.org/3.12/library/os.html",
+          "resolved_url": "https://docs.python.org/3.12/library/os.html",
+          "sha256": "0fcd482cfe5a5998da64c6100b44d5c7eba8ca29e7c40c7ee13d5911db6e1239",
+          "bytes": 682785,
+          "snapshot": ".evaluation/reviews/R14/primary/sources/python-os.source",
+          "retrieved_at": "2026-10-29T10:01:30.944303+00:00",
+          "read_scope": "Python3.12 selected text1919–1943 fsync,3716–3780 chmod platform limits,4965–5010 replace atomic success/directory fd. Not whole library.",
+          "name": "R14-python-os",
+          "status": "retrieved"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S18",
+      "title": "RFC 8259 JSON",
+      "authority": "IETF / RFC Editor",
+      "kind": "specification",
+      "url": "https://www.rfc-editor.org/rfc/rfc8259.txt",
+      "use": "JSON、编码、互操作性与重复键",
+      "limit": "本地规范化算法不自动等于跨实现规范化标准",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:50.042517+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259.txt",
+          "status": "retrieved",
+          "resolved_url": "https://www.rfc-editor.org/rfc/rfc8259.txt",
+          "sha256": "61a5378f4255c720beb2a4b4a63b29540147c140f36988bf086291989b4cd2d7",
+          "bytes": 28360,
+          "snapshot": ".reference/review-preparation/S18-0.source"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S19",
+      "title": "JSON Schema 2020-12 core",
+      "authority": "JSON Schema project",
+      "kind": "specification",
+      "url": "https://json-schema.org/draft/2020-12/json-schema-core.html",
+      "use": "成熟数据契约和校验方案",
+      "limit": "自有命令字段表不应被误称为完整 JSON Schema",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:50.186773+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://json-schema.org/draft/2020-12/json-schema-core.html",
+          "status": "retrieved",
+          "resolved_url": "https://json-schema.org/draft/2020-12/json-schema-core",
+          "sha256": "4ce5fc619488e45b7ad363e69f6c46ca7245001910b10ab1a19519b5b21b3712",
+          "bytes": 342931,
+          "snapshot": ".reference/review-preparation/S19-0.source"
+        },
+        {
+          "name": "jsonschema-validation",
+          "url": "https://json-schema.org/draft/2020-12/json-schema-validation.html",
+          "status": "retrieved",
+          "resolved_url": "https://json-schema.org/draft/2020-12/json-schema-validation",
+          "sha256": "84d08c893988ba6f985fcce818b6ddb3c02a8c5f5754e1df38e8faac0156cd1a",
+          "bytes": 169790,
+          "snapshot": ".evaluation/reviews/R06/primary/sources/jsonschema-validation.source",
+          "read_scope": "Structural validation types/enum/numeric limits lines 380–483; strings/arrays excerpt 480–602; required and format distinctions 626–786; no whole-standard conformance claim",
+          "retrieved_at": "2026-10-28T22:20:32.926506+00:00"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S20",
+      "title": "Pydantic validators",
+      "authority": "Pydantic maintainers",
+      "kind": "implementation",
+      "url": "https://docs.pydantic.dev/latest/concepts/validators/",
+      "use": "成熟类型与数据校验候选",
+      "limit": "需比较保证、依赖与维护成本，尚未选用",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:50.562768+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://docs.pydantic.dev/latest/concepts/validators/",
+          "status": "retrieved",
+          "resolved_url": "https://pydantic.dev/docs/validation/latest/concepts/validators/",
+          "sha256": "a1b518b37ba0918a0402d810df1d14ec3ed11723dc087c8096d0dc625e9e4ee0",
+          "bytes": 140967,
+          "snapshot": ".reference/review-preparation/S20-0.source"
+        },
+        {
+          "name": "pydantic-models",
+          "url": "https://docs.pydantic.dev/latest/concepts/models/",
+          "status": "retrieved",
+          "resolved_url": "https://pydantic.dev/docs/validation/latest/concepts/models/",
+          "sha256": "ab9d91277d628ff17b86be017d35a498659a12e0e3c2045a8ebb3574b8c0cef4",
+          "bytes": 214916,
+          "snapshot": ".evaluation/reviews/R06/primary/sources/pydantic-models.source",
+          "read_scope": "Basic model/validation semantics lines 1–55, Data conversion and Extra data 215–299; no full library or SDK evaluation",
+          "retrieved_at": "2026-10-28T22:20:33.726303+00:00"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S21",
+      "title": "Temporal workflows",
+      "authority": "Temporal",
+      "kind": "implementation",
+      "url": "https://docs.temporal.io/workflows",
+      "use": "持久执行、工作流和重放候选",
+      "limit": "服务型运行环境与本地 skill 不同，按职责可比维度评价",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:50.579667+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://docs.temporal.io/workflows",
+          "status": "retrieved",
+          "resolved_url": "https://docs.temporal.io/workflows",
+          "sha256": "285690c14f68efff93b90e0c87a7c93c782b09a8ef2983f0c130101b5f31d8cb",
+          "bytes": 56741,
+          "snapshot": ".reference/review-preparation/S21-0.source"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S22",
+      "title": "Temporal activity execution",
+      "authority": "Temporal",
+      "kind": "official documentation",
+      "url": "https://docs.temporal.io/activity-execution",
+      "use": "副作用、执行结果和重试",
+      "limit": "不能据此宣称外部动作普遍恰好执行一次",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:50.969255+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://docs.temporal.io/activity-execution",
+          "status": "retrieved",
+          "resolved_url": "https://docs.temporal.io/activity-execution",
+          "sha256": "8074861236944316b6f34ef12bc6bfc4bf65cb3cae6e2b823530eb2ffd89f4e2",
+          "bytes": 72656,
+          "snapshot": ".reference/review-preparation/S22-0.source"
+        },
+        {
+          "url": "https://docs.temporal.io/activity-execution.md",
+          "resolved_url": "https://docs.temporal.io/activity-execution.md",
+          "sha256": "710e839d78f8c05445f1d56ee5a6d747c2a46fd6a379185cbadec66f924f9a62",
+          "bytes": 13988,
+          "snapshot": ".evaluation/reviews/R14/primary/sources/temporal-activity.source",
+          "retrieved_at": "2026-10-29T10:05:11.968411+00:00",
+          "read_scope": "Selected1–115 activity lifecycle/timeouts/lost task after effect; not full page or deployed Temporal experiment.",
+          "name": "R14-temporal-activity",
+          "status": "retrieved"
+        },
+        {
+          "url": "https://docs.temporal.io/activity-definition.md",
+          "resolved_url": "https://docs.temporal.io/activity-definition.md",
+          "sha256": "2f028f4cca7154ae482dd6d726ee60ef698b552069ba4177f75c156f32140373",
+          "bytes": 14998,
+          "snapshot": ".evaluation/reviews/R14/primary/sources/temporal-definition.source",
+          "retrieved_at": "2026-10-29T10:05:21.013524+00:00",
+          "read_scope": "Selected157–200 idempotency, duplicate effects, downstream idempotency keys and reliability. Framework documentation comparison only; no claim it provides exactly-once arbitrary effects.",
+          "name": "R14-temporal-definition",
+          "status": "retrieved"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S23",
+      "title": "LangGraph persistence",
+      "authority": "LangChain maintainers",
+      "kind": "implementation",
+      "url": "https://docs.langchain.com/oss/python/langgraph/persistence",
+      "use": "检查点、任务状态与跨任务记忆",
+      "limit": "比较当前版本语义和部署依赖，尚未选用",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:51.137104+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://docs.langchain.com/oss/python/langgraph/persistence",
+          "status": "retrieved",
+          "resolved_url": "https://docs.langchain.com/oss/python/langgraph/persistence",
+          "sha256": "d50d490c702990ddfee2b90c326bd913c26d1c5f93307f72a8d08561ab8576cd",
+          "bytes": 526869,
+          "snapshot": ".reference/review-preparation/S23-0.source"
+        },
+        {
+          "url": "https://docs.langchain.com/oss/python/langgraph/interrupts.md",
+          "resolved_url": "https://docs.langchain.com/oss/python/langgraph/interrupts.md",
+          "retrieved_at": "2026-10-29T11:00:30.830310+00:00",
+          "sha256": "8e74a64b21ce2b2d965d9b185ab3dc4fc7b9f88db6d8da536c2abe97b639ea94",
+          "bytes": 46203,
+          "snapshot": ".evaluation/reviews/R03/primary/sources/langgraph-interrupts.source",
+          "read_scope": "Current official Markdown1–102 pause/resume, persistent thread identity, resume payload and node restart semantics. Not full1042-line page or deployed LangGraph behavior.",
+          "name": "R03-langgraph-interrupts",
+          "status": "retrieved"
+        },
+        {
+          "url": "https://docs.langchain.com/oss/python/langgraph/persistence.md",
+          "resolved_url": "https://docs.langchain.com/oss/python/langgraph/persistence.md",
+          "retrieved_at": "2026-10-29T11:00:30.831979+00:00",
+          "sha256": "9985e697f3f56c9c703360f75d7e56c0d3040307d46ccff4b0a7d4964ab07932",
+          "bytes": 5321,
+          "snapshot": ".evaluation/reviews/R03/primary/sources/langgraph-persistence.source",
+          "read_scope": "Full104-line current official Markdown; thread checkpointer vs cross-thread stores, real restart persistence and caveats. Memory storage is not evidence of user learning.",
+          "name": "R03-langgraph-persistence",
+          "status": "retrieved"
+        },
+        {
+          "id": "langgraph-store",
+          "url": "https://docs.langchain.com/oss/python/langgraph/persistence.md",
+          "resolved_url": "https://docs.langchain.com/oss/python/langgraph/persistence.md",
+          "retrieved_at": "2026-10-29T17:07:07.528581+00:00",
+          "sha256": "9985e697f3f56c9c703360f75d7e56c0d3040307d46ccff4b0a7d4964ab07932",
+          "bytes": 5321,
+          "snapshot": ".evaluation/reviews/R09/primary/sources/langgraph-store.source",
+          "derived_text": ".evaluation/reviews/R09/primary/sources/langgraph-store.txt",
+          "derived_text_sha256": "9985e697f3f56c9c703360f75d7e56c0d3040307d46ccff4b0a7d4964ab07932",
+          "lines": 104,
+          "status": "retrieved",
+          "read_scope": "Full104-line current official persistence overview, retrieved version differs from previous rounds: checkpointer vs store, memory scope and backend limits. No deployed LangGraph parity certification.",
+          "name": "R09-langgraph-store"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S24",
+      "title": "LangGraph durable execution entry (redirects to persistence)",
+      "authority": "LangChain maintainers",
+      "kind": "implementation",
+      "url": "https://docs.langchain.com/oss/python/langgraph/durable-execution",
+      "use": "恢复、重放和副作用分离",
+      "limit": "原生模型编排和会话宿主需明确适配差异；原入口当前重定向到 persistence，正式复核按实际目标页取证",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:51.185724+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://docs.langchain.com/oss/python/langgraph/durable-execution",
+          "status": "retrieved",
+          "resolved_url": "https://docs.langchain.com/oss/python/langgraph/persistence",
+          "sha256": "d50d490c702990ddfee2b90c326bd913c26d1c5f93307f72a8d08561ab8576cd",
+          "bytes": 526869,
+          "snapshot": ".reference/review-preparation/S24-0.source"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S25",
+      "title": "Event Sourcing pattern",
+      "authority": "Microsoft Azure Architecture Center",
+      "kind": "reference architecture",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/event-sourcing",
+      "use": "事件、投影、历史重建及模式成本",
+      "limit": "参考架构不等于强制标准或采用建议",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:51.359339+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/event-sourcing",
+          "status": "retrieved",
+          "resolved_url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/event-sourcing",
+          "sha256": "e20aa0e0f7b9d0c3042a97625db8461b07d5837a1b167acc11fe957dd64982e2",
+          "bytes": 80187,
+          "snapshot": ".reference/review-preparation/S25-0.source"
+        },
+        {
+          "id": "azure-event-sourcing",
+          "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/event-sourcing",
+          "resolved_url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/event-sourcing",
+          "retrieved_at": "2026-10-29T17:33:52.663388+00:00",
+          "sha256": "1d3210f3c09d542a4796936007ba63f43e6bd1474d963131a6c37fa6a52041b4",
+          "bytes": 80187,
+          "snapshot": ".evaluation/reviews/R10/primary/sources/azure-event-sourcing.source",
+          "status": "retrieved",
+          "read_scope": "Microsoft original guidance selected derived27–31 complexity tradeoff;69–87 event versioning, upcasting, compensation, snapshot/replay. No deployed enterprise event-store benchmark.",
+          "derived_text": ".evaluation/reviews/R10/primary/sources/azure-event-sourcing.txt",
+          "derived_text_sha256": "55e370aa35a4b46abdcb0c832f343c534461d94b46e5134ffd9ee9c85f895c46",
+          "lines": 184,
+          "name": "R10-azure-event-sourcing"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S26",
+      "title": "PROV-DM",
+      "authority": "W3C",
+      "kind": "specification",
+      "url": "https://www.w3.org/TR/prov-dm/",
+      "use": "实体、活动、主体及来源关系",
+      "limit": "不要求完整实现 PROV，作为来源语义对照",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:51.567758+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://www.w3.org/TR/prov-dm/",
+          "status": "retrieved",
+          "resolved_url": "https://www.w3.org/TR/prov-dm/",
+          "sha256": "5c925c21bc96c285b25017c3b90d82cf74251d07713b71fcb81ca60f873c9e88",
+          "bytes": 271572,
+          "snapshot": ".reference/review-preparation/S26-0.source"
+        },
+        {
+          "name": "prov-dm",
+          "url": "https://www.w3.org/TR/2013/REC-prov-dm-20130430/",
+          "status": "retrieved",
+          "resolved_url": "https://www.w3.org/TR/2013/REC-prov-dm-20130430/",
+          "sha256": "5c925c21bc96c285b25017c3b90d82cf74251d07713b71fcb81ca60f873c9e88",
+          "bytes": 271572,
+          "snapshot": ".evaluation/reviews/R05/primary/sources/prov-dm.source",
+          "retrieved_at": "2026-10-29T05:27:50.705564+00:00",
+          "read_scope": "§2.1.1 entity/activity/generation/usage derived text590–650 only this round"
+        },
+        {
+          "name": "prov-constraints",
+          "url": "https://www.w3.org/TR/2013/REC-prov-constraints-20130430/",
+          "status": "retrieved",
+          "resolved_url": "https://www.w3.org/TR/2013/REC-prov-constraints-20130430/",
+          "sha256": "0e65d02339347af6f6e5744cb69a99cf56430e8fd9dd904ac476541634361287",
+          "bytes": 285333,
+          "snapshot": ".evaluation/reviews/R05/primary/sources/prov-constraints.source",
+          "retrieved_at": "2026-10-29T05:27:51.391776+00:00",
+          "read_scope": "Overview/validity terminology excerpt332–378 only; no full PROV solver evaluation"
+        },
+        {
+          "name": "R15-prov-dm",
+          "url": "https://www.w3.org/TR/prov-dm/",
+          "resolved_url": "https://www.w3.org/TR/prov-dm/",
+          "status": "retrieved",
+          "snapshot": ".evaluation/reviews/R15/primary/sources/prov-dm.source",
+          "sha256": "5c925c21bc96c285b25017c3b90d82cf74251d07713b71fcb81ca60f873c9e88",
+          "bytes": 271572,
+          "retrieved_at": "2026-10-29T23:04:44.863984+00:00",
+          "derived_text": ".evaluation/reviews/R15/primary/sources/prov-dm.txt",
+          "derived_sha256": "724781b5c5c9f21951d1ada1a1b012734845dbcef7c5147f1774772254906c5f",
+          "lines": 1700,
+          "read_scope": "derived43–55 abstract entity/activity/responsibility/derivation and role of provenance; not full PROV compliance"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S27",
+      "title": "OpenTelemetry traces",
+      "authority": "OpenTelemetry / CNCF maintainers",
+      "kind": "specification documentation",
+      "url": "https://opentelemetry.io/docs/concepts/signals/traces/",
+      "use": "执行链与耗时观测候选",
+      "limit": "遥测不等于审计认证，不要求新增常驻服务",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:51.619928+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://opentelemetry.io/docs/concepts/signals/traces/",
+          "status": "retrieved",
+          "resolved_url": "https://opentelemetry.io/docs/concepts/signals/traces/",
+          "sha256": "f8201e37c1f9f191b686ad48327896d0b737606dc45b5ce911f22d9493825253",
+          "bytes": 433512,
+          "snapshot": ".reference/review-preparation/S27-0.source"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S28",
+      "title": "Retrieval-Augmented Generation paper",
+      "authority": "Lewis et al. original authors",
+      "kind": "primary research",
+      "url": "https://arxiv.org/abs/2005.11401",
+      "use": "检索增强生成原始研究入口",
+      "limit": "论文不规定本项目必须用向量数据库",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:51.752403+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://arxiv.org/abs/2005.11401",
+          "status": "retrieved",
+          "resolved_url": "https://arxiv.org/abs/2005.11401",
+          "sha256": "e61987bdbb0d90c7c823a071619c48b361b71538ddb4279f581724f5c59bb860",
+          "bytes": 46421,
+          "snapshot": ".reference/review-preparation/S28-0.source"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Original author publication entry/abstract; full paper reading pending."
+    },
+    {
+      "id": "S29",
+      "title": "pgvector",
+      "authority": "pgvector maintainers",
+      "kind": "implementation",
+      "url": "https://github.com/pgvector/pgvector",
+      "use": "向量、近邻与混合检索候选",
+      "limit": "PostgreSQL 依赖及适用规模需比较，尚未选用",
+      "repository": "pgvector/pgvector",
+      "paths": [
+        "README.md"
+      ],
+      "retrieved_at": "2026-10-27T22:59:51.892329+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "README.md",
+          "url": "https://raw.githubusercontent.com/pgvector/pgvector/3fc275dab27818f4b327ddf8b85b90b274584540/README.md",
+          "status": "retrieved",
+          "resolved_url": "https://raw.githubusercontent.com/pgvector/pgvector/3fc275dab27818f4b327ddf8b85b90b274584540/README.md",
+          "sha256": "19cebadeeb8d3181d01ef00399674ec41bd2f0363850cdccc7685d4260c5a1c6",
+          "bytes": 42305,
+          "snapshot": ".reference/review-preparation/S29-0.source"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/pgvector/pgvector/3fc275dab27818f4b327ddf8b85b90b274584540/README.md",
+          "resolved_url": "https://raw.githubusercontent.com/pgvector/pgvector/3fc275dab27818f4b327ddf8b85b90b274584540/README.md",
+          "retrieved_at": "2026-10-29T12:46:52.709307+00:00",
+          "sha256": "19cebadeeb8d3181d01ef00399674ec41bd2f0363850cdccc7685d4260c5a1c6",
+          "bytes": 42305,
+          "snapshot": ".evaluation/reviews/R07/primary/sources/pgvector-readme.source",
+          "read_scope": "Fixed3fc275dab27818f4b327ddf8b85b90b274584540 README selected195–221 exact/approximate index and HNSW tradeoff,424–441 filtering,633–644 hybrid search. Perfect exact-neighbor recall is not semantic relevance; no Postgres/vector deployment benchmark executed.",
+          "name": "R07-pgvector-readme",
+          "status": "retrieved"
+        }
+      ],
+      "version": "3fc275dab27818f4b327ddf8b85b90b274584540",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S30",
+      "title": "Qdrant hybrid queries",
+      "authority": "Qdrant maintainers",
+      "kind": "implementation",
+      "url": "https://qdrant.tech/documentation/concepts/hybrid-queries/",
+      "use": "混合检索、融合和重排候选",
+      "limit": "实现能力与效果评价分开；尚未选用",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:52.282723+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://qdrant.tech/documentation/concepts/hybrid-queries/",
+          "status": "retrieved",
+          "resolved_url": "https://qdrant.tech/documentation/search/hybrid-queries/",
+          "sha256": "96373850a6ad188ba5fffb1250f177ea66111d85091e62e6768d5dcb7480ed05",
+          "bytes": 514413,
+          "snapshot": ".reference/review-preparation/S30-0.source"
+        },
+        {
+          "url": "https://qdrant.tech/documentation/concepts/hybrid-queries/",
+          "resolved_url": "https://qdrant.tech/documentation/search/hybrid-queries/",
+          "retrieved_at": "2026-10-29T12:46:54.646205+00:00",
+          "sha256": "a08f5314214f1c55ed6433586a9c0bdd46619461fbb9dac20a4f388a1e6a3e5c",
+          "bytes": 522972,
+          "snapshot": ".evaluation/reviews/R07/primary/sources/qdrant-hybrid.source",
+          "read_scope": "Official current entry redirects concepts→search/hybrid-queries; selected277–296 RRF and3015–3032 DBSF caveats. Not whole10k-line derived page, deployed service or a universal fusion winner.",
+          "name": "R07-qdrant-hybrid",
+          "status": "retrieved"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S31",
+      "title": "Git objects",
+      "authority": "Git / Pro Git original authors",
+      "kind": "official documentation",
+      "url": "https://git-scm.com/book/en/v2/Git-Internals-Git-Objects",
+      "use": "成熟内容寻址及对象身份对照",
+      "limit": "内容哈希不提供外部见证或执行真实性保证",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:52.538588+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://git-scm.com/book/en/v2/Git-Internals-Git-Objects",
+          "status": "retrieved",
+          "resolved_url": "https://git-scm.com/book/en/v2/Git-Internals-Git-Objects",
+          "sha256": "f2286c7d25096ce435054125fe6eb8c8a7b110c5a7f2316e8f8c21a1c2b039ca",
+          "bytes": 145608,
+          "snapshot": ".reference/review-preparation/S31-0.source"
+        },
+        {
+          "id": "git-objects",
+          "url": "https://git-scm.com/book/en/v2/Git-Internals-Git-Objects",
+          "resolved_url": "https://git-scm.com/book/en/v2/Git-Internals-Git-Objects",
+          "retrieved_at": "2026-10-29T17:07:07.675698+00:00",
+          "sha256": "f2286c7d25096ce435054125fe6eb8c8a7b110c5a7f2316e8f8c21a1c2b039ca",
+          "bytes": 145608,
+          "snapshot": ".evaluation/reviews/R09/primary/sources/git-objects.source",
+          "derived_text": ".evaluation/reviews/R09/primary/sources/git-objects.txt",
+          "derived_text_sha256": "10e7ec3170a6a28119f655c263cc4be22eefc3e9a0cc4d326ef782e6d1a89789",
+          "lines": 520,
+          "status": "retrieved",
+          "read_scope": "Official ProGit2 content selected268–303 object store,332–350 tree metadata,399–428 commit parents/provenance. Does not claim Git-compatible hash encoding or ancestry transport.",
+          "name": "R09-git-objects"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S32",
+      "title": "pyproject.toml specification",
+      "authority": "PyPA",
+      "kind": "specification",
+      "url": "https://packaging.python.org/en/latest/specifications/pyproject-toml/",
+      "use": "Python 分发元数据与构建",
+      "limit": "Python 包是可选渠道，不能代替 skill 目录验证",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:52.647171+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://packaging.python.org/en/latest/specifications/pyproject-toml/",
+          "status": "retrieved",
+          "resolved_url": "https://packaging.python.org/en/latest/specifications/pyproject-toml/",
+          "sha256": "df5714bc1e8d356cac680b9126d692143ae71e6affe0e739974546581c14dbb4",
+          "bytes": 92691,
+          "snapshot": ".reference/review-preparation/S32-0.source"
+        },
+        {
+          "name": "R16-pyproject-retry",
+          "url": "https://packaging.python.org/specifications/pyproject-toml/",
+          "resolved_url": "https://packaging.python.org/en/latest/specifications/pyproject-toml/",
+          "status": "retrieved",
+          "snapshot": ".evaluation/reviews/R16/primary/sources/pyproject-retry.source",
+          "sha256": "df3b780347c9b19df038b5aad432dbac76cbf3edeb659a3a38a8bb5dacba95f2",
+          "bytes": 92473,
+          "retrieved_at": "2026-10-29T22:43:21.800957+00:00",
+          "derived_text": ".evaluation/reviews/R16/primary/sources/pyproject-retry.txt",
+          "derived_sha256": "6af7de8deca68deb5491e5e9c9a82fad388fee10a0aa37fb6bec93353661af0d",
+          "derived_lines": 606,
+          "read_scope": "selected version/dynamic/readme/license-files/authors fields, including version-normalization recommendation and distribution obligations"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S33",
+      "title": "Semantic Versioning 2.0.0",
+      "authority": "Semantic Versioning authors",
+      "kind": "specification",
+      "url": "https://semver.org/spec/v2.0.0.html",
+      "use": "插件版本与发布语义",
+      "limit": "还需核对 Python 版本规范及实际宿主消费者",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:52.752231+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://semver.org/spec/v2.0.0.html",
+          "status": "retrieved",
+          "resolved_url": "https://semver.org/spec/v2.0.0.html",
+          "sha256": "f9d4b8b1a5e9a0de6621dbbc70d69fdf05310b7a737509317b94a7bddfb9409e",
+          "bytes": 31121,
+          "snapshot": ".reference/review-preparation/S33-0.source"
+        },
+        {
+          "id": "semver",
+          "url": "https://semver.org/spec/v2.0.0.html",
+          "resolved_url": "https://semver.org/spec/v2.0.0.html",
+          "retrieved_at": "2026-10-29T17:33:53.365802+00:00",
+          "sha256": "f9d4b8b1a5e9a0de6621dbbc70d69fdf05310b7a737509317b94a7bddfb9409e",
+          "bytes": 31121,
+          "snapshot": ".evaluation/reviews/R10/primary/sources/semver.source",
+          "status": "retrieved",
+          "read_scope": "SemVer2.0.0 selected derived80–119 public API, released-content immutability,0.y.z initial development,1.0 and increments. Not automatic store/event migration policy.",
+          "derived_text": ".evaluation/reviews/R10/primary/sources/semver.txt",
+          "derived_text_sha256": "0747826210eb7eb6a9e320a17873d4ab505b02941d52b6698fc5e7a9efe5d89d",
+          "lines": 309,
+          "name": "R10-semver"
+        },
+        {
+          "name": "R16-semver-current",
+          "url": "https://semver.org/spec/v2.0.0.html",
+          "resolved_url": "https://semver.org/spec/v2.0.0.html",
+          "status": "retrieved",
+          "snapshot": ".evaluation/reviews/R16/primary/sources/semver-current.source",
+          "sha256": "f9d4b8b1a5e9a0de6621dbbc70d69fdf05310b7a737509317b94a7bddfb9409e",
+          "bytes": 31121,
+          "retrieved_at": "2026-10-29T22:49:43.241266+00:00",
+          "derived_text": ".evaluation/reviews/R16/primary/sources/semver-current.txt",
+          "derived_lines": 309,
+          "derived_sha256": "0d46da1cb535d635bb2a55c8cac5f23a812e71c64e4cacb7bf86749c23212d30",
+          "read_scope": "derived86–93 and113–120, §2 and§9 numeric leading zeros; independent also official regex"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S34",
+      "title": "GitHub Actions secure use",
+      "authority": "GitHub",
+      "kind": "official documentation",
+      "url": "https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions",
+      "use": "CI 引用、权限和发布边界",
+      "limit": "CI 通过不代表语义质量或所有宿主通过",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:53.143406+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions",
+          "status": "retrieved",
+          "resolved_url": "https://docs.github.com/en/actions/reference/security/secure-use",
+          "sha256": "9e57db37c13a55e6b0694eabc6f3494a9f375dd78a3b2f8453c737d1eee92c1c",
+          "bytes": 466507,
+          "snapshot": ".reference/review-preparation/S34-0.source"
+        },
+        {
+          "name": "R16-github-secure-use",
+          "url": "https://docs.github.com/en/actions/reference/security/secure-use",
+          "resolved_url": "https://docs.github.com/en/actions/reference/security/secure-use",
+          "status": "retrieved",
+          "snapshot": ".evaluation/reviews/R16/primary/sources/github-secure-use.source",
+          "sha256": "9a5c0f465227bf455b59f73bcab26471499321061bc4eb76f760dab7d9e738c6",
+          "bytes": 466527,
+          "retrieved_at": "2026-10-29T22:39:47.533625+00:00",
+          "derived_text": ".evaluation/reviews/R16/primary/sources/github-secure-use.txt",
+          "derived_sha256": "b4bd41c211295c3e02129111240214ac66b382c34d1a52aa651b7bfbe6fb517b",
+          "derived_lines": 461,
+          "read_scope": "derived275–277 minimum permissions;323–344 untrusted workflows, source identity and official fallback SHA guidance"
+        },
+        {
+          "name": "R16-github-workflow-locks",
+          "url": "https://docs.github.com/en/actions/concepts/security/workflow-dependency-lockfiles",
+          "resolved_url": "https://docs.github.com/en/actions/concepts/security/workflow-dependency-lockfiles",
+          "status": "retrieved",
+          "snapshot": ".evaluation/reviews/R16/primary/sources/github-workflow-locks.source",
+          "sha256": "96d8ea790dd3d51b1a4f98199cb1d0116649a2d40620e7ea7098b36a6432c9a4",
+          "bytes": 301713,
+          "retrieved_at": "2026-10-29T22:43:20.435399+00:00",
+          "derived_text": ".evaluation/reviews/R16/primary/sources/github-workflow-locks.txt",
+          "derived_sha256": "080ef19846fb7307849081bef2d93b75b6d886ed831898e2e84e9271c318cc89",
+          "derived_lines": 323,
+          "read_scope": "derived262–310 native actions.lock, gh actions-lock, dependency/source identities and comparison with SHA pin; alternative evaluated, not adopted"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S35",
+      "title": "LLM prompt injection prevention",
+      "authority": "OWASP Cheat Sheet Series maintainers",
+      "kind": "primary guidance",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html",
+      "use": "外部材料与资产的信任边界",
+      "limit": "指导不是绝对安全证明，需实际攻击与授权边界检查",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:53.192619+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html",
+          "status": "retrieved",
+          "resolved_url": "https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html",
+          "sha256": "3600eeb8c31e386d11bda4d032e6d1d35b1cd20c3bf7c2f9ba4418a5db8b043f",
+          "bytes": 121934,
+          "snapshot": ".reference/review-preparation/S35-0.source"
+        },
+        {
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html",
+          "resolved_url": "https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html",
+          "sha256": "3600eeb8c31e386d11bda4d032e6d1d35b1cd20c3bf7c2f9ba4418a5db8b043f",
+          "bytes": 121934,
+          "snapshot": ".evaluation/reviews/R14/primary/sources/owasp-injection.source",
+          "retrieved_at": "2026-10-29T10:01:29.920373+00:00",
+          "read_scope": "Selected text lines374–455 (agent manipulation, screening and text separation are not enforcement),606–706 (consequential action authority, least privilege, sensitive logging, guardrail limitations/cost). Not the whole guide; examples are not a deployed defense.",
+          "name": "R14-owasp-injection",
+          "status": "retrieved"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S36",
+      "title": "Apache License 2.0",
+      "authority": "Apache Software Foundation",
+      "kind": "license",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+      "use": "许可证和分发义务",
+      "limit": "参考项目采用不同许可时分别核验",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:53.239807+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+          "status": "retrieved",
+          "resolved_url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358,
+          "snapshot": ".reference/review-preparation/S36-0.source"
+        },
+        {
+          "name": "R16-apache-license",
+          "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+          "resolved_url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+          "status": "retrieved",
+          "snapshot": ".evaluation/reviews/R16/primary/sources/apache-license.source",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358,
+          "retrieved_at": "2026-10-29T22:39:49.798807+00:00",
+          "derived_text": ".evaluation/reviews/R16/primary/sources/apache-license.txt",
+          "derived_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "derived_lines": 202,
+          "read_scope": "§1–9 plus§4 and APPENDIX; root differs only application copyright slot, not full legal provenance opinion"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S37",
+      "title": "XState implementation",
+      "authority": "Stately / XState maintainers",
+      "kind": "implementation",
+      "url": "https://github.com/statelyai/xstate",
+      "use": "成熟状态建模及解释器候选",
+      "limit": "JavaScript 环境、规模与适配成本需单独评价",
+      "repository": "statelyai/xstate",
+      "paths": [
+        "README.md",
+        "packages/core/src/StateMachine.ts"
+      ],
+      "retrieved_at": "2026-10-27T23:04:39.188393+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://stately.ai/docs/state-machines",
+          "status": "access pending",
+          "error": "HTTPError: HTTP Error 404: Not Found"
+        },
+        {
+          "name": "README.md",
+          "url": "https://raw.githubusercontent.com/statelyai/xstate/060cd63378b46b32e7559d569ed3ad112ee60084/README.md",
+          "status": "retrieved",
+          "resolved_url": "https://raw.githubusercontent.com/statelyai/xstate/060cd63378b46b32e7559d569ed3ad112ee60084/README.md",
+          "sha256": "1419a7c9b667dc08b9207681fd304436045403f49c112a6406f4650515f3598c",
+          "bytes": 18169,
+          "snapshot": ".reference/review-preparation/S37-code-0.source"
+        },
+        {
+          "name": "packages/core/src/StateMachine.ts",
+          "url": "https://raw.githubusercontent.com/statelyai/xstate/060cd63378b46b32e7559d569ed3ad112ee60084/packages/core/src/StateMachine.ts",
+          "status": "retrieved",
+          "resolved_url": "https://raw.githubusercontent.com/statelyai/xstate/060cd63378b46b32e7559d569ed3ad112ee60084/packages/core/src/StateMachine.ts",
+          "sha256": "854d1761355e6add70deefaceda3a2f6162dd094026e60d02faec5a36741834e",
+          "bytes": 17013,
+          "snapshot": ".reference/review-preparation/S37-code-1.source"
+        }
+      ],
+      "version": "060cd63378b46b32e7559d569ed3ad112ee60084",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S38",
+      "title": "BEIR retrieval evaluation",
+      "authority": "Thakur et al. original authors",
+      "kind": "primary research",
+      "url": "https://arxiv.org/abs/2104.08663",
+      "use": "跨任务检索评价设计",
+      "limit": "研究基准不能直接代替星灵任务样本",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:53.823243+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://arxiv.org/abs/2104.08663",
+          "status": "retrieved",
+          "resolved_url": "https://arxiv.org/abs/2104.08663",
+          "sha256": "a344803df236c8e470955deaff353c3e8395ce11bf1f5f5d9c95d37a059835a8",
+          "bytes": 44937,
+          "snapshot": ".reference/review-preparation/S38-0.source"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Original author publication entry/abstract; full paper reading pending."
+    },
+    {
+      "id": "S39",
+      "title": "LangGraph / LangChain memory",
+      "authority": "LangChain maintainers",
+      "kind": "implementation",
+      "url": "https://docs.langchain.com/oss/python/langgraph/memory",
+      "use": "记忆分类、检索与维护候选",
+      "limit": "记忆存储不直接证明学习有效或用户能力提升",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:53.837161+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://docs.langchain.com/oss/python/langgraph/memory",
+          "status": "retrieved",
+          "resolved_url": "https://docs.langchain.com/oss/python/concepts/memory",
+          "sha256": "e14c78ae40166c85d0c2f237cd95d9e52b2836e463c3268472f9d724d3fb8286",
+          "bytes": 616186,
+          "snapshot": ".reference/review-preparation/S39-0.source"
+        },
+        {
+          "url": "https://docs.langchain.com/oss/python/langchain/short-term-memory.md",
+          "resolved_url": "https://docs.langchain.com/oss/python/langchain/short-term-memory.md",
+          "retrieved_at": "2026-10-29T12:46:51.936997+00:00",
+          "sha256": "b6dca1fd528505604fab7396d663b88feced167626a1a5f9c0bede69280560b3",
+          "bytes": 31952,
+          "snapshot": ".evaluation/reviews/R07/primary/sources/langchain-memory.source",
+          "read_scope": "Official current selected7–26 context/history growth,339–375 trimming patterns and527–545 summarization/information-loss caveat. Not full middleware implementation or evidence that deleting immutable audit history is safe.",
+          "name": "R07-langchain-memory",
+          "status": "retrieved"
+        },
+        {
+          "id": "langchain-memory-concepts",
+          "url": "https://docs.langchain.com/oss/python/concepts/memory.md",
+          "resolved_url": "https://docs.langchain.com/oss/python/concepts/memory.md",
+          "retrieved_at": "2026-10-29T16:40:10.099150+00:00",
+          "sha256": "7cba0710f88942a51b1b5024a27825270afb951db98727035a1a10cdd6583922",
+          "bytes": 20191,
+          "snapshot": ".evaluation/reviews/R08/primary/sources/langchain-memory-concepts.source",
+          "status": "retrieved",
+          "read_scope": "Selected7–91 memory scope, facts/episodes/profile/collection and evaluation;91–149 procedural reflection, hot-path/background tradeoffs and store introduction. No operational benchmark or universal automatic improvement proof.",
+          "name": "R08-langchain-memory-concepts"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S40",
+      "title": "Ten usability heuristics",
+      "authority": "Jakob Nielsen / Nielsen Norman Group",
+      "kind": "primary guidance",
+      "url": "https://www.nngroup.com/articles/ten-usability-heuristics/",
+      "use": "反馈、用户控制、错误恢复与可见性",
+      "limit": "启发式需要实际用户行为验证，不是本项目认证",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:54.342718+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://www.nngroup.com/articles/ten-usability-heuristics/",
+          "status": "retrieved",
+          "resolved_url": "https://www.nngroup.com/articles/ten-usability-heuristics/",
+          "sha256": "63a5f43a837153059e2b1124c4f7caaaefca29a98be6e3033fbf29c6b445e928",
+          "bytes": 142007,
+          "snapshot": ".reference/review-preparation/S40-0.source"
+        },
+        {
+          "url": "https://www.nngroup.com/articles/ten-usability-heuristics/",
+          "resolved_url": "https://www.nngroup.com/articles/ten-usability-heuristics/",
+          "retrieved_at": "2026-10-29T11:00:32.744623+00:00",
+          "sha256": "63a5f43a837153059e2b1124c4f7caaaefca29a98be6e3033fbf29c6b445e928",
+          "bytes": 142007,
+          "snapshot": ".evaluation/reviews/R03/primary/sources/nng-heuristics.source",
+          "read_scope": "Current author page1–240: author/review date, heuristic character (broad rules of thumb), status visibility, user-language, control, error prevention, recognition, efficiency, minimalism, error recovery/help. Heuristics are not a certification or real user test.",
+          "name": "R03-nng-heuristics",
+          "status": "retrieved"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S41",
+      "title": "NIST SP 800-218 SSDF",
+      "authority": "NIST",
+      "kind": "standard publication",
+      "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+      "use": "成熟开发与供应链实践入口",
+      "limit": "按适用责任审查，不整套引入重型治理",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-27T22:59:54.345664+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+          "status": "retrieved",
+          "resolved_url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+          "sha256": "9b39a883e28bbf44d945ec5579ddc1c0ef2675b44e128a8cb206397437767a4f",
+          "bytes": 48321,
+          "snapshot": ".reference/review-preparation/S41-0.source"
+        },
+        {
+          "id": "nist-ssdf",
+          "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-218.pdf",
+          "resolved_url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-218.pdf",
+          "retrieved_at": "2026-10-29T17:33:52.774344+00:00",
+          "sha256": "617746e553a9e2da49bfbd4eef0dfc3094758a39b869314e4173ac36605cde22",
+          "bytes": 739891,
+          "snapshot": ".evaluation/reviews/R10/primary/sources/nist-ssdf.source",
+          "status": "retrieved",
+          "read_scope": "Original NIST SP800-218 SSDF1.1 PDF, pdftotext-layout physical LF lines293–305 risk/outcome adaptation;707–721 and768–793 first110 columns of practices/tasks only (PO3/PO4). Not full SSDF conformance or all table examples/reference columns. PDF form-feed is not counted as an extra LF line.",
+          "derived_text": ".evaluation/reviews/R10/primary/sources/nist-ssdf.txt",
+          "derived_text_sha256": "d41a1b1fff92a39936fce8374975042a8132f2c5bb58e80ae0f7582459669f00",
+          "physical_lf_lines": 1794,
+          "name": "R10-nist-ssdf"
+        },
+        {
+          "name": "R16-nist-ssdf-reused",
+          "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-218.pdf",
+          "status": "retrieved",
+          "sha256": "617746e553a9e2da49bfbd4eef0dfc3094758a39b869314e4173ac36605cde22",
+          "snapshot": ".evaluation/reviews/R10/primary/sources/nist-ssdf.source",
+          "bytes": 739891,
+          "identity_rechecked": true,
+          "retrieved_at": "2026-10-29T17:33:52.774344+00:00",
+          "read_scope": "R10 original PDF SHA verified; PO3/PO4/risk-adaptation previously scoped first110 columns and this-round re-read PO3; not whole SSDF certification"
+        },
+        {
+          "name": "R16-ssdf-current-entry",
+          "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+          "resolved_url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+          "status": "retrieved",
+          "snapshot": ".evaluation/reviews/R16/primary/sources/ssdf-current-entry.source",
+          "sha256": "a71cc2d6f6ba6d2fc6b883badfe1cb8b46c691ae31e57f6cd2468c87272a0265",
+          "bytes": 48497,
+          "retrieved_at": "2026-10-29T22:49:44.825678+00:00",
+          "derived_text": ".evaluation/reviews/R16/primary/sources/ssdf-current-entry.txt",
+          "derived_lines": 144,
+          "derived_sha256": "0d426076ecdb56a47d88476d6725d0e179a2aa0682aef2eea255ae55a06eac46",
+          "read_scope": "derived65–82 current official final entry identifies SSDF1.1/February2022 and high-level abstraction; no whole-framework certification"
+        },
+        {
+          "name": "R15-reused-S41",
+          "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-218.pdf",
+          "status": "retrieved",
+          "sha256": "617746e553a9e2da49bfbd4eef0dfc3094758a39b869314e4173ac36605cde22",
+          "snapshot": ".evaluation/reviews/R10/primary/sources/nist-ssdf.source",
+          "bytes": 739891,
+          "identity_rechecked": true,
+          "retrieved_at": "2026-10-29T17:33:52.774344+00:00",
+          "read_scope": "R15 reuse checked SSDF1.1 PO3/PO4 risk/tool/criteria scope; no whole certification"
+        }
+      ],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "access_scope": "Official publication entry; detailed document reading pending."
+    },
+    {
+      "id": "S42",
+      "title": "ATAM: Method for Architecture Evaluation",
+      "authority": "Kazman, Klein, Clements / CMU SEI",
+      "kind": "primary architecture research",
+      "url": "https://www.sei.cmu.edu/library/atam-method-for-architecture-evaluation/",
+      "use": "场景、质量属性、架构风险与取舍的成熟评估方法",
+      "limit": "原始报告不规定星灵必须采用其完整组织形式；适用性待正式复核",
+      "repository": null,
+      "paths": [],
+      "version": "CMU/SEI-2000-TR-004",
+      "retrieved_at": "2026-10-27T23:13:33.353616+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://www.sei.cmu.edu/library/atam-method-for-architecture-evaluation/",
+          "status": "retrieved",
+          "resolved_url": "https://www.sei.cmu.edu/library/atam-method-for-architecture-evaluation/",
+          "sha256": "a837772fdee1f4d458761be5636ccdb0f5512e62fec09e532af453cbe8ee5253",
+          "bytes": 121093,
+          "snapshot": ".reference/review-preparation/S42-0.source"
+        },
+        {
+          "name": "original report PDF; reading pending",
+          "url": "https://www.sei.cmu.edu/documents/629/2000_005_001_13706.pdf",
+          "status": "retrieved",
+          "resolved_url": "https://www.sei.cmu.edu/documents/629/2000_005_001_13706.pdf",
+          "sha256": "f3d40302402a9f075615b2bf431e4ed84397cb4072fca6d842432191e9bdf324",
+          "bytes": 245552,
+          "snapshot": ".reference/review-preparation/S42-report.source"
+        }
+      ],
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S43",
+      "title": "LangGraph source implementation",
+      "authority": "LangChain maintainers",
+      "kind": "implementation",
+      "use": "成熟编排与状态执行候选源码",
+      "limit": "未选用，需比较职责、保证、部署和维护成本",
+      "materials": [
+        {
+          "name": "README.md",
+          "url": "https://raw.githubusercontent.com/langchain-ai/langgraph/eb8ec111b3e9d3108af5d7bdcac51e3e913637a0/README.md",
+          "status": "retrieved",
+          "resolved_url": "https://raw.githubusercontent.com/langchain-ai/langgraph/eb8ec111b3e9d3108af5d7bdcac51e3e913637a0/README.md",
+          "sha256": "3a13e257af1216962d53d72414a7f44ac1fc5cea34d994bdff60ea2a3b045933",
+          "bytes": 6395,
+          "snapshot": ".reference/review-preparation/S43-code-0.source"
+        },
+        {
+          "name": "libs/langgraph/langgraph/pregel/_loop.py",
+          "url": "https://raw.githubusercontent.com/langchain-ai/langgraph/eb8ec111b3e9d3108af5d7bdcac51e3e913637a0/libs/langgraph/langgraph/pregel/_loop.py",
+          "status": "retrieved",
+          "resolved_url": "https://raw.githubusercontent.com/langchain-ai/langgraph/eb8ec111b3e9d3108af5d7bdcac51e3e913637a0/libs/langgraph/langgraph/pregel/_loop.py",
+          "sha256": "b122f38f691b41759c350480a481a12200bf19ece0359a5ca2a99febda1f5c64",
+          "bytes": 91760,
+          "snapshot": ".reference/review-preparation/S43-code-1.source"
+        }
+      ],
+      "url": "https://github.com/langchain-ai/langgraph",
+      "repository": "langchain-ai/langgraph",
+      "paths": [
+        "README.md",
+        "libs/langgraph/langgraph/pregel/_loop.py"
+      ],
+      "version": "eb8ec111b3e9d3108af5d7bdcac51e3e913637a0",
+      "retrieved_at": "2026-10-27T23:04:39.182015+00:00",
+      "status": "located; applicability and comparison pending",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S44",
+      "title": "Temporal Python SDK source",
+      "authority": "Temporal maintainers",
+      "kind": "implementation",
+      "use": "成熟编排与状态执行候选源码",
+      "limit": "未选用，需比较职责、保证、部署和维护成本",
+      "materials": [
+        {
+          "name": "README.md",
+          "url": "https://raw.githubusercontent.com/temporalio/sdk-python/64b700540a14591f7bfcfebeaad2dfc5ba9cce1b/README.md",
+          "status": "retrieved",
+          "resolved_url": "https://raw.githubusercontent.com/temporalio/sdk-python/64b700540a14591f7bfcfebeaad2dfc5ba9cce1b/README.md",
+          "sha256": "bc8a00599184a608561cff4fb7ac262e1e865df453cec26e20714570e5569db1",
+          "bytes": 106561,
+          "snapshot": ".reference/review-preparation/S44-code-0.source"
+        },
+        {
+          "name": "temporalio/worker/_workflow_instance.py",
+          "url": "https://raw.githubusercontent.com/temporalio/sdk-python/64b700540a14591f7bfcfebeaad2dfc5ba9cce1b/temporalio/worker/_workflow_instance.py",
+          "status": "retrieved",
+          "resolved_url": "https://raw.githubusercontent.com/temporalio/sdk-python/64b700540a14591f7bfcfebeaad2dfc5ba9cce1b/temporalio/worker/_workflow_instance.py",
+          "sha256": "bcdac6d453110511f7952bae11f0ec28d874191757192c22a533762065330fe4",
+          "bytes": 175101,
+          "snapshot": ".reference/review-preparation/S44-code-1.source"
+        }
+      ],
+      "url": "https://github.com/temporalio/sdk-python",
+      "repository": "temporalio/sdk-python",
+      "paths": [
+        "README.md",
+        "temporalio/worker/_workflow_instance.py"
+      ],
+      "version": "64b700540a14591f7bfcfebeaad2dfc5ba9cce1b",
+      "retrieved_at": "2026-10-27T23:04:39.340370+00:00",
+      "status": "located; applicability and comparison pending",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S45",
+      "title": "Python 3.12 argparse",
+      "authority": "Python Software Foundation",
+      "kind": "official documentation",
+      "url": "https://docs.python.org/3.12/library/argparse.html",
+      "use": "CLI 参数、子命令与错误语义",
+      "limit": "库接口契约不代表业务协议正确",
+      "repository": null,
+      "paths": [],
+      "version": "Python 3.12",
+      "retrieved_at": "2026-10-27T23:13:34.756345+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://docs.python.org/3.12/library/argparse.html",
+          "status": "retrieved",
+          "resolved_url": "https://docs.python.org/3.12/library/argparse.html",
+          "sha256": "0390c38500f9aab62942a72fc9a66f91dc40e0176d9445d106235ef135f23aff",
+          "bytes": 300660,
+          "snapshot": ".reference/review-preparation/S45-0.source"
+        },
+        {
+          "url": "https://docs.python.org/3.12/library/argparse.html",
+          "resolved_url": "https://docs.python.org/3.12/library/argparse.html",
+          "retrieved_at": "2026-10-29T11:00:32.593564+00:00",
+          "sha256": "0390c38500f9aab62942a72fc9a66f91dc40e0176d9445d106235ef135f23aff",
+          "bytes": 300660,
+          "snapshot": ".evaluation/reviews/R03/primary/sources/python-argparse.source",
+          "read_scope": "Python3.12 selected6150–6235 exit/error methods: stderr and exit2 argument failures. Host-facing CLI conventions not end-user conversation behavior.",
+          "name": "R03-python-argparse",
+          "status": "retrieved"
+        }
+      ],
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S46",
+      "title": "Python version specifiers",
+      "authority": "PyPA",
+      "kind": "specification",
+      "url": "https://packaging.python.org/en/latest/specifications/version-specifiers/",
+      "use": "Python 版本与插件语义版本映射",
+      "limit": "需明确预发布和消费者差异",
+      "repository": null,
+      "paths": [],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "retrieved_at": "2026-10-27T23:04:41.753610+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://packaging.python.org/en/latest/specifications/version-specifiers/",
+          "status": "retrieved",
+          "resolved_url": "https://packaging.python.org/en/latest/specifications/version-specifiers/",
+          "sha256": "a1d06f0db7fcb6548acd0d9a905803ef7944cd8e6e52ede3e5b933b40263babc",
+          "bytes": 116071,
+          "snapshot": ".reference/review-preparation/S46-0.source"
+        },
+        {
+          "name": "R16-version-specifiers",
+          "url": "https://packaging.python.org/specifications/version-specifiers/",
+          "resolved_url": "https://packaging.python.org/en/latest/specifications/version-specifiers/",
+          "status": "retrieved",
+          "snapshot": ".evaluation/reviews/R16/primary/sources/version-specifiers.source",
+          "sha256": "5f6be6d4fe3d1926f274cfa0e7e6e7ac277db49abaf188524666518858ca7c98",
+          "bytes": 115841,
+          "retrieved_at": "2026-10-29T22:49:44.150530+00:00",
+          "derived_text": ".evaluation/reviews/R16/primary/sources/version-specifiers.txt",
+          "derived_lines": 1027,
+          "derived_sha256": "d856d7d4f679d23097dd491ceb6b7ac473cfb093733bd05efb316d28142782a6",
+          "read_scope": "derived378–387 integer normalization; actual packaging.Version comparison in four primary cases"
+        }
+      ],
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S47",
+      "title": "RFC 8785 JSON Canonicalization Scheme",
+      "authority": "IETF / RFC Editor",
+      "kind": "specification",
+      "url": "https://www.rfc-editor.org/rfc/rfc8785.txt",
+      "use": "跨实现规范化与内容身份对照",
+      "limit": "RFC 为 Informational；当前 Python JSON 排序不自动等于 JCS 合规",
+      "repository": null,
+      "paths": [],
+      "version": "URL version where stated; otherwise retrieval timestamp and content digest",
+      "retrieved_at": "2026-10-27T23:04:42.312422+00:00",
+      "status": "located; applicability and comparison pending",
+      "materials": [
+        {
+          "name": "page",
+          "url": "https://www.rfc-editor.org/rfc/rfc8785.txt",
+          "status": "retrieved",
+          "resolved_url": "https://www.rfc-editor.org/rfc/rfc8785.txt",
+          "sha256": "63d52294eb0e3f0014174288186d388b4ddbf2c67d1ce8af1d9726eb0c3ab240",
+          "bytes": 41879,
+          "snapshot": ".reference/review-preparation/S47-0.source"
+        }
+      ],
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S48",
+      "title": "OpenAI Agents SDK source",
+      "authority": "OpenAI",
+      "kind": "implementation",
+      "use": "成熟编排与状态执行候选源码",
+      "limit": "未选用，需比较职责、保证、部署和维护成本",
+      "materials": [
+        {
+          "name": "README.md",
+          "url": "https://raw.githubusercontent.com/openai/openai-agents-python/cd26bbbc52847845fde73b9952b51e62e2bcbdc0/README.md",
+          "status": "retrieved",
+          "resolved_url": "https://raw.githubusercontent.com/openai/openai-agents-python/cd26bbbc52847845fde73b9952b51e62e2bcbdc0/README.md",
+          "sha256": "cf68cb43182d6ea4f79a32421f6723e8ee2cc0f68f97524da7f300e9fc77940b",
+          "bytes": 9009,
+          "snapshot": ".reference/review-preparation/S48-code-0.source"
+        },
+        {
+          "name": "src/agents/run.py",
+          "url": "https://raw.githubusercontent.com/openai/openai-agents-python/cd26bbbc52847845fde73b9952b51e62e2bcbdc0/src/agents/run.py",
+          "status": "retrieved",
+          "resolved_url": "https://raw.githubusercontent.com/openai/openai-agents-python/cd26bbbc52847845fde73b9952b51e62e2bcbdc0/src/agents/run.py",
+          "sha256": "3cdd652446db22646f24dd8e283dc39d54724a7a76822856c17e39a8f549d997",
+          "bytes": 155777,
+          "snapshot": ".reference/review-preparation/S48-code-1.source"
+        }
+      ],
+      "url": "https://github.com/openai/openai-agents-python",
+      "repository": "openai/openai-agents-python",
+      "paths": [
+        "README.md",
+        "src/agents/run.py"
+      ],
+      "version": "cd26bbbc52847845fde73b9952b51e62e2bcbdc0",
+      "retrieved_at": "2026-10-27T23:04:39.483504+00:00",
+      "status": "located; applicability and comparison pending",
+      "access_scope": "Primary material obtained; formal reading scope remains to be recorded."
+    },
+    {
+      "id": "S49",
+      "title": "MCP tool contracts and execution errors",
+      "authority": "Model Context Protocol official specification and maintainers",
+      "kind": "specification and official type definitions",
+      "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools",
+      "repository": "modelcontextprotocol/modelcontextprotocol",
+      "paths": [
+        "schema/2025-11-25/schema.ts"
+      ],
+      "version": "2026-07-28 current clauses; 2025-11-25 comparison and type definitions",
+      "retrieved_at": "2026-10-28T22:31:43.897198+00:00",
+      "use": "扩展工具发现、输入契约、安全可修复错误及提示/权限区分",
+      "limit": "本地runner不是MCP端点；只按相同职责比较，不强制采用传输/所有字段",
+      "status": "R06 scoped primary and independent reading recorded; implementation gap remains open",
+      "access_scope": "R06 source table and per-original read_scope; primary current-edition reading is selected clauses, not full spec",
+      "materials": [
+        {
+          "name": "mcp-tools",
+          "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/tools.md",
+          "status": "retrieved",
+          "resolved_url": "https://modelcontextprotocol.io/specification/2025-11-25/server/tools.md",
+          "sha256": "115e4f690d42615bf2c59000e2a7e8401bab3e984060a7054fcdf980ce3496b9",
+          "bytes": 14400,
+          "snapshot": ".evaluation/reviews/R06/primary/sources/mcp-tools.source",
+          "read_scope": "Full 520-line Tools Markdown, fixed 2025-11-25 edition; not labeled current after latest edition check",
+          "retrieved_at": "2026-10-28T22:20:32.491116+00:00"
+        },
+        {
+          "name": "mcp-schema",
+          "url": "https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/2025-11-25/schema/2025-11-25/schema.ts",
+          "status": "retrieved",
+          "resolved_url": "https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/2025-11-25/schema/2025-11-25/schema.ts",
+          "sha256": "0845473b20273dae35df6651b831540be3d5866a42d0ad324e4a06caaa398a07",
+          "bytes": 66523,
+          "snapshot": ".evaluation/reviews/R06/primary/sources/mcp-schema.source",
+          "read_scope": "ToolAnnotations/ToolExecution/Tool TypeScript definitions lines 1164–1298 only, fixed 2025-11-25",
+          "retrieved_at": "2026-10-28T22:20:32.280520+00:00"
+        },
+        {
+          "name": "mcp-current",
+          "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools.md",
+          "status": "retrieved",
+          "resolved_url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools.md",
+          "sha256": "ffd2f284b837a0e00b2cb0a366dfa76d90ff579b759dfdc91f9fcabb8e51e76b",
+          "bytes": 24865,
+          "snapshot": ".evaluation/reviews/R06/primary/sources/mcp-current.source",
+          "read_scope": "Current fixed 2026-07-28 Tools Markdown: Tool/Names lines 278–329; Output Schema 501–515; state handle excerpt and Error Handling/Security lines 698–795; not full-page read by primary",
+          "retrieved_at": "2026-10-28T22:31:43.897198+00:00"
+        },
+        {
+          "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools.md",
+          "resolved_url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools.md",
+          "sha256": "ffd2f284b837a0e00b2cb0a366dfa76d90ff579b759dfdc91f9fcabb8e51e76b",
+          "bytes": 24865,
+          "snapshot": ".evaluation/reviews/R14/primary/sources/mcp-tools.source",
+          "retrieved_at": "2026-10-29T10:01:29.908655+00:00",
+          "read_scope": "Fixed2026-07-28 edition lines698–795 handles/authorization, errors and security; local runner is not an MCP endpoint, no whole-protocol compliance claim.",
+          "name": "R14-mcp-tools",
+          "status": "retrieved"
+        }
+      ]
+    },
+    {
+      "id": "S50",
+      "title": "Python 3.12 mimetypes",
+      "authority": "Python Software Foundation",
+      "kind": "official documentation",
+      "url": "https://docs.python.org/3.12/library/mimetypes.html",
+      "repository": null,
+      "paths": [],
+      "version": "Python 3.12 documentation; actual tested interpreter 3.12.13",
+      "retrieved_at": "2026-10-28T22:20:32.374515+00:00",
+      "use": "文件扩展名到MIME提示的成熟标准库机制",
+      "limit": "不检查真实文件格式、渲染、事实或语义质量",
+      "status": "R06 scoped reading and fake-extension observation recorded; no all-format conclusion",
+      "access_scope": "Overview and guess_type definition, derived text lines 40–112; filename/extension mapping only",
+      "materials": [
+        {
+          "name": "python-mimetypes",
+          "url": "https://docs.python.org/3.12/library/mimetypes.html",
+          "status": "retrieved",
+          "resolved_url": "https://docs.python.org/3.12/library/mimetypes.html",
+          "sha256": "dfc7348ab0b646a36f529596a6f06cc328e825ebcffae6e508ed281b113bda5c",
+          "bytes": 45453,
+          "snapshot": ".evaluation/reviews/R06/primary/sources/python-mimetypes.source",
+          "read_scope": "Overview and guess_type definition, derived text lines 40–112; filename/extension mapping only",
+          "retrieved_at": "2026-10-28T22:20:32.374515+00:00"
+        }
+      ]
+    },
+    {
+      "id": "S51",
+      "title": "RO-Crate structure and provenance",
+      "authority": "RO-Crate community official specification",
+      "kind": "specification",
+      "url": "https://www.researchobject.org/ro-crate/specification",
+      "repository": "ResearchObject/ro-crate",
+      "paths": [],
+      "version": "1.3 current long-term release on official index; scoped structure/provenance reading",
+      "retrieved_at": "2026-10-29T05:27:50.750276+00:00",
+      "use": "多文件/来源/软件版本及有界元数据组合候选",
+      "limit": "基础crate不是穷尽清单，不证明语义/来源事实；本轮未宣称RO-Crate合规或执行validator",
+      "status": "R05 scoped comparison and applicability recorded; optional integration not selected",
+      "access_scope": "R05 source table and original read_scope; independent implementations reading separate",
+      "materials": [
+        {
+          "name": "rocrate-current",
+          "url": "https://www.researchobject.org/ro-crate/specification",
+          "status": "retrieved",
+          "resolved_url": "https://www.researchobject.org/ro-crate/specification",
+          "sha256": "5d6395451fd2fdcca0414a4cf2344fa3b8fb389b9c07516482a143ca7c3900f5",
+          "bytes": 24473,
+          "snapshot": ".evaluation/reviews/R05/primary/sources/rocrate-current.source",
+          "retrieved_at": "2026-10-29T05:27:50.750276+00:00",
+          "read_scope": "Release listing lines 1–83: 1.3 newest/current long-term; trailing text mentioning 1.2 stable not used to override release listing"
+        },
+        {
+          "name": "rocrate-structure",
+          "url": "https://www.researchobject.org/ro-crate/specification/1.3/structure",
+          "status": "retrieved",
+          "resolved_url": "https://www.researchobject.org/ro-crate/specification/1.3/structure",
+          "sha256": "305cc0bc2c5bd0b27d4359080b1cb8fc45d590448f67932db3747553a82f262c",
+          "bytes": 44450,
+          "snapshot": ".evaluation/reviews/R05/primary/sources/rocrate-structure.source",
+          "retrieved_at": "2026-10-29T05:27:50.932024+00:00",
+          "read_scope": "Attached/detached packaging/access lines 72–132; metadata need not be exhaustive manifest and composition with other packaging lines 448–486"
+        },
+        {
+          "name": "rocrate-provenance",
+          "url": "https://www.researchobject.org/ro-crate/specification/1.3/provenance",
+          "status": "retrieved",
+          "resolved_url": "https://www.researchobject.org/ro-crate/specification/1.3/provenance",
+          "sha256": "b7031cc4fcfdbd596e5beb4da1ea31ff7d8bf4b84813ddf2332d89cda38320b6",
+          "bytes": 58298,
+          "snapshot": ".evaluation/reviews/R05/primary/sources/rocrate-provenance.source",
+          "retrieved_at": "2026-10-29T05:27:51.037805+00:00",
+          "read_scope": "Software version and CreateAction/instrument/object/result excerpt 175–280 only"
+        }
+      ]
+    },
+    {
+      "id": "S52",
+      "title": "RFC 8493 BagIt",
+      "authority": "RFC Editor; BagIt authors",
+      "kind": "Informational RFC",
+      "url": "https://www.rfc-editor.org/rfc/rfc8493.txt",
+      "repository": null,
+      "paths": [],
+      "version": "BagIt 1.0, RFC8493, October 2018",
+      "retrieved_at": "2026-10-29T05:27:50.662790+00:00",
+      "use": "文件清单完整性、逐文件checksum及complete/valid区分",
+      "limit": "只核opaque payload bytes/fixity，不证明语义、业务正确或抵抗主动篡改",
+      "status": "R05 scoped primary and independent comparison; no BagIt-compliance claim",
+      "access_scope": "RFC8493 §2.1.2–2.1.3 text352–408 and §3 Complete/Valid Bags743–790; no whole-RFC conformance claim",
+      "materials": [
+        {
+          "name": "bagit",
+          "url": "https://www.rfc-editor.org/rfc/rfc8493.txt",
+          "status": "retrieved",
+          "resolved_url": "https://www.rfc-editor.org/rfc/rfc8493.txt",
+          "sha256": "4964147d2e6e16442d4a6dbfbe68178a8f33c3e791c06d68a8b33f51ad821537",
+          "bytes": 48783,
+          "snapshot": ".evaluation/reviews/R05/primary/sources/bagit.source",
+          "retrieved_at": "2026-10-29T05:27:50.662790+00:00",
+          "read_scope": "RFC8493 §2.1.2–2.1.3 text352–408 and §3 Complete/Valid Bags743–790; no whole-RFC conformance claim"
+        }
+      ]
+    },
+    {
+      "id": "S53",
+      "title": "SLSA artifact verification",
+      "authority": "SLSA official specification maintainers",
+      "kind": "approved specification guidance",
+      "url": "https://slsa.dev/spec/v1.2/verifying-artifacts",
+      "repository": null,
+      "paths": [],
+      "version": "v1.2 fixed Approved comparison baseline, not asserted latest",
+      "retrieved_at": "2026-10-29T05:27:52.136021+00:00",
+      "use": "核对证据subject与实际artifact摘要，区分来源信任与对象一致性",
+      "limit": "借同职责比较，不要求通用技能采用构建签名/等级，不声明SLSA认证",
+      "status": "R05 artifact-target comparison recorded; product D02 remains open",
+      "access_scope": "v1.2 approved fixed comparison: overview and subject/digest/trust-limit text1–196; no complete SLSA/latest certification claim",
+      "materials": [
+        {
+          "name": "slsa-verification",
+          "url": "https://slsa.dev/spec/v1.2/verifying-artifacts",
+          "status": "retrieved",
+          "resolved_url": "https://slsa.dev/spec/v1.2/verifying-artifacts",
+          "sha256": "3922b210da9ea002d2c267edf89864382bf4e582d3da9bbc8164ef8fe977a8b1",
+          "bytes": 35578,
+          "snapshot": ".evaluation/reviews/R05/primary/sources/slsa-verification.source",
+          "retrieved_at": "2026-10-29T05:27:52.136021+00:00",
+          "read_scope": "v1.2 approved fixed comparison: overview and subject/digest/trust-limit text1–196; no complete SLSA/latest certification claim"
+        }
+      ]
+    },
+    {
+      "id": "S54",
+      "title": "Python 3.12 pathlib",
+      "authority": "Python Software Foundation",
+      "kind": "official documentation",
+      "url": "https://docs.python.org/3.12/library/pathlib.html",
+      "repository": null,
+      "paths": [],
+      "version": "Python3.12",
+      "retrieved_at": "2026-10-29T10:01:30.136867+00:00",
+      "use": "路径解析、符号链接与归属判断",
+      "limit": "resolve加归属比较不是敌对竞争隔离或多租户权限",
+      "status": "R14 scoped comparison and targeted local evidence; no whole-product conformance claim",
+      "access_scope": "R14 source-identities.json selected ranges; independent reading separately attributed",
+      "materials": [
+        {
+          "url": "https://docs.python.org/3.12/library/pathlib.html",
+          "resolved_url": "https://docs.python.org/3.12/library/pathlib.html",
+          "sha256": "7f0bc9f819ef99fa7059b452e563646546b839bd8ce50d7e4884d68feeb143ab",
+          "bytes": 210454,
+          "snapshot": ".evaluation/reviews/R14/primary/sources/python-pathlib.source",
+          "retrieved_at": "2026-10-29T10:01:30.136867+00:00",
+          "read_scope": "Python3.12 selected1135–1180 PurePath.is_relative_to lexical nature,2148–2205 Path.resolve symlink and parent normalization. No race-proof claim.",
+          "name": "R14-python-pathlib",
+          "status": "retrieved"
+        }
+      ]
+    },
+    {
+      "id": "S55",
+      "title": "Python 3.12 tempfile",
+      "authority": "Python Software Foundation",
+      "kind": "official documentation",
+      "url": "https://docs.python.org/3.12/library/tempfile.html",
+      "repository": null,
+      "paths": [],
+      "version": "Python3.12",
+      "retrieved_at": "2026-10-29T10:01:30.826975+00:00",
+      "use": "复用mkstemp独占创建、私有模式和清理责任",
+      "limit": "原子临时文件创建不证明最终目录持久化或Windows账户ACL",
+      "status": "R14 scoped comparison and targeted local evidence; no whole-product conformance claim",
+      "access_scope": "R14 source-identities.json selected ranges; independent reading separately attributed",
+      "materials": [
+        {
+          "url": "https://docs.python.org/3.12/library/tempfile.html",
+          "resolved_url": "https://docs.python.org/3.12/library/tempfile.html",
+          "sha256": "5e2561e55d757cf763529df87579e86037d6135ef200eaec9aad9cc50be062e1",
+          "bytes": 73726,
+          "snapshot": ".evaluation/reviews/R14/primary/sources/python-tempfile.source",
+          "retrieved_at": "2026-10-29T10:01:30.826975+00:00",
+          "read_scope": "Python3.12 mkstemp selected544–605: exclusive creation, private modes and caller cleanup. Not full tempfile docs.",
+          "name": "R14-python-tempfile",
+          "status": "retrieved"
+        }
+      ]
+    },
+    {
+      "id": "S56",
+      "title": "Claude Code permissions",
+      "authority": "Anthropic official Claude Code documentation",
+      "kind": "official documentation",
+      "url": "https://code.claude.com/docs/en/permissions",
+      "repository": null,
+      "paths": [],
+      "version": "Retrieved current official page 2026-10-29; content SHA anchored",
+      "retrieved_at": "2026-10-29T10:01:31.460149+00:00",
+      "use": "宿主原生allow/ask/deny及执行层授权职责比较",
+      "limit": "仅官方文档选段，未本机执行该应用或证明所有宿主一致",
+      "status": "R14 scoped comparison and targeted local evidence; no whole-product conformance claim",
+      "access_scope": "R14 source-identities.json selected ranges; independent reading separately attributed",
+      "materials": [
+        {
+          "url": "https://code.claude.com/docs/en/permissions.md",
+          "resolved_url": "https://code.claude.com/docs/en/permissions.md",
+          "sha256": "a72bafb46a558dec5a641916b6f1482b101a8b4ca7602f0a2d3fb636b0b3c25c",
+          "bytes": 90325,
+          "snapshot": ".evaluation/reviews/R14/primary/sources/claude-permissions.source",
+          "retrieved_at": "2026-10-29T10:01:31.460149+00:00",
+          "read_scope": "Selected1–31 and45–68 tiered permissions/allow-ask-deny and implementation-enforced rather than prompt-enforced policy. Native-host comparison only; no installed application exercise or cross-host uniformity claim.",
+          "name": "R14-claude-permissions",
+          "status": "retrieved"
+        }
+      ]
+    },
+    {
+      "id": "S57",
+      "title": "Guidelines for Human-AI Interaction (CHI2019 original and HAX)",
+      "authority": "Amershi et al.; ACM CHI2019; Microsoft Research original author repository",
+      "kind": "original research and official author guidance",
+      "url": "https://www.microsoft.com/en-us/research/publication/guidelines-for-human-ai-interaction/",
+      "repository": null,
+      "paths": [],
+      "version": "CHI2019 DOI10.1145/3290605.3300233; official current HAX index retrieved2026-10-29",
+      "retrieved_at": "2026-10-29T11:02:51.460515+00:00",
+      "use": "初始能力/限制、时机/相关信息、调用/退出/纠正/疑问/解释/近期记忆与谨慎适应的原作者交互评估依据",
+      "limit": "原研究验证指南，不验证本项目；非ISO或产品认证；PDF只读表及讨论等选段，真实成员负担和长期效果待证",
+      "status": "R03 scoped original-paper comparison, model trial and independent byte/source checks recorded",
+      "access_scope": "R03 per-original read_scope; original PDF and derived text distinguished; independent ranges separately recorded",
+      "materials": [
+        {
+          "url": "https://www.microsoft.com/en-us/research/publication/guidelines-for-human-ai-interaction/",
+          "resolved_url": "https://www.microsoft.com/en-us/research/publication/guidelines-for-human-ai-interaction/",
+          "retrieved_at": "2026-10-29T11:00:33.258275+00:00",
+          "sha256": "1023e91b868373ead28ccf1cd571155cc14e5f848b155c592eb94b1b501e71a3",
+          "bytes": 181865,
+          "snapshot": ".evaluation/reviews/R03/primary/sources/microsoft-hai.source",
+          "read_scope": "Full78-line publication/abstract page; CHI2019 original author list/DOI link and 49-practitioner/20-product study description. Landing page not substituted for the original paper.",
+          "name": "R03-microsoft-hai",
+          "status": "retrieved"
+        },
+        {
+          "url": "https://www.microsoft.com/en-us/haxtoolkit/ai-guidelines/",
+          "resolved_url": "https://www.microsoft.com/en-us/haxtoolkit/ai-guidelines/",
+          "retrieved_at": "2026-10-29T11:00:32.360826+00:00",
+          "sha256": "c144564733d4190cc4de32fd2c63c6548d449b33324b99f6f4caad60cbf36a81",
+          "bytes": 131151,
+          "snapshot": ".evaluation/reviews/R03/primary/sources/hax-guidelines.source",
+          "read_scope": "Full38-line official HAX guide index; identifies maintained18guidelines and links original2019paper. Not a full reading of all design-library patterns.",
+          "name": "R03-hax-guidelines",
+          "status": "retrieved"
+        },
+        {
+          "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2019/01/Guidelines-for-Human-AI-Interaction-camera-ready.pdf",
+          "resolved_url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2019/01/Guidelines-for-Human-AI-Interaction-camera-ready.pdf",
+          "retrieved_at": "2026-10-29T11:02:51.460515+00:00",
+          "sha256": "82fff584c6b986f573608361478e93447538c6ce707e4b9b04d45d584272ea03",
+          "bytes": 1405242,
+          "snapshot": ".evaluation/reviews/R03/primary/sources/microsoft-hai-paper.source",
+          "read_scope": "Original CHI2019 paper PDF obtained directly from author institution; pdftotext -layout derived selected1–42 (abstract/DOI),109–197 Table1 full18guidelines,560–628 discussion and application limits. Not whole13-page-paper reading or AstroFairy user-study validation.",
+          "name": "R03-microsoft-hai-paper",
+          "status": "retrieved"
+        }
+      ]
+    },
+    {
+      "id": "S58",
+      "title": "Python 3.12 clocks and microbenchmarking",
+      "authority": "Python Software Foundation",
+      "kind": "official documentation or original engineering guidance",
+      "url": "https://docs.python.org/3.12/library/time.html",
+      "repository": null,
+      "paths": [],
+      "version": "Python3.12 documentation as retrieved",
+      "retrieved_at": "2026-10-29T12:46:52.130391+00:00",
+      "use": "区分monotonic经过时间/CPU、重复测量原向量和基线",
+      "limit": "微基准和进程墙钟不提供模型token/价格/真实UI时延或总体统计保证",
+      "status": "R07 scoped official comparison and actual task/microbenchmark evidence; no whole-product certification",
+      "access_scope": "R07 per-original read_scope; independent source selections separately attributed",
+      "materials": [
+        {
+          "url": "https://docs.python.org/3.12/library/time.html",
+          "resolved_url": "https://docs.python.org/3.12/library/time.html",
+          "retrieved_at": "2026-10-29T12:46:52.130391+00:00",
+          "sha256": "84ce5d2bd5a4487db8321aa69a16a8a9e22c33ffff18a6bbca5841b6f20c1412",
+          "bytes": 120939,
+          "snapshot": ".evaluation/reviews/R07/primary/sources/python-time.source",
+          "read_scope": "Python3.12 selected557–633 perf_counter/ns and process_time/ns, clocks and sleep inclusion. Actual wall observations not CPU/token/UI measures.",
+          "name": "R07-python-time",
+          "status": "retrieved"
+        },
+        {
+          "url": "https://docs.python.org/3.12/library/timeit.html",
+          "resolved_url": "https://docs.python.org/3.12/library/timeit.html",
+          "retrieved_at": "2026-10-29T12:46:52.025079+00:00",
+          "sha256": "9696e451864d4c297c5e031c485aa2d5fb43e572741789e4800099a876306de0",
+          "bytes": 57902,
+          "snapshot": ".evaluation/reviews/R07/primary/sources/python-timeit.source",
+          "read_scope": "Python3.12 selected1–72 intro,381–410 repeat-vector/lowest-bound warning,485–555 command options,563–579 baseline/scheduler caveats. Raw5-sample vectors retained; medians describe this run, not confidence intervals or population percentiles.",
+          "name": "R07-python-timeit",
+          "status": "retrieved"
+        }
+      ]
+    },
+    {
+      "id": "S59",
+      "title": "Building effective agents: simplicity, economy and ACI",
+      "authority": "Anthropic engineering authors",
+      "kind": "official documentation or original engineering guidance",
+      "url": "https://www.anthropic.com/research/building-effective-agents",
+      "repository": null,
+      "paths": [],
+      "version": "Original2024 engineering guidance with current tooling-change notice",
+      "retrieved_at": "2026-10-29T12:46:53.472006+00:00",
+      "use": "简单组合、成本与效果权衡、工具格式和接口防错",
+      "limit": "历史工程经验不是2026所有API标准或性能认证；当前页面明确工具生态已改变",
+      "status": "R07 scoped official comparison and actual task/microbenchmark evidence; no whole-product certification",
+      "access_scope": "R07 per-original read_scope; independent source selections separately attributed",
+      "materials": [
+        {
+          "url": "https://www.anthropic.com/engineering/building-effective-agents",
+          "resolved_url": "https://www.anthropic.com/research/building-effective-agents",
+          "retrieved_at": "2026-10-29T12:46:53.472006+00:00",
+          "sha256": "0d5cbb5d21b79834603d0f0b4d7ee7c707e6d586bd2c05214cdb2fa66b74f1d7",
+          "bytes": 258319,
+          "snapshot": ".evaluation/reviews/R07/primary/sources/effective-agents.source",
+          "read_scope": "Official original2024 engineering guidance with current notice that tooling has changed: selected1–112 simplest-solution/latency-cost/ACI/workflows,132–216 evaluation/agent limits/summary/tools. Historical design guidance, not current API obligations or full latest managed-agent implementation.",
+          "name": "R07-effective-agents",
+          "status": "retrieved"
+        }
+      ]
+    },
+    {
+      "id": "S60",
+      "title": "Unicode literal matching: Python casefold and SQLite lower",
+      "authority": "Python Software Foundation and SQLite maintainers",
+      "kind": "official documentation or original engineering guidance",
+      "url": "https://www.sqlite.org/lang_corefunc.html",
+      "repository": null,
+      "paths": [],
+      "version": "Python3.12 and current SQLite core-function docs",
+      "retrieved_at": "2026-10-29T13:00:09.582308+00:00",
+      "use": "核对查询与元数据两侧归一化的实际语义",
+      "limit": "casefold/lower并非等价；本轮不宣称完整Unicode等价规范、所有分词或语义质量通过",
+      "status": "R07 scoped official comparison and actual task/microbenchmark evidence; no whole-product certification",
+      "access_scope": "R07 per-original read_scope; independent source selections separately attributed",
+      "materials": [
+        {
+          "url": "https://www.sqlite.org/lang_corefunc.html",
+          "resolved_url": "https://www.sqlite.org/lang_corefunc.html",
+          "retrieved_at": "2026-10-29T13:00:09.582308+00:00",
+          "sha256": "ec49b7c5fb5905f6adaff7d09ace92db22a9f6310435d098501f163f48257885",
+          "bytes": 43320,
+          "snapshot": ".evaluation/reviews/R07/primary/sources/sqlite-corefunc.source",
+          "read_scope": "Selected426–439 lower(X), default ASCII-only and ICU option. Actual runtime SQLite lower results independently measured; full fetched page not fully read.",
+          "name": "R07-sqlite-corefunc",
+          "status": "retrieved"
+        },
+        {
+          "url": "https://docs.python.org/3.12/library/stdtypes.html",
+          "resolved_url": "https://docs.python.org/3.12/library/stdtypes.html",
+          "retrieved_at": "2026-10-29T13:00:11.244402+00:00",
+          "sha256": "0b10fb9e7e5b8db1d1283835b98b6a9c167871bf6475937aa5d0e1467956a352",
+          "bytes": 648964,
+          "snapshot": ".evaluation/reviews/R07/primary/sources/python-stdtypes.source",
+          "read_scope": "Python3.12 selected3583–3622 str.casefold, caseless matching, ß→ss and Unicode algorithm link. Not full standard-types manual or complete Unicode-equivalence proof.",
+          "name": "R07-python-stdtypes",
+          "status": "retrieved"
+        },
+        {
+          "id": "sqlite-core-functions",
+          "url": "https://www.sqlite.org/lang_corefunc.html",
+          "resolved_url": "https://www.sqlite.org/lang_corefunc.html",
+          "sha256": "ec49b7c5fb5905f6adaff7d09ace92db22a9f6310435d098501f163f48257885",
+          "bytes": 43320,
+          "retrieved_at": "2026-10-29T18:54:54.079569+00:00",
+          "name": "R10-independent-sqlite-core-functions",
+          "status": "retrieved",
+          "snapshot": ".evaluation/reviews/R10/independent-resume/sources/sqlite-core-functions.source",
+          "derived_text": ".evaluation/reviews/R10/independent-resume/sources/sqlite-core-functions.txt",
+          "read_scope": "Independent selected derived range 290-305; attributed to fresh verifier, not root full-source reading or whole standard certification."
+        },
+        {
+          "id": "python-stdtypes",
+          "url": "https://docs.python.org/3.12/library/stdtypes.html",
+          "resolved_url": "https://docs.python.org/3.12/library/stdtypes.html",
+          "sha256": "0b10fb9e7e5b8db1d1283835b98b6a9c167871bf6475937aa5d0e1467956a352",
+          "bytes": 648964,
+          "retrieved_at": "2026-10-29T18:54:55.138916+00:00",
+          "name": "R10-independent-python-stdtypes",
+          "status": "retrieved",
+          "snapshot": ".evaluation/reviews/R10/independent-resume/sources/python-stdtypes.source",
+          "derived_text": ".evaluation/reviews/R10/independent-resume/sources/python-stdtypes.txt",
+          "read_scope": "Independent selected derived range 1133-1149; attributed to fresh verifier, not root full-source reading or whole standard certification."
+        }
+      ]
+    },
+    {
+      "id": "S61",
+      "title": "LangMem memory extraction and feedback optimization",
+      "authority": "LangChain / LangMem maintainers",
+      "kind": "official documentation and fixed source implementation",
+      "url": "https://github.com/langchain-ai/langmem",
+      "repository": "langchain-ai/langmem",
+      "paths": [
+        "src/langmem/knowledge/extraction.py",
+        "docs/docs/guides/optimize_memory_prompt.md",
+        "README.md"
+      ],
+      "version": "ae6f15fb76603fa2c86ad05f1ecb4a110fa8060b and current concepts page",
+      "retrieved_at": "2026-10-29T16:40:10.229115+00:00",
+      "use": "比较事实/经历/行为方法、成功与纠正信号、已有记忆合并、反馈轨迹和存储接线",
+      "limit": "选段和固定指南比较；未安装执行依赖，不以官方收益描述认定本项目长期有效",
+      "status": "R08 scoped primary-source comparison; no SDK execution or whole-package certification",
+      "access_scope": "R08 per-original read_scope and report",
+      "materials": [
+        {
+          "id": "langmem-concepts",
+          "url": "https://langchain-ai.github.io/langmem/concepts/conceptual_guide/",
+          "resolved_url": "https://langchain-ai.github.io/langmem/concepts/conceptual_guide/",
+          "retrieved_at": "2026-10-29T16:40:10.229115+00:00",
+          "sha256": "9fb1062ea629efb77107e393174961c2d3a5f0dfbd8b8842feb0ad8fd7b30f7a",
+          "bytes": 102736,
+          "snapshot": ".evaluation/reviews/R08/primary/sources/langmem-concepts.source",
+          "status": "retrieved",
+          "read_scope": "Derived text71–110 extraction/consolidation and semantic distinctions;214–220 successful episodes;279–343 prompt optimization, timing and functional/stateful split. HTML fetched whole, selected passages read; marketing benefits not adopted as empirical evidence.",
+          "derived_text": ".evaluation/reviews/R08/primary/sources/langmem-concepts.txt",
+          "derived_text_sha256": "669f7653aa5dee7564cf9e9942a83914f86f899ea36d9ed1003be0af92374b24",
+          "name": "R08-langmem-concepts"
+        },
+        {
+          "id": "langmem-memory-source",
+          "url": "https://raw.githubusercontent.com/langchain-ai/langmem/ae6f15fb76603fa2c86ad05f1ecb4a110fa8060b/src/langmem/knowledge/extraction.py",
+          "resolved_url": "https://raw.githubusercontent.com/langchain-ai/langmem/ae6f15fb76603fa2c86ad05f1ecb4a110fa8060b/src/langmem/knowledge/extraction.py",
+          "version": "ae6f15fb76603fa2c86ad05f1ecb4a110fa8060b",
+          "retrieved_at": "2026-10-29T16:41:33.015360+00:00",
+          "sha256": "165d4c019f55a365dba5a551e1af0c0313a2f4bab292e47493acc6f1cd62c13e",
+          "bytes": 81775,
+          "snapshot": ".evaluation/reviews/R08/primary/sources/langmem-memory-source.source",
+          "status": "retrieved",
+          "read_scope": "Selected217–322 MemoryManager: messages + existing memories, explicit schema/inserts/updates/deletes flags, max_steps loop and update payload. Remaining source not fully reviewed; no full package conformance or execution claim.",
+          "name": "R08-langmem-memory-source"
+        },
+        {
+          "id": "langmem-optimization-guide",
+          "url": "https://raw.githubusercontent.com/langchain-ai/langmem/ae6f15fb76603fa2c86ad05f1ecb4a110fa8060b/docs/docs/guides/optimize_memory_prompt.md",
+          "resolved_url": "https://raw.githubusercontent.com/langchain-ai/langmem/ae6f15fb76603fa2c86ad05f1ecb4a110fa8060b/docs/docs/guides/optimize_memory_prompt.md",
+          "version": "ae6f15fb76603fa2c86ad05f1ecb4a110fa8060b",
+          "retrieved_at": "2026-10-29T16:41:33.535960+00:00",
+          "sha256": "f0610a7052100e1746af554a1464949ed88d5d13a06279ebcdd03e076c251939",
+          "bytes": 5450,
+          "snapshot": ".evaluation/reviews/R08/primary/sources/langmem-optimization-guide.source",
+          "status": "retrieved",
+          "read_scope": "Full1–end fixed-source guide: trajectories include unannotated conversations, positive score, edits and optional feedback; optimizer call budgets examples, not measured on this project.",
+          "name": "R08-langmem-optimization-guide"
+        },
+        {
+          "id": "langmem-readme",
+          "url": "https://raw.githubusercontent.com/langchain-ai/langmem/ae6f15fb76603fa2c86ad05f1ecb4a110fa8060b/README.md",
+          "resolved_url": "https://raw.githubusercontent.com/langchain-ai/langmem/ae6f15fb76603fa2c86ad05f1ecb4a110fa8060b/README.md",
+          "version": "ae6f15fb76603fa2c86ad05f1ecb4a110fa8060b",
+          "retrieved_at": "2026-10-29T16:41:34.050593+00:00",
+          "sha256": "e1edd000d263bfea842c34273add82421340c2caf2d7b87edd285daf02156ca3",
+          "bytes": 5205,
+          "snapshot": ".evaluation/reviews/R08/primary/sources/langmem-readme.source",
+          "status": "retrieved",
+          "read_scope": "Full README1–end: functional memory, integration, SDK/model key requirements and in-memory persistence caveat. No installation or model invocation of this dependency.",
+          "name": "R08-langmem-readme"
+        }
+      ]
+    },
+    {
+      "id": "S62",
+      "title": "Common Workflow Language workflow reference",
+      "authority": "Common Workflow Language project",
+      "kind": "official specification",
+      "url": "https://www.commonwl.org/v1.2/Workflow.html",
+      "version": "v1.2 reference page, retrieval timestamp and content digest",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-29",
+      "use": "对照输入类型、数据依赖、步骤run、requirements与hints；不要求方法资产冒充执行引擎",
+      "limit": "R09按原件选段比较；未运行规范一致性套件、执行器或制品注册表，不宣称Astro资产格式符合该标准",
+      "status": "R09 scoped official comparison; no full specification or interoperability certification",
+      "access_scope": "R09 per-original read_scope",
+      "materials": [
+        {
+          "id": "cwl-workflow",
+          "url": "https://www.commonwl.org/v1.2/Workflow.html",
+          "resolved_url": "https://www.commonwl.org/v1.2/Workflow.html",
+          "retrieved_at": "2026-10-29T17:07:08.458143+00:00",
+          "sha256": "0ab95077277dbf6ccca98a2fecce296e0d4373ddb4c802ebbeef5090f4088336",
+          "bytes": 285993,
+          "snapshot": ".evaluation/reviews/R09/primary/sources/cwl-workflow.source",
+          "derived_text": ".evaluation/reviews/R09/primary/sources/cwl-workflow.txt",
+          "derived_text_sha256": "d28764d72ea408abdd573011535d575ae5155c84ef3040633006c5cd516c2dc3",
+          "lines": 3385,
+          "status": "retrieved",
+          "read_scope": "v1.2 reference URL, selected derived663–685 requirements vs hints,869–1015 workflow dependency/success/input/output and typed inputs,1956–2068 steps/run/conditional/requirements. Not whole3385-line document, CWL conformance run or proposed mandatory adoption.",
+          "name": "R09-cwl-workflow"
+        }
+      ]
+    },
+    {
+      "id": "S63",
+      "title": "OCI content descriptors and artifact manifests",
+      "authority": "Open Container Initiative",
+      "kind": "official specification",
+      "url": "https://github.com/opencontainers/image-spec/tree/v1.1.1",
+      "version": "image-spec v1.1.1",
+      "repository": "opencontainers/image-spec",
+      "paths": [],
+      "retrieved_at": "2026-10-29",
+      "use": "对照内容摘要、描述符、制品类型及多件依赖分发的职责",
+      "limit": "R09按原件选段比较；未运行规范一致性套件、执行器或制品注册表，不宣称Astro资产格式符合该标准",
+      "status": "R09 scoped official comparison; no full specification or interoperability certification",
+      "access_scope": "R09 per-original read_scope",
+      "materials": [
+        {
+          "id": "oci-descriptor",
+          "url": "https://raw.githubusercontent.com/opencontainers/image-spec/v1.1.1/descriptor.md",
+          "resolved_url": "https://raw.githubusercontent.com/opencontainers/image-spec/v1.1.1/descriptor.md",
+          "retrieved_at": "2026-10-29T17:07:07.594977+00:00",
+          "sha256": "89399b5ffabfeb9688b66de9afcf08b60691710d94d0f5b061cb30e6fbc75428",
+          "bytes": 12152,
+          "snapshot": ".evaluation/reviews/R09/primary/sources/oci-descriptor.source",
+          "derived_text": ".evaluation/reviews/R09/primary/sources/oci-descriptor.txt",
+          "derived_text_sha256": "89399b5ffabfeb9688b66de9afcf08b60691710d94d0f5b061cb30e6fbc75428",
+          "lines": 222,
+          "status": "retrieved",
+          "read_scope": "OCI image-spec v1.1.1 descriptor selected1–126 fields/digest/verification/canonicalization. Size and byte-content verification are compared as design responsibilities, not a claim of OCI format compatibility.",
+          "name": "R09-oci-descriptor"
+        },
+        {
+          "id": "oci-manifest",
+          "url": "https://raw.githubusercontent.com/opencontainers/image-spec/v1.1.1/manifest.md",
+          "resolved_url": "https://raw.githubusercontent.com/opencontainers/image-spec/v1.1.1/manifest.md",
+          "retrieved_at": "2026-10-29T17:07:07.601419+00:00",
+          "sha256": "fc35d252c5cc192ce972bbd52b560184ba427a8a374107fc5cdd7442034cd867",
+          "bytes": 14010,
+          "snapshot": ".evaluation/reviews/R09/primary/sources/oci-manifest.source",
+          "derived_text": ".evaluation/reviews/R09/primary/sources/oci-manifest.txt",
+          "derived_text_sha256": "fc35d252c5cc192ce972bbd52b560184ba427a8a374107fc5cdd7442034cd867",
+          "lines": 270,
+          "status": "retrieved",
+          "read_scope": "OCI image-spec v1.1.1 manifest selected1–65 schema/media/config/layers and165–183 artifact-use guidance. Not whole manifest/image-spec or actual registry implementation.",
+          "name": "R09-oci-manifest"
+        }
+      ]
+    },
+    {
+      "id": "S64",
+      "title": "SQLite online backup and VACUUM lifecycle",
+      "authority": "SQLite maintainers",
+      "kind": "official documentation",
+      "url": "https://www.sqlite.org/backup.html",
+      "version": "Official current docs, retrieval timestamp and SHA256",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-29",
+      "use": "比较一致数据库备份、压紧、逻辑删除和保留政策的不同职责",
+      "limit": "R10选段与无并发写者的本机API恢复；不证明断电/任意工作区备份或完整保留政策",
+      "status": "R10 scoped primary and fresh independent comparison; no disaster-recovery or whole-lifecycle certification",
+      "access_scope": "R10 per-original read_scope",
+      "materials": [
+        {
+          "id": "sqlite-backup",
+          "url": "https://www.sqlite.org/backup.html",
+          "resolved_url": "https://www.sqlite.org/backup.html",
+          "retrieved_at": "2026-10-29T17:33:53.536847+00:00",
+          "sha256": "306b6cca5c7c2f93b648040ae139f14d7d3221c0d16d79b5749e69d808382e04",
+          "bytes": 28195,
+          "snapshot": ".evaluation/reviews/R10/primary/sources/sqlite-backup.source",
+          "status": "retrieved",
+          "read_scope": "Official selected derived29–68 online backup vs naive copy, incremental access and snapshot. No full C examples or complete API proof; local probe has no concurrent writer.",
+          "derived_text": ".evaluation/reviews/R10/primary/sources/sqlite-backup.txt",
+          "derived_text_sha256": "46937828b4d99176d7b4616742bbc9a13b24b227e3de25306ac25e3d2a3e2c4f",
+          "lines": 305,
+          "name": "R10-sqlite-backup"
+        },
+        {
+          "id": "sqlite-vacuum",
+          "url": "https://www.sqlite.org/lang_vacuum.html",
+          "resolved_url": "https://www.sqlite.org/lang_vacuum.html",
+          "retrieved_at": "2026-10-29T17:33:53.529749+00:00",
+          "sha256": "740f02ade00626f50c7a71ded2615995362fedfc30e09aa22dbe4535b7615c54",
+          "bytes": 15215,
+          "snapshot": ".evaluation/reviews/R10/primary/sources/sqlite-vacuum.source",
+          "status": "retrieved",
+          "read_scope": "Official selected derived24–49 reclaim deleted free pages;67–108 VACUUM INTO consistent snapshot and interruption limits. Not a logical retention/GC policy.",
+          "derived_text": ".evaluation/reviews/R10/primary/sources/sqlite-vacuum.txt",
+          "derived_text_sha256": "77b96d96096a208e25075c0045f64e40a15a4b0b3fa81eb4015a99257a2c7828",
+          "lines": 132,
+          "name": "R10-sqlite-vacuum"
+        }
+      ]
+    },
+    {
+      "id": "S65",
+      "title": "OpenAI Codex app-server protocol",
+      "authority": "OpenAI",
+      "kind": "primary documentation",
+      "url": "https://developers.openai.com/codex/app-server/",
+      "use": "原生skills/list发现及初始化",
+      "limit": "不替代模型调用或全部桌面应用认证",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-29T19:55:53.562908+00:00",
+      "status": "R12 scoped original reading; not conformance certification",
+      "materials": [
+        {
+          "name": "R12-openai-app-server",
+          "url": "https://developers.openai.com/codex/app-server/",
+          "resolved_url": "https://learn.chatgpt.com/docs/app-server",
+          "sha256": "f12d6e51bc6eb72f59b27f5af6804718b0b7fa169ee3c85ba0f92572858a64cb",
+          "bytes": 981905,
+          "snapshot": ".evaluation/reviews/R12/primary/sources/openai-app-server.source",
+          "retrieved_at": "2026-10-29T19:44:34.044979+00:00",
+          "status": "retrieved",
+          "read_scope": "925–965 initialization;1923–1975 skills/list, refresh and skill marker; rolling docs, actual0.164.0 separately measured"
+        }
+      ],
+      "version": "retrieval identity and explicitly stated runtime version",
+      "access_scope": "Selected passages and local probes only"
+    },
+    {
+      "id": "S66",
+      "title": "SQLite window-function version floor",
+      "authority": "SQLite maintainers",
+      "kind": "primary documentation",
+      "url": "https://sqlite.org/windowfunctions.html",
+      "use": "实际SQL窗口语法能力及引入版本",
+      "limit": "未运行旧SQLite整栈；不是SQL全特性兼容证明",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-29T19:55:53.562908+00:00",
+      "status": "R12 scoped original reading; not conformance certification",
+      "materials": [
+        {
+          "name": "R12-sqlite-window",
+          "url": "https://sqlite.org/windowfunctions.html",
+          "resolved_url": "https://sqlite.org/windowfunctions.html",
+          "status": "retrieved",
+          "sha256": "541a738f7fd26efca132111ef51e74c2a3233054faa3471ee88f9696ebe97e98",
+          "bytes": 923326,
+          "snapshot": ".evaluation/reviews/R12/independent/authority/sqlite-window.txt",
+          "read_scope": "Root re-read original7905–7908 window introduction3.25.0; not whole SQL manual.",
+          "time_limit": "See independent authority manifests; current file mtime is not fabricated exact retrieval time"
+        },
+        {
+          "name": "R12-sqlite-release",
+          "url": "https://sqlite.org/releaselog/3_25_0.html",
+          "resolved_url": "https://sqlite.org/releaselog/3_25_0.html",
+          "status": "retrieved",
+          "sha256": "8f57db9b80f2eb2422565f85749429dec21ea665218d3a9397b9e57f71b9b9a5",
+          "bytes": 7410,
+          "snapshot": ".evaluation/reviews/R12/independent/authority/sqlite-325-release.txt",
+          "read_scope": "Official3.25.0 release window-function addition; static dependency contract only.",
+          "time_limit": "See independent authority manifests; current file mtime is not fabricated exact retrieval time"
+        }
+      ],
+      "version": "retrieval identity and explicitly stated runtime version",
+      "access_scope": "Selected passages and local probes only"
+    },
+    {
+      "id": "S67",
+      "title": "GitHub Copilot native Agent Skills",
+      "authority": "GitHub",
+      "kind": "primary documentation",
+      "url": "https://docs.github.com/en/copilot/concepts/agents/about-agent-skills",
+      "use": "CLI/IDE/云端原生技能位置与边界",
+      "limit": "各应用表面分别验证，不由VSCode文档替代全部GitHub产品",
+      "repository": null,
+      "paths": [],
+      "retrieved_at": "2026-10-29T19:55:53.562908+00:00",
+      "status": "R12 scoped original reading; not conformance certification",
+      "materials": [
+        {
+          "name": "R12-copilot-cli-skills",
+          "url": "https://docs.github.com/en/copilot/concepts/agents/about-agent-skills",
+          "resolved_url": "https://docs.github.com/en/copilot/concepts/customizations/agent-skills",
+          "sha256": "95e3ed62cba291f227cdfe1b6ca7b377763621ae1553e3c1dfacd62d860ae1aa",
+          "bytes": 580596,
+          "snapshot": ".evaluation/reviews/R12/primary/sources/copilot-cli-skills.source",
+          "retrieved_at": "2026-10-29T19:44:37.324274+00:00",
+          "status": "retrieved",
+          "read_scope": "derived591–617 native supported surfaces, roots and cloud boundary"
+        }
+      ],
+      "version": "retrieval identity and explicitly stated runtime version",
+      "access_scope": "Selected passages and local probes only"
+    },
+    {
+      "id": "S68",
+      "title": "Python3.12 unittest discovery",
+      "authority": "Python Software Foundation",
+      "kind": "primary documentation",
+      "url": "https://docs.python.org/3.12/library/unittest.html",
+      "use": "测试导入、发现与包标记规则",
+      "limit": "不代替实际收集对账，不由所有unittest特性推项目覆盖",
+      "repository": null,
+      "paths": [],
+      "status": "R16 selected original reading and probes",
+      "materials": [
+        {
+          "name": "R16-python-unittest",
+          "url": "https://docs.python.org/3.12/library/unittest.html",
+          "resolved_url": "https://docs.python.org/3.12/library/unittest.html",
+          "status": "retrieved",
+          "snapshot": ".evaluation/reviews/R16/primary/sources/python-unittest.source",
+          "sha256": "a7891bedfa9b5d8d99b9ef287c8010cf38a0468e3409b623438e37a4a4baf6d9",
+          "bytes": 327819,
+          "retrieved_at": "2026-10-29T22:39:48.332922+00:00",
+          "derived_text": ".evaluation/reviews/R16/primary/sources/python-unittest.txt",
+          "derived_sha256": "d808a62e6bbf4e19c2d59ac6f17ca0dabc0130cf81a984257b5ca7c322ba0b20",
+          "derived_lines": 1757,
+          "read_scope": "derived200–216,235–253,1258–1299 discovery/import/package limitations and wrong-checkout warning"
+        },
+        {
+          "name": "R15-reused-S68",
+          "url": "https://docs.python.org/3.12/library/unittest.html",
+          "resolved_url": "https://docs.python.org/3.12/library/unittest.html",
+          "status": "retrieved",
+          "snapshot": ".evaluation/reviews/R16/primary/sources/python-unittest.source",
+          "sha256": "a7891bedfa9b5d8d99b9ef287c8010cf38a0468e3409b623438e37a4a4baf6d9",
+          "bytes": 327819,
+          "retrieved_at": "2026-10-29T22:39:48.332922+00:00",
+          "derived_text": ".evaluation/reviews/R16/primary/sources/python-unittest.txt",
+          "derived_sha256": "d808a62e6bbf4e19c2d59ac6f17ca0dabc0130cf81a984257b5ca7c322ba0b20",
+          "derived_lines": 1757,
+          "read_scope": "R15 reuse original selected discovery/importability facts and actual wrapper/canary; no entire manual review",
+          "identity_rechecked": true
+        }
+      ],
+      "retrieved_at": "2026-10-29T22:55:13.659760+00:00",
+      "version": "Explicit document version and retrieval identity",
+      "access_scope": "Scoped passages, no complete framework certification"
+    },
+    {
+      "id": "S69",
+      "title": "Git hook execution contract",
+      "authority": "Git project maintainers",
+      "kind": "primary documentation",
+      "url": "https://github.com/git/git/blob/v2.51.0/Documentation/githooks.adoc",
+      "use": "可执行位、core.hooksPath、pre-commit非零拒绝",
+      "limit": "固定v2.51文档；本机2.20.1仅验证脚本，不冒称新子命令或commit派发",
+      "repository": null,
+      "paths": [],
+      "status": "R16 selected original reading and probes",
+      "materials": [
+        {
+          "name": "R16-git-hooks-fixed",
+          "url": "https://raw.githubusercontent.com/git/git/v2.51.0/Documentation/githooks.adoc",
+          "resolved_url": "https://raw.githubusercontent.com/git/git/v2.51.0/Documentation/githooks.adoc",
+          "status": "retrieved",
+          "snapshot": ".evaluation/reviews/R16/primary/sources/git-hooks-fixed.source",
+          "sha256": "dc7165822ba02f5c73ecd386218e236c56cef166eb73e905eec82b712d541f19",
+          "bytes": 29644,
+          "retrieved_at": "2026-10-29T22:43:21.020386+00:00",
+          "derived_text": ".evaluation/reviews/R16/primary/sources/git-hooks-fixed.txt",
+          "derived_sha256": "a4ab374c919b3f0c0ae2b2a09147cc7fc3a8084d9701f25ff94488eb632fad32",
+          "derived_lines": 587,
+          "read_scope": "fixed Gitv2.51.0 original1–26 executable/core.hooksPath/cwd and70–87 precommit failure; actual Git2.20.1 wrapper separately measured"
+        }
+      ],
+      "retrieved_at": "2026-10-29T22:55:13.659775+00:00",
+      "version": "Explicit document version and retrieval identity",
+      "access_scope": "Scoped passages, no complete framework certification"
+    },
+    {
+      "id": "S70",
+      "title": "Agent evaluation engineering: tasks, trials and graders",
+      "authority": "Anthropic official engineering",
+      "url": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
+      "kind": "industry engineering guidance",
+      "use": "任务/尝试/结果与代码/模型/人类评分、能力及回归的区分",
+      "limit": "实践指导非强制标准；不以文章陈述代替本项目效果测量",
+      "repository": null,
+      "paths": [],
+      "status": "R15 scoped original reading and comparison",
+      "materials": [
+        {
+          "name": "R15-agent-evals",
+          "url": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
+          "resolved_url": "https://www.anthropic.com/research/demystifying-evals-for-ai-agents",
+          "status": "retrieved",
+          "snapshot": ".evaluation/reviews/R15/primary/sources/agent-evals.source",
+          "sha256": "294f059aea337190c3eca2d81a66bb2d972734a69254354a13a5a3fb81650b9a",
+          "bytes": 315536,
+          "retrieved_at": "2026-10-29T23:04:42.622359+00:00",
+          "derived_text": ".evaluation/reviews/R15/primary/sources/agent-evals.txt",
+          "derived_sha256": "2763d48d06fc48593a40d2a05920d5a8811a3d108443917508ee00b0fa1a0263",
+          "lines": 336,
+          "read_scope": "derived41–48 task/trial/grader/trace/outcome/harness;61–117 grader roles, calibration and capability/regression distinction"
+        }
+      ],
+      "retrieved_at": "2026-10-29T23:22:49.042738+00:00",
+      "version": "Actual retrieved page SHA and explicit specification versions; rolling framework docs not a pinned executed release",
+      "access_scope": "Selected original passages only"
+    },
+    {
+      "id": "S71",
+      "title": "Inspect AI tasks and scorers",
+      "authority": "Inspect AI maintainers, official inspect.aisi.org.uk documentation",
+      "url": "https://inspect.aisi.org.uk/tasks.html",
+      "kind": "mature evaluation framework documentation",
+      "use": "数据集/求解/评分/epoch/日志职责，成熟工具备选",
+      "limit": "未在本轮安装或运行Inspect；文档API不证明本项目达到该框架全部能力",
+      "repository": null,
+      "paths": [],
+      "status": "R15 scoped original reading and comparison",
+      "materials": [
+        {
+          "name": "R15-inspect-tasks",
+          "url": "https://inspect.aisi.org.uk/tasks.html",
+          "resolved_url": "https://inspect.aisi.org.uk/tasks.html",
+          "status": "retrieved",
+          "snapshot": ".evaluation/reviews/R15/primary/sources/inspect-tasks.source",
+          "sha256": "5f704f963c956ce0bb13b3b17ac70e44eb7f38d226051ff419b4bb6b09a0910b",
+          "bytes": 149599,
+          "retrieved_at": "2026-10-29T23:04:43.908292+00:00",
+          "derived_text": ".evaluation/reviews/R15/primary/sources/inspect-tasks.txt",
+          "derived_sha256": "62f2a1798540821cfc3df2704f4cdd779f72fc9f2a40c035c1b97118c64cc428",
+          "lines": 796,
+          "read_scope": "derived129–168 Task dataset/solver/scorer, epochs and configuration; no framework execution"
+        },
+        {
+          "name": "R15-inspect-scorers",
+          "url": "https://inspect.aisi.org.uk/scorers.html",
+          "resolved_url": "https://inspect.aisi.org.uk/scorers.html",
+          "status": "retrieved",
+          "snapshot": ".evaluation/reviews/R15/primary/sources/inspect-scorers.source",
+          "sha256": "bb3c374b21c81e5e4a3aeb937ecc78a3ba82411b3ff5cdba172876fe7135a43e",
+          "bytes": 65802,
+          "retrieved_at": "2026-10-29T23:04:44.498324+00:00",
+          "derived_text": ".evaluation/reviews/R15/primary/sources/inspect-scorers.txt",
+          "derived_sha256": "158371da0c457d14b1bffd3a6c3c447af451201cf6820dee615a4d56a2e6571f",
+          "lines": 162,
+          "read_scope": "derived96–110 target-dependent scorers and metrics; no complete scorer API or model grader execution"
+        }
+      ],
+      "retrieved_at": "2026-10-29T23:22:49.042757+00:00",
+      "version": "Actual retrieved page SHA and explicit specification versions; rolling framework docs not a pinned executed release",
+      "access_scope": "Selected original passages only"
+    }
+  ],
+  "reading_status": "All sixteen facets have scoped evidence records. Source acquisition and record coverage are not full-text or whole-system conformance certification; open findings and untested outcomes remain."
+}

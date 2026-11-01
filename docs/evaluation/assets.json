@@ -1,0 +1,191 @@
+{
+  "format": 1,
+  "meaning": "Handoff preparation identities; excludes this manifest and future evaluation results; not product acceptance",
+  "files": [
+    {
+      "path": "dev/check_validation_handoff.py",
+      "bytes": 6041,
+      "sha256": "51a9c810db13ba8646f1eba6eaddf9f078912698db37e9b67e280ff00d1628a5"
+    },
+    {
+      "path": "dev/tests/test_validation_handoff.py",
+      "bytes": 3315,
+      "sha256": "54917bed01adaa6c09ffab9b96e05cb946b6dff63a6a1db606a4bb533a7c5087"
+    },
+    {
+      "path": "docs/evaluation/README.md",
+      "bytes": 5177,
+      "sha256": "460976df81e6cf399e72614aec0736f872a47d9dfe01b3cc11c307dfb16dfe18"
+    },
+    {
+      "path": "docs/evaluation/assignment.md",
+      "bytes": 10035,
+      "sha256": "3da1b729f7b7f81c60d68b522d8eb7805c4a8f43c3e49c01169a41e84e37a471"
+    },
+    {
+      "path": "docs/evaluation/baseline.json",
+      "bytes": 27966,
+      "sha256": "3c74aafd2c146e2bb2087d7a573da386a69f531b346f1c234d49ea6d5a463a1f"
+    },
+    {
+      "path": "docs/evaluation/fixtures/inputs/AF-B01-context.md",
+      "bytes": 361,
+      "sha256": "d4fcc7fbc7a83fc67a5ac10b098c9a94e42f34ccf9fb53a923b7b0d380933bca"
+    },
+    {
+      "path": "docs/evaluation/fixtures/inputs/AF-B01-data.csv",
+      "bytes": 60,
+      "sha256": "e61e15bce3e590adc06b60a889b7c5bd16f80cee5cf501dbb5a202e2f1cb22bc"
+    },
+    {
+      "path": "docs/evaluation/fixtures/inputs/AF-B02-context.md",
+      "bytes": 155,
+      "sha256": "f4a9db4882b31e88b4fcfd6b29e93344266cd420325b0de86e588ebe609f8c2c"
+    },
+    {
+      "path": "docs/evaluation/fixtures/inputs/AF-B02-data.csv",
+      "bytes": 60,
+      "sha256": "c132129a6e72aa2a44a116dd5c81c27cb94f588db886c0338761e2f4a1652c82"
+    },
+    {
+      "path": "docs/evaluation/fixtures/inputs/AF-B03-context.md",
+      "bytes": 411,
+      "sha256": "18da7d1bf1ed8c8d54a6724d7dcbf410c6c76451c814b404c8c2f9131e338322"
+    },
+    {
+      "path": "docs/evaluation/fixtures/inputs/AF-C01-handbook.md",
+      "bytes": 313,
+      "sha256": "f75805f6568e5603a298b7fcb1454cc261acf625f1b8a4a406e108a711753a22"
+    },
+    {
+      "path": "docs/evaluation/fixtures/inputs/AF-C02-handbook.md",
+      "bytes": 256,
+      "sha256": "a9ea07e5a2d9a628c7ffa05feb6a365f44e2c73e84d5d1acbeebec129116cff0"
+    },
+    {
+      "path": "docs/evaluation/fixtures/inputs/AF-P01-context.md",
+      "bytes": 292,
+      "sha256": "30b66e5fa24336f40fd5f4c6309fe1c25af8bbb300e74409507dbecc9c1d86ab"
+    },
+    {
+      "path": "docs/evaluation/fixtures/inputs/AF-P01-service.csv",
+      "bytes": 59,
+      "sha256": "e8eb8e4c45eb98cb262c3689a59ee95ed86310b109c91b761fb28b88d190f497"
+    },
+    {
+      "path": "docs/evaluation/fixtures/inputs/AF-P02-context.md",
+      "bytes": 292,
+      "sha256": "30b66e5fa24336f40fd5f4c6309fe1c25af8bbb300e74409507dbecc9c1d86ab"
+    },
+    {
+      "path": "docs/evaluation/fixtures/inputs/AF-P02-service.csv",
+      "bytes": 58,
+      "sha256": "d2eab8f4a027d96ea625088d3542ed2474aed1d4b71bc9a93662a7a3377e18c6"
+    },
+    {
+      "path": "docs/evaluation/fixtures/inputs/AF-T01-orders.csv",
+      "bytes": 120,
+      "sha256": "441d38585bf47aa54530982245f6d8567f226dc4ec61302007ba2daea0a7cda3"
+    },
+    {
+      "path": "docs/evaluation/fixtures/inputs/AF-T01-rules.md",
+      "bytes": 184,
+      "sha256": "24ef889315a7bba35fe8b11ea5ba5ddddc5cf872d4cfe802f6f4dfdf508a046d"
+    },
+    {
+      "path": "docs/evaluation/fixtures/inputs/AF-T02-orders.csv",
+      "bytes": 114,
+      "sha256": "9e8a736ba06469fb2719a46047dd57a73a4b6521d09697ba75c1d9ea49f4ae67"
+    },
+    {
+      "path": "docs/evaluation/fixtures/inputs/AF-T02-rules.md",
+      "bytes": 139,
+      "sha256": "5eb18c5c39a4b0a52d5eb6c73918fceea0904fce471d4ae1bd3f92b8c1ce5e67"
+    },
+    {
+      "path": "docs/evaluation/fixtures/inputs/AF-T03-orders.csv",
+      "bytes": 88,
+      "sha256": "22b60d798f167e0e7b0443d22bfe07b4114916d948cce2cfd61a40dd511938aa"
+    },
+    {
+      "path": "docs/evaluation/fixtures/inputs/AF-T03-rules.md",
+      "bytes": 115,
+      "sha256": "6f94719344ccf7d6e124741786b1029ddd1411ed82ee40a4a004aaca5a979dec"
+    },
+    {
+      "path": "docs/evaluation/fixtures/pack.json",
+      "bytes": 3213,
+      "sha256": "8782d97bd95846bcf3bfe178b22c23510e7286f742465306325b807920db373c"
+    },
+    {
+      "path": "docs/evaluation/fixtures/private/rubrics.json",
+      "bytes": 3994,
+      "sha256": "191658918bf58bc05bfd5482a21045046dde8cedcc1cb8fdeb705070ba2c73e4"
+    },
+    {
+      "path": "docs/evaluation/fixtures/requests/AF-B01.md",
+      "bytes": 82,
+      "sha256": "8e4faa1ef3d4d704a8b0c582d56acadc23993f7ff3015015c90379027ea1719a"
+    },
+    {
+      "path": "docs/evaluation/fixtures/requests/AF-B02.md",
+      "bytes": 49,
+      "sha256": "957533fe715a40d545c28c2fdb784c7b5d650385d1035e1283bc642868e1fd93"
+    },
+    {
+      "path": "docs/evaluation/fixtures/requests/AF-B03.md",
+      "bytes": 49,
+      "sha256": "c87d93d715324582ee7ac2d8dc7f85487fb93a0be6bacf937532be73d70efc6e"
+    },
+    {
+      "path": "docs/evaluation/fixtures/requests/AF-C01.md",
+      "bytes": 52,
+      "sha256": "fffe68b1ad6f7a1c6f78ab2e181de41b85084e5c2eb11cd50231eb4c2372f21d"
+    },
+    {
+      "path": "docs/evaluation/fixtures/requests/AF-C02.md",
+      "bytes": 52,
+      "sha256": "e82f2144a430c3eaa47f05d2272be9fcf522a70eba37ad5d24c6e5389a028fa4"
+    },
+    {
+      "path": "docs/evaluation/fixtures/requests/AF-P01.md",
+      "bytes": 73,
+      "sha256": "e1ef22cbe830b2caae7aa6c4dc9e669988579923768304d7446dec5903f06907"
+    },
+    {
+      "path": "docs/evaluation/fixtures/requests/AF-P02.md",
+      "bytes": 73,
+      "sha256": "e1ef22cbe830b2caae7aa6c4dc9e669988579923768304d7446dec5903f06907"
+    },
+    {
+      "path": "docs/evaluation/fixtures/requests/AF-T01.md",
+      "bytes": 64,
+      "sha256": "aa31313e41138cee0dddf6a013e8f51e697462418b755bf86528c876a9c79202"
+    },
+    {
+      "path": "docs/evaluation/fixtures/requests/AF-T02.md",
+      "bytes": 73,
+      "sha256": "87bb6dc2137c26ecf7d1aac6eabe9d5e1be789811eb9ade82751e7206c67a01f"
+    },
+    {
+      "path": "docs/evaluation/fixtures/requests/AF-T03.md",
+      "bytes": 49,
+      "sha256": "e2517274771715ffcef5bd6ea990c33e3abf3d731d1fb9e54eda66bdaaaaca50"
+    },
+    {
+      "path": "docs/evaluation/return-checklist.md",
+      "bytes": 5568,
+      "sha256": "f6a8bf61e66f058ecf48516c93f00e4cf859002e997c3a0c01e0dbddc9b037b0"
+    },
+    {
+      "path": "docs/evaluation/scope-map.json",
+      "bytes": 51144,
+      "sha256": "4de771ccf00b375a28080a2f681321d1ae69198e14173406910e8a7aacd20ba7"
+    },
+    {
+      "path": "docs/evaluation/submission.schema.json",
+      "bytes": 5536,
+      "sha256": "ad9b34c904ee3656755d7e3ee25ec164bc352c86e484353ef62d777b64cbb2ae"
+    }
+  ]
+}

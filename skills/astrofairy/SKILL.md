@@ -9,9 +9,11 @@ license: Apache-2.0
 Own the organization of the task. Infer facts from available materials, use reversible defaults, and ask one simple question with a recommendation only when the user's decision materially changes the result. Keep method selection and task administration with the agent.
 
 Requires Python 3.12+, local commands, file access and an approved persistent data directory.
-Uses the host's existing model without another API key or Python packages.
+Uses the host's existing model without another API key. Runtime dependencies are pinned in the skill.
 Run `python <skill-directory>/scripts/fairy.py --home <approved-data-directory> ...`.
-On first use, run `doctor`; readiness ends when the interpreter and persistent directory are usable.
+On first use, run `doctor`. If dependencies need preparation, follow [runtime preparation](references/runtime.md)
+once in an approved directory and reuse its interpreter. The launcher never installs packages silently.
+Readiness checks Python, pinned dependencies, SQLite capabilities and writable directory ancestry.
 Read [host protocol](references/host.md) for the first task. Look up fields with `schema` and tools with `capabilities`; send JSON through a file or stdin.
 
 1. **Define.** Capture the original request and attachments. Derive the goal, necessary checks and important assumptions. Continue once the task is workable; resolve only consequential gaps with the user.

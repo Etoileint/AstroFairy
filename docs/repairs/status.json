@@ -1,0 +1,24 @@
+{
+  "format": 1,
+  "review_baseline": "22b7ece5d8388379f7b4bcaf47de4c047173cd9b",
+  "current_batch": "F07",
+  "verified_means": "Implemented and independently revalidated in the named batch; not maintainer acceptance or overall product conformance",
+  "status_vocabulary": ["open", "verifying", "verified", "boundary_pending"],
+  "findings": [
+    {"id": "R16-D01", "status": "verified", "batch": "F01"},
+    {"id": "R05-D01", "status": "verified", "batch": "F01"},
+    {"id": "R05-D02", "status": "verified", "batch": "F01"},
+    {"id": "R14-D01", "status": "verified", "batch": "F01"},
+    {"id": "R10-D01", "status": "verified", "batch": "F01"},
+    {"id": "R04-D01", "status": "verified", "batch": "F02"},
+    {"id": "R04-D02", "status": "verified", "batch": "F02"},
+    {"id": "R04-D03", "status": "verified", "batch": "F02"},
+    {"id": "R06-D01", "status": "verified", "batch": "F03"},
+    {"id": "R03-D01", "status": "verified", "batch": "F02"},
+    {"id": "R07-D01", "status": "verified", "batch": "F04"},
+    {"id": "R12-D01", "status": "verified", "batch": "F04"},
+    {"id": "R16-D02", "status": "verified", "batch": "F05"},
+    {"id": "R02-D01", "status": "verified", "batch": "F06"},
+    {"id": "R02-D02", "status": "verified", "batch": "F07"}
+  ]
+}

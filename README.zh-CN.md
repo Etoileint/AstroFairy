@@ -11,22 +11,37 @@ AstroFairy 是遵循 [Agent Skills 开放规范](https://agentskills.io/specific
 提出任务、提供相关文件，偶尔回答影响结果的关键问题，即可获得成果、简短的假设与限制说明，
 以及需要复核时可查看的详细回执。
 
-> 当前为早期 Alpha：本地运行器和便携 skill 已实现；尚未逐一验证所有安装目标的原生应用发现、
-> 插件管理及更新行为。
+> 当前为早期 Alpha · `0.1.0a1`：本地运行器和便携 skill 已实现并测试；尚未逐一验证所有安装目标的
+> 原生应用发现、插件管理及更新行为。详见[发布说明与验证范围](docs/releases/v0.1.0a1.md)。
+
+希望从逻辑理解整个项目，可以读[项目逻辑说明](docs/guides/understanding-astrofairy.md)。
+[复核工作区](docs/reviews/README.md)包含全量架构与机制台账及取证准备，不代表这些设计已经通过复核。
 
 ## 安装
 
 需要：
 
 - 支持 Agent Skills、本地命令执行和文件访问的智能体应用。
-- Python 3.12+，用于运行随包附带的脚本；无需第三方 Python 包或额外模型 API key。
-- Node.js/npm，用于运行 [skills CLI](https://github.com/vercel-labs/skills) 安装器。
+- Python 3.12+ 与随技能提供的哈希锁定运行依赖；无需额外模型 API key。
+- 该解释器的 SQLite 须支持窗口函数、物化 CTE、确定性回调和外键；`doctor` 实测这些能力，不创建任务数据。
+- Node.js 22.20.0+ 和 npm，用于运行本次验证的 [skills CLI](https://github.com/vercel-labs/skills)
+  1.7.4 安装器（[发布的运行要求](https://www.npmjs.com/package/skills/v/1.7.4)）。
+  后续安装器版本可能调整要求；手动复制安装无需 Node.js。
 - 一个可写、可持久保存的数据目录，用于任务历史和可复用资产。
+
+智能体按[运行环境准备说明](skills/astrofairy/references/runtime.md)一次性准备本地虚拟环境并复用，
+无需使用者管理版本，也不全局安装或静默下载依赖。
 
 从 GitHub 安装到当前项目：
 
 ```sh
 npx skills@latest add Etoileint/AstroFairy --skill astrofairy --copy
+```
+
+需要固定本次发布及已验证安装器时，使用：
+
+```sh
+npx skills@1.7.4 add https://github.com/Etoileint/AstroFairy/tree/v0.1.0a1 --skill astrofairy --copy
 ```
 
 安装器会让你选择目标应用。需要无人值守、用户级安装时，指定应用并添加 `-g --yes`：
@@ -75,8 +90,17 @@ npx skills@latest add Etoileint/AstroFairy --skill astrofairy --agent codex --co
 3. **检查成果：** 执行适用的机械检查，依据语义准则审查成果。
 4. **交付结果：** 返回成果和回执，如实区分完整、部分、失败或取消的结果。
 
-原始材料和成果字节会被保留。检查绑定任务修订和成果版本，成果改变后需要重新检查。
+原始材料和成果字节会被保留。检查绑定任务约定修订和内容摘要；重复登记相同内容会保留既有判断，内容真正改变后需要重新检查。
 工具观测与模型判断分别记录。回执保存目标、假设、输入、执行动作和审查依据，供后续复核。
+开发版当前使用协议及存储格式 7。旧数据库不迁移、不兼容，由智能体为新任务选用获准的新状态目录。
+
+面向智能体的命令回包有固定字节预算。较大的完整记录通过不可变文档和免费分段读取保留，
+智能体按需查看相关部分，快照共用不变内容。局部读取核对所读部分，另有完整审计检查整份文档。
+使用者无需管理这些步骤。这个机制不保证磁盘、重放耗时或宿主整体对话上下文恒定。
+
+写工具可显式指定受信的只读核对工具，以权威结果确认原尝试，同时保留原来的未知观察；当前成果仍须独立检查。
+相互矛盾的正向证据持续显示争议，历史关闭之后也不会消失。无法核对或仍不确定时如实采用部分、失败或取消结果，
+详见[恢复协议](skills/astrofairy/references/review.md)。
 
 模型和任务所需工具由宿主提供。文档制作、渲染、浏览等专门能力取决于宿主可用的工具；
 AstroFairy 没有内置所有文件格式的制作引擎。
@@ -100,10 +124,14 @@ AstroFairy 依靠智能体配合与本地检查运行，不隔离宿主，也不
 直到完成核对。本地约束调用次数和内容预算，实际模型 token 与耗时由宿主管理。
 详见[架构与约束边界](docs/guides/architecture.md)。
 
+结构化工作可能比直接回答消耗更多调用与时间，简单任务尤其如此。受控样例支持可行性，
+不能据此承诺普遍的质量、速度或成本优势。真人使用体验、长期学习收益及资源取舍仍需持续观察。
+
 ## 开发
 
 ```sh
 python -m venv .venv
+.venv/bin/python -m pip install --require-hashes --only-binary=:all: -r skills/astrofairy/scripts/requirements-runtime.lock
 .venv/bin/python -m pip install -r requirements-dev.lock
 .venv/bin/python -m pip install --no-deps --no-build-isolation -e .
 .venv/bin/python dev/check.py
@@ -133,8 +161,12 @@ python -m astrofairy --home .fairy start --request 'Prepare a source-based proje
 
 解析器是命令字段单源，`requirements-dev.lock` 是开发工具版本单源，`governance.toml` 声明测试面和增长预算。
 修改包元数据或根 LICENSE 后，运行 `python dev/sync_metadata.py`；检查模式和 CI 会拒绝过期的派生文件。
+包版本采用三段数字，可带 a/b/rc 预发布标记；开发生成器用 packaging.Version 规范化后派生插件 SemVer，
+超出声明范围的 epoch/post/dev/local 等形式在生成前拒绝，详见[版本契约](docs/adr/0007-package-to-plugin-version-contract.md)。
 验证结果见[首版记录](docs/reports/initial-validation.md)与[分发对照研究](docs/reports/mattpocock-alignment.md)，
 具体操作见[运行指南](docs/guides/operation.md)。
+[修复工作区](docs/repairs/README.md)单独登记初版复核后的改动与重验。
+[发布流程](docs/guides/releasing.md)说明版本、检查和制品发布方法。
 
 ## 致谢与许可证
 

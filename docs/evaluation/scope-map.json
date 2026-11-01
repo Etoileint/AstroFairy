@@ -1,0 +1,2463 @@
+{
+  "format": 1,
+  "source": "../reviews/overall-assessment.json",
+  "source_sha256": "5753e5efd01fe2c6d950a182587ef7b14f6cadb59845c7d39bb8b9db690f05c2",
+  "meaning": "Navigation from historical original scope through current routes; not current verdicts or proof of execution",
+  "groups": {
+    "checks": [
+      {
+        "id": "R01-01",
+        "title": "愿景是否被准确整理？",
+        "original_rounds": [
+          "R01"
+        ],
+        "remaining_work": [
+          "P05",
+          "P07"
+        ]
+      },
+      {
+        "id": "R01-02",
+        "title": "目标用户与人机分工是否准确？",
+        "original_rounds": [
+          "R01"
+        ],
+        "remaining_work": [
+          "P05",
+          "P07"
+        ]
+      },
+      {
+        "id": "R01-03",
+        "title": "通用性的边界是否明确？",
+        "original_rounds": [
+          "R01"
+        ],
+        "remaining_work": [
+          "P05",
+          "P07"
+        ]
+      },
+      {
+        "id": "R01-04",
+        "title": "是否把高投入工程要求扩散到普通工作？",
+        "original_rounds": [
+          "R01"
+        ],
+        "remaining_work": [
+          "P05",
+          "P07"
+        ]
+      },
+      {
+        "id": "R01-05",
+        "title": "“可用至优秀”是否可评价？",
+        "original_rounds": [
+          "R01"
+        ],
+        "remaining_work": [
+          "P05",
+          "P07"
+        ]
+      },
+      {
+        "id": "R01-06",
+        "title": "可用、完整和完美是否被混淆？",
+        "original_rounds": [
+          "R01"
+        ],
+        "remaining_work": [
+          "P05",
+          "P07"
+        ]
+      },
+      {
+        "id": "R01-07",
+        "title": "每项外部承诺能否找到支持？",
+        "original_rounds": [
+          "R01"
+        ],
+        "remaining_work": [
+          "P05",
+          "P07"
+        ]
+      },
+      {
+        "id": "R02-01",
+        "title": "架构从哪些基本问题和前提推出？",
+        "original_rounds": [
+          "R02"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "R02-02",
+        "title": "每项核心职责是否必要？",
+        "original_rounds": [
+          "R02"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "R02-03",
+        "title": "职责之间是否独立且边界清楚？",
+        "original_rounds": [
+          "R02"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "R02-04",
+        "title": "对声明的任务范围是否有缺口？",
+        "original_rounds": [
+          "R02"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "R02-05",
+        "title": "核心与任务策略是否分离？",
+        "original_rounds": [
+          "R02"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "R02-06",
+        "title": "四步入口与内部机制是否一致？",
+        "original_rounds": [
+          "R02"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "R02-07",
+        "title": "当前运行器的复杂度是否值得？",
+        "original_rounds": [
+          "R02"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "R02-08",
+        "title": "扩展点是否真实而可替换？",
+        "original_rounds": [
+          "R02"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "R02-09",
+        "title": "能否诚实说明架构保证范围？",
+        "original_rounds": [
+          "R02"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "R03-01",
+        "title": "第一次使用需要多少人工组织？",
+        "original_rounds": [
+          "R03"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "R03-02",
+        "title": "模糊需求能否直接推进？",
+        "original_rounds": [
+          "R03"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "R03-03",
+        "title": "问题是否少而关键？",
+        "original_rounds": [
+          "R03"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "R03-04",
+        "title": "智能体是否承担方法与任务管理？",
+        "original_rounds": [
+          "R03"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "R03-05",
+        "title": "变更、否定和反馈是否自然？",
+        "original_rounds": [
+          "R03"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "R03-06",
+        "title": "推进信息是否及时而有用？",
+        "original_rounds": [
+          "R03"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "R03-07",
+        "title": "能否方便结束、重做和继续？",
+        "original_rounds": [
+          "R03"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "R04-01",
+        "title": "协议语义和字段是否一致？",
+        "original_rounds": [
+          "R04"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "R04-02",
+        "title": "要求来源是否被正确保存？",
+        "original_rounds": [
+          "R04"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "R04-03",
+        "title": "状态转移是否覆盖合法与非法路径？",
+        "original_rounds": [
+          "R04"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "R04-04",
+        "title": "调用记录与实际效果能否对应？",
+        "original_rounds": [
+          "R04"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "R04-05",
+        "title": "并发、重复和过期输入如何处理？",
+        "original_rounds": [
+          "R04"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "R04-06",
+        "title": "持久化是否保真并可恢复？",
+        "original_rounds": [
+          "R04"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "R04-07",
+        "title": "生命周期结束与迟到信息是否协调？",
+        "original_rounds": [
+          "R04"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "R05-01",
+        "title": "验收标准是否真的代表任务成功？",
+        "original_rounds": [
+          "R05"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "R05-02",
+        "title": "默认检查是否会制造虚假通过？",
+        "original_rounds": [
+          "R05"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "R05-03",
+        "title": "实际检查对象与交付物是否相同？",
+        "original_rounds": [
+          "R05"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "R05-04",
+        "title": "事实、推导与建议能否区分？",
+        "original_rounds": [
+          "R05"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "R05-05",
+        "title": "审核者能否理解内容组织？",
+        "original_rounds": [
+          "R05"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "R05-06",
+        "title": "判断的主体和强度是否真实？",
+        "original_rounds": [
+          "R05"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "R05-07",
+        "title": "冲突、失败和未知能否影响结论？",
+        "original_rounds": [
+          "R05"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "R05-08",
+        "title": "成果组合是否满足通用交付需要？",
+        "original_rounds": [
+          "R05"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "R06-01",
+        "title": "哪些重要保证实际由代码执行？",
+        "original_rounds": [
+          "R06"
+        ],
+        "remaining_work": [
+          "P03"
+        ]
+      },
+      {
+        "id": "R06-02",
+        "title": "机械劳动是否仍交给模型反复组织？",
+        "original_rounds": [
+          "R06"
+        ],
+        "remaining_work": [
+          "P03"
+        ]
+      },
+      {
+        "id": "R06-03",
+        "title": "脚本是否僭越语义判断？",
+        "original_rounds": [
+          "R06"
+        ],
+        "remaining_work": [
+          "P03"
+        ]
+      },
+      {
+        "id": "R06-04",
+        "title": "模型能否轻易绕过所声明的保证？",
+        "original_rounds": [
+          "R06"
+        ],
+        "remaining_work": [
+          "P03"
+        ]
+      },
+      {
+        "id": "R06-05",
+        "title": "模型是否必须理解过多内部协议？",
+        "original_rounds": [
+          "R06"
+        ],
+        "remaining_work": [
+          "P03"
+        ]
+      },
+      {
+        "id": "R06-06",
+        "title": "机器规则是否与文本单源同步？",
+        "original_rounds": [
+          "R06"
+        ],
+        "remaining_work": [
+          "P03"
+        ]
+      },
+      {
+        "id": "R06-07",
+        "title": "缺工具时是否合理降级？",
+        "original_rounds": [
+          "R06"
+        ],
+        "remaining_work": [
+          "P03"
+        ]
+      },
+      {
+        "id": "R07-01",
+        "title": "延迟由哪些阶段构成？",
+        "original_rounds": [
+          "R07"
+        ],
+        "remaining_work": [
+          "P03"
+        ]
+      },
+      {
+        "id": "R07-02",
+        "title": "管理开销是否与任务相称？",
+        "original_rounds": [
+          "R07"
+        ],
+        "remaining_work": [
+          "P03"
+        ]
+      },
+      {
+        "id": "R07-03",
+        "title": "预算是否约束实际高成本？",
+        "original_rounds": [
+          "R07"
+        ],
+        "remaining_work": [
+          "P03"
+        ]
+      },
+      {
+        "id": "R07-04",
+        "title": "上下文是否按需装载？",
+        "original_rounds": [
+          "R07"
+        ],
+        "remaining_work": [
+          "P03"
+        ]
+      },
+      {
+        "id": "R07-05",
+        "title": "输出和查询是否有效率？",
+        "original_rounds": [
+          "R07"
+        ],
+        "remaining_work": [
+          "P03"
+        ]
+      },
+      {
+        "id": "R07-06",
+        "title": "学习是否拖慢交付？",
+        "original_rounds": [
+          "R07"
+        ],
+        "remaining_work": [
+          "P03"
+        ]
+      },
+      {
+        "id": "R07-07",
+        "title": "增长后是否仍保持可用延迟？",
+        "original_rounds": [
+          "R07"
+        ],
+        "remaining_work": [
+          "P03"
+        ]
+      },
+      {
+        "id": "R08-01",
+        "title": "学习来源是否足够全面？",
+        "original_rounds": [
+          "R08"
+        ],
+        "remaining_work": [
+          "P05",
+          "P06"
+        ]
+      },
+      {
+        "id": "R08-02",
+        "title": "经验是否有真实依据？",
+        "original_rounds": [
+          "R08"
+        ],
+        "remaining_work": [
+          "P05",
+          "P06"
+        ]
+      },
+      {
+        "id": "R08-03",
+        "title": "任务事实、个人偏好和通用约束是否分开？",
+        "original_rounds": [
+          "R08"
+        ],
+        "remaining_work": [
+          "P05",
+          "P06"
+        ]
+      },
+      {
+        "id": "R08-04",
+        "title": "学习是否产生可验证收益？",
+        "original_rounds": [
+          "R08"
+        ],
+        "remaining_work": [
+          "P05",
+          "P06"
+        ]
+      },
+      {
+        "id": "R08-05",
+        "title": "学习是否有克制与纠偏能力？",
+        "original_rounds": [
+          "R08"
+        ],
+        "remaining_work": [
+          "P05",
+          "P06"
+        ]
+      },
+      {
+        "id": "R08-06",
+        "title": "约束经验是否放到了合适载体？",
+        "original_rounds": [
+          "R08"
+        ],
+        "remaining_work": [
+          "P05",
+          "P06"
+        ]
+      },
+      {
+        "id": "R08-07",
+        "title": "用户是否逐渐更会表达和判断？",
+        "original_rounds": [
+          "R08"
+        ],
+        "remaining_work": [
+          "P05",
+          "P06"
+        ]
+      },
+      {
+        "id": "R08-08",
+        "title": "回流机制是否实际可达？",
+        "original_rounds": [
+          "R08"
+        ],
+        "remaining_work": [
+          "P05",
+          "P06"
+        ]
+      },
+      {
+        "id": "R09-01",
+        "title": "资产种类、身份和版本语义是否清楚？",
+        "original_rounds": [
+          "R09"
+        ],
+        "remaining_work": [
+          "P06"
+        ]
+      },
+      {
+        "id": "R09-02",
+        "title": "工作流是否可以指导实际执行？",
+        "original_rounds": [
+          "R09"
+        ],
+        "remaining_work": [
+          "P06"
+        ]
+      },
+      {
+        "id": "R09-03",
+        "title": "重复任务能否逐步收敛？",
+        "original_rounds": [
+          "R09"
+        ],
+        "remaining_work": [
+          "P06"
+        ]
+      },
+      {
+        "id": "R09-04",
+        "title": "检索是否找得到且取用得当？",
+        "original_rounds": [
+          "R09"
+        ],
+        "remaining_work": [
+          "P06"
+        ]
+      },
+      {
+        "id": "R09-05",
+        "title": "采用与成熟度是否有实质含义？",
+        "original_rounds": [
+          "R09"
+        ],
+        "remaining_work": [
+          "P06"
+        ]
+      },
+      {
+        "id": "R09-06",
+        "title": "版本竞争和回退是否可靠？",
+        "original_rounds": [
+          "R09"
+        ],
+        "remaining_work": [
+          "P06"
+        ]
+      },
+      {
+        "id": "R09-07",
+        "title": "分享包是否独立可用？",
+        "original_rounds": [
+          "R09"
+        ],
+        "remaining_work": [
+          "P06"
+        ]
+      },
+      {
+        "id": "R09-08",
+        "title": "个人与团队的边界是否真实？",
+        "original_rounds": [
+          "R09"
+        ],
+        "remaining_work": [
+          "P06"
+        ]
+      },
+      {
+        "id": "R10-01",
+        "title": "什么会随使用增长，什么应稳定？",
+        "original_rounds": [
+          "R10"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "R10-02",
+        "title": "资产增多是否会变成新的信息堆积？",
+        "original_rounds": [
+          "R10"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "R10-03",
+        "title": "行数预算是否真正约束复杂度？",
+        "original_rounds": [
+          "R10"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "R10-04",
+        "title": "外部变化是否能局部吸收？",
+        "original_rounds": [
+          "R10"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "R10-05",
+        "title": "历史和资产的存储寿命如何管理？",
+        "original_rounds": [
+          "R10"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "R10-06",
+        "title": "未来版本变化是否有清楚政策？",
+        "original_rounds": [
+          "R10"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "R10-07",
+        "title": "开发治理是否保持适度？",
+        "original_rounds": [
+          "R10"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "R11-01",
+        "title": "实际遵循的是哪些规范版本？",
+        "original_rounds": [
+          "R11"
+        ],
+        "remaining_work": [
+          "P04",
+          "P07"
+        ]
+      },
+      {
+        "id": "R11-02",
+        "title": "基础结构与 frontmatter 是否合规？",
+        "original_rounds": [
+          "R11"
+        ],
+        "remaining_work": [
+          "P04",
+          "P07"
+        ]
+      },
+      {
+        "id": "R11-03",
+        "title": "描述和入口能否准确触发？",
+        "original_rounds": [
+          "R11"
+        ],
+        "remaining_work": [
+          "P04",
+          "P07"
+        ]
+      },
+      {
+        "id": "R11-04",
+        "title": "按需披露是否符合运行需要？",
+        "original_rounds": [
+          "R11"
+        ],
+        "remaining_work": [
+          "P04",
+          "P07"
+        ]
+      },
+      {
+        "id": "R11-05",
+        "title": "脚本和依赖是否可移植？",
+        "original_rounds": [
+          "R11"
+        ],
+        "remaining_work": [
+          "P04",
+          "P07"
+        ]
+      },
+      {
+        "id": "R11-06",
+        "title": "厂商扩展是否独立且准确？",
+        "original_rounds": [
+          "R11"
+        ],
+        "remaining_work": [
+          "P04",
+          "P07"
+        ]
+      },
+      {
+        "id": "R11-07",
+        "title": "能力声明是否超出标准保证？",
+        "original_rounds": [
+          "R11"
+        ],
+        "remaining_work": [
+          "P04",
+          "P07"
+        ]
+      },
+      {
+        "id": "R12-01",
+        "title": "新用户能否照文档成功安装？",
+        "original_rounds": [
+          "R12"
+        ],
+        "remaining_work": [
+          "P04"
+        ]
+      },
+      {
+        "id": "R12-02",
+        "title": "仓库、目录、ZIP 和 wheel 是否同源？",
+        "original_rounds": [
+          "R12"
+        ],
+        "remaining_work": [
+          "P04"
+        ]
+      },
+      {
+        "id": "R12-03",
+        "title": "原生应用中是否实际加载并工作？",
+        "original_rounds": [
+          "R12"
+        ],
+        "remaining_work": [
+          "P04"
+        ]
+      },
+      {
+        "id": "R12-04",
+        "title": "跨系统和解释器条件是否清楚？",
+        "original_rounds": [
+          "R12"
+        ],
+        "remaining_work": [
+          "P04"
+        ]
+      },
+      {
+        "id": "R12-05",
+        "title": "升级和重新安装是否保留用户资产？",
+        "original_rounds": [
+          "R12"
+        ],
+        "remaining_work": [
+          "P04"
+        ]
+      },
+      {
+        "id": "R12-06",
+        "title": "插件托管与普通安装是否各自正确？",
+        "original_rounds": [
+          "R12"
+        ],
+        "remaining_work": [
+          "P04"
+        ]
+      },
+      {
+        "id": "R12-07",
+        "title": "安装失败能否由智能体协助处理？",
+        "original_rounds": [
+          "R12"
+        ],
+        "remaining_work": [
+          "P04"
+        ]
+      },
+      {
+        "id": "R13-01",
+        "title": "参考源和版本是否可信？",
+        "original_rounds": [
+          "R13"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "R13-02",
+        "title": "是否准确理解了分发实现？",
+        "original_rounds": [
+          "R13"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "R13-03",
+        "title": "写作与依赖原则是否落实？",
+        "original_rounds": [
+          "R13"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "R13-04",
+        "title": "澄清方式是否适配目标用户？",
+        "original_rounds": [
+          "R13"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "R13-05",
+        "title": "回顾和学习是否借鉴到实质？",
+        "original_rounds": [
+          "R13"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "R13-06",
+        "title": "是否漏掉重要实践或误搬工程负担？",
+        "original_rounds": [
+          "R13"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "R13-07",
+        "title": "参考关系是否可复核且尊重许可？",
+        "original_rounds": [
+          "R13"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "R14-01",
+        "title": "实际信任模型是否明确？",
+        "original_rounds": [
+          "R14"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "R14-02",
+        "title": "用户授权是否贯穿任务与学习？",
+        "original_rounds": [
+          "R14"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "R14-03",
+        "title": "材料和共享资产能否改变行为权限？",
+        "original_rounds": [
+          "R14"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "R14-04",
+        "title": "文件与存储操作是否符合宣称？",
+        "original_rounds": [
+          "R14"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "R14-05",
+        "title": "是否暴露超出任务需要的数据？",
+        "original_rounds": [
+          "R14"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "R14-06",
+        "title": "外部失败和不可逆操作如何处置？",
+        "original_rounds": [
+          "R14"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "R14-07",
+        "title": "完整性与审计性有无过度声明？",
+        "original_rounds": [
+          "R14"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "R15-01",
+        "title": "测试是否从要求独立导出？",
+        "original_rounds": [
+          "R15"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "R15-02",
+        "title": "关键保证是否有反例检查？",
+        "original_rounds": [
+          "R15"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "R15-03",
+        "title": "测试是否接入真实执行通道？",
+        "original_rounds": [
+          "R15"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "R15-04",
+        "title": "环境是否会掩盖缺陷？",
+        "original_rounds": [
+          "R15"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "R15-05",
+        "title": "前向试用是否独立且可重建？",
+        "original_rounds": [
+          "R15"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "R15-06",
+        "title": "样本是否支持所声称的结论？",
+        "original_rounds": [
+          "R15"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "R15-07",
+        "title": "最终结论能否经独立主体复验？",
+        "original_rounds": [
+          "R15"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "R16-01",
+        "title": "中英文描述是否一致且专业？",
+        "original_rounds": [
+          "R16"
+        ],
+        "remaining_work": [
+          "P04",
+          "P07"
+        ]
+      },
+      {
+        "id": "R16-02",
+        "title": "文档是否反映当前版本？",
+        "original_rounds": [
+          "R16"
+        ],
+        "remaining_work": [
+          "P04",
+          "P07"
+        ]
+      },
+      {
+        "id": "R16-03",
+        "title": "元数据与许可证是否正确？",
+        "original_rounds": [
+          "R16"
+        ],
+        "remaining_work": [
+          "P04",
+          "P07"
+        ]
+      },
+      {
+        "id": "R16-04",
+        "title": "公开仓库边界是否保持独立？",
+        "original_rounds": [
+          "R16"
+        ],
+        "remaining_work": [
+          "P04",
+          "P07"
+        ]
+      },
+      {
+        "id": "R16-05",
+        "title": "规范单源是否落实到消费者？",
+        "original_rounds": [
+          "R16"
+        ],
+        "remaining_work": [
+          "P04",
+          "P07"
+        ]
+      },
+      {
+        "id": "R16-06",
+        "title": "复核记录是否可持续维护？",
+        "original_rounds": [
+          "R16"
+        ],
+        "remaining_work": [
+          "P04",
+          "P07"
+        ]
+      },
+      {
+        "id": "R16-07",
+        "title": "发布承诺是否有对应的真实验证？",
+        "original_rounds": [
+          "R16"
+        ],
+        "remaining_work": [
+          "P04",
+          "P07"
+        ]
+      }
+    ],
+    "requirements": [
+      {
+        "id": "V01",
+        "title": "日常只有一个低负担入口，用户提出任务、提供材料并回答少量关键问题",
+        "original_rounds": [
+          "R03",
+          "R12"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "V02",
+        "title": "智能体承担事实调查、方法选择、任务组织和推进",
+        "original_rounds": [
+          "R03",
+          "R05",
+          "R06"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "V03",
+        "title": "通用于多种轻量任务，质量目标为可用至优秀，检查投入与任务相称",
+        "original_rounds": [
+          "R01",
+          "R05",
+          "R07"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05",
+          "P07"
+        ]
+      },
+      {
+        "id": "V04",
+        "title": "成果有清晰组织和依据，审核者能理解生成与检查过程",
+        "original_rounds": [
+          "R05",
+          "R15"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05",
+          "P07"
+        ]
+      },
+      {
+        "id": "V05",
+        "title": "核心职责必要、分离且覆盖声明范围，保持简洁并允许低成本扩展",
+        "original_rounds": [
+          "R02",
+          "R10"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "V06",
+        "title": "能确定的规则尽量脚本化，模型集中处理重要判断",
+        "original_rounds": [
+          "R04",
+          "R05",
+          "R06",
+          "R14"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05",
+          "P07"
+        ]
+      },
+      {
+        "id": "V07",
+        "title": "反馈和推进及时，避免不必要的等待、工具调用和上下文负担",
+        "original_rounds": [
+          "R07"
+        ],
+        "remaining_work": [
+          "P03"
+        ]
+      },
+      {
+        "id": "V08",
+        "title": "成功、失败、纠正、反馈、重复结构和有效工具使用均可成为学习依据",
+        "original_rounds": [
+          "R08",
+          "R09"
+        ],
+        "remaining_work": [
+          "P05",
+          "P06"
+        ]
+      },
+      {
+        "id": "V09",
+        "title": "学习资产外置、按需取用，核心及常驻指令不随经验线性膨胀",
+        "original_rounds": [
+          "R07",
+          "R09",
+          "R10"
+        ],
+        "remaining_work": [
+          "P03",
+          "P06",
+          "P07"
+        ]
+      },
+      {
+        "id": "V10",
+        "title": "重复任务有机会形成可执行、可验证、可修订的成熟工作流",
+        "original_rounds": [
+          "R09"
+        ],
+        "remaining_work": [
+          "P06"
+        ]
+      },
+      {
+        "id": "V11",
+        "title": "资产可以分享，接收方能理解、验证和使用，明确数据和权限边界",
+        "original_rounds": [
+          "R09",
+          "R14"
+        ],
+        "remaining_work": [
+          "P03",
+          "P06",
+          "P07"
+        ]
+      },
+      {
+        "id": "V12",
+        "title": "使用过程逐渐改善用户表达和判断，保持交互负担低",
+        "original_rounds": [
+          "R08"
+        ],
+        "remaining_work": [
+          "P05",
+          "P06"
+        ]
+      },
+      {
+        "id": "V13",
+        "title": "遵循 Agent Skills 及适用宿主规范，分发安装使用简便",
+        "original_rounds": [
+          "R11",
+          "R12",
+          "R16"
+        ],
+        "remaining_work": [
+          "P04",
+          "P07"
+        ]
+      },
+      {
+        "id": "V14",
+        "title": "准确研究 Matt 的实现，采用合适实践，并说明有意差异",
+        "original_rounds": [
+          "R13"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "V15",
+        "title": "项目独立、维护组织适度、规范单源，借鉴成熟经验且控制治理成本",
+        "original_rounds": [
+          "R10",
+          "R16"
+        ],
+        "remaining_work": [
+          "P04",
+          "P07"
+        ]
+      },
+      {
+        "id": "V16",
+        "title": "对外文字专业，能力、限制和证据强度如实表达",
+        "original_rounds": [
+          "R14",
+          "R16"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P07"
+        ]
+      },
+      {
+        "id": "V17",
+        "title": "整体架构、全量机制及组合逐项对标权威规范和成熟方案；复用成熟实现或以证据证明自有实现达到或超过适用地板",
+        "original_rounds": [
+          "R02",
+          "R16"
+        ],
+        "remaining_work": [
+          "P04",
+          "P07"
+        ]
+      }
+    ],
+    "scenarios": [
+      {
+        "id": "S01",
+        "title": "简短任务及充分材料；可以直接执行",
+        "original_rounds": [
+          "R03",
+          "R05",
+          "R07"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "S02",
+        "title": "分别缺少关键决策与非关键偏好",
+        "original_rounds": [
+          "R03",
+          "R06"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "S03",
+        "title": "材料互相矛盾、事实不足或带错误结论",
+        "original_rounds": [
+          "R05",
+          "R14"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05",
+          "P07"
+        ]
+      },
+      {
+        "id": "S04",
+        "title": "无附件的开放创作与需要外部调查的任务",
+        "original_rounds": [
+          "R03",
+          "R05",
+          "R08"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05",
+          "P06"
+        ]
+      },
+      {
+        "id": "S05",
+        "title": "数据分析、可复算计算与来源引用",
+        "original_rounds": [
+          "R05",
+          "R09"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05",
+          "P06"
+        ]
+      },
+      {
+        "id": "S06",
+        "title": "二进制成果、多文件交付及可编辑件/预览；渲染工具缺失",
+        "original_rounds": [
+          "R05",
+          "R12"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "S07",
+        "title": "过程中改变受众、目标、要求或授权范围",
+        "original_rounds": [
+          "R03",
+          "R04"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05",
+          "P07"
+        ]
+      },
+      {
+        "id": "S08",
+        "title": "预算不足、取消、中断重启及结果不确定",
+        "original_rounds": [
+          "R03",
+          "R04",
+          "R14"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05",
+          "P07"
+        ]
+      },
+      {
+        "id": "S09",
+        "title": "重复请求、迟到结果、并发修订和过期判断",
+        "original_rounds": [
+          "R04",
+          "R05",
+          "R09"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05",
+          "P06",
+          "P07"
+        ]
+      },
+      {
+        "id": "S10",
+        "title": "正面反馈、纠正、相反反馈、沉默及没有改进价值",
+        "original_rounds": [
+          "R08",
+          "R09"
+        ],
+        "remaining_work": [
+          "P05",
+          "P06"
+        ]
+      },
+      {
+        "id": "S11",
+        "title": "多次相似但内容变化的任务，及相邻但不应套用的任务",
+        "original_rounds": [
+          "R08",
+          "R09"
+        ],
+        "remaining_work": [
+          "P05",
+          "P06"
+        ]
+      },
+      {
+        "id": "S12",
+        "title": "大量无关、重复、过时或互相冲突的资产与历史",
+        "original_rounds": [
+          "R07",
+          "R10"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "S13",
+        "title": "全新接收端只凭分享包；缺依赖、敏感资料或恶意指令",
+        "original_rounds": [
+          "R09",
+          "R14"
+        ],
+        "remaining_work": [
+          "P03",
+          "P06",
+          "P07"
+        ]
+      },
+      {
+        "id": "S14",
+        "title": "新用户、新宿主、新系统、离开源码目录、升级后继续使用",
+        "original_rounds": [
+          "R11",
+          "R12"
+        ],
+        "remaining_work": [
+          "P04",
+          "P07"
+        ]
+      },
+      {
+        "id": "S15",
+        "title": "大文件、损坏文件、编码异常、存储不足及错误权限",
+        "original_rounds": [
+          "R04",
+          "R14"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "S16",
+        "title": "工具/检查器/宿主被替换，或任务超出声明能力",
+        "original_rounds": [
+          "R02",
+          "R06",
+          "R10"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      }
+    ],
+    "object_dispositions": [
+      {
+        "id": "A01",
+        "title": "产品范围与低负担委托",
+        "original_rounds": [
+          "R03"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "A02",
+        "title": "协作宿主与本地运行器边界",
+        "original_rounds": [
+          "R14"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "A03",
+        "title": "协议、判定、调用和存储分离",
+        "original_rounds": [
+          "R06"
+        ],
+        "remaining_work": [
+          "P03"
+        ]
+      },
+      {
+        "id": "A04",
+        "title": "受控任务循环及完成语义",
+        "original_rounds": [
+          "R05"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "A05",
+        "title": "原始证据、事件与派生视图",
+        "original_rounds": [
+          "R14"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "A06",
+        "title": "外置资产与任务化维护",
+        "original_rounds": [
+          "R09"
+        ],
+        "remaining_work": [
+          "P06"
+        ]
+      },
+      {
+        "id": "A07",
+        "title": "共享 skill 加可选分发适配",
+        "original_rounds": [
+          "R12"
+        ],
+        "remaining_work": [
+          "P04"
+        ]
+      },
+      {
+        "id": "A08",
+        "title": "稳定核心与外围增长",
+        "original_rounds": [
+          "R10"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "A09",
+        "title": "整体组合及端到端保证",
+        "original_rounds": [
+          "R15"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "M01",
+        "title": "技能发现与调用入口",
+        "original_rounds": [
+          "R03"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "M02",
+        "title": "条件资料与按需披露",
+        "original_rounds": [
+          "R07"
+        ],
+        "remaining_work": [
+          "P03"
+        ]
+      },
+      {
+        "id": "M03",
+        "title": "环境就绪诊断",
+        "original_rounds": [
+          "R12"
+        ],
+        "remaining_work": [
+          "P04"
+        ]
+      },
+      {
+        "id": "M04",
+        "title": "数据目录与任务工作区",
+        "original_rounds": [
+          "R12"
+        ],
+        "remaining_work": [
+          "P04"
+        ]
+      },
+      {
+        "id": "M05",
+        "title": "建任务、默认标准和附件快照",
+        "original_rounds": [
+          "R03"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "M06",
+        "title": "严格 JSON 与命令字段契约",
+        "original_rounds": [
+          "R06"
+        ],
+        "remaining_work": [
+          "P03"
+        ]
+      },
+      {
+        "id": "M07",
+        "title": "要求来源与修订",
+        "original_rounds": [
+          "R05"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "M08",
+        "title": "关键提问与输入转发",
+        "original_rounds": [
+          "R03"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "M09",
+        "title": "模型工作请求与报告",
+        "original_rounds": [
+          "R05"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "M10",
+        "title": "工具注册、字段发现与能力目录",
+        "original_rounds": [
+          "R06"
+        ],
+        "remaining_work": [
+          "P03"
+        ]
+      },
+      {
+        "id": "M11",
+        "title": "动作准入、预算与重复防护",
+        "original_rounds": [
+          "R14"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "M12",
+        "title": "调用前留痕与执行后观测",
+        "original_rounds": [
+          "R14"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "M13",
+        "title": "成果登记与版本绑定",
+        "original_rounds": [
+          "R05"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "M14",
+        "title": "文件捕获与类型标记",
+        "original_rounds": [
+          "R05"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "M15",
+        "title": "内容访问与分段读取",
+        "original_rounds": [
+          "R07"
+        ],
+        "remaining_work": [
+          "P03"
+        ]
+      },
+      {
+        "id": "M16",
+        "title": "机械检查器",
+        "original_rounds": [
+          "R05"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "M17",
+        "title": "语义审查、替代链和冲突",
+        "original_rounds": [
+          "R05"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "M18",
+        "title": "关闭门与结果分类",
+        "original_rounds": [
+          "R05"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "M19",
+        "title": "下一步工作包与调度",
+        "original_rounds": [
+          "R07"
+        ],
+        "remaining_work": [
+          "P03"
+        ]
+      },
+      {
+        "id": "M20",
+        "title": "回执与交付导出",
+        "original_rounds": [
+          "R07"
+        ],
+        "remaining_work": [
+          "P03"
+        ]
+      },
+      {
+        "id": "M21",
+        "title": "SQLite 存储与事务",
+        "original_rounds": [
+          "R10"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "M22",
+        "title": "事件链、序号与重放",
+        "original_rounds": [
+          "R14"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "M23",
+        "title": "内容寻址与字节完整性",
+        "original_rounds": [
+          "R14"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "M24",
+        "title": "路径约束、原子写与文件权限",
+        "original_rounds": [
+          "R14"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "M25",
+        "title": "重开、未决动作与迟到结果",
+        "original_rounds": [
+          "R03"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "M26",
+        "title": "资产提案与工作流结构",
+        "original_rounds": [
+          "R09"
+        ],
+        "remaining_work": [
+          "P06"
+        ]
+      },
+      {
+        "id": "M27",
+        "title": "候选验证任务与固定策略",
+        "original_rounds": [
+          "R09"
+        ],
+        "remaining_work": [
+          "P06"
+        ]
+      },
+      {
+        "id": "M28",
+        "title": "采用与基准竞争",
+        "original_rounds": [
+          "R09"
+        ],
+        "remaining_work": [
+          "P06"
+        ]
+      },
+      {
+        "id": "M29",
+        "title": "资产状态、版本、退役与回退",
+        "original_rounds": [
+          "R10"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "M30",
+        "title": "资产检索与排序",
+        "original_rounds": [
+          "R09"
+        ],
+        "remaining_work": [
+          "P06"
+        ]
+      },
+      {
+        "id": "M31",
+        "title": "资产读取与精确版本钉选",
+        "original_rounds": [
+          "R09"
+        ],
+        "remaining_work": [
+          "P06"
+        ]
+      },
+      {
+        "id": "M32",
+        "title": "反馈与独立维护任务",
+        "original_rounds": [
+          "R09"
+        ],
+        "remaining_work": [
+          "P06"
+        ]
+      },
+      {
+        "id": "M33",
+        "title": "资产分享与导入验证",
+        "original_rounds": [
+          "R09"
+        ],
+        "remaining_work": [
+          "P06"
+        ]
+      },
+      {
+        "id": "M34",
+        "title": "被动工具说明与内容信任",
+        "original_rounds": [
+          "R09"
+        ],
+        "remaining_work": [
+          "P06"
+        ]
+      },
+      {
+        "id": "M35",
+        "title": "资源限额与增长预算",
+        "original_rounds": [
+          "R10"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "M36",
+        "title": "CLI 错误、状态与诊断接口",
+        "original_rounds": [
+          "R12"
+        ],
+        "remaining_work": [
+          "P04"
+        ]
+      },
+      {
+        "id": "M37",
+        "title": "自包含启动与可选 Python 包",
+        "original_rounds": [
+          "R12"
+        ],
+        "remaining_work": [
+          "P04"
+        ]
+      },
+      {
+        "id": "M38",
+        "title": "便携 ZIP 内容过滤",
+        "original_rounds": [
+          "R12"
+        ],
+        "remaining_work": [
+          "P04"
+        ]
+      },
+      {
+        "id": "M39",
+        "title": "派生版本、许可与包元数据同步",
+        "original_rounds": [
+          "R16"
+        ],
+        "remaining_work": [
+          "P04",
+          "P07"
+        ]
+      },
+      {
+        "id": "M40",
+        "title": "原生插件与市场清单",
+        "original_rounds": [
+          "R12"
+        ],
+        "remaining_work": [
+          "P04"
+        ]
+      },
+      {
+        "id": "M41",
+        "title": "可选 UI 元数据",
+        "original_rounds": [
+          "R03"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "M42",
+        "title": "测试面、类型与规范检查",
+        "original_rounds": [
+          "R15"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "M43",
+        "title": "提交门与 CI 构建",
+        "original_rounds": [
+          "R15"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "M44",
+        "title": "文档、单源组织与公开边界",
+        "original_rounds": [
+          "R16"
+        ],
+        "remaining_work": [
+          "P04",
+          "P07"
+        ]
+      },
+      {
+        "id": "M45",
+        "title": "研究来源与验证声明",
+        "original_rounds": [
+          "R15"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "C01",
+        "title": "首次任务到交付",
+        "original_rounds": [
+          "R03"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "C02",
+        "title": "要求变化到重新验收",
+        "original_rounds": [
+          "R03"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "C03",
+        "title": "中断到恢复与迟到结果",
+        "original_rounds": [
+          "R03"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      {
+        "id": "C04",
+        "title": "经验到下一次任务收益",
+        "original_rounds": [
+          "R10"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "C05",
+        "title": "发送到接收端独立使用",
+        "original_rounds": [
+          "R12"
+        ],
+        "remaining_work": [
+          "P04"
+        ]
+      },
+      {
+        "id": "C06",
+        "title": "公开源到多宿主安装与升级",
+        "original_rounds": [
+          "R16"
+        ],
+        "remaining_work": [
+          "P04",
+          "P07"
+        ]
+      },
+      {
+        "id": "C07",
+        "title": "规模增长及外部能力替换",
+        "original_rounds": [
+          "R10"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "C08",
+        "title": "权限与副作用贯穿路径",
+        "original_rounds": [
+          "R14"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "U01",
+        "title": "使用者思路进步的证据路径",
+        "original_rounds": [
+          "R08"
+        ],
+        "remaining_work": [
+          "P05",
+          "P06"
+        ]
+      },
+      {
+        "id": "U02",
+        "title": "重复任务成熟与回流触发",
+        "original_rounds": [
+          "R09"
+        ],
+        "remaining_work": [
+          "P06"
+        ]
+      },
+      {
+        "id": "U03",
+        "title": "检索需求的语义覆盖",
+        "original_rounds": [
+          "R09"
+        ],
+        "remaining_work": [
+          "P06"
+        ]
+      },
+      {
+        "id": "U04",
+        "title": "长期数据保留与版本演化",
+        "original_rounds": [
+          "R10"
+        ],
+        "remaining_work": [
+          "P07"
+        ]
+      },
+      {
+        "id": "U05",
+        "title": "原生宿主及平台支持证据",
+        "original_rounds": [
+          "R15"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "U06",
+        "title": "审核者理解组织依据的能力",
+        "original_rounds": [
+          "R15"
+        ],
+        "remaining_work": [
+          "P03",
+          "P07"
+        ]
+      },
+      {
+        "id": "U07",
+        "title": "未知效果恢复的操作闭环",
+        "original_rounds": [
+          "R03"
+        ],
+        "remaining_work": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      }
+    ]
+  },
+  "notes": [
+    {
+      "id": "R11-Node",
+      "remaining_work": [
+        "P04"
+      ]
+    },
+    {
+      "id": "R05-request",
+      "remaining_work": [
+        "P05"
+      ]
+    },
+    {
+      "id": "R05-evidence-access",
+      "remaining_work": [
+        "P05"
+      ]
+    },
+    {
+      "id": "R16-N01",
+      "remaining_work": [
+        "P07"
+      ]
+    }
+  ]
+}

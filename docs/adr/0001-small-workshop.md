@@ -2,6 +2,9 @@
 
 Status: adopted for the first implementation.
 
+The standard-library-only runtime decision below is superseded by
+[ADR-0005](0005-declared-tool-contracts.md); the small protocol and workshop boundary remain.
+
 ## Decision
 
 Use one Python package, a standard-library SQLite runtime and a conversation-host skill.

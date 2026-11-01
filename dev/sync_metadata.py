@@ -3,9 +3,10 @@ from __future__ import annotations
 import argparse
 import ast
 import json
-import re
 import tomllib
 from pathlib import Path
+
+from packaging.version import Version
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -20,13 +21,21 @@ def render(root: Path) -> dict[Path, bytes]:
         if isinstance(node, ast.Assign)
         and any(isinstance(target, ast.Name) and target.id == "__version__" for target in node.targets)
     )
-    match = re.fullmatch(r"(\d+\.\d+\.\d+)(?:(a|b|rc)(\d+))?", version)
-    if match is None:
-        raise ValueError("Package version cannot be expressed as a plugin semantic version")
-    base, suffix, number = match.groups()
-    plugin_version = base + (
-        "-" + {"a": "alpha", "b": "beta", "rc": "rc"}[suffix] + "." + number if suffix else ""
-    )
+    if not isinstance(version, str):
+        raise TypeError("Package version must be a literal string")
+    parsed = Version(version)
+    if (
+        len(parsed.release) != 3
+        or parsed.epoch != 0
+        or parsed.post is not None
+        or parsed.dev is not None
+        or parsed.local is not None
+    ):
+        raise ValueError("Package version is outside the plugin release profile")
+    plugin_version = ".".join(str(part) for part in parsed.release)
+    if parsed.pre is not None:
+        suffix, number = parsed.pre
+        plugin_version += "-" + {"a": "alpha", "b": "beta", "rc": "rc"}[suffix] + "." + str(number)
     metadata = project["project"]
     author = metadata["authors"][0]["name"]
     plugin = {

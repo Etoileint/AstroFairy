@@ -1,0 +1,4 @@
+order_id,line_id,qty,unit_price,status
+C1,L1,2,100,paid
+C1,L2,1,80,paid
+C2,L1,3,50,paid

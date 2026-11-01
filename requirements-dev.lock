@@ -1,4 +1,4 @@
-# Development tools; runtime has no third-party dependencies.
+# Development tools; prepare the separate hash-locked runtime dependencies first.
 ast_serialize==0.13.1
 build==1.6.1
 click==8.5.0
@@ -15,6 +15,6 @@ setuptools==84.2.1
 six==1.17.0
 skills-ref==0.1.1
 strictyaml==1.7.3
-typing_extensions==4.16.0
+types-jsonschema==4.26.0.20261006
 tzdata==2026.5
 wheel==0.48.0

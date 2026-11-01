@@ -29,7 +29,9 @@ def run(arguments: list[str], directory: Path, env: dict[str, str], data: Any = 
     return json.loads(result.stdout)
 
 
-def probe(node: Path, cli: Path, directory: Path, agent: str, env: dict[str, str]) -> dict[str, Any]:
+def probe(
+    node: Path, cli: Path, directory: Path, agent: str, env: dict[str, str], *, python: Path
+) -> dict[str, Any]:
     directory.mkdir()
     git = shutil.which("git")
     if git is None:
@@ -57,7 +59,7 @@ def probe(node: Path, cli: Path, directory: Path, agent: str, env: dict[str, str
         raise ValueError(f"Expected one copied skill for {agent}: {launchers}")
     launcher = launchers[0]
     home = directory / "state"
-    command = [sys.executable, "-I", "-S", str(launcher), "--home", str(home)]
+    command = [str(python), "-I", str(launcher), "--home", str(home)]
     doctor = run([*command, "doctor"], directory, env)
     if not doctor["ready"] or home.exists():
         raise ValueError("Read-only readiness check failed")
@@ -68,7 +70,10 @@ def probe(node: Path, cli: Path, directory: Path, agent: str, env: dict[str, str
         return run([*command, "submit", task], directory, env, data)
 
     request = submit({"op": "request", "purpose": "Write the installation brief"})
-    content = "The copied skill produced this brief without its source checkout or site-packages."
+    content = (
+        "The copied skill produced this brief using prepared runtime dependencies "
+        "outside its source checkout."
+    )
     report = submit({"op": "report", "call": request["call"], "text": content, "name": "brief.md"})
     ref = report["ref"]
     submit({"op": "publish", "ref": ref})
@@ -94,7 +99,7 @@ def probe(node: Path, cli: Path, directory: Path, agent: str, env: dict[str, str
         "launcher": str(launcher.relative_to(ROOT)),
         "doctor": doctor,
         "delivery": delivery,
-        "isolation": "Python -I -S; no site-packages",
+        "isolation": "Python -I; copied runtime with prepared dependencies",
         "scope": "Installer layout and scripted protocol fixture; native agent/model not exercised",
     }
 
@@ -103,6 +108,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Exercise the real skills CLI in isolated project fixtures")
     parser.add_argument("--node", type=Path, required=True)
     parser.add_argument("--skills-cli", type=Path, required=True)
+    parser.add_argument(
+        "--python", type=Path, default=Path(sys.executable), help="Prepared runtime interpreter"
+    )
     parser.add_argument("--out", type=Path, default=ROOT / ".evaluation/installation")
     arguments = parser.parse_args()
     output = arguments.out.resolve()
@@ -122,7 +130,14 @@ def main() -> None:
     results = []
     for agent in AGENTS:
         results.append(
-            probe(arguments.node.resolve(), arguments.skills_cli.resolve(), batch / agent, agent, env)
+            probe(
+                arguments.node.resolve(),
+                arguments.skills_cli.resolve(),
+                batch / agent,
+                agent,
+                env,
+                python=arguments.python.absolute(),
+            )
         )
         print(f"{agent}: installed copy and isolated task delivery passed", flush=True)
     (output / "results.json").write_text(

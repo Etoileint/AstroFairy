@@ -3,20 +3,26 @@ from __future__ import annotations
 import mimetypes
 import os
 import tempfile
+from collections import Counter
 from dataclasses import dataclass
+from functools import cache
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
 from astrofairy._contracts import (
+    CAPABILITY_NAME,
     MAX_BLOB_BYTES,
     MAX_CONTEXT_BYTES,
-    integer,
+    MODEL_CAPABILITY,
+    SchemaContract,
+    canonical,
+    effect_value,
     object_value,
     parse_json,
     text_value,
 )
 from astrofairy._errors import FairyError
-from astrofairy._library import Library
+from astrofairy._library import MAX_SEARCH_RESULTS, Library
 
 if TYPE_CHECKING:
     from collections.abc import Callable
@@ -29,6 +35,7 @@ if TYPE_CHECKING:
 class Context:
     store: Store
     state: State
+    call_id: str | None = None
 
     def path(self, relative: str) -> Path:
         root = (self.store.home / "workspaces" / self.state.task).resolve()
@@ -40,19 +47,156 @@ class Context:
     def content(self, ref: str) -> bytes:
         known = {item["ref"] for item in self.state.inputs + self.state.artifacts}
         known.update(self.state.assets)
-        for call in self.state.calls.values():
-            known.update(item["ref"] for item in call["outputs"])
+        known.update(self.state.outputs)
+        known.update(
+            call["contract_ref"]
+            for call in self.state.calls.values()
+            if call["capability"] != MODEL_CAPABILITY
+        )
+        known.update(
+            call["reconciler"]["contract_ref"] for call in self.state.calls.values() if call.get("reconciler")
+        )
         if ref not in known:
             raise FairyError("permission", "Content is not an input, output or pinned asset of this task")
         return self.store.get(ref)
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, init=False)
 class Capability:
     effect: str
     handler: Callable[[Context, dict[str, Any]], dict[str, Any]]
-    required: tuple[str, ...] = ()
-    optional: tuple[str, ...] = ()
+    description: str
+    prepare: Callable[[Context, dict[str, Any]], None] | None
+    reconciler: str | None
+    _input: SchemaContract
+    _output: SchemaContract | None
+
+    def __init__(
+        self,
+        effect: str,
+        handler: Callable[[Context, dict[str, Any]], dict[str, Any]],
+        *,
+        description: str,
+        input_schema: dict[str, Any],
+        output_schema: dict[str, Any] | None = None,
+        prepare: Callable[[Context, dict[str, Any]], None] | None = None,
+        reconciler: str | None = None,
+    ) -> None:
+        if not callable(handler) or (prepare is not None and not callable(prepare)):
+            raise FairyError("invalid_contract", "Capability handlers and preflight must be callable")
+        if reconciler is not None and (
+            effect != "write" or not isinstance(reconciler, str) or not CAPABILITY_NAME.fullmatch(reconciler)
+        ):
+            raise FairyError("invalid_contract", "Only write capabilities may declare a named reconciler")
+        object.__setattr__(self, "effect", effect_value(effect))
+        object.__setattr__(self, "handler", handler)
+        object.__setattr__(self, "description", text_value(description, "tool description", 512))
+        object.__setattr__(self, "prepare", prepare)
+        object.__setattr__(self, "reconciler", reconciler)
+        object.__setattr__(self, "_input", SchemaContract(input_schema))
+        object.__setattr__(
+            self, "_output", SchemaContract(output_schema) if output_schema is not None else None
+        )
+
+    @property
+    def input_schema(self) -> dict[str, Any]:
+        return self._input.schema
+
+    def definition(self, name: str) -> dict[str, Any]:
+        result = {
+            "name": name,
+            "effect": self.effect,
+            "description": self.description,
+            "inputSchema": self.input_schema,
+        }
+        if self._output is not None:
+            result["outputSchema"] = self._output.schema
+        if self.reconciler is not None:
+            result["reconciler"] = self.reconciler
+        if len(canonical(result)) > MAX_CONTEXT_BYTES:
+            raise FairyError("invalid_contract", "Tool definition exceeds its detail budget")
+        return result
+
+    def validate_input(self, parameters: dict[str, Any]) -> None:
+        self._input.validate(parameters)
+
+    def validate_result(self, result: dict[str, Any]) -> None:
+        _validate_result(result, self._output)
+
+
+def _validate_result(result: dict[str, Any], schema: SchemaContract | None) -> None:
+    canonical(result)
+    _result_contract().validate(result)
+    for item in result["outputs"]:
+        text_value(item["name"], "output name", 200)
+        text_value(item["media_type"], "media type")
+    if schema is not None:
+        schema.validate(result)
+
+
+def validate_confirmation(
+    proof: dict[str, Any], observed: dict[str, Any], definition: dict[str, Any]
+) -> None:
+    recovered = object_value(proof["result"])
+    schema = definition.get("outputSchema")
+    _validate_result(recovered, SchemaContract(schema) if schema is not None else None)
+    if not Counter(canonical(item) for item in recovered["outputs"]) <= Counter(
+        canonical(item) for item in observed["outputs"]
+    ):
+        raise FairyError("invalid", "Confirmed outputs must be captured by the verifier")
+
+
+def _object_schema(properties: dict[str, Any], required: tuple[str, ...] = ()) -> dict[str, Any]:
+    return {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": properties,
+        "required": list(required),
+        "additionalProperties": False,
+    }
+
+
+_STRING = {"type": "string", "minLength": 1, "pattern": r"\S"}
+_REF = {"type": "string", "minLength": 64, "maxLength": 64, "pattern": "^[a-f0-9]{64}$"}
+_PATH = {
+    "type": "string",
+    "minLength": 1,
+    "maxLength": MAX_CONTEXT_BYTES,
+    "pattern": r"^[^\x00-\x1f\x7f]+$",
+    "description": "Nonblank path inside the task workspace",
+}
+
+
+@cache
+def _result_contract() -> SchemaContract:
+    item = _object_schema(
+        {
+            "ref": _REF,
+            "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200,
+                "pattern": r"^[^/\\\x00-\x1f\x7f]+$",
+                "not": {"enum": [".", ".."]},
+            },
+            "media_type": _STRING,
+        },
+        ("ref", "name", "media_type"),
+    )
+    schema = _object_schema({"outputs": {"type": "array", "items": item}}, ("outputs",))
+    schema["additionalProperties"] = True
+    return SchemaContract(schema)
+
+
+def _prepare_path(context: Context, parameters: dict[str, Any]) -> None:
+    context.path(text_value(parameters["path"], "workspace path"))
+    if "media_type" in parameters:
+        text_value(parameters["media_type"], "media type")
+
+
+def _prepare_write(context: Context, parameters: dict[str, Any]) -> None:
+    _prepare_path(context, parameters)
+    text_value(parameters["text"], "output text", MAX_BLOB_BYTES)
 
 
 def atomic_write(path: Path, data: bytes) -> None:
@@ -100,10 +244,8 @@ def _capture(context: Context, parameters: dict[str, Any]) -> dict[str, Any]:
 
 def _read(context: Context, parameters: dict[str, Any]) -> dict[str, Any]:
     data = context.content(text_value(parameters.get("ref"), "content reference"))
-    offset = integer(parameters.get("offset", 0), "character offset")
-    limit = min(
-        integer(parameters.get("limit", MAX_CONTEXT_BYTES // 4), "character limit", 1), MAX_CONTEXT_BYTES // 4
-    )
+    offset = int(parameters.get("offset", 0))
+    limit = min(int(parameters.get("limit", MAX_CONTEXT_BYTES // 4)), MAX_CONTEXT_BYTES // 4)
     text = data.decode("utf-8")
     fragment = text[offset : offset + limit]
     return {"outputs": [], "text": fragment, "next_offset": offset + len(fragment), "characters": len(text)}
@@ -113,7 +255,7 @@ def _search(context: Context, parameters: dict[str, Any]) -> dict[str, Any]:
     query = parameters.get("query", "")
     if not isinstance(query, str):
         raise FairyError("invalid", "Search query must be text")
-    limit = integer(parameters.get("limit", 3), "search limit", 1)
+    limit = int(parameters.get("limit", 3))
     return {"outputs": [], "matches": Library(context.store).search(query, limit)}
 
 
@@ -155,20 +297,101 @@ def check_content(checker: str, data: bytes, parameters: dict[str, Any]) -> tupl
 
 def _check(context: Context, parameters: dict[str, Any]) -> dict[str, Any]:
     ref = text_value(parameters.get("ref"), "checked content")
-    verdict, basis = check_content(
-        text_value(parameters.get("checker"), "checker"),
-        context.content(ref),
-        object_value(parameters.get("parameters", {})),
-    )
-    return {"outputs": [], "verdict": verdict, "basis": basis, "checked_ref": ref}
+    checker = text_value(parameters.get("checker"), "checker")
+    options = object_value(parameters.get("parameters", {}))
+    verdict, basis = check_content(checker, context.content(ref), options)
+    return {
+        "outputs": [],
+        "verdict": verdict,
+        "basis": basis,
+        "checked": {"ref": ref, "checker": checker, "parameters": options},
+    }
 
 
 def builtins() -> dict[str, Capability]:
+    checked = _object_schema(
+        {
+            "ref": _REF,
+            "checker": {"enum": ["nonempty", "json", "contains"]},
+            "parameters": {"type": "object"},
+        },
+        ("ref", "checker"),
+    )
+    checked["allOf"] = [
+        {
+            "if": {"properties": {"checker": {"const": "contains"}}},
+            "then": {
+                "required": ["parameters"],
+                "properties": {
+                    "parameters": {
+                        "type": "object",
+                        "properties": {"text": _STRING},
+                        "required": ["text"],
+                        "additionalProperties": False,
+                    }
+                },
+            },
+        }
+    ]
     return {
-        "text.write": Capability("write", _write, ("path", "text")),
-        "file.capture": Capability("read", _capture, ("path",), ("media_type",)),
-        "content.read": Capability("read", _read, ("ref",), ("offset", "limit")),
-        "asset.search": Capability("read", _search, (), ("query", "limit")),
-        "asset.read": Capability("read", _asset, ("ref",)),
-        "content.check": Capability("read", _check, ("ref", "checker"), ("parameters",)),
+        "text.write": Capability(
+            "write",
+            _write,
+            description="Write UTF-8 text inside the task workspace",
+            input_schema=_object_schema(
+                {
+                    "path": _PATH,
+                    "text": {
+                        **_STRING,
+                        "maxLength": MAX_BLOB_BYTES,
+                        "description": f"Nonblank text, at most {MAX_BLOB_BYTES} UTF-8 bytes",
+                    },
+                },
+                ("path", "text"),
+            ),
+            prepare=_prepare_write,
+        ),
+        "file.capture": Capability(
+            "read",
+            _capture,
+            description="Capture workspace file bytes without changing the source",
+            input_schema=_object_schema({"path": _PATH, "media_type": _STRING}, ("path",)),
+            prepare=_prepare_path,
+        ),
+        "content.read": Capability(
+            "read",
+            _read,
+            description="Read a bounded UTF-8 fragment of known task content",
+            input_schema=_object_schema(
+                {
+                    "ref": _REF,
+                    "offset": {"type": "integer", "minimum": 0},
+                    "limit": {"type": "integer", "minimum": 1, "maximum": MAX_CONTEXT_BYTES // 4},
+                },
+                ("ref",),
+            ),
+        ),
+        "asset.search": Capability(
+            "read",
+            _search,
+            description="Find adopted asset heads by Unicode casefolded metadata terms; up to 10 matches",
+            input_schema=_object_schema(
+                {
+                    "query": {"type": "string"},
+                    "limit": {"type": "integer", "minimum": 1, "maximum": MAX_SEARCH_RESULTS},
+                }
+            ),
+        ),
+        "asset.read": Capability(
+            "read",
+            _asset,
+            description="Read and pin an approved asset or an already pinned version",
+            input_schema=_object_schema({"ref": _REF}, ("ref",)),
+        ),
+        "content.check": Capability(
+            "read",
+            _check,
+            description="Check known content with nonempty, json or contains",
+            input_schema=checked,
+        ),
     }

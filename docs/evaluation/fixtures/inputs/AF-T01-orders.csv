@@ -1,0 +1,7 @@
+order_id,qty,unit_price,status
+A1,2,120,paid
+A2,3,80,paid
+A2,3,80,paid
+A3,1,500,cancelled
+A4,4,50,paid
+A5,1,90,refunded

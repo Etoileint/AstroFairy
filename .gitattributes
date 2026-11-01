@@ -1,1 +1,2 @@
 * text=auto eol=lf
+dev/runtime_snapshots/*.source -text

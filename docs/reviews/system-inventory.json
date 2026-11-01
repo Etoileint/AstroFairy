@@ -1,0 +1,4257 @@
+{
+  "format": 1,
+  "baseline_commit": "22b7ece5d8388379f7b4bcaf47de4c047173cd9b",
+  "status": "本台账登记冻结对象与逐对象证据；当前总体进度见preparation-status.json，综合判断与未决数量见overall-assessment.json，不重复手抄可变轮次。",
+  "objects": [
+    {
+      "id": "A01",
+      "title": "产品范围与低负担委托",
+      "kind": "architecture",
+      "review_facets": [
+        "R01",
+        "R03"
+      ],
+      "sources": [
+        "S10",
+        "S11",
+        "S40",
+        "S42",
+        "S03",
+        "S48",
+        "S57"
+      ],
+      "current": "用户提出任务，宿主负责组织和执行。",
+      "comparison_question": "这种委托方式与初始化、人工介入需求是否一致？",
+      "anchors": [
+        {
+          "path": "README.zh-CN.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/SKILL.md",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R03三段实际模型/自然改稿/关键问答及独立复验完成；D01预算边界调度建议未修，原生/真人/长期效果待证",
+      "evidence": [
+        "R01-vision-and-claims.md",
+        "R03-user-experience-and-guidance.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "A02",
+      "title": "协作宿主与本地运行器边界",
+      "kind": "architecture",
+      "review_facets": [
+        "R02",
+        "R06",
+        "R14"
+      ],
+      "sources": [
+        "S01",
+        "S23",
+        "S24",
+        "S35",
+        "S43",
+        "S48",
+        "S42",
+        "S49",
+        "S56"
+      ],
+      "current": "模型与大部分任务工具由宿主提供，运行器控制自己的协议和操作。",
+      "comparison_question": "成熟宿主原生能力、编排框架或当前分工的保证与成本如何比较？",
+      "anchors": [
+        {
+          "path": "docs/guides/architecture.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop",
+          "line": 35
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "Context",
+          "line": 29
+        }
+      ],
+      "status": "R14声明边界及局部权限/数据取证与独立复验完成；条件性D01扩展效果分类未修，模型抗注入/真实宿主/完整生命周期待后续",
+      "evidence": [
+        "R02-core-architecture.md",
+        "R06-deterministic-and-model-boundaries.md",
+        "R14-authorization-data-and-security.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "A03",
+      "title": "协议、判定、调用和存储分离",
+      "kind": "architecture",
+      "review_facets": [
+        "R02",
+        "R04",
+        "R06"
+      ],
+      "sources": [
+        "S12",
+        "S19",
+        "S20",
+        "S37",
+        "S48",
+        "S42",
+        "S49"
+      ],
+      "current": "命令表、状态规则、调度组合与存储分属不同职责。",
+      "comparison_question": "每一职责是否必要且可替换，是否有更成熟的组合或更小实现？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_contracts.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R06 局部机制及单个真实前向样本已取证/独立复验；扩展工具契约缺口未修，整体效果与既有事项待证",
+      "evidence": [
+        "R02-core-architecture.md",
+        "R04-protocol-and-recovery.md",
+        "R06-deterministic-and-model-boundaries.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "A04",
+      "title": "受控任务循环及完成语义",
+      "kind": "architecture",
+      "review_facets": [
+        "R02",
+        "R04",
+        "R05"
+      ],
+      "sources": [
+        "S12",
+        "S21",
+        "S23",
+        "S37",
+        "S43",
+        "S44",
+        "S48",
+        "S42"
+      ],
+      "current": "任务循环通过显式命令和状态决定下一步。",
+      "comparison_question": "与成熟状态建模、持久工作流及宿主直接执行相比如何？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "State",
+          "line": 11
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.next",
+          "line": 402
+        },
+        {
+          "path": "skills/astrofairy/SKILL.md",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R05真实多文件样本/陌生模型审核及机制独立复验完成；D01同内容冲突门和条件性D02对象错绑未修，整体效果待证",
+      "evidence": [
+        "R02-core-architecture.md",
+        "R04-protocol-and-recovery.md",
+        "R05-deliverables-and-evidence.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "A05",
+      "title": "原始证据、事件与派生视图",
+      "kind": "architecture",
+      "review_facets": [
+        "R02",
+        "R05",
+        "R14"
+      ],
+      "sources": [
+        "S13",
+        "S25",
+        "S26",
+        "S31",
+        "S42",
+        "S51",
+        "S52",
+        "S35"
+      ],
+      "current": "保存内容字节与事件，重放后生成任务状态和回执。",
+      "comparison_question": "事件化与内容寻址带来的保证、限制和成本是否值得？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "replay",
+          "line": 63
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.inspect",
+          "line": 457
+        }
+      ],
+      "status": "R14声明边界及局部权限/数据取证与独立复验完成；条件性D01扩展效果分类未修，模型抗注入/真实宿主/完整生命周期待后续",
+      "evidence": [
+        "R02-core-architecture.md",
+        "R05-deliverables-and-evidence.md",
+        "R14-authorization-data-and-security.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "A06",
+      "title": "外置资产与任务化维护",
+      "kind": "architecture",
+      "review_facets": [
+        "R02",
+        "R08",
+        "R09"
+      ],
+      "sources": [
+        "S03",
+        "S23",
+        "S39",
+        "S43",
+        "S42",
+        "S61",
+        "S62",
+        "S63"
+      ],
+      "current": "经验通过维护任务和候选验证进入外部资产库。",
+      "comparison_question": "与成熟记忆系统、工作流注册和版本库相比覆盖及学习效果如何？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.learning_task",
+          "line": 512
+        },
+        {
+          "path": "skills/astrofairy/references/learning.md",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R02 局部结构与探针证据已记录；完整行业对标及相关边界待证；R08 七对象八问及合成维护/新上下文迁移取证完成；真实学习收益、自然触发和人的进步待证；R09 14对象八问、变化修订与全新接收试验取证完成；R07-D01未修，长期成熟/语义覆盖/完整分享证据仍有限",
+      "evidence": [
+        "R02-core-architecture.md",
+        "R08-learning-and-feedback.md",
+        "R09-workflows-reuse-and-sharing.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "A07",
+      "title": "共享 skill 加可选分发适配",
+      "kind": "architecture",
+      "review_facets": [
+        "R02",
+        "R11",
+        "R12"
+      ],
+      "sources": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S32",
+        "S42",
+        "S65",
+        "S66",
+        "S67"
+      ],
+      "current": "一份 skill 源目录带运行器，可经安装器、ZIP、可选 wheel 或插件清单分发。",
+      "comparison_question": "共享契约及各宿主差异是否正确处理，维护成本如何？",
+      "anchors": [
+        {
+          "path": "docs/adr/0002-portable-standard-skill.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "pyproject.toml",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "dev/package_skill.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R12主审与独立取证完成；五布局同源/同版生命周期及Codex本机发现有限证据，D01及旧项开放，原生调用/跨平台/升级待证",
+      "evidence": [
+        "R02-core-architecture.md",
+        "R11-agent-skills-contracts.md",
+        "R12-distribution-and-host-use.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "A08",
+      "title": "稳定核心与外围增长",
+      "kind": "architecture",
+      "review_facets": [
+        "R02",
+        "R07",
+        "R10"
+      ],
+      "sources": [
+        "S03",
+        "S11",
+        "S23",
+        "S39",
+        "S43",
+        "S42",
+        "S58",
+        "S59"
+      ],
+      "current": "任务策略与经验外置，入口和部分核心文件有体积预算。",
+      "comparison_question": "新增职责、替换能力和规模增长时，复杂度是否真正留在外围？",
+      "anchors": [
+        {
+          "path": "governance.toml",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "AGENTS.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "docs/adr/0001-small-workshop.md",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R07双臂短任务/多维规模与独立复验取证完成；D01 Unicode字面匹配未修，R02-D02增长补证，普遍净收益/语义/长期效果待证；R10 主审及补做独立复验取证完成；R10-D01版本准入时序MAJOR/P2未修、FDP子类型保留，长期效果/政策待证",
+      "evidence": [
+        "R02-core-architecture.md",
+        "R07-speed-and-economy.md",
+        "R10-long-term-evolution-and-growth.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "A09",
+      "title": "整体组合及端到端保证",
+      "kind": "architecture",
+      "review_facets": [
+        "R01",
+        "R02",
+        "R15"
+      ],
+      "sources": [
+        "S10",
+        "S11",
+        "S21",
+        "S23",
+        "S26",
+        "S43",
+        "S44",
+        "S48",
+        "S42",
+        "S70",
+        "S71"
+      ],
+      "current": "以上分工组合为委托、产出、检查、交付和学习路径。",
+      "comparison_question": "成熟组件的保证在连接处是否丢失，整体是否仍简洁、快速和可分析？",
+      "anchors": [
+        {
+          "path": "README.zh-CN.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "docs/guides/architecture.md",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R15综合主审与独立证据核对完成；13确认问题及2边界候选开放，整体/原生/真实人类/长期效果未验收",
+      "evidence": [
+        "R01-vision-and-claims.md",
+        "R02-core-architecture.md",
+        "R15-evidence-and-integration.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M01",
+      "title": "技能发现与调用入口",
+      "kind": "mechanism",
+      "review_facets": [
+        "R03",
+        "R11"
+      ],
+      "sources": [
+        "S01",
+        "S03",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S57"
+      ],
+      "current": "描述支持自动选择，用户也可显式提及。",
+      "comparison_question": "触发精度、误触发及宿主支持如何验证？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/SKILL.md",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R03三段实际模型/自然改稿/关键问答及独立复验完成；D01预算边界调度建议未修，原生/真人/长期效果待证",
+      "evidence": [
+        "R11-agent-skills-contracts.md",
+        "R03-user-experience-and-guidance.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M02",
+      "title": "条件资料与按需披露",
+      "kind": "mechanism",
+      "review_facets": [
+        "R06",
+        "R07",
+        "R11"
+      ],
+      "sources": [
+        "S01",
+        "S03",
+        "S49",
+        "S59"
+      ],
+      "current": "首次读宿主协议，恢复与学习资料按条件打开。",
+      "comparison_question": "指针是否既准确又节约上下文？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/SKILL.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/references/host.md",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R07双臂短任务/多维规模与独立复验取证完成；D01 Unicode字面匹配未修，R02-D02增长补证，普遍净收益/语义/长期效果待证",
+      "evidence": [
+        "R11-agent-skills-contracts.md",
+        "R06-deterministic-and-model-boundaries.md",
+        "R07-speed-and-economy.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M03",
+      "title": "环境就绪诊断",
+      "kind": "mechanism",
+      "review_facets": [
+        "R03",
+        "R12"
+      ],
+      "sources": [
+        "S04",
+        "S16",
+        "S17",
+        "S45",
+        "S66"
+      ],
+      "current": "doctor 检查解释器和目录条件，不建立数据存储。",
+      "comparison_question": "检测是否覆盖真实前提，错误解释能否支持低负担恢复？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_cli.py",
+          "symbol": "_run",
+          "line": 79
+        }
+      ],
+      "status": "R12主审与独立取证完成；五布局同源/同版生命周期及Codex本机发现有限证据，D01及旧项开放，原生调用/跨平台/升级待证",
+      "evidence": [
+        "R03-user-experience-and-guidance.md",
+        "R12-distribution-and-host-use.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M04",
+      "title": "数据目录与任务工作区",
+      "kind": "mechanism",
+      "review_facets": [
+        "R04",
+        "R12",
+        "R14"
+      ],
+      "sources": [
+        "S16",
+        "S17",
+        "S66"
+      ],
+      "current": "数据目录持久保存，任务创建时准备专用工作区。",
+      "comparison_question": "权限、平台、目录寿命和升级隔离是否成立？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": "Store.__init__",
+          "line": 17
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop._start",
+          "line": 50
+        }
+      ],
+      "status": "R12主审与独立取证完成；五布局同源/同版生命周期及Codex本机发现有限证据，D01及旧项开放，原生调用/跨平台/升级待证",
+      "evidence": [
+        "R04-protocol-and-recovery.md",
+        "R14-authorization-data-and-security.md",
+        "R12-distribution-and-host-use.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M05",
+      "title": "建任务、默认标准和附件快照",
+      "kind": "mechanism",
+      "review_facets": [
+        "R03",
+        "R04",
+        "R05"
+      ],
+      "sources": [
+        "S18",
+        "S19",
+        "S26",
+        "S51",
+        "S52",
+        "S57"
+      ],
+      "current": "保存原始请求、目标、准则、预算和原始附件字节。",
+      "comparison_question": "默认标准足够吗，材料保真与上下文供给是否一致？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.start",
+          "line": 70
+        }
+      ],
+      "status": "R03三段实际模型/自然改稿/关键问答及独立复验完成；D01预算边界调度建议未修，原生/真人/长期效果待证",
+      "evidence": [
+        "R04-protocol-and-recovery.md",
+        "R05-deliverables-and-evidence.md",
+        "R03-user-experience-and-guidance.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M06",
+      "title": "严格 JSON 与命令字段契约",
+      "kind": "mechanism",
+      "review_facets": [
+        "R04",
+        "R06"
+      ],
+      "sources": [
+        "S18",
+        "S19",
+        "S20",
+        "S47",
+        "S49"
+      ],
+      "current": "拒绝重复键及未知字段，schema 从命令表生成。",
+      "comparison_question": "与成熟模式校验相比接受域、错误和维护成本如何？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_contracts.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R06 局部机制及单个真实前向样本已取证/独立复验；扩展工具契约缺口未修，整体效果与既有事项待证",
+      "evidence": [
+        "R04-protocol-and-recovery.md",
+        "R06-deterministic-and-model-boundaries.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M07",
+      "title": "要求来源与修订",
+      "kind": "mechanism",
+      "review_facets": [
+        "R04",
+        "R05"
+      ],
+      "sources": [
+        "S19",
+        "S23",
+        "S26",
+        "S43"
+      ],
+      "current": "区分 user/policy/derived，修改明确要求需关联后续用户输入。",
+      "comparison_question": "来源归属、修订授权与真实意图是否一致？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.submit",
+          "line": 271
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_contracts.py",
+          "symbol": "criteria_value",
+          "line": 96
+        }
+      ],
+      "status": "R05真实多文件样本/陌生模型审核及机制独立复验完成；D01同内容冲突门和条件性D02对象错绑未修，整体效果待证",
+      "evidence": [
+        "R04-protocol-and-recovery.md",
+        "R05-deliverables-and-evidence.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M08",
+      "title": "关键提问与输入转发",
+      "kind": "mechanism",
+      "review_facets": [
+        "R03",
+        "R04"
+      ],
+      "sources": [
+        "S03",
+        "S40",
+        "S57"
+      ],
+      "current": "提问需推荐答案，最多三次，回答进入事件并增加修订。",
+      "comparison_question": "提问是否必要、回答是否正确进入后续目标与验收？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "admit_question",
+          "line": 140
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.submit",
+          "line": 271
+        }
+      ],
+      "status": "R03三段实际模型/自然改稿/关键问答及独立复验完成；D01预算边界调度建议未修，原生/真人/长期效果待证",
+      "evidence": [
+        "R04-protocol-and-recovery.md",
+        "R03-user-experience-and-guidance.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M09",
+      "title": "模型工作请求与报告",
+      "kind": "mechanism",
+      "review_facets": [
+        "R04",
+        "R05",
+        "R06"
+      ],
+      "sources": [
+        "S23",
+        "S26",
+        "S43",
+        "S48",
+        "S49",
+        "S51",
+        "S52"
+      ],
+      "current": "模型请求保留目的及引用，报告需对应待处理调用。",
+      "comparison_question": "是否准确绑定输入、输出和执行者，协议负担是否值得？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop._request",
+          "line": 110
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop._known_outputs",
+          "line": 107
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.submit",
+          "line": 271
+        }
+      ],
+      "status": "R05真实多文件样本/陌生模型审核及机制独立复验完成；D01同内容冲突门和条件性D02对象错绑未修，整体效果待证",
+      "evidence": [
+        "R04-protocol-and-recovery.md",
+        "R06-deterministic-and-model-boundaries.md",
+        "R05-deliverables-and-evidence.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M10",
+      "title": "工具注册、字段发现与能力目录",
+      "kind": "mechanism",
+      "review_facets": [
+        "R02",
+        "R06"
+      ],
+      "sources": [
+        "S01",
+        "S19",
+        "S23",
+        "S43",
+        "S48",
+        "S49"
+      ],
+      "current": "工具声明 effect 和参数；目录按能力名子串检索。",
+      "comparison_question": "成熟工具接口与当前注册方式的覆盖、发现成本如何？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "Capability",
+          "line": 51
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "builtins",
+          "line": 166
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.catalog",
+          "line": 440
+        }
+      ],
+      "status": "R06 局部机制及单个真实前向样本已取证/独立复验；扩展工具契约缺口未修，整体效果与既有事项待证",
+      "evidence": [
+        "R02-core-architecture.md",
+        "R06-deterministic-and-model-boundaries.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M11",
+      "title": "动作准入、预算与重复防护",
+      "kind": "mechanism",
+      "review_facets": [
+        "R04",
+        "R06",
+        "R14"
+      ],
+      "sources": [
+        "S12",
+        "S21",
+        "S22",
+        "S44",
+        "S49"
+      ],
+      "current": "先检查 scope/budget，同类未决操作阻止盲目重试。",
+      "comparison_question": "与幂等键、重试和执行租约等成熟机制的责任边界如何？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "admit_call",
+          "line": 99
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "require_open",
+          "line": 112
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "State.budget_left",
+          "line": 59
+        }
+      ],
+      "status": "R14声明边界及局部权限/数据取证与独立复验完成；条件性D01扩展效果分类未修，模型抗注入/真实宿主/完整生命周期待后续",
+      "evidence": [
+        "R04-protocol-and-recovery.md",
+        "R06-deterministic-and-model-boundaries.md",
+        "R14-authorization-data-and-security.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M12",
+      "title": "调用前留痕与执行后观测",
+      "kind": "mechanism",
+      "review_facets": [
+        "R04",
+        "R05",
+        "R14"
+      ],
+      "sources": [
+        "S21",
+        "S22",
+        "S24",
+        "S26",
+        "S44",
+        "S48",
+        "S53"
+      ],
+      "current": "调用先落事件，异常按作用类型记 failed 或 unknown。",
+      "comparison_question": "副作用与日志之间的窗口如何处理；不确定性能否恢复？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.invoke",
+          "line": 133
+        }
+      ],
+      "status": "R14声明边界及局部权限/数据取证与独立复验完成；条件性D01扩展效果分类未修，模型抗注入/真实宿主/完整生命周期待后续",
+      "evidence": [
+        "R04-protocol-and-recovery.md",
+        "R05-deliverables-and-evidence.md",
+        "R14-authorization-data-and-security.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M13",
+      "title": "成果登记与版本绑定",
+      "kind": "mechanism",
+      "review_facets": [
+        "R04",
+        "R05"
+      ],
+      "sources": [
+        "S26",
+        "S31",
+        "S53"
+      ],
+      "current": "成果需来自本任务已观测输出，每次登记形成新目标。",
+      "comparison_question": "是否能定位真实最终交付物且使旧检查失效？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.submit",
+          "line": 271
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "State.artifact",
+          "line": 27
+        }
+      ],
+      "status": "R05真实多文件样本/陌生模型审核及机制独立复验完成；D01同内容冲突门和条件性D02对象错绑未修，整体效果待证",
+      "evidence": [
+        "R04-protocol-and-recovery.md",
+        "R05-deliverables-and-evidence.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M14",
+      "title": "文件捕获与类型标记",
+      "kind": "mechanism",
+      "review_facets": [
+        "R05",
+        "R06"
+      ],
+      "sources": [
+        "S17",
+        "S26",
+        "S50",
+        "S51",
+        "S52"
+      ],
+      "current": "按字节捕获工作区文件，推断或接受类型。",
+      "comparison_question": "类型、实际格式、读取预算和来源语义是否分开？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "_capture",
+          "line": 80
+        }
+      ],
+      "status": "R05真实多文件样本/陌生模型审核及机制独立复验完成；D01同内容冲突门和条件性D02对象错绑未修，整体效果待证",
+      "evidence": [
+        "R06-deterministic-and-model-boundaries.md",
+        "R05-deliverables-and-evidence.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M15",
+      "title": "内容访问与分段读取",
+      "kind": "mechanism",
+      "review_facets": [
+        "R06",
+        "R07",
+        "R14"
+      ],
+      "sources": [
+        "S17",
+        "S18",
+        "S58"
+      ],
+      "current": "按当前任务可访问引用读取，文本有分段和长度限制。",
+      "comparison_question": "权限、编码、二进制处理及大材料读取如何比较？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "Context.content",
+          "line": 40
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "_read",
+          "line": 101
+        }
+      ],
+      "status": "R07双臂短任务/多维规模与独立复验取证完成；D01 Unicode字面匹配未修，R02-D02增长补证，普遍净收益/语义/长期效果待证",
+      "evidence": [
+        "R06-deterministic-and-model-boundaries.md",
+        "R14-authorization-data-and-security.md",
+        "R07-speed-and-economy.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M16",
+      "title": "机械检查器",
+      "kind": "mechanism",
+      "review_facets": [
+        "R05",
+        "R06"
+      ],
+      "sources": [
+        "S18",
+        "S19",
+        "S20",
+        "S49",
+        "S53"
+      ],
+      "current": "内置 semantic 之外的 nonempty/json/contains 检查。",
+      "comparison_question": "能检什么、不能检什么，成熟格式工具如何接入？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "check_content",
+          "line": 137
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "_check",
+          "line": 156
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.check",
+          "line": 221
+        }
+      ],
+      "status": "R05真实多文件样本/陌生模型审核及机制独立复验完成；D01同内容冲突门和条件性D02对象错绑未修，整体效果待证",
+      "evidence": [
+        "R06-deterministic-and-model-boundaries.md",
+        "R05-deliverables-and-evidence.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M17",
+      "title": "语义审查、替代链和冲突",
+      "kind": "mechanism",
+      "review_facets": [
+        "R04",
+        "R05"
+      ],
+      "sources": [
+        "S23",
+        "S26",
+        "S43",
+        "S48",
+        "S53"
+      ],
+      "current": "审查绑定当前修订与成果；新通过不自动覆盖旧失败。",
+      "comparison_question": "证据与判断能否验证，冲突和替代是否真实？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop._review",
+          "line": 197
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "admit_review",
+          "line": 117
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "State.active_reviews",
+          "line": 30
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "State.issues",
+          "line": 42
+        }
+      ],
+      "status": "R05真实多文件样本/陌生模型审核及机制独立复验完成；D01同内容冲突门和条件性D02对象错绑未修，整体效果待证",
+      "evidence": [
+        "R04-protocol-and-recovery.md",
+        "R05-deliverables-and-evidence.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M18",
+      "title": "关闭门与结果分类",
+      "kind": "mechanism",
+      "review_facets": [
+        "R04",
+        "R05"
+      ],
+      "sources": [
+        "S12",
+        "S21",
+        "S23",
+        "S43",
+        "S44",
+        "S53"
+      ],
+      "current": "完整交付需必要检查通过、无待答和未决调用；部分交付需成果。",
+      "comparison_question": "结果分类是否准确，是否有错误完成或无法退出？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "State.complete",
+          "line": 51
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "admit_close",
+          "line": 146
+        }
+      ],
+      "status": "R05真实多文件样本/陌生模型审核及机制独立复验完成；D01同内容冲突门和条件性D02对象错绑未修，整体效果待证",
+      "evidence": [
+        "R04-protocol-and-recovery.md",
+        "R05-deliverables-and-evidence.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M19",
+      "title": "下一步工作包与调度",
+      "kind": "mechanism",
+      "review_facets": [
+        "R03",
+        "R04",
+        "R07"
+      ],
+      "sources": [
+        "S12",
+        "S23",
+        "S37",
+        "S43",
+        "S57",
+        "S58",
+        "S39"
+      ],
+      "current": "由状态返回 produce/review/repair/resolve 等行动与上下文。",
+      "comparison_question": "调度优先级、包大小与宿主实际推进是否协调？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.next",
+          "line": 402
+        }
+      ],
+      "status": "R07双臂短任务/多维规模与独立复验取证完成；D01 Unicode字面匹配未修，R02-D02增长补证，普遍净收益/语义/长期效果待证",
+      "evidence": [
+        "R04-protocol-and-recovery.md",
+        "R03-user-experience-and-guidance.md",
+        "R07-speed-and-economy.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M20",
+      "title": "回执与交付导出",
+      "kind": "mechanism",
+      "review_facets": [
+        "R05",
+        "R07"
+      ],
+      "sources": [
+        "S25",
+        "S26",
+        "S27",
+        "S51",
+        "S52",
+        "S58"
+      ],
+      "current": "完整视图写入 receipt，回包仅返回路径和简要状态。",
+      "comparison_question": "审核者能否还原内容组织；成果组合与后续更新如何？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.inspect",
+          "line": 457
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.deliver",
+          "line": 477
+        }
+      ],
+      "status": "R07双臂短任务/多维规模与独立复验取证完成；D01 Unicode字面匹配未修，R02-D02增长补证，普遍净收益/语义/长期效果待证",
+      "evidence": [
+        "R05-deliverables-and-evidence.md",
+        "R07-speed-and-economy.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M21",
+      "title": "SQLite 存储与事务",
+      "kind": "mechanism",
+      "review_facets": [
+        "R04",
+        "R10",
+        "R14"
+      ],
+      "sources": [
+        "S13",
+        "S14",
+        "S16",
+        "S64"
+      ],
+      "current": "标准库 SQLite，显式写事务，存储版本不支持时拒绝。",
+      "comparison_question": "实际事务与并发、崩溃、备份、迁移前提是否足够？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": "Store.__init__",
+          "line": 17
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": "Store.close",
+          "line": 49
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": "Store.transaction",
+          "line": 53
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": "Store.tasks",
+          "line": 125
+        }
+      ],
+      "status": "R14声明边界及局部权限/数据取证与独立复验完成；条件性D01扩展效果分类未修，模型抗注入/真实宿主/完整生命周期待后续；R10 主审及补做独立复验取证完成；R10-D01版本准入时序MAJOR/P2未修、FDP子类型保留，长期效果/政策待证",
+      "evidence": [
+        "R04-protocol-and-recovery.md",
+        "R14-authorization-data-and-security.md",
+        "R10-long-term-evolution-and-growth.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M22",
+      "title": "事件链、序号与重放",
+      "kind": "mechanism",
+      "review_facets": [
+        "R04",
+        "R05",
+        "R14"
+      ],
+      "sources": [
+        "S12",
+        "S25",
+        "S26",
+        "S51",
+        "S52"
+      ],
+      "current": "事件按序追加并校验哈希链，当前状态由事件重建。",
+      "comparison_question": "与成熟事件溯源相比一致性、篡改检测和成本如何？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": "Store.events",
+          "line": 78
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": "Store.append",
+          "line": 97
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "replay",
+          "line": 63
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.state",
+          "line": 47
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop._append",
+          "line": 104
+        }
+      ],
+      "status": "R14声明边界及局部权限/数据取证与独立复验完成；条件性D01扩展效果分类未修，模型抗注入/真实宿主/完整生命周期待后续",
+      "evidence": [
+        "R04-protocol-and-recovery.md",
+        "R05-deliverables-and-evidence.md",
+        "R14-authorization-data-and-security.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M23",
+      "title": "内容寻址与字节完整性",
+      "kind": "mechanism",
+      "review_facets": [
+        "R04",
+        "R14"
+      ],
+      "sources": [
+        "S18",
+        "S31",
+        "S47"
+      ],
+      "current": "字节内容以 SHA256 引用保存，读取时重算。",
+      "comparison_question": "规范化、重复、完整性、真实性与保留策略如何界定？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": "Store.put",
+          "line": 62
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": "Store.get",
+          "line": 69
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_contracts.py",
+          "symbol": "canonical",
+          "line": 34
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_contracts.py",
+          "symbol": "digest",
+          "line": 43
+        }
+      ],
+      "status": "R14声明边界及局部权限/数据取证与独立复验完成；条件性D01扩展效果分类未修，模型抗注入/真实宿主/完整生命周期待后续",
+      "evidence": [
+        "R04-protocol-and-recovery.md",
+        "R14-authorization-data-and-security.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M24",
+      "title": "路径约束、原子写与文件权限",
+      "kind": "mechanism",
+      "review_facets": [
+        "R04",
+        "R14"
+      ],
+      "sources": [
+        "S17",
+        "S35",
+        "S54",
+        "S55"
+      ],
+      "current": "约束普通路径越界，用临时文件同步后替换，POSIX 私有权限。",
+      "comparison_question": "成熟文件操作实践、并发、竞态及持久性保证如何？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "Context.path",
+          "line": 33
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "atomic_write",
+          "line": 58
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "_write",
+          "line": 71
+        }
+      ],
+      "status": "R14声明边界及局部权限/数据取证与独立复验完成；条件性D01扩展效果分类未修，模型抗注入/真实宿主/完整生命周期待后续",
+      "evidence": [
+        "R04-protocol-and-recovery.md",
+        "R14-authorization-data-and-security.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M25",
+      "title": "重开、未决动作与迟到结果",
+      "kind": "mechanism",
+      "review_facets": [
+        "R03",
+        "R04"
+      ],
+      "sources": [
+        "S21",
+        "S22",
+        "S24",
+        "S44",
+        "S57"
+      ],
+      "current": "重开同一数据目录可继续；未决工具动作无通用自动对账。",
+      "comparison_question": "成熟恢复方案相比缺口、人工负担和可接受边界是什么？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "replay",
+          "line": 63
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.submit",
+          "line": 271
+        },
+        {
+          "path": "skills/astrofairy/references/review.md",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R03三段实际模型/自然改稿/关键问答及独立复验完成；D01预算边界调度建议未修，原生/真人/长期效果待证",
+      "evidence": [
+        "R04-protocol-and-recovery.md",
+        "R03-user-experience-and-guidance.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M26",
+      "title": "资产提案与工作流结构",
+      "kind": "mechanism",
+      "review_facets": [
+        "R08",
+        "R09"
+      ],
+      "sources": [
+        "S03",
+        "S19",
+        "S39",
+        "S61",
+        "S62"
+      ],
+      "current": "资产有种类、范围、摘要、标签和证据；工作流步骤需完成条件。",
+      "comparison_question": "契约是否足以执行复用，是否存在过拟合或内容混杂？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.propose",
+          "line": 76
+        }
+      ],
+      "status": "pending formal review；R08 七对象八问及合成维护/新上下文迁移取证完成；真实学习收益、自然触发和人的进步待证；R09 14对象八问、变化修订与全新接收试验取证完成；R07-D01未修，长期成熟/语义覆盖/完整分享证据仍有限",
+      "evidence": [
+        "R08-learning-and-feedback.md",
+        "R09-workflows-reuse-and-sharing.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M27",
+      "title": "候选验证任务与固定策略",
+      "kind": "mechanism",
+      "review_facets": [
+        "R08",
+        "R09"
+      ],
+      "sources": [
+        "S03",
+        "S19",
+        "S23",
+        "S43",
+        "S61",
+        "S62"
+      ],
+      "current": "精确候选作为验证成果，固定 package-json 与 asset-fitness 标准。",
+      "comparison_question": "机械和语义验证的充分性、独立性和成本如何？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "validation_criteria",
+          "line": 24
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.validation_task",
+          "line": 500
+        }
+      ],
+      "status": "pending formal review；R08 七对象八问及合成维护/新上下文迁移取证完成；真实学习收益、自然触发和人的进步待证；R09 14对象八问、变化修订与全新接收试验取证完成；R07-D01未修，长期成熟/语义覆盖/完整分享证据仍有限",
+      "evidence": [
+        "R08-learning-and-feedback.md",
+        "R09-workflows-reuse-and-sharing.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M28",
+      "title": "采用与基准竞争",
+      "kind": "mechanism",
+      "review_facets": [
+        "R09",
+        "R14"
+      ],
+      "sources": [
+        "S13",
+        "S23",
+        "S31",
+        "S43"
+      ],
+      "current": "采用需精确包的完整验证，头版本变化时拒绝陈旧基准。",
+      "comparison_question": "并发采用、身份、信任及成熟度判断是否可靠？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.adopt",
+          "line": 137
+        }
+      ],
+      "status": "R14声明边界及局部权限/数据取证与独立复验完成；条件性D01扩展效果分类未修，模型抗注入/真实宿主/完整生命周期待后续；R09 14对象八问、变化修订与全新接收试验取证完成；R07-D01未修，长期成熟/语义覆盖/完整分享证据仍有限",
+      "evidence": [
+        "R14-authorization-data-and-security.md",
+        "R09-workflows-reuse-and-sharing.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M29",
+      "title": "资产状态、版本、退役与回退",
+      "kind": "mechanism",
+      "review_facets": [
+        "R09",
+        "R10"
+      ],
+      "sources": [
+        "S23",
+        "S31",
+        "S33",
+        "S39",
+        "S43",
+        "S46",
+        "S64"
+      ],
+      "current": "candidate/trial/stable/retired，历史不覆盖，退役后可显露旧活跃版本。",
+      "comparison_question": "状态含义是否由证据支撑，版本选择和淘汰如何比较？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.status",
+          "line": 52
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.head",
+          "line": 60
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.get",
+          "line": 70
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library._event",
+          "line": 130
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.retire",
+          "line": 158
+        }
+      ],
+      "status": "pending formal review；R09 14对象八问、变化修订与全新接收试验取证完成；R07-D01未修，长期成熟/语义覆盖/完整分享证据仍有限；R10 主审及补做独立复验取证完成；R10-D01版本准入时序MAJOR/P2未修、FDP子类型保留，长期效果/政策待证",
+      "evidence": [
+        "R09-workflows-reuse-and-sharing.md",
+        "R10-long-term-evolution-and-growth.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M30",
+      "title": "资产检索与排序",
+      "kind": "mechanism",
+      "review_facets": [
+        "R07",
+        "R09"
+      ],
+      "sources": [
+        "S15",
+        "S28",
+        "S29",
+        "S30",
+        "S38",
+        "S58",
+        "S60"
+      ],
+      "current": "对名称、摘要、标签做词项子串评分，限定范围、数量和活跃头版本。",
+      "comparison_question": "与全文、语义、混合及重排方案如何比相关性、漏检、延迟与成本？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.search",
+          "line": 163
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "_search",
+          "line": 112
+        }
+      ],
+      "status": "R07双臂短任务/多维规模与独立复验取证完成；D01 Unicode字面匹配未修，R02-D02增长补证，普遍净收益/语义/长期效果待证；R09 14对象八问、变化修订与全新接收试验取证完成；R07-D01未修，长期成熟/语义覆盖/完整分享证据仍有限",
+      "evidence": [
+        "R07-speed-and-economy.md",
+        "R09-workflows-reuse-and-sharing.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M31",
+      "title": "资产读取与精确版本钉选",
+      "kind": "mechanism",
+      "review_facets": [
+        "R04",
+        "R09"
+      ],
+      "sources": [
+        "S23",
+        "S26",
+        "S31",
+        "S43",
+        "S63"
+      ],
+      "current": "读取已采用资产记录使用引用，长内容可分段读取。",
+      "comparison_question": "检索结果到实际执行是否一致，旧版本与退役如何处理？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "_asset",
+          "line": 120
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.invoke",
+          "line": 133
+        }
+      ],
+      "status": "R04 协议/恢复局部取证及独立复验完成；三组接口发现未修复，完整对象与 FDP 分型仍待后续处置；R09 14对象八问、变化修订与全新接收试验取证完成；R07-D01未修，长期成熟/语义覆盖/完整分享证据仍有限",
+      "evidence": [
+        "R04-protocol-and-recovery.md",
+        "R09-workflows-reuse-and-sharing.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M32",
+      "title": "反馈与独立维护任务",
+      "kind": "mechanism",
+      "review_facets": [
+        "R08",
+        "R09"
+      ],
+      "sources": [
+        "S03",
+        "S23",
+        "S39",
+        "S43",
+        "S61"
+      ],
+      "current": "交付后记录反馈，按需以表现快照创建维护任务，允许不变。",
+      "comparison_question": "回流触发、证据支持和实际后续收益如何评价？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.learning_task",
+          "line": 512
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.submit",
+          "line": 271
+        }
+      ],
+      "status": "pending formal review；R08 七对象八问及合成维护/新上下文迁移取证完成；真实学习收益、自然触发和人的进步待证；R09 14对象八问、变化修订与全新接收试验取证完成；R07-D01未修，长期成熟/语义覆盖/完整分享证据仍有限",
+      "evidence": [
+        "R08-learning-and-feedback.md",
+        "R09-workflows-reuse-and-sharing.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M33",
+      "title": "资产分享与导入验证",
+      "kind": "mechanism",
+      "review_facets": [
+        "R09",
+        "R14"
+      ],
+      "sources": [
+        "S18",
+        "S26",
+        "S31",
+        "S36",
+        "S35",
+        "S63"
+      ],
+      "current": "导出 JSON 包；核验摘要后转本地候选，保留发送者声明的证据说明。",
+      "comparison_question": "可迁移依赖、来源可信度、隐私和本地复验是否完整？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.export",
+          "line": 183
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.import_bundle",
+          "line": 186
+        }
+      ],
+      "status": "R14声明边界及局部权限/数据取证与独立复验完成；条件性D01扩展效果分类未修，模型抗注入/真实宿主/完整生命周期待后续；R09 14对象八问、变化修订与全新接收试验取证完成；R07-D01未修，长期成熟/语义覆盖/完整分享证据仍有限",
+      "evidence": [
+        "R14-authorization-data-and-security.md",
+        "R09-workflows-reuse-and-sharing.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M34",
+      "title": "被动工具说明与内容信任",
+      "kind": "mechanism",
+      "review_facets": [
+        "R06",
+        "R09",
+        "R14"
+      ],
+      "sources": [
+        "S01",
+        "S03",
+        "S35",
+        "S49"
+      ],
+      "current": "tool-spec 是资料，导入不安装代码；约束与事实需要不同用途。",
+      "comparison_question": "资料、执行能力和授权的分界能否保持？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/references/learning.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.propose",
+          "line": 76
+        }
+      ],
+      "status": "R14声明边界及局部权限/数据取证与独立复验完成；条件性D01扩展效果分类未修，模型抗注入/真实宿主/完整生命周期待后续；R09 14对象八问、变化修订与全新接收试验取证完成；R07-D01未修，长期成熟/语义覆盖/完整分享证据仍有限",
+      "evidence": [
+        "R06-deterministic-and-model-boundaries.md",
+        "R14-authorization-data-and-security.md",
+        "R09-workflows-reuse-and-sharing.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M35",
+      "title": "资源限额与增长预算",
+      "kind": "mechanism",
+      "review_facets": [
+        "R06",
+        "R07",
+        "R10"
+      ],
+      "sources": [
+        "S11",
+        "S23",
+        "S27",
+        "S43",
+        "S58",
+        "S59"
+      ],
+      "current": "限制 blob、问题、调用和查询；限定入口及四个文件的体积。",
+      "comparison_question": "预算是否作用于真实成本，是否有移出预算文件的规避？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_contracts.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "governance.toml",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "dev/check.py",
+          "symbol": "structural_checks",
+          "line": 38
+        }
+      ],
+      "status": "R07双臂短任务/多维规模与独立复验取证完成；D01 Unicode字面匹配未修，R02-D02增长补证，普遍净收益/语义/长期效果待证；R10 主审及补做独立复验取证完成；R10-D01版本准入时序MAJOR/P2未修、FDP子类型保留，长期效果/政策待证",
+      "evidence": [
+        "R06-deterministic-and-model-boundaries.md",
+        "R07-speed-and-economy.md",
+        "R10-long-term-evolution-and-growth.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M36",
+      "title": "CLI 错误、状态与诊断接口",
+      "kind": "mechanism",
+      "review_facets": [
+        "R03",
+        "R04",
+        "R12"
+      ],
+      "sources": [
+        "S18",
+        "S19",
+        "S20",
+        "S45",
+        "S66"
+      ],
+      "current": "统一 JSON 输出，失败和未知返回非零；schema/doctor 不开存储。",
+      "comparison_question": "错误语义是否有遗漏，调用者能否可靠判断和恢复？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_cli.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_errors.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/__main__.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R12主审与独立取证完成；五布局同源/同版生命周期及Codex本机发现有限证据，D01及旧项开放，原生调用/跨平台/升级待证",
+      "evidence": [
+        "R04-protocol-and-recovery.md",
+        "R03-user-experience-and-guidance.md",
+        "R12-distribution-and-host-use.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M37",
+      "title": "自包含启动与可选 Python 包",
+      "kind": "mechanism",
+      "review_facets": [
+        "R11",
+        "R12"
+      ],
+      "sources": [
+        "S01",
+        "S04",
+        "S32",
+        "S45"
+      ],
+      "current": "launcher 仅定位自己的 scripts；wheel 从同源代码构建。",
+      "comparison_question": "脱离仓库、site-packages 和平台默认路径后是否可运行？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/fairy.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "pyproject.toml",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_version.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/__init__.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R12主审与独立取证完成；五布局同源/同版生命周期及Codex本机发现有限证据，D01及旧项开放，原生调用/跨平台/升级待证",
+      "evidence": [
+        "R11-agent-skills-contracts.md",
+        "R12-distribution-and-host-use.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M38",
+      "title": "便携 ZIP 内容过滤",
+      "kind": "mechanism",
+      "review_facets": [
+        "R11",
+        "R12"
+      ],
+      "sources": [
+        "S01",
+        "S04",
+        "S36"
+      ],
+      "current": "标准目录打包，排除测试、缓存与构建元数据，无私有安装清单。",
+      "comparison_question": "源、复制安装、ZIP 内容及许可是否一致？",
+      "anchors": [
+        {
+          "path": "dev/package_skill.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R12主审与独立取证完成；五布局同源/同版生命周期及Codex本机发现有限证据，D01及旧项开放，原生调用/跨平台/升级待证",
+      "evidence": [
+        "R11-agent-skills-contracts.md",
+        "R12-distribution-and-host-use.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M39",
+      "title": "派生版本、许可与包元数据同步",
+      "kind": "mechanism",
+      "review_facets": [
+        "R12",
+        "R16"
+      ],
+      "sources": [
+        "S32",
+        "S33",
+        "S36",
+        "S46"
+      ],
+      "current": "由包元数据及版本生成插件文件并同步许可。",
+      "comparison_question": "版本转换、错误输入和消费者漂移如何验证？",
+      "anchors": [
+        {
+          "path": "dev/sync_metadata.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "MANIFEST.in",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "LICENSE",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/LICENSE",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R16主审与独立取证完成；D02 MINOR/P2转换前导零未修；用户未裁定",
+      "evidence": [
+        "R12-distribution-and-host-use.md",
+        "R16-documents-development-and-public-claims.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M40",
+      "title": "原生插件与市场清单",
+      "kind": "mechanism",
+      "review_facets": [
+        "R11",
+        "R12"
+      ],
+      "sources": [
+        "S03",
+        "S05",
+        "S06",
+        "S08"
+      ],
+      "current": "提供可选 plugin/marketplace 清单，未宣称已在市场上架。",
+      "comparison_question": "各消费者实际解析、缓存和升级如何工作？",
+      "anchors": [
+        {
+          "path": ".claude-plugin/plugin.json",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R12主审与独立取证完成；五布局同源/同版生命周期及Codex本机发现有限证据，D01及旧项开放，原生调用/跨平台/升级待证",
+      "evidence": [
+        "R11-agent-skills-contracts.md",
+        "R12-distribution-and-host-use.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M41",
+      "title": "可选 UI 元数据",
+      "kind": "mechanism",
+      "review_facets": [
+        "R03",
+        "R11"
+      ],
+      "sources": [
+        "S01",
+        "S06"
+      ],
+      "current": "提供展示名、简述及默认提示，未禁止隐式调用。",
+      "comparison_question": "字段和发现行为是否符合对应宿主实际版本？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/agents/openai.yaml",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R03三段实际模型/自然改稿/关键问答及独立复验完成；D01预算边界调度建议未修，原生/真人/长期效果待证",
+      "evidence": [
+        "R11-agent-skills-contracts.md",
+        "R03-user-experience-and-guidance.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M42",
+      "title": "测试面、类型与规范检查",
+      "kind": "mechanism",
+      "review_facets": [
+        "R15",
+        "R16"
+      ],
+      "sources": [
+        "S02",
+        "S04",
+        "S41",
+        "S68",
+        "S70",
+        "S71"
+      ],
+      "current": "统一入口执行归属测试、Ruff、mypy、文档引用和预算检查。",
+      "comparison_question": "检查是否覆盖真实义务，是否有镜像测试或未执行表面？",
+      "anchors": [
+        {
+          "path": "dev/check.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "dev/check_installation.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "dev/tests/test_metadata.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "dev/tests/test_package_skill.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/tests",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "requirements-dev.lock",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R15综合主审与独立证据核对完成；13确认问题及2边界候选开放，整体/原生/真实人类/长期效果未验收",
+      "evidence": [
+        "R16-documents-development-and-public-claims.md",
+        "R15-evidence-and-integration.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M43",
+      "title": "提交门与 CI 构建",
+      "kind": "mechanism",
+      "review_facets": [
+        "R12",
+        "R15",
+        "R16"
+      ],
+      "sources": [
+        "S34",
+        "S41",
+        "S69"
+      ],
+      "current": "本地 pre-commit 运行检查，CI 检查并构建 wheel/sdist/ZIP。",
+      "comparison_question": "本地与远程执行体、覆盖通道、权限及版本锚是否一致？",
+      "anchors": [
+        {
+          "path": ".githooks/pre-commit",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": ".github/workflows/check.yml",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R15综合主审与独立证据核对完成；13确认问题及2边界候选开放，整体/原生/真实人类/长期效果未验收",
+      "evidence": [
+        "R12-distribution-and-host-use.md",
+        "R16-documents-development-and-public-claims.md",
+        "R15-evidence-and-integration.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M44",
+      "title": "文档、单源组织与公开边界",
+      "kind": "mechanism",
+      "review_facets": [
+        "R10",
+        "R16"
+      ],
+      "sources": [
+        "S03",
+        "S32",
+        "S36",
+        "S41"
+      ],
+      "current": "双语 README、设计决策、运行指南和忽略目录；公开用语专业。",
+      "comparison_question": "声明与行为能否双向追踪，治理和资料增长是否适度？",
+      "anchors": [
+        {
+          "path": "AGENTS.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "README.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "README.zh-CN.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": ".gitignore",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": ".gitattributes",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "docs",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R16主审与独立取证完成；N01导航漂移已修；长期治理成本待证；用户未裁定",
+      "evidence": [
+        "R10-long-term-evolution-and-growth.md",
+        "R16-documents-development-and-public-claims.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "M45",
+      "title": "研究来源与验证声明",
+      "kind": "mechanism",
+      "review_facets": [
+        "R13",
+        "R15",
+        "R16"
+      ],
+      "sources": [
+        "S01",
+        "S03",
+        "S26",
+        "S70",
+        "S71"
+      ],
+      "current": "首版研究记录固定 Matt 来源及本地试用，并区分未测项。",
+      "comparison_question": "原始证据与研究结论是否可重建，权威与效果是否被混淆？",
+      "anchors": [
+        {
+          "path": "docs/reports/initial-validation.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "docs/reports/mattpocock-alignment.md",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R15综合主审与独立证据核对完成；13确认问题及2边界候选开放，整体/原生/真实人类/长期效果未验收",
+      "evidence": [
+        "R13-mattpocock-alignment.md",
+        "R16-documents-development-and-public-claims.md",
+        "R15-evidence-and-integration.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "C01",
+      "title": "首次任务到交付",
+      "kind": "composition",
+      "review_facets": [
+        "R01",
+        "R03",
+        "R04",
+        "R05"
+      ],
+      "sources": [
+        "S01",
+        "S23",
+        "S26",
+        "S40",
+        "S43",
+        "S48",
+        "S51",
+        "S52",
+        "S57"
+      ],
+      "current": "从提出任务到实际成果及回执的组合路径。",
+      "comparison_question": "初始化、准则、动作、检查与交付间是否存在缺口？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/SKILL.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R03三段实际模型/自然改稿/关键问答及独立复验完成；D01预算边界调度建议未修，原生/真人/长期效果待证",
+      "evidence": [
+        "R01-vision-and-claims.md",
+        "R04-protocol-and-recovery.md",
+        "R05-deliverables-and-evidence.md",
+        "R03-user-experience-and-guidance.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "C02",
+      "title": "要求变化到重新验收",
+      "kind": "composition",
+      "review_facets": [
+        "R03",
+        "R04",
+        "R05"
+      ],
+      "sources": [
+        "S12",
+        "S23",
+        "S26",
+        "S43",
+        "S48",
+        "S53",
+        "S57"
+      ],
+      "current": "转发用户变化并修订任务，旧审查按版本失效。",
+      "comparison_question": "改变要求与改变成果的两种版本是否协同？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.submit",
+          "line": 271
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R03三段实际模型/自然改稿/关键问答及独立复验完成；D01预算边界调度建议未修，原生/真人/长期效果待证",
+      "evidence": [
+        "R04-protocol-and-recovery.md",
+        "R05-deliverables-and-evidence.md",
+        "R03-user-experience-and-guidance.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "C03",
+      "title": "中断到恢复与迟到结果",
+      "kind": "composition",
+      "review_facets": [
+        "R03",
+        "R04",
+        "R14"
+      ],
+      "sources": [
+        "S21",
+        "S22",
+        "S24",
+        "S44",
+        "S57"
+      ],
+      "current": "重放、未决识别、结果核对及回执更新的组合路径。",
+      "comparison_question": "全链是否保持真实，用户需要多少排错能力？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R03三段实际模型/自然改稿/关键问答及独立复验完成；D01预算边界调度建议未修，原生/真人/长期效果待证",
+      "evidence": [
+        "R04-protocol-and-recovery.md",
+        "R14-authorization-data-and-security.md",
+        "R03-user-experience-and-guidance.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "C04",
+      "title": "经验到下一次任务收益",
+      "kind": "composition",
+      "review_facets": [
+        "R08",
+        "R09",
+        "R10"
+      ],
+      "sources": [
+        "S03",
+        "S23",
+        "S39",
+        "S43",
+        "S61",
+        "S62"
+      ],
+      "current": "反馈、维护、候选、验证、采用、检索和实际复用。",
+      "comparison_question": "各连接处是否可达、有效并避免旧事实污染？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.learning_task",
+          "line": 512
+        }
+      ],
+      "status": "pending formal review；R08 七对象八问及合成维护/新上下文迁移取证完成；真实学习收益、自然触发和人的进步待证；R09 14对象八问、变化修订与全新接收试验取证完成；R07-D01未修，长期成熟/语义覆盖/完整分享证据仍有限；R10 主审及补做独立复验取证完成；R10-D01版本准入时序MAJOR/P2未修、FDP子类型保留，长期效果/政策待证",
+      "evidence": [
+        "R08-learning-and-feedback.md",
+        "R09-workflows-reuse-and-sharing.md",
+        "R10-long-term-evolution-and-growth.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "C05",
+      "title": "发送到接收端独立使用",
+      "kind": "composition",
+      "review_facets": [
+        "R09",
+        "R12",
+        "R14"
+      ],
+      "sources": [
+        "S18",
+        "S26",
+        "S36",
+        "S35",
+        "S63"
+      ],
+      "current": "导出、传输、导入、当地验证与后续使用。",
+      "comparison_question": "缺发送端数据库、私有文件或工具时能否成立？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.export",
+          "line": 183
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.import_bundle",
+          "line": 186
+        }
+      ],
+      "status": "R12主审与独立取证完成；五布局同源/同版生命周期及Codex本机发现有限证据，D01及旧项开放，原生调用/跨平台/升级待证",
+      "evidence": [
+        "R14-authorization-data-and-security.md",
+        "R09-workflows-reuse-and-sharing.md",
+        "R12-distribution-and-host-use.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "C06",
+      "title": "公开源到多宿主安装与升级",
+      "kind": "composition",
+      "review_facets": [
+        "R11",
+        "R12",
+        "R16"
+      ],
+      "sources": [
+        "S01",
+        "S03",
+        "S04",
+        "S32",
+        "S65",
+        "S66",
+        "S67"
+      ],
+      "current": "仓库、安装器、目录、脚本、宿主及独立数据目录。",
+      "comparison_question": "安装、加载、行为及更新保留能否逐层对应？",
+      "anchors": [
+        {
+          "path": "README.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "dev/check_installation.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "dev/package_skill.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R16主审与独立取证完成；公开CI有据；原生业务/跨版本升级待证；用户未裁定",
+      "evidence": [
+        "R11-agent-skills-contracts.md",
+        "R12-distribution-and-host-use.md",
+        "R16-documents-development-and-public-claims.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "C07",
+      "title": "规模增长及外部能力替换",
+      "kind": "composition",
+      "review_facets": [
+        "R02",
+        "R07",
+        "R10"
+      ],
+      "sources": [
+        "S11",
+        "S23",
+        "S27",
+        "S39",
+        "S43",
+        "S58",
+        "S15",
+        "S64"
+      ],
+      "current": "任务、版本、资产和工具增长下的整体变化。",
+      "comparison_question": "成本曲线、检索质量与核心变更量如何？",
+      "anchors": [
+        {
+          "path": "governance.toml",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R07双臂短任务/多维规模与独立复验取证完成；D01 Unicode字面匹配未修，R02-D02增长补证，普遍净收益/语义/长期效果待证；R10 主审及补做独立复验取证完成；R10-D01版本准入时序MAJOR/P2未修、FDP子类型保留，长期效果/政策待证",
+      "evidence": [
+        "R02-core-architecture.md",
+        "R07-speed-and-economy.md",
+        "R10-long-term-evolution-and-growth.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "C08",
+      "title": "权限与副作用贯穿路径",
+      "kind": "composition",
+      "review_facets": [
+        "R04",
+        "R06",
+        "R14"
+      ],
+      "sources": [
+        "S17",
+        "S22",
+        "S35",
+        "S44",
+        "S49",
+        "S56"
+      ],
+      "current": "任务 effect、运行器动作与宿主权限共同约束工作。",
+      "comparison_question": "只读、内部登记、实际写入和对外发布是否被正确区分？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/references/host.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R14声明边界及局部权限/数据取证与独立复验完成；条件性D01扩展效果分类未修，模型抗注入/真实宿主/完整生命周期待后续",
+      "evidence": [
+        "R04-protocol-and-recovery.md",
+        "R06-deterministic-and-model-boundaries.md",
+        "R14-authorization-data-and-security.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "U01",
+      "title": "使用者思路进步的证据路径",
+      "kind": "requirement probe",
+      "review_facets": [
+        "R03",
+        "R08"
+      ],
+      "sources": [
+        "S03",
+        "S39",
+        "S40",
+        "S57",
+        "S61"
+      ],
+      "current": "愿景要求；当前没有已验证的长期行为证据。",
+      "comparison_question": "由哪些交互和记录证明用户逐渐更会表达与判断？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/SKILL.md",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R03三段实际模型/自然改稿/关键问答及独立复验完成；D01预算边界调度建议未修，原生/真人/长期效果待证；R08 七对象八问及合成维护/新上下文迁移取证完成；真实学习收益、自然触发和人的进步待证",
+      "evidence": [
+        "R03-user-experience-and-guidance.md",
+        "R08-learning-and-feedback.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "U02",
+      "title": "重复任务成熟与回流触发",
+      "kind": "requirement probe",
+      "review_facets": [
+        "R08",
+        "R09"
+      ],
+      "sources": [
+        "S03",
+        "S23",
+        "S39",
+        "S43",
+        "S61",
+        "S62"
+      ],
+      "current": "宿主可决定维护与采用；自动收敛程度待证。",
+      "comparison_question": "是否需要用户主动组织维护，何种证据可认定成熟？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.learning_task",
+          "line": 512
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "pending formal review；R08 七对象八问及合成维护/新上下文迁移取证完成；真实学习收益、自然触发和人的进步待证；R09 14对象八问、变化修订与全新接收试验取证完成；R07-D01未修，长期成熟/语义覆盖/完整分享证据仍有限",
+      "evidence": [
+        "R08-learning-and-feedback.md",
+        "R09-workflows-reuse-and-sharing.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "U03",
+      "title": "检索需求的语义覆盖",
+      "kind": "requirement probe",
+      "review_facets": [
+        "R07",
+        "R09"
+      ],
+      "sources": [
+        "S15",
+        "S28",
+        "S29",
+        "S30",
+        "S38",
+        "S60"
+      ],
+      "current": "当前是词项匹配；语义及跨措辞适用性待证。",
+      "comparison_question": "现有实现满足哪些实际任务，需要哪些成熟检索能力？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.search",
+          "line": 163
+        }
+      ],
+      "status": "R07双臂短任务/多维规模与独立复验取证完成；D01 Unicode字面匹配未修，R02-D02增长补证，普遍净收益/语义/长期效果待证；R09 14对象八问、变化修订与全新接收试验取证完成；R07-D01未修，长期成熟/语义覆盖/完整分享证据仍有限",
+      "evidence": [
+        "R07-speed-and-economy.md",
+        "R09-workflows-reuse-and-sharing.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "U04",
+      "title": "长期数据保留与版本演化",
+      "kind": "requirement probe",
+      "review_facets": [
+        "R04",
+        "R10"
+      ],
+      "sources": [
+        "S13",
+        "S23",
+        "S25",
+        "S31",
+        "S33",
+        "S43",
+        "S46",
+        "S64"
+      ],
+      "current": "初版拒绝未知存储版本；长期清理、迁移及备份策略待复核。",
+      "comparison_question": "在声明生命周期下如何保留、清理、升级并恢复？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R04 协议/恢复局部取证及独立复验完成；三组接口发现未修复，完整对象与 FDP 分型仍待后续处置；R10 主审及补做独立复验取证完成；R10-D01版本准入时序MAJOR/P2未修、FDP子类型保留，长期效果/政策待证",
+      "evidence": [
+        "R04-protocol-and-recovery.md",
+        "R10-long-term-evolution-and-growth.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "U05",
+      "title": "原生宿主及平台支持证据",
+      "kind": "requirement probe",
+      "review_facets": [
+        "R11",
+        "R12",
+        "R15"
+      ],
+      "sources": [
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S65",
+        "S66",
+        "S67",
+        "S70"
+      ],
+      "current": "已有安装与隔离运行，原生宿主的行为矩阵未完成。",
+      "comparison_question": "每类宿主、系统、调用方式和权限环境需要什么证据？",
+      "anchors": [
+        {
+          "path": "README.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "dev/check_installation.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R15综合主审与独立证据核对完成；13确认问题及2边界候选开放，整体/原生/真实人类/长期效果未验收",
+      "evidence": [
+        "R11-agent-skills-contracts.md",
+        "R12-distribution-and-host-use.md",
+        "R15-evidence-and-integration.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "U06",
+      "title": "审核者理解组织依据的能力",
+      "kind": "requirement probe",
+      "review_facets": [
+        "R05",
+        "R15"
+      ],
+      "sources": [
+        "S10",
+        "S26",
+        "S40",
+        "S51",
+        "S52",
+        "S70"
+      ],
+      "current": "已有目标、假设、调用及审查依据，实际重建成本待证。",
+      "comparison_question": "能否从成果和回执看懂组织取舍及逐项事实来源？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.inspect",
+          "line": 457
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.deliver",
+          "line": 477
+        }
+      ],
+      "status": "R15综合主审与独立证据核对完成；13确认问题及2边界候选开放，整体/原生/真实人类/长期效果未验收",
+      "evidence": [
+        "R05-deliverables-and-evidence.md",
+        "R15-evidence-and-integration.md"
+      ],
+      "decision": null
+    },
+    {
+      "id": "U07",
+      "title": "未知效果恢复的操作闭环",
+      "kind": "requirement probe",
+      "review_facets": [
+        "R03",
+        "R04",
+        "R14"
+      ],
+      "sources": [
+        "S21",
+        "S22",
+        "S24",
+        "S44",
+        "S57"
+      ],
+      "current": "当前阻断不确定结果的完整关闭；任意外部动作无自动核对。",
+      "comparison_question": "恢复责任、工具支持和人工负担是否符合可用目标？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.next",
+          "line": 402
+        },
+        {
+          "path": "skills/astrofairy/references/review.md",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "R03三段实际模型/自然改稿/关键问答及独立复验完成；D01预算边界调度建议未修，原生/真人/长期效果待证",
+      "evidence": [
+        "R04-protocol-and-recovery.md",
+        "R14-authorization-data-and-security.md",
+        "R03-user-experience-and-guidance.md"
+      ],
+      "decision": null
+    }
+  ],
+  "review_coverage": {
+    "R01": [
+      "A01",
+      "A09",
+      "C01"
+    ],
+    "R02": [
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "A07",
+      "A08",
+      "A09",
+      "M10",
+      "C07"
+    ],
+    "R03": [
+      "A01",
+      "M01",
+      "M03",
+      "M05",
+      "M08",
+      "M19",
+      "M25",
+      "M36",
+      "M41",
+      "C01",
+      "C02",
+      "C03",
+      "U01",
+      "U07"
+    ],
+    "R04": [
+      "A03",
+      "A04",
+      "M04",
+      "M05",
+      "M06",
+      "M07",
+      "M08",
+      "M09",
+      "M11",
+      "M12",
+      "M13",
+      "M17",
+      "M18",
+      "M19",
+      "M21",
+      "M22",
+      "M23",
+      "M24",
+      "M25",
+      "M31",
+      "M36",
+      "C01",
+      "C02",
+      "C03",
+      "C08",
+      "U04",
+      "U07"
+    ],
+    "R05": [
+      "A04",
+      "A05",
+      "M05",
+      "M07",
+      "M09",
+      "M12",
+      "M13",
+      "M14",
+      "M16",
+      "M17",
+      "M18",
+      "M20",
+      "M22",
+      "C01",
+      "C02",
+      "U06"
+    ],
+    "R06": [
+      "A02",
+      "A03",
+      "M02",
+      "M06",
+      "M09",
+      "M10",
+      "M11",
+      "M14",
+      "M15",
+      "M16",
+      "M34",
+      "M35",
+      "C08"
+    ],
+    "R07": [
+      "A08",
+      "M02",
+      "M15",
+      "M19",
+      "M20",
+      "M30",
+      "M35",
+      "C07",
+      "U03"
+    ],
+    "R08": [
+      "A06",
+      "M26",
+      "M27",
+      "M32",
+      "C04",
+      "U01",
+      "U02"
+    ],
+    "R09": [
+      "A06",
+      "M26",
+      "M27",
+      "M28",
+      "M29",
+      "M30",
+      "M31",
+      "M32",
+      "M33",
+      "M34",
+      "C04",
+      "C05",
+      "U02",
+      "U03"
+    ],
+    "R10": [
+      "A08",
+      "M21",
+      "M29",
+      "M35",
+      "M44",
+      "C04",
+      "C07",
+      "U04"
+    ],
+    "R11": [
+      "A07",
+      "M01",
+      "M02",
+      "M37",
+      "M38",
+      "M40",
+      "M41",
+      "C06",
+      "U05"
+    ],
+    "R12": [
+      "A07",
+      "M03",
+      "M04",
+      "M36",
+      "M37",
+      "M38",
+      "M39",
+      "M40",
+      "M43",
+      "C05",
+      "C06",
+      "U05"
+    ],
+    "R13": [
+      "M45"
+    ],
+    "R14": [
+      "A02",
+      "A05",
+      "M04",
+      "M11",
+      "M12",
+      "M15",
+      "M21",
+      "M22",
+      "M23",
+      "M24",
+      "M28",
+      "M33",
+      "M34",
+      "C03",
+      "C05",
+      "C08",
+      "U07"
+    ],
+    "R15": [
+      "A09",
+      "M42",
+      "M43",
+      "M45",
+      "U05",
+      "U06"
+    ],
+    "R16": [
+      "M39",
+      "M42",
+      "M43",
+      "M44",
+      "M45",
+      "C06"
+    ]
+  },
+  "baseline_files": [
+    {
+      "path": ".claude-plugin/marketplace.json",
+      "sha256": "80dbe631f2b5dd42f19421f8df0636d268aba7ecb3013f9c1fde428874b0c8f2",
+      "objects": [
+        "M40"
+      ],
+      "symbols": []
+    },
+    {
+      "path": ".claude-plugin/plugin.json",
+      "sha256": "7b70bec57845dc5c441386cecfaa549b8fc282044d0234cb10433d8bc2a3ed9c",
+      "objects": [
+        "M40"
+      ],
+      "symbols": []
+    },
+    {
+      "path": ".gitattributes",
+      "sha256": "d60f352d0db1404c70afb4bb8b2ca3fd1c610572aa40720e8a0b7baa7885418c",
+      "objects": [
+        "M44"
+      ],
+      "symbols": []
+    },
+    {
+      "path": ".githooks/pre-commit",
+      "sha256": "adcbb77ed38b1acc6d1936b9f4f20b7f0dd48242f34b9bcdf41a7a56ec60ad52",
+      "objects": [
+        "M43"
+      ],
+      "symbols": []
+    },
+    {
+      "path": ".github/workflows/check.yml",
+      "sha256": "38f0d9b9e2a279e68a8c239341b8290416224da07746a963ff64e78842a2e1df",
+      "objects": [
+        "M43"
+      ],
+      "symbols": []
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "6a89bd9f1cb869547392588978e7414b4822a7cf5db736eb998fc76237f6863f",
+      "objects": [
+        "M44"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "70f2b7e5c8afab2e7db046f926c87e280589c72aad24404b2c6b13b487d3f182",
+      "objects": [
+        "M44"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "e915b4040942f018b4e1086f236e9ef4a56181cdfe02c484d277f4389ba66018",
+      "objects": [
+        "M39"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "MANIFEST.in",
+      "sha256": "bfb923199193fd527cf792c29fc8888335df9cf68631b6a234f9057ec5128537",
+      "objects": [
+        "M39"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "README.md",
+      "sha256": "7e6a34ddbe1e68cec7f771c5e883abfbd2087ce0d0bad8c578409d070aa8cfd5",
+      "objects": [
+        "M44"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "README.zh-CN.md",
+      "sha256": "e886e922cf2b8e6b5f390ed5e79c39da6f33bb1b1eba2cfff8f9a9cd0bafa9e3",
+      "objects": [
+        "M44"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "dev/__init__.py",
+      "sha256": "5384bfdb2df380b6557cc7a71d16891415bccaa87699406e236f752c6415389f",
+      "objects": [
+        "M42"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "dev/check.py",
+      "sha256": "608f6342570edb647713992da657df731096cd94d7c838426ac0d45ba147b276",
+      "objects": [
+        "M35",
+        "M42"
+      ],
+      "symbols": [
+        {
+          "name": "project_files",
+          "line": 28,
+          "end_line": 35
+        },
+        {
+          "name": "structural_checks",
+          "line": 38,
+          "end_line": 78
+        },
+        {
+          "name": "main",
+          "line": 81,
+          "end_line": 97
+        }
+      ]
+    },
+    {
+      "path": "dev/check_installation.py",
+      "sha256": "a302acb671f43a0cb07a1525fd2390b21c251652f341abc641e5962dd71a2f82",
+      "objects": [
+        "M42"
+      ],
+      "symbols": [
+        {
+          "name": "run",
+          "line": 17,
+          "end_line": 29
+        },
+        {
+          "name": "probe",
+          "line": 32,
+          "end_line": 99
+        },
+        {
+          "name": "probe.submit",
+          "line": 67,
+          "end_line": 68
+        },
+        {
+          "name": "main",
+          "line": 102,
+          "end_line": 130
+        }
+      ]
+    },
+    {
+      "path": "dev/package_skill.py",
+      "sha256": "613ee0f8a708860104635cbb672b7d43774547e34cec1e29fb22d623d33431fc",
+      "objects": [
+        "M38"
+      ],
+      "symbols": [
+        {
+          "name": "package",
+          "line": 10,
+          "end_line": 25
+        },
+        {
+          "name": "main",
+          "line": 28,
+          "end_line": 32
+        }
+      ]
+    },
+    {
+      "path": "dev/sync_metadata.py",
+      "sha256": "bcdc1efc1d021b477dc6ab85f6906968875e0a12ef6ab37d4fd13e4c10324be8",
+      "objects": [
+        "M39"
+      ],
+      "symbols": [
+        {
+          "name": "render",
+          "line": 13,
+          "end_line": 53
+        },
+        {
+          "name": "sync",
+          "line": 56,
+          "end_line": 65
+        },
+        {
+          "name": "main",
+          "line": 68,
+          "end_line": 79
+        }
+      ]
+    },
+    {
+      "path": "dev/tests/__init__.py",
+      "sha256": "5384bfdb2df380b6557cc7a71d16891415bccaa87699406e236f752c6415389f",
+      "objects": [
+        "M42"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "dev/tests/test_metadata.py",
+      "sha256": "20461f87d210b2dc7352a431f2c87fbb1d7501bbaff0bd09b4fba8f9e702f402",
+      "objects": [
+        "M42"
+      ],
+      "symbols": [
+        {
+          "name": "MetadataTests",
+          "line": 12,
+          "end_line": 30
+        },
+        {
+          "name": "MetadataTests.test_version_change_is_detected_without_mutating_manifests",
+          "line": 13,
+          "end_line": 30
+        }
+      ]
+    },
+    {
+      "path": "dev/tests/test_package_skill.py",
+      "sha256": "95fbadd09a6fbda07a478b9318bb9504bfd24a37455ae4dbe9c35fc3caca0fec",
+      "objects": [
+        "M42"
+      ],
+      "symbols": [
+        {
+          "name": "DistributionTests",
+          "line": 15,
+          "end_line": 80
+        },
+        {
+          "name": "DistributionTests.test_source_skill_copy_runs_without_parent_checkout",
+          "line": 16,
+          "end_line": 45
+        },
+        {
+          "name": "DistributionTests.test_packaged_skill_runs_without_checkout_or_installed_package",
+          "line": 47,
+          "end_line": 80
+        }
+      ]
+    },
+    {
+      "path": "docs/adr/0001-small-workshop.md",
+      "sha256": "5801a046f3446e14e035e3bb89c284e3ae8ab39511586515eda5b4d3f627c288",
+      "objects": [
+        "M44"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "docs/adr/0002-portable-standard-skill.md",
+      "sha256": "f0a2df1e17fc24ed44181c236bbfce8193cd3f36362ea3bc5365fb69e891a579",
+      "objects": [
+        "M44"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "docs/guides/architecture.md",
+      "sha256": "e66a8c3911c87e705a85e81be38358edd256f0b45e31fff1a16b5f70cfd51c69",
+      "objects": [
+        "M44"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "docs/guides/operation.md",
+      "sha256": "a7fb2470e8f0937a8ab71146d73d4cb01438e80ebc81b36e758c28d9702ae6d7",
+      "objects": [
+        "M44"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "docs/reports/initial-validation.md",
+      "sha256": "37a2ec1ef8b0261752bb74e8db65b132d10d4b9e79faae35707c9481229d4811",
+      "objects": [
+        "M44",
+        "M45"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "docs/reports/mattpocock-alignment.md",
+      "sha256": "d87cfe31612bf978dd7314b56a73eb3f74be889832465fb90863b16f42710600",
+      "objects": [
+        "M44",
+        "M45"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "governance.toml",
+      "sha256": "b6aecaefd6bdec6b5f816086d8b4ac9f7e58b44b79503d9209b7dc4dad1bc3b9",
+      "objects": [
+        "M35"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "9b85fd22562607eaf5abe03813164aa4c6e0568494e6481125b765d464b3e277",
+      "objects": [
+        "M37"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "requirements-dev.lock",
+      "sha256": "c79fc0f63d25dd3bcbc88ccac70eeb127248545d8e89fb4a72f6d9a7932ba1ba",
+      "objects": [
+        "M42"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "skills/astrofairy/LICENSE",
+      "sha256": "e915b4040942f018b4e1086f236e9ef4a56181cdfe02c484d277f4389ba66018",
+      "objects": [
+        "M39"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "skills/astrofairy/SKILL.md",
+      "sha256": "3fe583def836924c6ae12133f0334bfaa16619ad0a310fb7c8df77075566cc76",
+      "objects": [
+        "M01",
+        "M02"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "skills/astrofairy/agents/openai.yaml",
+      "sha256": "6c302c6502e20019cad83fd08b8d47744bce166ad66ee6ebb06f146556fbf4bb",
+      "objects": [
+        "M41"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "skills/astrofairy/references/host.md",
+      "sha256": "398c3a65e20b94a13e00dbe75d5f78a6932f9cda5fac28a321d13f90b7633258",
+      "objects": [
+        "M02"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "skills/astrofairy/references/learning.md",
+      "sha256": "c6714f9f4073503937058e0db6f0a7dd1543d7df24f72a9bcee1f3d9912917f4",
+      "objects": [
+        "M34"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "skills/astrofairy/references/review.md",
+      "sha256": "6e8aec3d1d3adc5911a6d34905ded90c487b463564afec62d1d78f591c20fada",
+      "objects": [
+        "M25"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "skills/astrofairy/scripts/astrofairy/__init__.py",
+      "sha256": "62bbf9239df78836fb2be69815441fbf2bbdb824acc06cc61a6a7b21982015a0",
+      "objects": [
+        "M37"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "skills/astrofairy/scripts/astrofairy/__main__.py",
+      "sha256": "db51a12d73fb365cc546905883ebbae3607a0a4aa31c5a31840e487dc8892b57",
+      "objects": [
+        "M36"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+      "sha256": "b9673747df0768ae6154ccd5380e0a5ee7262f1190aa3aecfbe020e3f4bd5fea",
+      "objects": [
+        "M10",
+        "M14",
+        "M15",
+        "M16",
+        "M24",
+        "M30",
+        "M31"
+      ],
+      "symbols": [
+        {
+          "name": "Context",
+          "line": 29,
+          "end_line": 47
+        },
+        {
+          "name": "Context.path",
+          "line": 33,
+          "end_line": 38
+        },
+        {
+          "name": "Context.content",
+          "line": 40,
+          "end_line": 47
+        },
+        {
+          "name": "Capability",
+          "line": 51,
+          "end_line": 55
+        },
+        {
+          "name": "atomic_write",
+          "line": 58,
+          "end_line": 68
+        },
+        {
+          "name": "_write",
+          "line": 71,
+          "end_line": 77
+        },
+        {
+          "name": "_capture",
+          "line": 80,
+          "end_line": 98
+        },
+        {
+          "name": "_read",
+          "line": 101,
+          "end_line": 109
+        },
+        {
+          "name": "_search",
+          "line": 112,
+          "end_line": 117
+        },
+        {
+          "name": "_asset",
+          "line": 120,
+          "end_line": 134
+        },
+        {
+          "name": "check_content",
+          "line": 137,
+          "end_line": 153
+        },
+        {
+          "name": "_check",
+          "line": 156,
+          "end_line": 163
+        },
+        {
+          "name": "builtins",
+          "line": 166,
+          "end_line": 174
+        }
+      ]
+    },
+    {
+      "path": "skills/astrofairy/scripts/astrofairy/_cli.py",
+      "sha256": "703122eb91be1f0a23c04aff48c9588121106d167618f41d343dace98ad701be",
+      "objects": [
+        "M03",
+        "M36"
+      ],
+      "symbols": [
+        {
+          "name": "_input",
+          "line": 22,
+          "end_line": 30
+        },
+        {
+          "name": "_parser",
+          "line": 33,
+          "end_line": 76
+        },
+        {
+          "name": "_run",
+          "line": 79,
+          "end_line": 159
+        },
+        {
+          "name": "main",
+          "line": 162,
+          "end_line": 183
+        }
+      ]
+    },
+    {
+      "path": "skills/astrofairy/scripts/astrofairy/_contracts.py",
+      "sha256": "9a4a2333632fb10efbb6db9bb886e4e8bc6faeb5889fd1651baa4c85b1e40e87",
+      "objects": [
+        "M06",
+        "M07",
+        "M23",
+        "M35"
+      ],
+      "symbols": [
+        {
+          "name": "canonical",
+          "line": 34,
+          "end_line": 40
+        },
+        {
+          "name": "digest",
+          "line": 43,
+          "end_line": 44
+        },
+        {
+          "name": "_pairs",
+          "line": 47,
+          "end_line": 53
+        },
+        {
+          "name": "parse_json",
+          "line": 56,
+          "end_line": 62
+        },
+        {
+          "name": "object_value",
+          "line": 65,
+          "end_line": 68
+        },
+        {
+          "name": "text_value",
+          "line": 71,
+          "end_line": 74
+        },
+        {
+          "name": "file_name",
+          "line": 77,
+          "end_line": 81
+        },
+        {
+          "name": "strings",
+          "line": 84,
+          "end_line": 87
+        },
+        {
+          "name": "integer",
+          "line": 90,
+          "end_line": 93
+        },
+        {
+          "name": "criteria_value",
+          "line": 96,
+          "end_line": 131
+        },
+        {
+          "name": "command_value",
+          "line": 134,
+          "end_line": 146
+        },
+        {
+          "name": "schema",
+          "line": 149,
+          "end_line": 158
+        }
+      ]
+    },
+    {
+      "path": "skills/astrofairy/scripts/astrofairy/_errors.py",
+      "sha256": "5d02d64dfb2c990aa0376f96456e0e0e8fc1c275b03086c46ff43f524f7463a7",
+      "objects": [
+        "M36"
+      ],
+      "symbols": [
+        {
+          "name": "FairyError",
+          "line": 4,
+          "end_line": 10
+        },
+        {
+          "name": "FairyError.__init__",
+          "line": 5,
+          "end_line": 7
+        },
+        {
+          "name": "FairyError.as_dict",
+          "line": 9,
+          "end_line": 10
+        }
+      ]
+    },
+    {
+      "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+      "sha256": "905353bcd5da9d11371f3f2077980383dab1d0c37dd7f34e80fe789ba387574b",
+      "objects": [
+        "M08",
+        "M11",
+        "M13",
+        "M17",
+        "M18",
+        "M22",
+        "M25"
+      ],
+      "symbols": [
+        {
+          "name": "State",
+          "line": 11,
+          "end_line": 60
+        },
+        {
+          "name": "State.artifact",
+          "line": 27,
+          "end_line": 28
+        },
+        {
+          "name": "State.active_reviews",
+          "line": 30,
+          "end_line": 40
+        },
+        {
+          "name": "State.issues",
+          "line": 42,
+          "end_line": 49
+        },
+        {
+          "name": "State.complete",
+          "line": 51,
+          "end_line": 57
+        },
+        {
+          "name": "State.budget_left",
+          "line": 59,
+          "end_line": 60
+        },
+        {
+          "name": "replay",
+          "line": 63,
+          "end_line": 96
+        },
+        {
+          "name": "admit_call",
+          "line": 99,
+          "end_line": 109
+        },
+        {
+          "name": "require_open",
+          "line": 112,
+          "end_line": 114
+        },
+        {
+          "name": "admit_review",
+          "line": 117,
+          "end_line": 137
+        },
+        {
+          "name": "admit_question",
+          "line": 140,
+          "end_line": 143
+        },
+        {
+          "name": "admit_close",
+          "line": 146,
+          "end_line": 153
+        }
+      ]
+    },
+    {
+      "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+      "sha256": "f53de0f2d1ab6fc5687aa652696a9b4160a301e23578ce5072b73cb50d4375fb",
+      "objects": [
+        "M26",
+        "M27",
+        "M28",
+        "M29",
+        "M30",
+        "M33",
+        "M34"
+      ],
+      "symbols": [
+        {
+          "name": "validation_criteria",
+          "line": 24,
+          "end_line": 45
+        },
+        {
+          "name": "Library",
+          "line": 48,
+          "end_line": 210
+        },
+        {
+          "name": "Library.__init__",
+          "line": 49,
+          "end_line": 50
+        },
+        {
+          "name": "Library.status",
+          "line": 52,
+          "end_line": 58
+        },
+        {
+          "name": "Library.head",
+          "line": 60,
+          "end_line": 68
+        },
+        {
+          "name": "Library.get",
+          "line": 70,
+          "end_line": 74
+        },
+        {
+          "name": "Library.propose",
+          "line": 76,
+          "end_line": 128
+        },
+        {
+          "name": "Library._event",
+          "line": 130,
+          "end_line": 135
+        },
+        {
+          "name": "Library.adopt",
+          "line": 137,
+          "end_line": 156
+        },
+        {
+          "name": "Library.retire",
+          "line": 158,
+          "end_line": 161
+        },
+        {
+          "name": "Library.search",
+          "line": 163,
+          "end_line": 181
+        },
+        {
+          "name": "Library.export",
+          "line": 183,
+          "end_line": 184
+        },
+        {
+          "name": "Library.import_bundle",
+          "line": 186,
+          "end_line": 210
+        }
+      ]
+    },
+    {
+      "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+      "sha256": "c20b0588d02dac72238f381ed75b61c2b86f91614d04c9a0ef53edde26dc7129",
+      "objects": [
+        "M04",
+        "M05",
+        "M07",
+        "M08",
+        "M09",
+        "M10",
+        "M12",
+        "M13",
+        "M16",
+        "M17",
+        "M19",
+        "M20",
+        "M22",
+        "M25",
+        "M27",
+        "M31",
+        "M32"
+      ],
+      "symbols": [
+        {
+          "name": "Workshop",
+          "line": 35,
+          "end_line": 541
+        },
+        {
+          "name": "Workshop.__init__",
+          "line": 36,
+          "end_line": 39
+        },
+        {
+          "name": "Workshop.__enter__",
+          "line": 41,
+          "end_line": 42
+        },
+        {
+          "name": "Workshop.__exit__",
+          "line": 44,
+          "end_line": 45
+        },
+        {
+          "name": "Workshop.state",
+          "line": 47,
+          "end_line": 48
+        },
+        {
+          "name": "Workshop._start",
+          "line": 50,
+          "end_line": 68
+        },
+        {
+          "name": "Workshop.start",
+          "line": 70,
+          "end_line": 102
+        },
+        {
+          "name": "Workshop._append",
+          "line": 104,
+          "end_line": 105
+        },
+        {
+          "name": "Workshop._known_outputs",
+          "line": 107,
+          "end_line": 108
+        },
+        {
+          "name": "Workshop._request",
+          "line": 110,
+          "end_line": 131
+        },
+        {
+          "name": "Workshop.invoke",
+          "line": 133,
+          "end_line": 195
+        },
+        {
+          "name": "Workshop._review",
+          "line": 197,
+          "end_line": 219
+        },
+        {
+          "name": "Workshop.check",
+          "line": 221,
+          "end_line": 269
+        },
+        {
+          "name": "Workshop.submit",
+          "line": 271,
+          "end_line": 400
+        },
+        {
+          "name": "Workshop.next",
+          "line": 402,
+          "end_line": 438
+        },
+        {
+          "name": "Workshop.catalog",
+          "line": 440,
+          "end_line": 455
+        },
+        {
+          "name": "Workshop.inspect",
+          "line": 457,
+          "end_line": 475
+        },
+        {
+          "name": "Workshop.deliver",
+          "line": 477,
+          "end_line": 498
+        },
+        {
+          "name": "Workshop.validation_task",
+          "line": 500,
+          "end_line": 510
+        },
+        {
+          "name": "Workshop.learning_task",
+          "line": 512,
+          "end_line": 541
+        }
+      ]
+    },
+    {
+      "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+      "sha256": "b0bbd84d62c61a9722580c4960d1052e6e95c5f3914a1a2c02d09b39a43b26b5",
+      "objects": [
+        "M04",
+        "M21",
+        "M22",
+        "M23"
+      ],
+      "symbols": [
+        {
+          "name": "Store",
+          "line": 16,
+          "end_line": 126
+        },
+        {
+          "name": "Store.__init__",
+          "line": 17,
+          "end_line": 47
+        },
+        {
+          "name": "Store.close",
+          "line": 49,
+          "end_line": 50
+        },
+        {
+          "name": "Store.transaction",
+          "line": 53,
+          "end_line": 60
+        },
+        {
+          "name": "Store.put",
+          "line": 62,
+          "end_line": 67
+        },
+        {
+          "name": "Store.get",
+          "line": 69,
+          "end_line": 76
+        },
+        {
+          "name": "Store.events",
+          "line": 78,
+          "end_line": 95
+        },
+        {
+          "name": "Store.append",
+          "line": 97,
+          "end_line": 123
+        },
+        {
+          "name": "Store.tasks",
+          "line": 125,
+          "end_line": 126
+        }
+      ]
+    },
+    {
+      "path": "skills/astrofairy/scripts/astrofairy/_version.py",
+      "sha256": "8f40adbb650e4a26d4484781ee1ecb973cb786e191678d1858163839dc61162e",
+      "objects": [
+        "M37"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "skills/astrofairy/scripts/astrofairy/tests/__init__.py",
+      "sha256": "5384bfdb2df380b6557cc7a71d16891415bccaa87699406e236f752c6415389f",
+      "objects": [
+        "M42"
+      ],
+      "symbols": []
+    },
+    {
+      "path": "skills/astrofairy/scripts/astrofairy/tests/_support.py",
+      "sha256": "4a09475be5bf55e10891dcf59b89f605bff740a0785515ea3939120fc3491417",
+      "objects": [
+        "M42"
+      ],
+      "symbols": [
+        {
+          "name": "WorkshopTest",
+          "line": 13,
+          "end_line": 56
+        },
+        {
+          "name": "WorkshopTest.setUp",
+          "line": 14,
+          "end_line": 21
+        },
+        {
+          "name": "WorkshopTest.produce",
+          "line": 23,
+          "end_line": 28
+        },
+        {
+          "name": "WorkshopTest.semantic",
+          "line": 30,
+          "end_line": 40
+        },
+        {
+          "name": "WorkshopTest.finish",
+          "line": 42,
+          "end_line": 45
+        },
+        {
+          "name": "WorkshopTest.proposal",
+          "line": 47,
+          "end_line": 56
+        }
+      ]
+    },
+    {
+      "path": "skills/astrofairy/scripts/astrofairy/tests/test_cli.py",
+      "sha256": "23a05d3e617fdbb8c826b902ca7b495c80905674c2aebb681cee53099948d41c",
+      "objects": [
+        "M42"
+      ],
+      "symbols": [
+        {
+          "name": "CliTests",
+          "line": 11,
+          "end_line": 87
+        },
+        {
+          "name": "CliTests.test_doctor_rejects_a_file_in_the_data_directory_path",
+          "line": 12,
+          "end_line": 25
+        },
+        {
+          "name": "CliTests.test_doctor_checks_environment_without_creating_state",
+          "line": 27,
+          "end_line": 39
+        },
+        {
+          "name": "CliTests.test_failed_invocation_has_nonzero_status_and_keeps_receipt",
+          "line": 41,
+          "end_line": 49
+        },
+        {
+          "name": "CliTests.cli",
+          "line": 51,
+          "end_line": 60
+        },
+        {
+          "name": "CliTests.test_request_with_shell_syntax_is_plain_data",
+          "line": 62,
+          "end_line": 67
+        },
+        {
+          "name": "CliTests.test_json_submission_errors_have_nonzero_status",
+          "line": 69,
+          "end_line": 73
+        },
+        {
+          "name": "CliTests.test_schema_is_available_without_creating_home",
+          "line": 75,
+          "end_line": 87
+        }
+      ]
+    },
+    {
+      "path": "skills/astrofairy/scripts/astrofairy/tests/test_library.py",
+      "sha256": "c9d7717bbd15350f6a7f6a6ab006eed7f702546d3e8e4923f6ea17a6959019a5",
+      "objects": [
+        "M42"
+      ],
+      "symbols": [
+        {
+          "name": "LibraryTests",
+          "line": 8,
+          "end_line": 132
+        },
+        {
+          "name": "LibraryTests.test_adoption_policy_cannot_be_weakened_by_strategy",
+          "line": 9,
+          "end_line": 24
+        },
+        {
+          "name": "LibraryTests.test_large_manual_is_pinned_then_read_in_bounded_parts",
+          "line": 26,
+          "end_line": 33
+        },
+        {
+          "name": "LibraryTests.validated",
+          "line": 35,
+          "end_line": 38
+        },
+        {
+          "name": "LibraryTests.test_candidate_excluded_until_exact_validation_and_adoption",
+          "line": 40,
+          "end_line": 45
+        },
+        {
+          "name": "LibraryTests.test_different_completed_task_cannot_validate_candidate",
+          "line": 47,
+          "end_line": 53
+        },
+        {
+          "name": "LibraryTests.test_failed_validation_does_not_activate_asset",
+          "line": 55,
+          "end_line": 61
+        },
+        {
+          "name": "LibraryTests.test_stale_base_rejects_overwriting_concurrent_improvement",
+          "line": 63,
+          "end_line": 73
+        },
+        {
+          "name": "LibraryTests.test_pin_survives_update_and_retirement",
+          "line": 75,
+          "end_line": 85
+        },
+        {
+          "name": "LibraryTests.test_share_bundle_is_data_and_requires_local_validation",
+          "line": 87,
+          "end_line": 98
+        },
+        {
+          "name": "LibraryTests.test_tampered_bundle_rejected",
+          "line": 100,
+          "end_line": 106
+        },
+        {
+          "name": "LibraryTests.test_workflow_needs_completion_conditions",
+          "line": 108,
+          "end_line": 111
+        },
+        {
+          "name": "LibraryTests.test_positive_feedback_enters_separate_learning_task",
+          "line": 113,
+          "end_line": 124
+        },
+        {
+          "name": "LibraryTests.test_namespace_search_and_limit",
+          "line": 126,
+          "end_line": 132
+        }
+      ]
+    },
+    {
+      "path": "skills/astrofairy/scripts/astrofairy/tests/test_workshop.py",
+      "sha256": "6fdc47763fb9fbc768ee557d6ab60b65fc42230f8b00e52f654adbf391cbc194",
+      "objects": [
+        "M42"
+      ],
+      "symbols": [
+        {
+          "name": "TaskTests",
+          "line": 13,
+          "end_line": 291
+        },
+        {
+          "name": "TaskTests.test_feedback_refreshes_closed_delivery_receipt",
+          "line": 14,
+          "end_line": 21
+        },
+        {
+          "name": "TaskTests.test_new_task_workspace_exists_for_host_tools",
+          "line": 23,
+          "end_line": 25
+        },
+        {
+          "name": "TaskTests.test_capture_infers_media_type_without_claiming_content_validity",
+          "line": 27,
+          "end_line": 32
+        },
+        {
+          "name": "TaskTests.test_unknown_capability_fields_reject_before_invocation",
+          "line": 34,
+          "end_line": 38
+        },
+        {
+          "name": "TaskTests.test_capability_discovery_does_not_load_whole_catalog",
+          "line": 40,
+          "end_line": 51
+        },
+        {
+          "name": "TaskTests.test_bad_output_name_does_not_close_or_consume_request",
+          "line": 53,
+          "end_line": 60
+        },
+        {
+          "name": "TaskTests.test_complete_delivery_has_actual_bytes_and_provenance",
+          "line": 62,
+          "end_line": 76
+        },
+        {
+          "name": "TaskTests.test_real_file_tool_runs_and_capture_preserves_binary_bytes",
+          "line": 78,
+          "end_line": 95
+        },
+        {
+          "name": "TaskTests.test_read_only_scope_blocks_write_before_call_and_charge",
+          "line": 97,
+          "end_line": 104
+        },
+        {
+          "name": "TaskTests.test_path_traversal_does_not_write_outside_workspace",
+          "line": 106,
+          "end_line": 110
+        },
+        {
+          "name": "TaskTests.test_inputs_are_snapshots_and_reads_are_bounded",
+          "line": 112,
+          "end_line": 120
+        },
+        {
+          "name": "TaskTests.test_model_cannot_forge_tool_review_or_observation",
+          "line": 122,
+          "end_line": 128
+        },
+        {
+          "name": "TaskTests.test_conflicting_pass_does_not_erase_fail",
+          "line": 130,
+          "end_line": 142
+        },
+        {
+          "name": "TaskTests.test_repair_requires_new_checks",
+          "line": 144,
+          "end_line": 151
+        },
+        {
+          "name": "TaskTests.test_goal_revision_preserves_but_invalidates_checks",
+          "line": 153,
+          "end_line": 169
+        },
+        {
+          "name": "TaskTests.test_explicit_requirements_need_forwarded_user_change",
+          "line": 171,
+          "end_line": 181
+        },
+        {
+          "name": "TaskTests.test_unknown_write_is_not_blindly_retried",
+          "line": 183,
+          "end_line": 193
+        },
+        {
+          "name": "TaskTests.test_unknown_write_is_not_blindly_retried.uncertain",
+          "line": 184,
+          "end_line": 185
+        },
+        {
+          "name": "TaskTests.test_budget_exhaustion_allows_honest_partial_delivery",
+          "line": 195,
+          "end_line": 203
+        },
+        {
+          "name": "TaskTests.test_closed_task_retains_late_report_and_feedback",
+          "line": 205,
+          "end_line": 215
+        },
+        {
+          "name": "TaskTests.test_pending_work_survives_reopen",
+          "line": 217,
+          "end_line": 223
+        },
+        {
+          "name": "TaskTests.test_stale_submission_rejects_without_mutation",
+          "line": 225,
+          "end_line": 233
+        },
+        {
+          "name": "TaskTests.test_content_and_event_corruption_are_detected",
+          "line": 235,
+          "end_line": 245
+        },
+        {
+          "name": "TaskTests.test_duplicate_keys_nonfinite_and_unknown_fields_fail",
+          "line": 247,
+          "end_line": 255
+        },
+        {
+          "name": "TaskTests.test_question_budget_and_spontaneous_steering",
+          "line": 257,
+          "end_line": 265
+        },
+        {
+          "name": "TaskTests.test_new_capability_requires_no_kernel_change",
+          "line": 267,
+          "end_line": 272
+        },
+        {
+          "name": "TaskTests.test_check_cannot_approve_artifact_changed_during_call",
+          "line": 274,
+          "end_line": 291
+        },
+        {
+          "name": "TaskTests.test_check_cannot_approve_artifact_changed_during_call.changing",
+          "line": 280,
+          "end_line": 283
+        }
+      ]
+    },
+    {
+      "path": "skills/astrofairy/scripts/fairy.py",
+      "sha256": "5217b70eaa4b2139e3d170ac03010153da340fbe9d26d2e1d3e8dcd7c9491e71",
+      "objects": [
+        "M37"
+      ],
+      "symbols": []
+    }
+  ],
+  "coverage_limit": "File and symbol registration is an omission detector, not proof of semantic completeness. Requirement probes and independent scope review remain mandatory.",
+  "baseline_manifest_sha256": "66ef38fe84f0d2260d2a0c6d8b274d5b5d440a6a82447c03162fe8258a10f267",
+  "mandatory_steps": [
+    "Q01",
+    "Q02",
+    "Q03",
+    "Q04",
+    "Q05",
+    "Q06",
+    "Q07",
+    "Q08"
+  ]
+}

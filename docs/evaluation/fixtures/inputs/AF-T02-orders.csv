@@ -1,0 +1,7 @@
+order_id,qty,unit_price,status
+B1,2,110,paid
+B2,5,45,paid
+B2,5,45,paid
+B3,3,80,paid
+B4,1,100,refunded
+B5,,90,paid

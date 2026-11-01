@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from astrofairy import FairyError
 from astrofairy._contracts import canonical, parse_json
+from astrofairy._presentation import read_document
 from astrofairy.tests._support import WorkshopTest
 
 
@@ -119,7 +120,9 @@ class LibraryTests(WorkshopTest):
         )
         maintenance = self.workshop.submit(task, {"op": "learn"})["learning_task"]
         data = self.workshop.store.get(self.workshop.state(maintenance).inputs[0]["ref"])
-        self.assertIn(b"positive", data)
+        locator = parse_json(data.decode())
+        snapshot = read_document(self.home, locator["document"], task=task, pointer="/feedback/0")
+        self.assertEqual(parse_json(snapshot["text"])["kind"], "positive")
         self.workshop.submit(maintenance, {"op": "close", "outcome": "failed"})
         self.assertEqual(self.workshop.state(task).outcome, "complete")
 

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import ast
+import fnmatch
 import os
 import re
 import subprocess
@@ -53,7 +54,7 @@ def structural_checks() -> list[str]:
     errors.extend(
         f"Declared test surface is missing or empty: {surface.relative_to(ROOT)}"
         for surface in surfaces
-        if not surface.is_dir() or not list(surface.glob("test_*.py"))
+        if not surface.is_dir() or not list(surface.rglob(config["tests"]["pattern"]))
     )
     for path in project_files():
         if path.suffix == ".py":
@@ -61,7 +62,7 @@ def structural_checks() -> list[str]:
             ast.parse(source, filename=str(path))
             if re.search(r"#\s*type:\s*ignore\s*(?:$|#)", source, re.MULTILINE):
                 errors.append(f"Bare typing suppression: {path.relative_to(ROOT)}")
-            if path.name.startswith("test_") and not any(
+            if fnmatch.fnmatchcase(path.name, config["tests"]["pattern"]) and not any(
                 path.is_relative_to(surface) for surface in surfaces
             ):
                 errors.append(f"Unregistered test: {path.relative_to(ROOT)}")
@@ -86,7 +87,7 @@ def main() -> int:
         return 1
     config = tomllib.loads((ROOT / "governance.toml").read_text(encoding="utf-8"))
     commands = [
-        ["-m", "unittest", "discover", "-s", surface["path"], "-t", surface["top"], "-v"]
+        ["-m", "dev.run_tests", surface["path"], surface["top"], config["tests"]["pattern"]]
         for surface in config["tests"]["surfaces"]
     ] + config["checks"]["commands"]
     for arguments in commands:

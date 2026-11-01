@@ -15,10 +15,13 @@ from astrofairy._contracts import (
 from astrofairy._errors import FairyError
 from astrofairy._kernel import replay
 
+ASSET_STATES = frozenset({"candidate", "trial", "stable", "retired"})
+
 if TYPE_CHECKING:
     from astrofairy._store import Store
 
 KINDS = {"workflow", "guide", "profile", "case", "constraint", "tool-spec"}
+MAX_SEARCH_RESULTS = 10
 
 
 def validation_criteria() -> list[dict[str, Any]]:
@@ -161,23 +164,24 @@ class Library:
             self._event(ref, "retired", None)
 
     def search(self, query: str, limit: int = 3, scope: str | None = None) -> list[dict[str, Any]]:
-        if not 1 <= limit <= 10:
+        if type(limit) is not int or not 1 <= limit <= MAX_SEARCH_RESULTS:
             raise FairyError("limit", "Asset search limit must be between 1 and 10")
         words = query.casefold().split()[:16]
-        score = (
-            " + ".join(["(instr(lower(name || ' ' || summary || ' ' || tags), ?) > 0)"] * len(words)) or "0"
-        )
+        score = " + ".join(["(instr(search_text, ?) > 0)"] * len(words)) or "0"
+        search_text = "astrofairy_search_text(name, summary, tags)" if words else "''"
         statement = (
             "WITH active AS (SELECT a.*, e.seq AS adoption, "  # noqa: S608 - only trusted placeholder syntax is interpolated.
             "ROW_NUMBER() OVER (PARTITION BY a.scope, a.name ORDER BY e.seq DESC) AS rank "
             "FROM assets a JOIN asset_events e ON a.ref = e.ref "
             "WHERE e.status IN ('trial', 'stable') "
             "AND e.seq = (SELECT MAX(x.seq) FROM asset_events x WHERE x.ref = a.ref)), "
-            f"scored AS (SELECT *, {score} AS score FROM active WHERE rank = 1) "
+            "prepared AS MATERIALIZED (SELECT ref, name, scope, kind, summary, version, "
+            f"{search_text} AS search_text FROM active WHERE rank = 1 AND (? IS NULL OR scope = ?)), "
+            f"scored AS (SELECT *, {score} AS score FROM prepared) "
             "SELECT ref, name, scope, kind, summary, version, score FROM scored "
-            "WHERE (? IS NULL OR scope = ?) AND (? = 0 OR score > 0) ORDER BY score DESC, name LIMIT ?"
+            "WHERE (? = 0 OR score > 0) ORDER BY score DESC, name, scope LIMIT ?"
         )
-        rows = self.store.connection.execute(statement, (*words, scope, scope, len(words), limit)).fetchall()
+        rows = self.store.connection.execute(statement, (scope, scope, *words, len(words), limit)).fetchall()
         return [dict(row) for row in rows]
 
     def export(self, ref: str) -> bytes:

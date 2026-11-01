@@ -1,0 +1,173 @@
+{
+  "format": 1,
+  "source": "../reviews/overall-assessment.json",
+  "source_sha256": "5753e5efd01fe2c6d950a182587ef7b14f6cadb59845c7d39bb8b9db690f05c2",
+  "repairs": "status.json",
+  "product_accepted": false,
+  "meaning": "Routes every original assessment object to follow-up work; routing and technical repairs do not prove original limited/pending judgments accepted",
+  "work": [
+    {
+      "id": "P00",
+      "title": "原问题台账技术修复",
+      "kind": "technical",
+      "status": "technical_verified",
+      "evidence": [
+        "status.json",
+        "F07-bounded-agent-responses.md"
+      ],
+      "completion": "保留15项各自范围内的独立技术复验；不将其扩张为整体产品终验"
+    },
+    {
+      "id": "P01",
+      "title": "文档存储放大与选读成本",
+      "kind": "technical",
+      "status": "technical_verified",
+      "batch": "F08",
+      "evidence": [
+        "F08-shared-authenticated-documents.md",
+        "../adr/0010-shared-authenticated-documents.md"
+      ],
+      "completion": "共享不变数据，选读仅验证并处理相关有界数据；准确声明整体审计与局部读取的不同保证，独立测增长、完整性和恢复"
+    },
+    {
+      "id": "P02",
+      "title": "事件重放与历史资产寿命",
+      "kind": "technical",
+      "status": "technical_verified",
+      "evidence": [
+        "F09-record-lifetime-and-state-recovery.md",
+        "../adr/0011-record-lifetime-and-state-recovery.md"
+      ],
+      "completion": "取证事件重放、保留、备份恢复、失效引用及退役成本，定义不损害依据的生命周期；不自动删除原件或假定无限资源",
+      "batch": "F09"
+    },
+    {
+      "id": "P03",
+      "title": "端到端任务质量与经济性",
+      "kind": "evaluation",
+      "status": "planned",
+      "evidence": [],
+      "completion": "用明确身份的任务、模型、工具及环境比较成果质量、首反馈、总耗时、行政开销和维护代价；保留源请求录入与证据可取得性限制"
+    },
+    {
+      "id": "P04",
+      "title": "安装与原生宿主使用",
+      "kind": "evaluation",
+      "status": "planned",
+      "notes": [
+        "R11-Node"
+      ],
+      "evidence": [],
+      "completion": "补齐安装器运行前提；分别取证复制安装、原生发现与调用、更新、平台和Office渲染，未执行的通道保持待证"
+    },
+    {
+      "id": "P05",
+      "title": "真实成员低负担与审核理解",
+      "kind": "field",
+      "status": "awaiting_evidence",
+      "notes": [
+        "R05-request",
+        "R05-evidence-access"
+      ],
+      "evidence": [],
+      "completion": "准备可直接试用的任务和观察办法；需要真实成员操作及反馈才能签收首次使用、关键问答和审核理解，合成反馈不得代替"
+    },
+    {
+      "id": "P06",
+      "title": "学习净收益与工作流成熟",
+      "kind": "evaluation",
+      "status": "planned",
+      "evidence": [],
+      "completion": "比较重复任务复用前后及反例的效果、成本和适用性；以真实任务查询评测检索相关性及成熟字面/全文/语义方案的收益、过滤与维护代价；分别取证受控收益、真实长期收益和人的思路改善"
+    },
+    {
+      "id": "P07",
+      "title": "权威地板、当前承诺与整体终验",
+      "kind": "assurance",
+      "status": "planned",
+      "notes": [
+        "R16-N01"
+      ],
+      "evidence": [],
+      "completion": "核对修改影响域的权威规范及Matt参考、公开描述、全量对象覆盖和剩余限制；汇总原要求与场景证据后由维护者终验"
+    }
+  ],
+  "routes": {
+    "R01": [
+      "P05",
+      "P07"
+    ],
+    "R02": [
+      "P00",
+      "P01",
+      "P02",
+      "P07"
+    ],
+    "R03": [
+      "P00",
+      "P03",
+      "P04",
+      "P05"
+    ],
+    "R04": [
+      "P00",
+      "P03",
+      "P07"
+    ],
+    "R05": [
+      "P00",
+      "P03",
+      "P04",
+      "P05"
+    ],
+    "R06": [
+      "P00",
+      "P03"
+    ],
+    "R07": [
+      "P00",
+      "P01",
+      "P02",
+      "P03"
+    ],
+    "R08": [
+      "P05",
+      "P06"
+    ],
+    "R09": [
+      "P02",
+      "P06"
+    ],
+    "R10": [
+      "P00",
+      "P01",
+      "P02",
+      "P07"
+    ],
+    "R11": [
+      "P04",
+      "P07"
+    ],
+    "R12": [
+      "P00",
+      "P04"
+    ],
+    "R13": [
+      "P07"
+    ],
+    "R14": [
+      "P00",
+      "P03",
+      "P07"
+    ],
+    "R15": [
+      "P03",
+      "P07"
+    ],
+    "R16": [
+      "P00",
+      "P04",
+      "P07"
+    ]
+  }
+}

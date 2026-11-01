@@ -1,0 +1,248 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AstroFairy evaluation return, for original-session review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "claim",
+    "source_manifest_sha256",
+    "product_accepted",
+    "work",
+    "human_evidence",
+    "return_report",
+    "runs_file",
+    "metrics_file",
+    "coverage_file",
+    "findings_file",
+    "sources_file",
+    "human_trial_kit_file",
+    "evidence_inventory"
+  ],
+  "properties": {
+    "format": {
+      "const": 1
+    },
+    "claim": {
+      "const": "for_original_session_review"
+    },
+    "source_manifest_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "product_accepted": {
+      "const": false
+    },
+    "work": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "P03",
+        "P04",
+        "P05",
+        "P06",
+        "P07"
+      ],
+      "properties": {
+        "P03": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "outcome",
+            "basis",
+            "evidence"
+          ],
+          "properties": {
+            "outcome": {
+              "enum": [
+                "supported",
+                "limited",
+                "not_observed",
+                "blocked",
+                "failed"
+              ]
+            },
+            "basis": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "P04": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "outcome",
+            "basis",
+            "evidence"
+          ],
+          "properties": {
+            "outcome": {
+              "enum": [
+                "supported",
+                "limited",
+                "not_observed",
+                "blocked",
+                "failed"
+              ]
+            },
+            "basis": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "P05": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "outcome",
+            "basis",
+            "evidence"
+          ],
+          "properties": {
+            "outcome": {
+              "enum": [
+                "supported",
+                "limited",
+                "not_observed",
+                "blocked",
+                "failed"
+              ]
+            },
+            "basis": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "P06": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "outcome",
+            "basis",
+            "evidence"
+          ],
+          "properties": {
+            "outcome": {
+              "enum": [
+                "supported",
+                "limited",
+                "not_observed",
+                "blocked",
+                "failed"
+              ]
+            },
+            "basis": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "P07": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "outcome",
+            "basis",
+            "evidence"
+          ],
+          "properties": {
+            "outcome": {
+              "enum": [
+                "supported",
+                "limited",
+                "not_observed",
+                "blocked",
+                "failed"
+              ]
+            },
+            "basis": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "human_evidence": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "return_report": {
+      "type": "string",
+      "minLength": 1
+    },
+    "runs_file": {
+      "type": "string",
+      "minLength": 1
+    },
+    "metrics_file": {
+      "type": "string",
+      "minLength": 1
+    },
+    "coverage_file": {
+      "type": "string",
+      "minLength": 1
+    },
+    "findings_file": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sources_file": {
+      "type": "string",
+      "minLength": 1
+    },
+    "human_trial_kit_file": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_inventory": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

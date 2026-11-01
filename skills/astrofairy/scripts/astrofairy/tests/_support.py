@@ -6,6 +6,24 @@ from pathlib import Path
 from typing import Any
 
 from astrofairy import Workshop
+from astrofairy._capabilities import Capability
+
+
+def mock_capability(effect: str, handler: Any, template: Capability | None = None) -> Capability:
+    return Capability(
+        effect,
+        handler,
+        description="Controlled fixture capability",
+        input_schema=template.input_schema
+        if template
+        else {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "type": "object",
+            "properties": {},
+            "additionalProperties": False,
+        },
+    )
+
 
 ROOT = next(path for path in Path(__file__).resolve().parents if (path / "governance.toml").is_file())
 

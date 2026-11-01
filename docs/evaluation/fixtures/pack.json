@@ -1,0 +1,125 @@
+{
+  "format": 1,
+  "purpose": "Constructed fixed inputs for real-model controlled execution; not real members/business evidence",
+  "cases": [
+    {
+      "id": "AF-B01",
+      "family": "decision-brief",
+      "split": "seed",
+      "request": "requests/AF-B01.md",
+      "inputs": [
+        "inputs/AF-B01-data.csv",
+        "inputs/AF-B01-context.md"
+      ],
+      "data_origin": "constructed; not real team data"
+    },
+    {
+      "id": "AF-B02",
+      "family": "decision-brief",
+      "split": "transfer",
+      "request": "requests/AF-B02.md",
+      "inputs": [
+        "inputs/AF-B02-data.csv",
+        "inputs/AF-B02-context.md"
+      ],
+      "data_origin": "constructed; not real team data"
+    },
+    {
+      "id": "AF-B03",
+      "family": "decision-brief",
+      "split": "boundary",
+      "request": "requests/AF-B03.md",
+      "inputs": [
+        "inputs/AF-B03-context.md"
+      ],
+      "data_origin": "constructed; not real team data"
+    },
+    {
+      "id": "AF-T01",
+      "family": "table-analysis",
+      "split": "seed",
+      "request": "requests/AF-T01.md",
+      "inputs": [
+        "inputs/AF-T01-orders.csv",
+        "inputs/AF-T01-rules.md"
+      ],
+      "data_origin": "constructed; not real team data"
+    },
+    {
+      "id": "AF-T02",
+      "family": "table-analysis",
+      "split": "transfer",
+      "request": "requests/AF-T02.md",
+      "inputs": [
+        "inputs/AF-T02-orders.csv",
+        "inputs/AF-T02-rules.md"
+      ],
+      "data_origin": "constructed; not real team data"
+    },
+    {
+      "id": "AF-T03",
+      "family": "table-analysis",
+      "split": "boundary",
+      "request": "requests/AF-T03.md",
+      "inputs": [
+        "inputs/AF-T03-orders.csv",
+        "inputs/AF-T03-rules.md"
+      ],
+      "data_origin": "constructed; not real team data"
+    },
+    {
+      "id": "AF-C01",
+      "family": "checklist",
+      "split": "seed",
+      "request": "requests/AF-C01.md",
+      "inputs": [
+        "inputs/AF-C01-handbook.md"
+      ],
+      "data_origin": "constructed; not real team data"
+    },
+    {
+      "id": "AF-C02",
+      "family": "checklist",
+      "split": "transfer",
+      "request": "requests/AF-C02.md",
+      "inputs": [
+        "inputs/AF-C02-handbook.md"
+      ],
+      "data_origin": "constructed; not real team data"
+    },
+    {
+      "id": "AF-P01",
+      "family": "slides",
+      "split": "seed",
+      "request": "requests/AF-P01.md",
+      "inputs": [
+        "inputs/AF-P01-service.csv",
+        "inputs/AF-P01-context.md"
+      ],
+      "data_origin": "constructed; not real team data"
+    },
+    {
+      "id": "AF-P02",
+      "family": "slides",
+      "split": "transfer",
+      "request": "requests/AF-P02.md",
+      "inputs": [
+        "inputs/AF-P02-service.csv",
+        "inputs/AF-P02-context.md"
+      ],
+      "data_origin": "constructed; not real team data"
+    }
+  ],
+  "grading_reference": "private/rubrics.json",
+  "seed_order": [
+    "AF-B01",
+    "AF-T01",
+    "AF-C01",
+    "AF-P01"
+  ],
+  "learning_families": [
+    "decision-brief",
+    "table-analysis"
+  ],
+  "isolation": "Production contexts receive only selected request+input bytes; no rubrics, other-arm outputs or inherited review conclusions"
+}

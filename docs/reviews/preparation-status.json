@@ -1,0 +1,1332 @@
+{
+  "state": "All16 review facets have scoped evidence and synthesis; original and resumed R15 independent finalization complete,13 confirmed findings+2 boundary candidates remain open, product not accepted and user adjudication/genuine/native/long-term outcomes pending",
+  "product_baseline": "22b7ece5d8388379f7b4bcaf47de4c047173cd9b",
+  "formal_review_started": true,
+  "product_mechanisms_changed": false,
+  "committed": false,
+  "pushed": false,
+  "readiness_scope": "Preparation checks cover material structure only; formal scoped results are recorded per round; no overall product conformance conclusion",
+  "inventory": {
+    "architecture": 9,
+    "mechanisms": 45,
+    "compositions": 8,
+    "requirement_probes": 7,
+    "baseline_files": 51,
+    "symbol_locations": 160
+  },
+  "method": {
+    "name": "FDP",
+    "version": "1.0.3",
+    "use": "Design-review method supplied by maintainer; not an industry standard",
+    "access": "Original method must be loaded at the start of formal design review",
+    "identity": {
+      "definition": "0eefcd7c35cf57bcf1db219c5e8d3fad708c863ffd4708cd0c5234bd7151caf4",
+      "carrier": "8138c90436a9bd5c30141df7e269409c083af050e6052f43a5f0be7b4a904922",
+      "review_protocol": "d805efae4ea778bb50872125cf695dca819906c1d64db4d50d61fe1fc84d2871"
+    }
+  },
+  "checks": {
+    "project_check": "passed: 47 existing tests, Ruff, format, mypy, references and budgets",
+    "preparation_validation": "passed: object links, source references, frozen code and generated views",
+    "primary_snapshot_integrity": "passed",
+    "negative_checks": [
+      "missing object",
+      "missing baseline file",
+      "missing industry obligation",
+      "unknown authority",
+      "no accessible source material"
+    ],
+    "baseline_git_blob_identity": "all 51 file digests matched",
+    "production_baseline_changes": "none",
+    "documentation_and_terminology": "passed",
+    "source_distribution": "new review JSON and guide included"
+  },
+  "prepared_at": "2026-10-27T23:18:52.753576+00:00",
+  "authority_sources": {
+    "entries": 71,
+    "retrieved_materials": 152,
+    "comparison_status": "All facets scoped; final record coverage distinct from source full-reading, mechanism acceptance and empirical outcome assurance",
+    "limitations": [
+      "ISO catalog/abstract pages do not provide full standard text",
+      "formal source reading and exact claim applicability remain to be established",
+      "mutable sources require retained originals for historical revalidation"
+    ]
+  },
+  "checklist": {
+    "vision_requirements": 17,
+    "review_facets": 16,
+    "facet_checks": 117,
+    "mandatory_per_object_industry_steps": 8,
+    "total_check_definitions": 125,
+    "scenario_classes": 16
+  },
+  "first_round_brief": "first-round-brief.md",
+  "formal_review": {
+    "started_on": "2026-10-29",
+    "round": "R15",
+    "report": "R15-evidence-and-integration.md",
+    "stage": "Primary, original scoped independent review and resumed final expanded69 object/synthesis check complete; no new product defect, old13 confirmed+2 candidates open; user unadjudicated",
+    "objects": [
+      "A09",
+      "M42",
+      "M43",
+      "M45",
+      "U05",
+      "U06"
+    ],
+    "checks": {
+      "R15-01": "待证（已有部分证据或未闭合条件）; 本轮综合证据复核；13确认问题、2边界候选与实际使用/长期责任不因取证完成而关闭。",
+      "R15-02": "未达到（已指出的条件）; 本轮综合证据复核；13确认问题、2边界候选与实际使用/长期责任不因取证完成而关闭。",
+      "R15-03": "未达到（已指出的条件）; 本轮综合证据复核；13确认问题、2边界候选与实际使用/长期责任不因取证完成而关闭。",
+      "R15-04": "有限支持; 本轮综合证据复核；13确认问题、2边界候选与实际使用/长期责任不因取证完成而关闭。",
+      "R15-05": "待证（已有部分证据或未闭合条件）; 本轮综合证据复核；13确认问题、2边界候选与实际使用/长期责任不因取证完成而关闭。",
+      "R15-06": "有限支持; 本轮综合证据复核；13确认问题、2边界候选与实际使用/长期责任不因取证完成而关闭。",
+      "R15-07": "有限支持; 本轮综合证据复核；13确认问题、2边界候选与实际使用/长期责任不因取证完成而关闭。"
+    },
+    "confirmed_findings": [],
+    "reconfirmed_old_findings": [
+      "R04-D01",
+      "R05-D01",
+      "R05-D02",
+      "R16-D01"
+    ],
+    "independent_review": {
+      "agent": "r15_independent_review",
+      "completed": true,
+      "initial_isolation": "all51 before sealed8 candidates; direct Git blob verification; later old source/evidence exchange and separate reproduction",
+      "matrix_cells": 48,
+      "reports": [
+        ".evaluation/reviews/R15/independent/report.md",
+        ".evaluation/reviews/R15/independent/object-matrix.md"
+      ],
+      "final_integration": "2026-10-30 resumed expanded check complete; resume-final-review.md sha12f40edfed2f2969289525f35fe1820851ce0a1d3996019b24e48b42f931c8bc and resume-final-crosscheck.json shaf27b7045afe7f7e5257f06a2b8a11d16eff0efa5a338275f490654ad96b408a5; errors=[],69 Q08/owner/latest/dependency checks; original scoped records unchanged",
+      "resumed_reports": [
+        ".evaluation/reviews/R15/independent/resume-final-review.md",
+        ".evaluation/reviews/R15/independent/resume-final-crosscheck.json"
+      ]
+    },
+    "authority_catalog_families": 71,
+    "record_coverage": {
+      "vision_requirements": 17,
+      "checks": 117,
+      "facets": 16,
+      "objects": 69,
+      "scenarios": 16,
+      "meaning": "Every item has a bounded record or explicit pending decision, not blanket conformance"
+    },
+    "summary": "overall-assessment.md",
+    "summary_data": "overall-assessment.json",
+    "check_summary": "check-results.md",
+    "confirmed_open_total": 13,
+    "boundary_candidates_total": 2,
+    "product_changed": false,
+    "regression_suites_rerun": true,
+    "regression_scope": "Independent frozen canonical47 and targeted quality/discovery probes; root scripted3 tasks and immutable selected evidence audit, not all old13 bug reruns",
+    "fresh_business_model_trials": 0,
+    "user_adjudication": "not yet performed",
+    "fdp_convergence": false,
+    "round_evidence_complete": true,
+    "external_tracking": "No external Issue; current local review scope and no parent tracker; explicit deviation, major findings remain open locally",
+    "next": "Prioritized repair/boundary decisions and impact revalidation, followed by scoped genuine-user/native trials; no automatic product change in this review phase",
+    "resume": {
+      "on": "2026-10-30",
+      "previous_attempt_complete": false,
+      "reason": "platform usage limit interrupted final extended crosscheck",
+      "archived_inputs": ".evaluation/reviews/R15/primary/resume-input-baseline/manifest.json",
+      "completed_on": "2026-10-30",
+      "completed": true
+    },
+    "verification": "Passed: original independent seal and Git51 identity, primary/independent48 cells, exact17/117/16/69 synthesis and original Q08 owner/chronology/dependency checks,42 scripted submissions and selected raw evidence/8×51 source audits,71 source snapshots, prior44 and original19 archives, documented interruption and precloseout status snapshot. No product repair, user/overallFDP acceptance or untested outcomes inferred."
+  },
+  "rounds": {
+    "R01": {
+      "started_on": "2026-10-28",
+      "round": "R01",
+      "report": "R01-vision-and-claims.md",
+      "stage": "evidence and independent verification complete",
+      "checks": {
+        "R01-01": "pass: requirement synthesis accuracy only",
+        "R01-02": "pending evidence",
+        "R01-03": "pending evidence",
+        "R01-04": "pending evidence",
+        "R01-05": "pending evidence",
+        "R01-06": "pending evidence",
+        "R01-07": "pending evidence"
+      },
+      "confirmed_product_design_defects": 0,
+      "user_adjudication": "not yet performed",
+      "next": "R02 architecture and mature alternatives",
+      "verification": "passed: inventory/source snapshots, generated views, document structure/references, Ruff, formatting, mypy, public terminology and git whitespace",
+      "runtime_suite_rerun": false
+    },
+    "R02": {
+      "started_on": "2026-10-28",
+      "round": "R02",
+      "report": "R02-core-architecture.md",
+      "stage": "primary evidence and independent verification complete; two conceptual boundary candidates remain open",
+      "checks": {
+        "R02-01": "pass within stated scope",
+        "R02-02": "pass within stated scope",
+        "R02-03": "pass within stated scope",
+        "R02-04": "pending evidence or boundary decision",
+        "R02-05": "pass within stated scope",
+        "R02-06": "pass within stated scope",
+        "R02-07": "pending evidence or boundary decision",
+        "R02-08": "pending evidence or boundary decision",
+        "R02-09": "pending evidence or boundary decision"
+      },
+      "open_candidates": [
+        {
+          "id": "R02-D01",
+          "class": "conceptual boundary candidate",
+          "severity": "NOTE",
+          "priority": "P2",
+          "conditional_independent_rating": "MAJOR/P1 if same-task reconciliation remains a current promise",
+          "next": [
+            "R04",
+            "R14",
+            "R16"
+          ]
+        },
+        {
+          "id": "R02-D02",
+          "class": "conceptual boundary candidate",
+          "severity": "NOTE",
+          "priority": "P2",
+          "next": [
+            "R07",
+            "R10"
+          ]
+        }
+      ],
+      "user_adjudication": "not yet performed",
+      "runtime_tests": {
+        "scope": "TaskTests and LibraryTests in isolated independent process",
+        "count": 38,
+        "result": "passed",
+        "full_project_check_rerun": false
+      },
+      "next": "R11 skill specification; then R13 reference alignment",
+      "verification": "passed: inventory and original source hashes, generated views, document structure/references, budgets, public terminology, git whitespace, 51-file frozen identity and unchanged production skill"
+    },
+    "R11": {
+      "started_on": "2026-10-28",
+      "round": "R11",
+      "report": "R11-agent-skills-contracts.md",
+      "stage": "primary evidence and independent verification complete; activation and native extension behavior pending",
+      "checks": {
+        "R11-01": "pass within documented format/static/local-environment scope",
+        "R11-02": "pass within documented format/static/local-environment scope",
+        "R11-03": "pending behavior evidence",
+        "R11-04": "pass within documented format/static/local-environment scope",
+        "R11-05": "pass within documented format/static/local-environment scope",
+        "R11-06": "pending behavior evidence",
+        "R11-07": "pass within documented format/static/local-environment scope"
+      },
+      "confirmed_shared_format_defects": 0,
+      "suggestions": [
+        {
+          "id": "R11-N01",
+          "class": "editorial recommendation",
+          "severity": "NOTE",
+          "priority": "P3",
+          "subject": "Document installer prerequisites or link current upstream requirements",
+          "next": [
+            "R12"
+          ]
+        }
+      ],
+      "evidence_obligations": [
+        {
+          "id": "R11-E02",
+          "class": "verification obligation; not a confirmed incompatibility",
+          "subject": "Copilot harness and actual discovery path",
+          "next": [
+            "R12"
+          ]
+        }
+      ],
+      "runtime_tests": {
+        "scope": "44 runtime + 3 dev frozen tests, executed from independent copy",
+        "count": 47,
+        "result": "passed",
+        "full_project_check_rerun": false
+      },
+      "primary_isolation": "source-copy and ZIP; Python -I -S -B; empty cwd; spaces/Unicode; binary artifact preserved",
+      "user_adjudication": "not yet performed",
+      "next": "R13 Matt Pocock reference accuracy and adaptation",
+      "verification": "passed: inventory/source originals, generated views, document structure/references/budgets, public terminology, git whitespace, exact 51-file baseline and unchanged production skill"
+    },
+    "R13": {
+      "started_on": "2026-10-28",
+      "round": "R13",
+      "report": "R13-mattpocock-alignment.md",
+      "stage": "primary and independent reference review complete; real effects and historical trials remain pending",
+      "checks": {
+        "R13-01": "pass within reference accuracy and structure/mechanism mapping scope",
+        "R13-02": "pass within reference accuracy and structure/mechanism mapping scope",
+        "R13-03": "pass within reference accuracy and structure/mechanism mapping scope",
+        "R13-04": "pass within reference accuracy and structure/mechanism mapping scope",
+        "R13-05": "pass within reference accuracy and structure/mechanism mapping scope",
+        "R13-06": "pass within reference accuracy and structure/mechanism mapping scope",
+        "R13-07": "pass within reference accuracy and structure/mechanism mapping scope"
+      },
+      "confirmed_source_misreading_or_bad_adaptation_defects": 0,
+      "primary_upstream_files_read": 26,
+      "independent_upstream_files_read": 25,
+      "upstream_commit": "59db609eb1e18aaf59b63284d0e52255aff0c63c",
+      "runtime_tests": {
+        "count": 47,
+        "result": "passed from independent copy plus metadata check",
+        "full_project_check_rerun": false
+      },
+      "independent_isolation_limit": "Brief exposure to other-object R02 status labels in a truncated inventory output; no R13 primary hypotheses or prior conclusion reports read",
+      "user_adjudication": "not yet performed",
+      "next": "R04 protocol, state, completion and recovery",
+      "verification": "passed: inventory/source originals, generated views, document structure/references/budgets, public terminology, git whitespace, exact 51-file baseline and unchanged production skill"
+    },
+    "R04": {
+      "started_on": "2026-10-28",
+      "round": "R04",
+      "report": "R04-protocol-and-recovery.md",
+      "stage": "primary truth recheck and independent review completed; three confirmed implementation defects not repaired; FDP classification reserved",
+      "checks": {
+        "R04-01": "not met: D01/D02/D03 interface inconsistencies",
+        "R04-02": "partial: source/revision mechanisms supported; initial assumptions affected and host semantics pending",
+        "R04-03": "pass within tested transition and completion-gate scope",
+        "R04-04": "partial: honest pending/unknown; public tool reconciliation remains open",
+        "R04-05": "not met: expected_seq exceptions and race",
+        "R04-06": "partial: bytes/rollback/integrity tests supported; database error envelope and environment limits remain",
+        "R04-07": "partial: late facts retained; export freshness limits remain"
+      },
+      "objects": [
+        "A03",
+        "A04",
+        "M04",
+        "M05",
+        "M06",
+        "M07",
+        "M08",
+        "M09",
+        "M11",
+        "M12",
+        "M13",
+        "M17",
+        "M18",
+        "M19",
+        "M21",
+        "M22",
+        "M23",
+        "M24",
+        "M25",
+        "M31",
+        "M36",
+        "C01",
+        "C02",
+        "C03",
+        "C08",
+        "U04",
+        "U07"
+      ],
+      "confirmed_findings": [
+        {
+          "id": "R04-D01",
+          "severity": "MAJOR",
+          "priority": "P2",
+          "status": "open"
+        },
+        {
+          "id": "R04-D02",
+          "severity": "MAJOR",
+          "priority": "P2",
+          "status": "open"
+        },
+        {
+          "id": "R04-D03",
+          "severity": "MAJOR",
+          "priority": "P2",
+          "status": "open"
+        }
+      ],
+      "retained_prior_candidates": [
+        "R02-D01",
+        "R02-D02"
+      ],
+      "notes": [
+        "R04-N01",
+        "R04-N02"
+      ],
+      "FDP_classification": "confirmed implementation deviation; primary execution-semantics conceptual classification vs independent protocol-semantics reservation; transfer to R16/user",
+      "primary_new_records": 26,
+      "independent_new_records": 43,
+      "primary_fresh_official_originals": 14,
+      "primary_retained_official_originals": 2,
+      "runtime_tests": {
+        "count": 44,
+        "result": "passed in independent frozen source copy",
+        "full_project_check_rerun": false
+      },
+      "user_adjudication": "not yet performed",
+      "next": "R06 execution and capability boundaries",
+      "verification": "passed: coverage/generated views, authority original hashes, structural/references/budgets, public terminology, git whitespace, exact 51-file frozen baseline and unchanged skill"
+    },
+    "R06": {
+      "started_on": "2026-10-28",
+      "round": "R06",
+      "report": "R06-deterministic-and-model-boundaries.md",
+      "stage": "primary and independent review complete; one new conceptual interface finding remains open; effect and net-cost conclusions limited",
+      "checks": {
+        "R06-01": "partial: enforcement mapped; inherited R04 exceptions remain",
+        "R06-02": "partial automation observed; comparative net benefit pending",
+        "R06-03": "pass within tested mechanical/semantic separation",
+        "R06-04": "supported within cooperative-host declaration; no sandbox conclusion",
+        "R06-05": "pending broad conclusion; one real forward sample plus D01 observed",
+        "R06-06": "partial, not met for extended input discovery and inherited guard semantics",
+        "R06-07": "partial: synthetic missing registered tool/checker yields honest partial; native-host alternatives pending"
+      },
+      "objects": [
+        "A02",
+        "A03",
+        "M02",
+        "M06",
+        "M09",
+        "M10",
+        "M11",
+        "M14",
+        "M15",
+        "M16",
+        "M34",
+        "M35",
+        "C08"
+      ],
+      "confirmed_findings": [
+        {
+          "id": "R06-D01",
+          "classification": "conceptual interface design gap",
+          "severity": "MAJOR",
+          "priority": "P2",
+          "status": "open"
+        }
+      ],
+      "retained_prior_items": [
+        "R04-D01",
+        "R04-D02",
+        "R04-D03",
+        "R02-D01",
+        "R02-D02"
+      ],
+      "notes": [
+        "R06-N01",
+        "R06-N02"
+      ],
+      "primary_probe_groups": 14,
+      "primary_fresh_official_originals": 9,
+      "authority_catalog_families": 50,
+      "forward_trial": {
+        "count": 1,
+        "seconds": 78,
+        "includes": "first skill reading and log setup",
+        "cli_commands": 14,
+        "json_submissions": 8,
+        "registered_calls": 4,
+        "user_questions": 0,
+        "cli_errors": 0,
+        "artifact_unicode_characters": 433,
+        "artifact_bytes": 1015,
+        "outcome": "runner complete; tool nonempty and host-model semantic review; not independent quality certification",
+        "no_direct_baseline_or_real_human_feedback": true
+      },
+      "regression_suites_rerun": false,
+      "independent_isolation_limit": "Stage 2 object extraction briefly exposed old status/evidence summaries including R04 labels; no old reports or primary R06 draft read; forward trial preceded exposure",
+      "user_adjudication": "not yet performed",
+      "next": "R05 deliverable, checks and evidence",
+      "verification": "passed: object/source/generated-view checks, structural/references/budgets, professional public terminology, git whitespace, exact frozen baseline, unchanged production skill, nine original hashes and sealed real forward sample"
+    },
+    "R05": {
+      "started_on": "2026-10-29",
+      "round": "R05",
+      "report": "R05-deliverables-and-evidence.md",
+      "stage": "primary and independent artifact/mechanism review complete; two conceptual findings remain open",
+      "objects": [
+        "A04",
+        "A05",
+        "M05",
+        "M07",
+        "M09",
+        "M12",
+        "M13",
+        "M14",
+        "M16",
+        "M17",
+        "M18",
+        "M20",
+        "M22",
+        "C01",
+        "C02",
+        "U06"
+      ],
+      "checks": {
+        "R05-01": "single-task criteria supported with source-ingestion deviation and viewer limits; generic sufficiency pending",
+        "R05-02": "narrow checks correctly scoped; D01/D02 undermine completion in specified counterexamples",
+        "R05-03": "conditional not met: explicit adapter target mismatch stamped current review",
+        "R05-04": "supported for one real controlled business sample",
+        "R05-05": "visible organization reconstructed by independent model, not human-cost or exact execution-reproduction proof",
+        "R05-06": "partial: model/tool attribution visible, external evidence bytes and D02 limit assurance",
+        "R05-07": "not met: duplicate/reverted identical content drops active conflict",
+        "R05-08": "multi-file packaging supported; portable evidence access is conditional"
+      },
+      "confirmed_findings": [
+        {
+          "id": "R05-D01",
+          "classification": "conceptual",
+          "severity": "MAJOR",
+          "priority": "P1",
+          "status": "open",
+          "discovery": "blind independent review, primary reproduced"
+        },
+        {
+          "id": "R05-D02",
+          "classification": "conceptual",
+          "severity": "MAJOR conditional on miswired extension adapter declaring different checked_ref",
+          "priority": "P2",
+          "status": "open",
+          "discovery": "primary candidate, independent two-checker reproduction"
+        }
+      ],
+      "notes": [
+        "R05-N01",
+        "R05-N02",
+        "R05-N03"
+      ],
+      "note_classification_reservation": "N01 independent MINOR/P2 suggestion; primary NOTE/P2 due no demonstrated explicit closed-CLI byte-read promise violation; facts agree",
+      "primary_probe_records": 14,
+      "primary_official_originals": 9,
+      "authority_catalog_families": 53,
+      "forward_sample": {
+        "count": 1,
+        "outcome": "runner complete; business argument supported by separate model auditor; application rendering/edit untested",
+        "instrumented_window_seconds": 341.886,
+        "complete_end_to_end_time": false,
+        "instrumented_commands": 20,
+        "registered_calls": 7,
+        "user_questions": 0,
+        "actual_command_errors_retained": true,
+        "request_field_deviation": "literal filename original-request.txt instead of file text; substantive goal/criteria and separate source input retained",
+        "delivered_members": [
+          "editable PPTX",
+          "Markdown speaking script"
+        ],
+        "human_feedback_or_cost_measured": false,
+        "instrumented_commands_scope": "20 outer command records include nested CLI operations; not total CLI or model-roundtrip count",
+        "instrumented_window_end": "delivery-close batch ended 05:31:12.901620 UTC; later post-close records end 05:32:07.163372 UTC"
+      },
+      "independent_isolation": "A criteria fixed before artifact; A sealed before implementation read; B first candidate before main comparison; no old reports/current main draft read",
+      "regression_suites_rerun": false,
+      "user_adjudication": "not yet performed",
+      "next": "R14 authorization, data and security boundaries",
+      "verification": "passed: preparation/source/generated views, structural/references/budgets, professional wording, whitespace, exact baseline/copies, unchanged product, authority hashes, forward/A seals, matrices and delivery identities; not full regression or acceptance"
+    },
+    "R14": {
+      "started_on": "2026-10-29",
+      "round": "R14",
+      "report": "R14-authorization-data-and-security.md",
+      "stage": "primary, authenticity check and independent review evidence complete; one conditional conceptual finding open",
+      "objects": [
+        "A02",
+        "A05",
+        "M04",
+        "M11",
+        "M12",
+        "M15",
+        "M21",
+        "M22",
+        "M23",
+        "M24",
+        "M28",
+        "M33",
+        "M34",
+        "C03",
+        "C05",
+        "C08",
+        "U07"
+      ],
+      "checks": {
+        "R14-01": "supported scoped declaration and local controls; cooperative host and trusted adapters, no sandbox/attestation claim",
+        "R14-02": "partial local authorization supported; host-native exact action/recipient and actual publish/share pending",
+        "R14-03": "passive/candidate/policy gates supported mechanically; model prompt-injection resistance unmeasured",
+        "R14-04": "ordinary path/static nested symlink, POSIX modes and pre-replace fsync failure supported; not race-proof or power-cut/platform proof",
+        "R14-05": "bounded selected asset bundle supported; full receipt request/parameters and selected evidence notes require recipient-aware disclosure checks",
+        "R14-06": "conditional not met: custom side-effect labels can become failed/retryable/complete after uncertain effects; native write protection correct",
+        "R14-07": "scoped integrity/attestation distinctions supported; inherited review-binding and unknown-recovery gaps remain"
+      },
+      "confirmed_findings": [
+        {
+          "id": "R14-D01",
+          "independent_id": "R14-I01",
+          "classification": "conceptual effect/failure contract gap",
+          "severity": "MAJOR",
+          "priority": "P2",
+          "condition": "explicitly authorized custom effect label other than write/read/reason; post-effect exception or runner result validation failure",
+          "status": "open",
+          "discovery": "primary and independent derived before comparison; distinct post-effect validation reproductions"
+        }
+      ],
+      "notes": [
+        "R14-N01",
+        "R14-N02",
+        "R14-N03"
+      ],
+      "withdrawals": [
+        "R14-X01 trusted home reconfiguration outside ordinary path threat model",
+        "R14-X02 malicious trusted state owner not independently attested",
+        "R14-X03 selected asset note export is not full-ledger leakage or code execution"
+      ],
+      "primary_probe_records": 17,
+      "independent_probe_records": 20,
+      "primary_official_originals": 11,
+      "independent_official_originals": 13,
+      "authority_catalog_families": 56,
+      "independent_isolation": "fresh context; frozen51 and clean17 objects; initial hypotheses before root comparison; no previous reports, root probes/draft or original conversation assumptions read",
+      "regression_suites_rerun": false,
+      "actual_external_side_effects": 0,
+      "production_changed": false,
+      "user_adjudication": "not yet performed",
+      "next": "R03 user experience, guidance and autonomous progress",
+      "verification": "passed: source/inventory/generated views, structural/references/budgets/public wording, whitespace, frozen51/source input identities, unchanged product, 11+13 official originals, 17-object matrices, 17+20 targeted case records and effect controls; not full regression or product acceptance"
+    },
+    "R03": {
+      "started_on": "2026-10-29",
+      "round": "R03",
+      "report": "R03-user-experience-and-guidance.md",
+      "stage": "primary, authenticity and independent evidence complete; MAJOR/P2 scheduling implementation finding open, FDP subtype reserved",
+      "objects": [
+        "A01",
+        "M01",
+        "M03",
+        "M05",
+        "M08",
+        "M19",
+        "M25",
+        "M36",
+        "M41",
+        "C01",
+        "C02",
+        "C03",
+        "U01",
+        "U07"
+      ],
+      "checks": {
+        "R03-01": "controlled prerequisites support member/admin separation; actual new-machine/native setup pending",
+        "R03-02": "one ambiguous brief executed without question; task generality and real-human burden unproven",
+        "R03-03": "two zero-question segments and one critical question with actual synthetic reply; no inherited previous budget",
+        "R03-04": "host owned ids/JSON; 31 successful submissions, one recovered entry error; net economy pending",
+        "R03-05": "one actual natural-language closed-task followup; in-flight revision invalidation positive control",
+        "R03-06": "instrumented progress records retained; recording time is not UI delivery or pure skill effect",
+        "R03-07": "partial/cancel/reopen-model supported; D01 advisory premature closing and existing tool-reconciliation gap remain"
+      },
+      "confirmed_findings": [
+        {
+          "id": "R03-D01",
+          "classification": "implementation/interface scheduling priority defect",
+          "fdp_subtype": "conceptual classification not established; implementation defect retained with subtype reservation",
+          "severity": "MAJOR",
+          "priority": "P2",
+          "status": "open",
+          "condition": "zero invocation budget with existing model report or user answer still sufficient for completion without new calls",
+          "discovery": "independent initial candidate; narrowed after comparison; separate four-case reproductions"
+        }
+      ],
+      "notes": [
+        "R03-N01",
+        "R03-N02",
+        "R03-N03",
+        "R03-N04"
+      ],
+      "primary_probe_records": 14,
+      "independent_probe_records": 17,
+      "primary_official_originals": 8,
+      "reused_matt_originals": 1,
+      "authority_catalog_families": 57,
+      "forward_trial": {
+        "segments": 3,
+        "independent_model_hosts": 1,
+        "questions": [
+          0,
+          0,
+          1
+        ],
+        "simulated_reply_count": 1,
+        "real_human_feedback": false,
+        "artifact_bytes": [
+          3687,
+          6114,
+          2287
+        ],
+        "runner_commands": 42,
+        "successful_submissions": 31,
+        "submission_attempts": 32,
+        "registered_calls": 10,
+        "registered_call_counts_are_model_roundtrips": false,
+        "command_entry_errors": 1,
+        "recording_windows_seconds": [
+          212.488983,
+          163.404874,
+          127.295191
+        ],
+        "complete_end_to_end_or_ui_timing": false,
+        "limits": "Python/explicit entry/approved home supplied; instrumented progress; initial/outer timing gaps; no real-human/native discovery/baseline/longitudinal proof; mistyped-home error discrepancy retained without outside replay"
+      },
+      "independent_isolation": "fresh context; A skill/resources only until three deliveries; B clean14/frozen implementation; first candidate before comparison; no root probes/draft/previous reports/private harness read; early B reads in shared command log then separate B log",
+      "regression_suites_rerun": false,
+      "production_changed": false,
+      "user_adjudication": "not yet performed",
+      "next": "R07 speed, resources and progression economy",
+      "verification": "passed: inventory/source/generated views, structural/references/budgets/professional wording, whitespace, frozen51/independent28 read identities, unchanged product, eight originals/fixed Matt/PDF equivalence,14-object matrices,14+17 targeted records and three sealed actual artifacts/receipts/input bytes/command counts; not full regression or UX acceptance"
+    },
+    "R07": {
+      "started_on": "2026-10-29",
+      "round": "R07",
+      "report": "R07-speed-and-economy.md",
+      "stage": "primary, authenticity and independent evidence complete; one MAJOR/P2 Unicode search implementation finding open, FDP subtype reserved",
+      "objects": [
+        "A08",
+        "M02",
+        "M15",
+        "M19",
+        "M20",
+        "M30",
+        "M35",
+        "C07",
+        "U03"
+      ],
+      "checks": {
+        "R07-01": "recorded phases/child processes; receipt/UI/pure-model/CPU attribution remains incomplete",
+        "R07-02": "two fresh-context same-input model arms eachN1; extra audit output and protocol cost observed, no universal net benefit",
+        "R07-03": "proxy counts/bytes execute locally; real tokens/prices/wall budget not established",
+        "R07-04": "conditional references and bounded capability metadata supported; per-task whole answered packet grows",
+        "R07-05": "MAJOR/P2 literal Unicode normalization mismatch confirmed; index-only speed distinct from relevance",
+        "R07-06": "closure-before-maintenance/separate task/unchanged original supported; no actual arm maintenance or total learning-cost proof",
+        "R07-07": "separate history/task/head/version/fragment/capability scaling; no production SLO/infinite growth or semantic-performance certification"
+      },
+      "confirmed_findings": [
+        {
+          "id": "R07-D01",
+          "independent_id": "IR07-C1",
+          "classification": "implementation/query-metadata normalization inconsistency",
+          "fdp_subtype": "conceptual/writing external-subtype applicability reserved; independent initial writing-only label withdrawn with provenance",
+          "severity": "MAJOR",
+          "priority": "P2",
+          "status": "open",
+          "condition": "accepted Unicode metadata exact literal casefold diverges from SQLite ASCII lower",
+          "discovery": "independent candidate before root comparison; separate validated fixture and API controls by both"
+        }
+      ],
+      "previous_item_supplement": {
+        "id": "R02-D02",
+        "classification": "existing NOTE/P2 candidate unchanged",
+        "new_evidence": "whole answered packets and replay grow by per-task history, unrelated-task controls and local fragment/capability bounded controls"
+      },
+      "notes": [
+        "R07-N01",
+        "R07-N02",
+        "R07-N03",
+        "R07-N04"
+      ],
+      "primary_official_originals": 10,
+      "authority_catalog_families": 60,
+      "primary_measurement_levels": {
+        "asset": 5,
+        "history": 5,
+        "fragment": 3,
+        "unrelated_task_control": 1,
+        "maintenance_control": 1
+      },
+      "primary_unicode_cases": 3,
+      "primary_retrieval_fixture": {
+        "documents": 12,
+        "queries": 18,
+        "summary": {
+          "keyword": {
+            "queries": 11,
+            "current": {
+              "mean_recall_at3": 1.0,
+              "mrr_at3": 1.0
+            },
+            "fts5": {
+              "mean_recall_at3": 1.0,
+              "mrr_at3": 1.0
+            }
+          },
+          "natural_phrase": {
+            "queries": 6,
+            "current": {
+              "mean_recall_at3": 0.0,
+              "mrr_at3": 0
+            },
+            "fts5": {
+              "mean_recall_at3": 0.0,
+              "mrr_at3": 0
+            }
+          }
+        },
+        "limits": "hand labels, no model-query reformulation, no embeddings or real-user relevance study"
+      },
+      "paired_trial": {
+        "fresh_contexts": 2,
+        "samples_per_arm": 1,
+        "same_configured_host_and_inputs": true,
+        "direct": {
+          "all_recorded_commands": 5,
+          "subprocess_ns_sum": 271511022,
+          "first_read_to_final_record_seconds": 116.426634,
+          "artifact_bytes": 1195,
+          "artifact_unicode_chars": 491,
+          "stdout_bytes": 4076
+        },
+        "skill": {
+          "all_recorded_commands": 22,
+          "subprocess_ns_sum": 2412535465,
+          "first_read_to_final_record_seconds": 217.423264,
+          "artifact_bytes": 1194,
+          "artifact_unicode_chars": 462,
+          "stdout_bytes": 39761
+        },
+        "user_questions": [
+          0,
+          0
+        ],
+        "unexpected_command_errors": [
+          0,
+          1
+        ],
+        "tokens_prices_ui_delivery_measured": false,
+        "quality": "core-task criteria supported by root scorer aware of arm mapping; direct explicit source links vs skill separate receipt provenance; not blind/human or universal quality proof",
+        "limits": "shared machine/scheduler/randomness and instrumented final-record gaps; five/22 subprocesses are not model roundtrips; structured ledger differs from output-only baseline"
+      },
+      "independent_isolation": "fresh skill A before implementation; independent mechanism candidates before root mapping/direct summary; no old reports/root probes/draft; direct arm never read product; followup classification correction explicit",
+      "regression_suites_rerun": false,
+      "production_changed": false,
+      "user_adjudication": "not yet performed",
+      "next": "R08 learning signals and feedback",
+      "verification": "passed: inventory/source/generated views, structural/references/budgets/professional wording, whitespace, frozen51/independent25 read identities, unchanged product, ten official originals and independent sources, nine-object matrices, arm seals/materials, real briefs/receipt/counters, Unicode adopted fixtures and positive controls, measured growth/maintenance and fixed12asset18query results; not full regression or general performance/quality acceptance"
+    },
+    "R08": {
+      "started_on": "2026-10-29",
+      "round": "R08",
+      "report": "R08-learning-and-feedback.md",
+      "stage": "primary, authenticity, independent and two-arm transfer evidence complete; no new independent defect; actual longitudinal benefit pending",
+      "objects": [
+        "A06",
+        "M26",
+        "M27",
+        "M32",
+        "C04",
+        "U01",
+        "U02"
+      ],
+      "checks": {
+        "R08-01": "six signal classes have paths; correction history and original bytes need explicit retrieval",
+        "R08-02": "synthetic feedback, host model and native checks separated; no real-human benefit evidence",
+        "R08-03": "scoped workflow and fresh transfer exclude old facts; unrelated greeting does not reuse method",
+        "R08-04": "two fresh contexts with same skill/materials each execute two tasks; both succeed, no stable net-benefit proof",
+        "R08-05": "seven maintenance tasks only one trial; actual nochange, stale-base conflict, retire fallback and restore controls",
+        "R08-06": "external method and existing native JSON checker reused; new tool/checker improvement not executed",
+        "R08-07": "no real participants or longitudinal user-thinking observations; explicitly pending",
+        "R08-08": "controlled chain through future asset use supported, genuine feedback and natural host triggers still unproven"
+      },
+      "confirmed_findings": [],
+      "previous_item_supplement": {
+        "id": "R05-N01",
+        "classification": "existing NOTE/P2; independent MINOR/P2 convenience opinion retained",
+        "new_evidence": "maintenance raw inputs and old artifacts require explicit owner Store.get; answered recovered via inspect history; no irretrievable loss"
+      },
+      "additional_previous_item": "R05-N03 repeated host request-path recording mistake in empty-library comparator; original body separately retained; no new defect ID",
+      "primary_official_originals": 5,
+      "reused_matt_originals": 1,
+      "authority_catalog_families": 61,
+      "synthetic_episodes": 7,
+      "maintenance_tasks_complete": 7,
+      "initial_asset_count": 0,
+      "final_trial_asset_count": 1,
+      "source_tasks_unchanged": true,
+      "independent_revision_controls": "validated sibling candidates, stale-base conflict, retire/fallback/pin/restore in separate home",
+      "paired_trial": {
+        "fresh_contexts": 2,
+        "tasks_per_context": 2,
+        "same_skill_and_materials": true,
+        "learned_calls": [
+          5,
+          4
+        ],
+        "empty_calls": [
+          5,
+          5
+        ],
+        "model_requests_per_arm": 2,
+        "learned_artifact_bytes": [
+          808,
+          69
+        ],
+        "empty_artifact_bytes": [
+          728,
+          90
+        ],
+        "user_questions": [
+          0,
+          0
+        ],
+        "non_ok_registered_calls": [
+          0,
+          0
+        ],
+        "outcome": "both current-fact briefs and unrelated greetings satisfy bounded task; method transfer supported, causal improvement not established",
+        "limits": "N1 per genre per arm, unblinded root scorer, different self-chosen checks, empty-arm request path vs body error, learned initial timing gap, no token/cost/real-user/longitudinal evidence"
+      },
+      "independent_isolation": "fresh verifier froze candidates before root fixture/old-item mapping; fresh arms saw only assigned skill/materials and own library, no source episodes or other arm",
+      "regression_suites_rerun": false,
+      "production_changed": false,
+      "user_adjudication": "not yet performed",
+      "next": "R09 workflow consolidation, reuse and sharing",
+      "verification": "passed: inventory/source/generated views, structural/references/budgets/professional wording, whitespace, exact frozen51 and independent24 read identities, unchanged product, five primary originals plus fixed Matt, seven-object Q01–Q08 matrices, seven closed maintenance tasks/one trial/unchanged source artifacts, revision/stale/retire/restore controls, pre-trial rubric and sealed four actual transfer outputs/receipts/call facts; not full regression or long-term learning/UX acceptance"
+    },
+    "R09": {
+      "started_on": "2026-10-29",
+      "round": "R09",
+      "report": "R09-workflows-reuse-and-sharing.md",
+      "stage": "primary, authenticity, independent mechanism and actual sender/receiver evidence complete; no new independent defect; existing R07-D01 and long-term maturity gaps remain",
+      "objects": [
+        "A06",
+        "M26",
+        "M27",
+        "M28",
+        "M29",
+        "M30",
+        "M31",
+        "M32",
+        "M33",
+        "M34",
+        "C04",
+        "C05",
+        "U02",
+        "U03"
+      ],
+      "checks": {
+        "R09-01": "six passive kinds, scoped families, local integer versions and immutable refs supported; no complete cross-home provenance graph",
+        "R09-02": "host-followed method actual variations, not executable graph or CWL conformance",
+        "R09-03": "synthetic A/B maintenance same-family v1-to-v2 and C application; C seen before revision, no blind generalization claim",
+        "R09-04": "existing R07-D01 reproduced; lexical/semantic/content-only gaps and native/CLI scope selection distinguished",
+        "R09-05": "exact candidate/policy/local validation controls; stable not empirical maturity; known completion-gate defects remain",
+        "R09-06": "independent stale-base rejection, namespace separation, retire fallback and historical pin positive controls; not all concurrent schedules",
+        "R09-07": "fresh isolated recipient imports candidate, validates exact local package, trial adopts, searches/pins and executes new material; notes-only provenance and rights/dependency limits retained",
+        "R09-08": "same-name personal/team local families supported; not account ACL/remote sync; native search lacks scope filter but returns scope"
+      },
+      "confirmed_findings": [],
+      "previous_item_supplement": {
+        "id": "R07-D01",
+        "classification": "existing MAJOR/P2 implementation Unicode normalization mismatch, FDP subtype reserved",
+        "new_evidence": "independent summary and tag origins with ASCII/CJK controls"
+      },
+      "other_previous_items": [
+        "R05-N01 maintenance raw evidence/historical retired assets require explicit recovery",
+        "R05-D01/D02 completion/check binding not repaired",
+        "R04-D01 learn expected-seq not repaired"
+      ],
+      "notes": [
+        "R09-N01 workflow inputs/parameters shape",
+        "R09-N02 notes-only imported provenance",
+        "R09-N03 maturity labels",
+        "R09-N04 boolean format accepted as1: NOTE/P3 hygiene, no adoption bypass"
+      ],
+      "primary_official_originals": 5,
+      "reused_license_original": "S36 Work and redistribution clauses",
+      "authority_catalog_families": 63,
+      "primary_probe_records": 14,
+      "independent_original_runtime_tests": {
+        "run": 44,
+        "failures": 0,
+        "scratch_root_redirect_only": true,
+        "not_full_development_gate": true
+      },
+      "sender_trial": {
+        "synthetic_tasks": 3,
+        "maintenance_tasks": 1,
+        "validated_versions": 2,
+        "revision_family_unchanged": true,
+        "export_bytes": 7593,
+        "status": "trial",
+        "real_feedback": false,
+        "third_case_blind": false
+      },
+      "independent_isolation": "initial candidates before old mapping/root probes; sender reads frozen skill/resources plus own fixtures; recipient sees only bundle/new inputs and skill, not sender ledger or scorer rubric",
+      "production_changed": false,
+      "regression_suites_rerun": false,
+      "user_adjudication": "not yet performed",
+      "next": "R10 long-term evolution, growth and maintenance burden",
+      "verification": "passed: inventory/source/generated views, references/AST/budgets/ownership/professional wording, whitespace, exact frozen51 and independent source manifest, unchanged skill product, five official originals and licensed-source selected ranges, 14-object Q01–Q08 matrices, primary14 probes, independent44 existing runtime tests, trial seal19 identities, read-only replay sender6+recipient2 tasks, exact bundle/content/base/local candidate policy/pin/current artifacts, corrected code anchors and disclosed C-preexposure; not whole development gate, universal interoperability, long-term maturity or net-benefit acceptance",
+      "recipient_trial": {
+        "fresh_context": true,
+        "new_task_count": 1,
+        "validation_tasks": 1,
+        "sender_evidence_accessed": false,
+        "candidate_not_searchable_before_adoption": true,
+        "local_version": 1,
+        "sender_version": 2,
+        "artifact_bytes": 841,
+        "registered_calls": 10,
+        "model_reports": 1,
+        "non_ok_calls": 0,
+        "new_material_arithmetic": "45/(90-30)=75%; compatible prior70%→+5pp; no revenue-change or responsibility invention"
+      },
+      "known_runtime_tests_reexecuted_by_independent": true
+    },
+    "R10": {
+      "started_on": "2026-10-29",
+      "round": "R10",
+      "report": "R10-long-term-evolution-and-growth.md",
+      "stage": "primary, authenticity and resumed fresh independent evidence complete; new MAJOR/P2 version-admission ordering finding open, FDP subtype reserved",
+      "objects": [
+        "A08",
+        "M21",
+        "M29",
+        "M35",
+        "M44",
+        "C04",
+        "C07",
+        "U04"
+      ],
+      "checks": {
+        "R10-01": "primary growth40 tasks plus independent feedback1/20/200 and immutable replay; whole-history/cost obligations remain",
+        "R10-02": "primary noise/refinement/retire controls and independent retire/pin/backup; no autonomous cleanup or semantic efficacy claim",
+        "R10-03": "primary: scratch relocation moves541lines outside budget, core978→442 with normalstart/cancel; structural gate only",
+        "R10-04": "primary: two simulated provider adapters,0.7/0.75 and prior observation replay without core changes; not real native host",
+        "R10-05": "primary: sqlite backup restore40 tasks/projection regeneration, no concurrent writer or unrecorded-workspace proof; retirement/VACUUM keep logical rows",
+        "R10-06": "new R10-D01 confirmed version gate after DDL; implementation MAJOR/P2 open, FDP subtype reserved; no data loss or v2-migration duty invented",
+        "R10-07": "frozen initial counts independently recomputed; historical review33files/776099B/12804lines remains primary measurement without epoch file manifest or real maintenance effort proof"
+      },
+      "confirmed_findings": [
+        {
+          "id": "R10-D01",
+          "aliases": [
+            "R10-C01",
+            "I-02"
+          ],
+          "classification": "implementation/persistent-format version admission ordered after v1 DDL",
+          "fdp_subtype": "reserved; behavior defect not automatically a writing-level change",
+          "severity": "MAJOR",
+          "priority": "P2",
+          "status": "open",
+          "location": "skills/astrofairy/scripts/astrofairy/_store.py:25–47",
+          "condition": "existing metadata declares unsupported version; current startup first performs v1 table/index DDL",
+          "evidence_limit": "new tables and premature shape error observed; sentinels retained, no loss/corruption established; SQLite traceback symptom supplements existing R04-D03"
+        }
+      ],
+      "candidate_findings": [
+        {
+          "id": "R10-C01",
+          "status": "resolved into confirmed R10-D01; discovery provenance retained",
+          "location": "skills/astrofairy/scripts/astrofairy/_store.py:25–47",
+          "observation": "unknown metadata2 rejected after old schema tables created in two synthetic future-store fixtures; sentinel intact, no data loss shown",
+          "severity": "MAJOR",
+          "fdp_subtype": "reserved",
+          "priority": "P2",
+          "resolution": "Primary R10-C01 and sealed independent I-02 merged without double counting"
+        }
+      ],
+      "independent_review": {
+        "agent": "r10_independent_resume",
+        "status": "completed scoped independent review",
+        "completed": true,
+        "substituted_by_primary": false,
+        "initial_isolation": "fresh context; all51 frozen files/4031lines and clean8 before candidate seal; no root conclusions before independent derivation",
+        "matrix_cells": 64,
+        "source_manifest_files": 51,
+        "additional_originals": 3,
+        "previous_attempt": {
+          "agent": "r10_independent_review",
+          "completed": false,
+          "reason": "platform usage limit, no independent candidate/report produced"
+        },
+        "reports": [
+          ".evaluation/reviews/R10/independent-resume/report.md",
+          ".evaluation/reviews/R10/independent-resume/matrix.md"
+        ],
+        "final_integration": "no remaining conflict; final root report hash33fd8d7a4ff86eff530c7400b4383f571079f5de0f2d72090448f5936ed17726"
+      },
+      "previous_items": [
+        "R02-D02 per-task historical work-packet growth remains open",
+        "R07-D01 Unicode search remains open",
+        "R04/R05/R06/R14 existing findings not repaired or withdrawn"
+      ],
+      "primary_official_originals": 6,
+      "authority_catalog_families": 64,
+      "primary_fixture_tasks": 40,
+      "backup_replayed_tasks": 40,
+      "provider_adapters": 2,
+      "governance_measurement_epoch": "before R10 brief/report creation; not final live counts",
+      "regression_suites_rerun": false,
+      "production_changed": false,
+      "user_adjudication": "not yet performed",
+      "next": "R12 distribution, installation and actual host use",
+      "verification": "passed: resumed fresh independent review and final integration without remaining conflict, primary6/independent3 original identities, frozen51/full independent read declaration and64 Q cells, candidate7 seal and historical18 archived inputs, immutable seven-home hashes/replay,40+40 same-source task recovery and adapter/library facts, separate supported/unsupported/foreign-schema CLI controls, strict scope/cost/governance qualifications, structural/reference/AST/ownership/budgets/professional wording and whitespace; product not repaired or accepted, no whole-regression rerun, R10-D01 MAJOR/P2 open with FDP subtype reserved",
+      "round_evidence_complete": true,
+      "fdp_convergence": false,
+      "previous_item_supplements": [
+        "R07-D01 Unicode: summary Straße/tag Greek and consistent-casefold controls",
+        "R04-D03 SQLite error normalization: unsupported foreign schema CLI traceback",
+        "R02-D02 growth concerns retained; closed-feedback inspect/receipt growth separately described, not a new bounded-packet promise"
+      ],
+      "independent_primary_db_verification": "mode=ro&immutable=1, repeated40/restored40 same-source tasks/library8/adapter2 plus relocated1cancel and2unsupported-version homes; all7 DB hashes unchanged",
+      "independent_relocation_check": "read-only scratch diff: only _runtime wrapper and _relocated_runtime added/body identity; stub5, core978→442, structural gate passes; no full suite"
+    },
+    "R12": {
+      "started_on": "2026-10-29",
+      "round": "R12",
+      "report": "R12-distribution-and-host-use.md",
+      "stage": "primary and fresh independent evidence complete; MINOR/P2 SQLite dependency contract finding open, FDP subtype reserved; native model/platform/upgrade outcomes unaccepted",
+      "objects": [
+        "A07",
+        "M03",
+        "M04",
+        "M36",
+        "M37",
+        "M38",
+        "M39",
+        "M40",
+        "M43",
+        "C05",
+        "C06",
+        "U05"
+      ],
+      "checks": {
+        "R12-01": "public GitHub and five project copies; preinstalled environment, cached CLI1.7.4; first npx/user-wide/interactive setup not tested",
+        "R12-02": "public directory23/ZIP18/wheel11 source bytes, license and version verified; sdist47/51 excluding four repository control files",
+        "R12-03": "Codex0.164.0 app-server exact repo path four controls; all native model triggers/tasks and other native apps pending",
+        "R12-04": "Linux/aarch64 Python3.12.13 SQLite3.53.0, Unicode/space and permission controls; R12-D01 MINOR/P2 static dependency floor gap, no old stack execution",
+        "R12-05": "five same-version reinstall/remove/readd external home retention assertions and current replay; historic hash maps not retained, no real upgrade/migration",
+        "R12-06": "Claude relative/direct skill path allowed in actual official text; native management/marketplace/cache/updates pending",
+        "R12-07": "unwritable directory false and missing python launch boundary; SQLite traceback supplements R04-D03; real first-use recovery/persistence not measured"
+      },
+      "confirmed_findings": [
+        {
+          "id": "R12-D01",
+          "aliases": [
+            "IR-F03"
+          ],
+          "severity": "MINOR",
+          "priority": "P2",
+          "status": "open",
+          "classification": "implementation/dependency contract omits SQLite window-function capability required by search",
+          "fdp_subtype": "reserved; not automatically writing-level",
+          "location": "skills/astrofairy/scripts/astrofairy/_library.py:172",
+          "evidence_limit": "official CPython minimum3.7.15 vs SQLite window introduction3.25.0 and unconditional consumer; current library positive, old SQLite full Python stack not executed"
+        }
+      ],
+      "independent_review": {
+        "agent": "r12_independent_review",
+        "completed": true,
+        "status": "completed scoped review and final read-only crosscheck",
+        "initial_isolation": "all51 frozen files and clean12 before sealed candidates; later addendum IR-F03 separately recorded",
+        "matrix_cells": 96,
+        "reports": [
+          ".evaluation/reviews/R12/independent/independent-review.md",
+          ".evaluation/reviews/R12/independent/objects-12x8.md"
+        ],
+        "crosscheck": ".evaluation/reviews/R12/independent/crosscheck-final-evidence.json",
+        "crosscheck_scope": "93 commands, five current databases and hash chains, current copies/public23/wheel11/sdist47/ZIP18/native4; cannot reconstruct unretained historical before/after hash maps",
+        "final_integration": "final-root-report-check.json: report hash f6ba141992154d19fb65300b1ec5b797b3fd16b0ccd671ce4a66f9273d530be4; no remaining material evidence conflict, pyproject line anchor corrected"
+      },
+      "previous_item_supplements": [
+        "R04-D03 SQLite exception normalization two new failure origins and clean control",
+        "R11 Node>=22.20.0 prerequisite omission: primary NOTE/P3 and independent MINOR rating difference retained"
+      ],
+      "authority_catalog_families": 67,
+      "native_discovery_targets": 1,
+      "installer_targets": 5,
+      "production_changed": false,
+      "regression_suites_rerun": false,
+      "user_adjudication": "not yet performed",
+      "fdp_convergence": false,
+      "round_evidence_complete": true,
+      "next": "R16 documentation, development guarantees and public claims; then R15 integrated review",
+      "verification": "passed: frozen51/source identity, primary96 and independent96 cells, independent pre-exchange seal and final raw evidence crosscheck, five installed lifecycles/93 commands/public23/ZIP18/wheel11/sdist47/native4, current SQLite positive, source snapshots67 families, structural/reference/AST/ownership/budgets/professional wording and whitespace; exact historic home maps unretained and wheel target reused disclosed. No product fixes, real upgrade/native model/other OS acceptance, full regression or overall FDP convergence."
+    },
+    "R16": {
+      "started_on": "2026-10-29",
+      "round": "R16",
+      "report": "R16-documents-development-and-public-claims.md",
+      "stage": "primary, authenticity, fresh independent reproduction and final report evidence check complete; D01 MAJOR/P2 and D02 MINOR/P2 open, FDP subtype reserved",
+      "objects": [
+        "M39",
+        "M42",
+        "M43",
+        "M44",
+        "M45",
+        "C06"
+      ],
+      "checks": {
+        "R16-01": "bilingual themes/limits coherent; existing Node and SQLite prerequisites gaps retained",
+        "R16-02": "dated historical claims vs live documentation separated; current navigation driftN01 repaired within review materials",
+        "R16-03": "current version/license and source distributions have evidence; D02 leading-zero conversion violates SemVer, current version valid; no native loader failure claimed",
+        "R16-04": "independent public repo, no runtime third-party dependency; marker scan133 files only false-positive generic home wording, not complete secret/legal certification",
+        "R16-05": "consumer/SSOT traceable and ordinary drift detected; D01 owner/discovery/lint combination skips new failing dev test with full green; current47 all execute",
+        "R16-06": "navigation references canonical progress, priorR12 37 exact inputs archived before shared changes; local raw evidence not fully public; real long-term maintenance cost unproven",
+        "R16-07": "public run40593456406 on frozen commit successful44+3/build/ZIP, official actiontags and read token verified; local canonical47 and direct hook script controls; no actual commit/newremote run/native business/platform upgrade acceptance"
+      },
+      "confirmed_findings": [
+        {
+          "id": "R16-D01",
+          "severity": "MAJOR",
+          "priority": "P2",
+          "status": "open",
+          "classification": "implementation/test owner admission inconsistent with unittest discovery and dev INP001 ignore",
+          "fdp_subtype": "reserved",
+          "location": "dev/check.py:50–67,88–91; pyproject.toml:53",
+          "evidence_limit": "Synthetic owner-local failing dev nested test omitted with no init; explicit load and init control fail; current frozen47 all executed, runtime counterpart blocked"
+        },
+        {
+          "id": "R16-D02",
+          "aliases": [
+            "I-C01"
+          ],
+          "severity": "MINOR",
+          "priority": "P2",
+          "status": "open",
+          "classification": "implementation/PEP440 to SemVer numeric normalization",
+          "fdp_subtype": "reserved",
+          "location": "dev/sync_metadata.py:23–29",
+          "evidence_limit": "01.2.3 and1.2.3a01 accepted/render invalid SemVer with clean sync check; independent a01 whole gate/build pass; current version valid, Claude version field not validated, no native load failure claimed"
+        }
+      ],
+      "review_infrastructure_findings": [
+        {
+          "id": "R16-N01",
+          "severity": "MINOR",
+          "priority": "P3",
+          "status": "repaired in authorized review docs",
+          "location": "docs/reviews/README.md:4–5",
+          "baseline_product": false,
+          "change": "Removed manually repeated current/next round; link INDEX and status",
+          "original": ".evaluation/reviews/R16/primary/review-readme-before.md"
+        }
+      ],
+      "independent_review": {
+        "agent": "r16_independent_review",
+        "completed": true,
+        "initial_isolation": "fresh full51/4031 before seal; version candidate pre-exchange, discovery defect independently reproduced after root candidate exchange",
+        "matrix_cells": 48,
+        "reports": [
+          ".evaluation/reviews/R16/independent/report.md",
+          ".evaluation/reviews/R16/independent/matrix.md"
+        ],
+        "final_integration": "independent/crosscheck.json: final report 2461730d4e8e59c240317ae4b1e525049c75e1e0720c763f6328940123ada25c; no material evidence conflict; six-object48 total wording corrected"
+      },
+      "previous_item_supplements": [
+        "R11 Node floor and R12-D01 SQLite capability premise remain",
+        "R04/R05/R06/R07/R10 findings not repaired by CI green or source consistency",
+        "R10 governance growth/cost remains scoped/unproven"
+      ],
+      "authority_catalog_families": 69,
+      "local_existing_tests": 47,
+      "remote_existing_tests": 47,
+      "remote_ci_run": 40593456406,
+      "production_changed": false,
+      "review_docs_repaired": true,
+      "regression_suites_rerun": true,
+      "regression_scope": "Frozen baseline full canonical gate in isolated copy and independent copy, plus targeted mutated contexts. Not all business/native/OS tests.",
+      "user_adjudication": "not yet performed",
+      "fdp_convergence": false,
+      "round_evidence_complete": true,
+      "external_tracking": "No external issue: this phase restricted to local review evidence/docs; independent project does not use parent tracker; deviation explicit, major finding open locally",
+      "next": "R15 integrated validation and evidence review",
+      "verification": "Frozen51 and source identities, 48 primary/48 independent cells, initial/final independent seals and final report identity, actual frozen44+3 local and remoteCI, D01 skip/direct/init/runtime-INP001 controls, D02 two version classes with normal current controls and independent full gate/build, direct hook normal/drift controls with explicit mode restoration and no commit-dispatch claim, Apache appendix-only diff, previous epoch37 archive, professional wording/refs/AST/structure/budgets/whitespace passed. Product not repaired; R15/overall/native/long-term acceptance pending."
+    },
+    "R15": {
+      "started_on": "2026-10-29",
+      "round": "R15",
+      "report": "R15-evidence-and-integration.md",
+      "stage": "Primary, original scoped independent review and resumed final expanded69 object/synthesis check complete; no new product defect, old13 confirmed+2 candidates open; user unadjudicated",
+      "objects": [
+        "A09",
+        "M42",
+        "M43",
+        "M45",
+        "U05",
+        "U06"
+      ],
+      "checks": {
+        "R15-01": "待证（已有部分证据或未闭合条件）; 本轮综合证据复核；13确认问题、2边界候选与实际使用/长期责任不因取证完成而关闭。",
+        "R15-02": "未达到（已指出的条件）; 本轮综合证据复核；13确认问题、2边界候选与实际使用/长期责任不因取证完成而关闭。",
+        "R15-03": "未达到（已指出的条件）; 本轮综合证据复核；13确认问题、2边界候选与实际使用/长期责任不因取证完成而关闭。",
+        "R15-04": "有限支持; 本轮综合证据复核；13确认问题、2边界候选与实际使用/长期责任不因取证完成而关闭。",
+        "R15-05": "待证（已有部分证据或未闭合条件）; 本轮综合证据复核；13确认问题、2边界候选与实际使用/长期责任不因取证完成而关闭。",
+        "R15-06": "有限支持; 本轮综合证据复核；13确认问题、2边界候选与实际使用/长期责任不因取证完成而关闭。",
+        "R15-07": "有限支持; 本轮综合证据复核；13确认问题、2边界候选与实际使用/长期责任不因取证完成而关闭。"
+      },
+      "confirmed_findings": [],
+      "reconfirmed_old_findings": [
+        "R04-D01",
+        "R05-D01",
+        "R05-D02",
+        "R16-D01"
+      ],
+      "independent_review": {
+        "agent": "r15_independent_review",
+        "completed": true,
+        "initial_isolation": "all51 before sealed8 candidates; direct Git blob verification; later old source/evidence exchange and separate reproduction",
+        "matrix_cells": 48,
+        "reports": [
+          ".evaluation/reviews/R15/independent/report.md",
+          ".evaluation/reviews/R15/independent/object-matrix.md"
+        ],
+        "final_integration": "2026-10-30 resumed expanded check complete; resume-final-review.md sha12f40edfed2f2969289525f35fe1820851ce0a1d3996019b24e48b42f931c8bc and resume-final-crosscheck.json shaf27b7045afe7f7e5257f06a2b8a11d16eff0efa5a338275f490654ad96b408a5; errors=[],69 Q08/owner/latest/dependency checks; original scoped records unchanged",
+        "resumed_reports": [
+          ".evaluation/reviews/R15/independent/resume-final-review.md",
+          ".evaluation/reviews/R15/independent/resume-final-crosscheck.json"
+        ]
+      },
+      "authority_catalog_families": 71,
+      "record_coverage": {
+        "vision_requirements": 17,
+        "checks": 117,
+        "facets": 16,
+        "objects": 69,
+        "scenarios": 16,
+        "meaning": "Every item has a bounded record or explicit pending decision, not blanket conformance"
+      },
+      "summary": "overall-assessment.md",
+      "summary_data": "overall-assessment.json",
+      "check_summary": "check-results.md",
+      "confirmed_open_total": 13,
+      "boundary_candidates_total": 2,
+      "product_changed": false,
+      "regression_suites_rerun": true,
+      "regression_scope": "Independent frozen canonical47 and targeted quality/discovery probes; root scripted3 tasks and immutable selected evidence audit, not all old13 bug reruns",
+      "fresh_business_model_trials": 0,
+      "user_adjudication": "not yet performed",
+      "fdp_convergence": false,
+      "round_evidence_complete": true,
+      "external_tracking": "No external Issue; current local review scope and no parent tracker; explicit deviation, major findings remain open locally",
+      "next": "Prioritized repair/boundary decisions and impact revalidation, followed by scoped genuine-user/native trials; no automatic product change in this review phase",
+      "resume": {
+        "on": "2026-10-30",
+        "previous_attempt_complete": false,
+        "reason": "platform usage limit interrupted final extended crosscheck",
+        "archived_inputs": ".evaluation/reviews/R15/primary/resume-input-baseline/manifest.json",
+        "completed_on": "2026-10-30",
+        "completed": true
+      },
+      "verification": "Passed: original independent seal and Git51 identity, primary/independent48 cells, exact17/117/16/69 synthesis and original Q08 owner/chronology/dependency checks,42 scripted submissions and selected raw evidence/8×51 source audits,71 source snapshots, prior44 and original19 archives, documented interruption and precloseout status snapshot. No product repair, user/overallFDP acceptance or untested outcomes inferred."
+    }
+  },
+  "overall_assessment": {
+    "path": "overall-assessment.json",
+    "summary": "overall-assessment.md",
+    "checks": "check-results.md",
+    "facets_with_evidence": 16,
+    "confirmed_open": 13,
+    "boundary_candidates": 2,
+    "product_accepted": false,
+    "user_adjudicated": false,
+    "independent_finalization": "Completed2026-10-30; resumed addition independently sealed, product not accepted"
+  }
+}

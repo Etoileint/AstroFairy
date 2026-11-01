@@ -5,9 +5,9 @@ from pathlib import Path
 from typing import Any
 
 from astrofairy import FairyError, Workshop
-from astrofairy._capabilities import Capability, Context, builtins
+from astrofairy._capabilities import Context, builtins
 from astrofairy._contracts import canonical, parse_json
-from astrofairy.tests._support import WorkshopTest
+from astrofairy.tests._support import WorkshopTest, mock_capability
 
 
 class TaskTests(WorkshopTest):
@@ -39,12 +39,10 @@ class TaskTests(WorkshopTest):
 
     def test_capability_discovery_does_not_load_whole_catalog(self) -> None:
         task = self.workshop.start("Work")
-        self.workshop.capabilities.update(
-            {
-                f"extra.tool{index}": Capability("read", lambda _context, _parameters: {"outputs": []})
-                for index in range(100)
-            }
-        )
+        for index in range(100):
+            self.workshop.register(
+                f"extra.tool{index}", mock_capability("read", lambda _context, _parameters: {"outputs": []})
+            )
         packet = self.workshop.next(task)
         self.assertEqual(len(packet["capabilities"]), 8)
         self.assertGreater(packet["capability_count"], 100)
@@ -105,8 +103,9 @@ class TaskTests(WorkshopTest):
 
     def test_path_traversal_does_not_write_outside_workspace(self) -> None:
         task = self.workshop.start("Write")
-        result = self.workshop.invoke(task, "text.write", {"path": "../../escape", "text": "no"})
-        self.assertEqual(result["status"], "unknown")
+        with self.assertRaises(FairyError):
+            self.workshop.invoke(task, "text.write", {"path": "../../escape", "text": "no"})
+        self.assertFalse(self.workshop.state(task).calls)
         self.assertFalse((self.home / "escape").exists())
 
     def test_inputs_are_snapshots_and_reads_are_bounded(self) -> None:
@@ -170,7 +169,7 @@ class TaskTests(WorkshopTest):
 
     def test_explicit_requirements_need_forwarded_user_change(self) -> None:
         task = self.workshop.start(
-            "Work", criteria=[{"id": "goal", "description": "Original", "origin": "user"}]
+            "Work", spec={"criteria": [{"id": "goal", "description": "Original", "origin": "user"}]}
         )
         revised = [{"id": "goal", "description": "Changed", "origin": "user"}]
         command = {"op": "revise", "goal": "Changed", "criteria": revised, "reason": "Requested change"}
@@ -184,7 +183,7 @@ class TaskTests(WorkshopTest):
         def uncertain(_context: Context, _parameters: dict[str, Any]) -> dict[str, Any]:
             raise OSError("an operation may have happened")
 
-        self.workshop.capabilities["uncertain"] = Capability("write", uncertain)
+        self.workshop.register("uncertain", mock_capability("write", uncertain))
         task = self.workshop.start("Work")
         result = self.workshop.invoke(task, "uncertain", {})
         self.assertEqual(result["status"], "unknown")
@@ -265,8 +264,9 @@ class TaskTests(WorkshopTest):
             self.workshop.submit(task, {"op": "ask", "question": "Again?", "recommendation": "A"})
 
     def test_new_capability_requires_no_kernel_change(self) -> None:
-        self.workshop.capabilities["domain.compute"] = Capability(
-            "read", lambda _context, _parameters: {"outputs": [], "value": 42}
+        self.workshop.register(
+            "domain.compute",
+            mock_capability("read", lambda _context, _parameters: {"outputs": [], "value": 42}),
         )
         task = self.workshop.start("Work")
         self.assertEqual(self.workshop.invoke(task, "domain.compute", {})["result"]["value"], 42)
@@ -282,8 +282,8 @@ class TaskTests(WorkshopTest):
                 other.submit(task, {"op": "publish", "ref": second})
             return original.handler(context, parameters)
 
-        self.workshop.capabilities["content.check"] = Capability(
-            original.effect, changing, original.required, original.optional
+        self.workshop.register(
+            "content.check", mock_capability(original.effect, changing, original), replace=True
         )
         with self.assertRaises(FairyError) as caught:
             self.workshop.check(task)
