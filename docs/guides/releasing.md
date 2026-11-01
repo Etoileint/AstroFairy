@@ -17,7 +17,9 @@ does not publish to PyPI or list a plugin in a marketplace.
 5. Preserve frozen reviews, source manifests and original evaluation records. Append corrections
    and release decisions separately. Permission to release an alpha does not certify every
    long-term validation objective.
-6. Run `python dev/check.py`. Inspect the exact candidate diff and file list for unintended files,
+6. Run `python dev/check.py`. If a GitHub workflow changes, validate it with
+   [actionlint](https://github.com/rhysd/actionlint) as well; Python tests do not validate workflow YAML.
+   Inspect the exact candidate diff and file list for unintended files,
    private data and credentials. Commit through the configured hooks; never bypass them.
 
 ## Build and publish
