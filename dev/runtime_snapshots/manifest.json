@@ -38,5 +38,10 @@
     "url": "https://pypi.org/pypi/filelock/4.2.6/json",
     "sha256": "b41fd205f9a016c5da0e3f3576106bbc0077fd0027702977549e0a7bf9d99922",
     "retrieved_at": "2026-10-31T18:45:30.472532+00:00"
+  },
+  "pathvalidate": {
+    "url": "https://pypi.org/pypi/pathvalidate/3.3.1/json",
+    "sha256": "b144b6d54a2465dba1651d9cfd12eb65400b2b67081926336d9b9e933b7c3d0e",
+    "retrieved_at": "2026-11-02T18:41:25.988025+00:00"
   }
 }

@@ -19,7 +19,7 @@ class MetadataTests(unittest.TestCase):
         self.root = Path(temporary.name)
         shutil.copyfile(ROOT / "pyproject.toml", self.root / "pyproject.toml")
         shutil.copyfile(ROOT / "LICENSE", self.root / "LICENSE")
-        self.version = self.root / "skills/astrofairy/scripts/astrofairy/_version.py"
+        self.version = self.root / "skills/fairy/scripts/astrofairy/_version.py"
         self.version.parent.mkdir(parents=True)
         self.manifest = self.root / ".claude-plugin/plugin.json"
 
@@ -85,7 +85,7 @@ class MetadataTests(unittest.TestCase):
         outputs = (
             self.manifest,
             self.root / ".claude-plugin/marketplace.json",
-            self.root / "skills/astrofairy/LICENSE",
+            self.root / "skills/fairy/LICENSE",
         )
         for existing in (False, True):
             for path in outputs:

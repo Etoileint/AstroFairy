@@ -1,0 +1,282 @@
+{
+  "format": 1,
+  "reviewed_at": "2026-11-02T23:26:26.809898+00:00",
+  "technical_verdict": "rework_required",
+  "product_accepted": false,
+  "input_manifest_sha256": "51a18ec46af49f30a8cb4d71b0604af00d642b452cff86b2df6d870a34db4956",
+  "reviewed_return_sha256": {
+    "source-manifest.json": "94ee37c04dcca101124e928ca8500fe62666748d565f63ebc3fca074c4cea93b",
+    "source.zip": "da5bc8bee393969eb43ec77bfb84b6dc3ba9b7a9922123c3b9eb416a465d6f78",
+    "evidence-inventory.json": "c63bcab9b67a056f10de00ff1eef10b354f2777772fffba52806b48b5ad0b255",
+    "submission.json": "c058614580b43419dcd0fc0da1e6a0cfc408782d0450172293f3df91d7fc5665"
+  },
+  "source_scope": "Assigned working-tree snapshot to received final source, including untracked files and skill directory rename; not HEAD...HEAD",
+  "findings": [
+    {
+      "id": "STD-01",
+      "axis": "standards",
+      "priority": "P2",
+      "status": "confirmed_open",
+      "title": "BagIt 实际版本与声明不一致",
+      "anchor": {
+        "path": "skills/fairy/scripts/astrofairy/_delivery.py",
+        "line": 132
+      },
+      "authority": "design §7; RFC8493 BagIt 1.0 output promise",
+      "observation": "make_bag 产出 header 0.97，receipt 却写 bagit-1.0；完整自校验没有发现声明错位。",
+      "root_cause_repair": "按固定成熟实现/API产出所承诺的规范版本，并在消费点核 header/清单/回执同一身份；不得仅降低声明以绕过方案。",
+      "affected_work": [
+        "W02",
+        "W07"
+      ],
+      "acceptance_cases": [
+        "V15",
+        "V24"
+      ],
+      "independent_validation": "原会话实际生成导出+acceptance_standards读取原件/已交产物"
+    },
+    {
+      "id": "STD-02",
+      "axis": "standards",
+      "priority": "P2",
+      "status": "confirmed_open",
+      "title": "可移植路径的目录前缀冲突漏拒",
+      "anchor": {
+        "path": "skills/fairy/scripts/astrofairy/_contracts.py",
+        "line": 202
+      },
+      "authority": "design §5 portable path conflict rules",
+      "observation": "A 与 a/file.txt 被接受；同大小写前缀反例被拒。完整路径fold，前缀却用原串。",
+      "root_cause_repair": "统一完整路径和每级前缀的可移植比较规则，测试嵌套、大小写、冲突顺序和合法同目录。",
+      "affected_work": [
+        "W01",
+        "W02"
+      ],
+      "acceptance_cases": [
+        "V07",
+        "V14"
+      ],
+      "independent_validation": "原会话函数级生产路径+acceptance_standards独立复现"
+    },
+    {
+      "id": "STD-03",
+      "axis": "standards",
+      "priority": "P2",
+      "status": "confirmed_open",
+      "title": "独立技能包中的运维入口断链",
+      "anchor": {
+        "path": "skills/fairy/SKILL.md",
+        "line": 182
+      },
+      "authority": "ADR-0002 portable self-contained skill; design §11",
+      "observation": "SKILL引用../../docs/guides/operation.md，fairy.zip及目录复制不包含该文档。",
+      "root_cause_repair": "将必要运行/恢复资料纳入规范技能单元并校验分发后链接/命令同源，不只检查源码仓库链接。",
+      "affected_work": [
+        "W03",
+        "W07"
+      ],
+      "acceptance_cases": [
+        "V23",
+        "V24"
+      ],
+      "independent_validation": "原会话读实际fairy.zip+acceptance_standards独立分发检查"
+    },
+    {
+      "id": "SPEC-01",
+      "axis": "spec",
+      "priority": "P1",
+      "status": "confirmed_open",
+      "title": "中断接续丢失完整成员计划",
+      "anchor": {
+        "path": "skills/fairy/scripts/astrofairy/_runtime.py",
+        "line": 690
+      },
+      "authority": "design §3 resumable combination; V06/V13",
+      "observation": "计划[a,b]捕获a后b缺失，next建议只发a；按remaining仅续b，最终complete只交b。",
+      "root_cause_repair": "持久化完整交付意图及进度，使next/续接从记录恢复全部成员与角色；中断不得退化为部分计划complete。",
+      "affected_work": [
+        "W01",
+        "W02",
+        "W03"
+      ],
+      "acceptance_cases": [
+        "V06",
+        "V08",
+        "V13"
+      ],
+      "independent_validation": "原会话实际Workshop重复+acceptance_spec独立临时home复现"
+    },
+    {
+      "id": "SPEC-02",
+      "axis": "spec",
+      "priority": "P1",
+      "status": "confirmed_open",
+      "title": "已有交付Bag未核对权威快照",
+      "anchor": {
+        "path": "skills/fairy/scripts/astrofairy/_delivery.py",
+        "line": 210
+      },
+      "authority": "design §7 fixed snapshot/receipt and existing-directory verification",
+      "observation": "改payload并重封为内部自洽Bag后deliver成功；返回字节SHA与账本snapshot.ref不一致。换放另一个合法Bag同类。",
+      "root_cause_repair": "用账本固定成员摘要/集合与task/revision/seq核交付和回执；成熟Bag校验负责格式与清单，项目规则负责权威绑定。",
+      "affected_work": [
+        "W02",
+        "W07"
+      ],
+      "acceptance_cases": [
+        "V13",
+        "V15",
+        "V23"
+      ],
+      "independent_validation": "原会话生产deliver重封反例+acceptance_spec独立复现"
+    },
+    {
+      "id": "SPEC-03",
+      "axis": "spec",
+      "priority": "P2",
+      "status": "confirmed_open",
+      "title": "已有通过复用阻断合法失败重评",
+      "anchor": {
+        "path": "skills/fairy/scripts/astrofairy/_runtime.py",
+        "line": 438
+      },
+      "authority": "design §6 legitimate reassessment; V10/V11",
+      "observation": "A通过→B失败→恢复A；check一直checks=[]/reused=1/seq不变，B未决失败不能处置。",
+      "root_cause_repair": "同时从当前检查身份和待处置失败推导执行；必要时产生真实新检查或明确定义有依据处置；不可抹去历史失败。",
+      "affected_work": [
+        "W01",
+        "W02",
+        "W03"
+      ],
+      "acceptance_cases": [
+        "V10",
+        "V11"
+      ],
+      "independent_validation": "原会话两次无进展调用+acceptance_spec独立复现"
+    },
+    {
+      "id": "ROOT-01",
+      "axis": "retrieval_learning",
+      "priority": "P1",
+      "status": "confirmed_open",
+      "title": "两路排名在融合前被跨路去重",
+      "anchor": {
+        "path": "skills/fairy/scripts/astrofairy/_search.py",
+        "line": 639
+      },
+      "authority": "design §9 BM25/vector/RRF; W06 same-field comparisons",
+      "observation": "全文[A,B]、向量[B,C,D,A]时，B/A的向量贡献消失；2:1公式应B>A，生产page却A>B。",
+      "root_cause_repair": "每路独立按资产聚合/去重并保留原排名后融合；优先成熟实现，必要领域适配须与参考公式/实现定向对照。",
+      "affected_work": [
+        "W04",
+        "W06"
+      ],
+      "acceptance_cases": [
+        "V16",
+        "V17"
+      ],
+      "independent_validation": "原会话控制排名调用生产page+acceptance_spec独立公式复核"
+    },
+    {
+      "id": "ROOT-02",
+      "axis": "retrieval_learning",
+      "priority": "P1",
+      "status": "confirmed_open",
+      "title": "首个模型准备入口形成循环",
+      "anchor": {
+        "path": "skills/fairy/scripts/astrofairy/_search.py",
+        "line": 423
+      },
+      "authority": "design §3/§9 first use and explicit preparation; V02",
+      "observation": "空cache refresh先找tokenizer，报search_not_ready并指向同一refresh；load调用0，无其它产品准备入口。",
+      "root_cause_repair": "准备阶段用成熟下载/缓存组件建立固定且可校验原件，之后才能切分/投影；空库不下载，首次有资产可见进度并可恢复。",
+      "affected_work": [
+        "W03",
+        "W04",
+        "W07"
+      ],
+      "acceptance_cases": [
+        "V02",
+        "V19",
+        "V24"
+      ],
+      "independent_validation": "原会话新cache生产refresh+acceptance_standards独立只读顺序复现"
+    },
+    {
+      "id": "ROOT-03",
+      "axis": "retrieval_learning",
+      "priority": "P1",
+      "status": "confirmed_open",
+      "title": "模型profile与实际消费原件断开",
+      "anchor": {
+        "path": "skills/fairy/scripts/astrofairy/_search.py",
+        "line": 140
+      },
+      "authority": "design §9/§11 fixed model revision/files/profile",
+      "observation": "SDK仅接name/cache/threads，缺缓存用默认HEAD；tokenizer任取glob首项，无消费SHA门。普通搜索可进入下载。",
+      "root_cause_repair": "准备固定revision及消费文件哈希，固定实际加载目录/完整profile；普通查询离线验证，不静默下载或跨模型复用索引/向量缓存。",
+      "affected_work": [
+        "W04",
+        "W07"
+      ],
+      "acceptance_cases": [
+        "V02",
+        "V18",
+        "V19"
+      ],
+      "independent_validation": "原会话拦截真实加载调用+acceptance_standards回读锁定SDK与全部消费点"
+    },
+    {
+      "id": "ROOT-04",
+      "axis": "retrieval_learning",
+      "priority": "P1",
+      "status": "confirmed_open",
+      "title": "学习与必需治理资产的职责未接齐",
+      "anchor": {
+        "path": "skills/fairy/scripts/astrofairy/_runtime.py",
+        "line": 946
+      },
+      "authority": "design §9 required governance independent of top-k; §10 learning lifecycle",
+      "observation": "已有维护子任务和采用/退役，但每交付的维护/暂缓/不变决定、后会话待办发现、必需规则固定和资产结构/投影合同缺失。",
+      "root_cause_repair": "接通决定/待办的可追溯普通任务路径、结构化适用/输入依赖/案例/失效字段及检索、范围确定的治理引用；语义适用性仍由host判断。",
+      "affected_work": [
+        "W01",
+        "W03",
+        "W04",
+        "W06"
+      ],
+      "acceptance_cases": [
+        "V03",
+        "V18",
+        "V20",
+        "V21"
+      ],
+      "independent_validation": "原会话接口/工作包/投影标记+acceptance_spec独立静读和标记复现",
+      "scope_precision": [
+        "workflow.content可以自由放附加字段，但未定义这些语义的字段合同，且applicability/dependencies/invalidation不进入投影；非workflow仍仅文本。",
+        "完整分页浏览原语存在；欠缺的是必需规则范围确定、约定固定引用及未知适用性提示接线。",
+        "learning_task确实冻结source并建普通维护任务，允许不变；不把部分未接齐夸大成完全没有学习。"
+      ]
+    }
+  ],
+  "counts_by_axis": {
+    "standards": 3,
+    "spec": 3,
+    "retrieval_learning": 4
+  },
+  "existing_checks": {
+    "exit_code": 0,
+    "runtime_collected": 179,
+    "runtime_skipped": 1,
+    "development_tests": 19,
+    "meaning": "Existing suites pass; independent production-path counterexamples reveal unmet requirements"
+  },
+  "not_reclassified_as_new_defects": [
+    "Previously declared native host/model adherence gap",
+    "Windows/macOS/native plugin evidence gap",
+    "Long-term human/team benefit unobserved",
+    "No-match applicability remains an explicit host judgment"
+  ],
+  "evidence_root": ".evaluation/optimization-acceptance/20261102",
+  "review_limits": "Independent targeted contract/standard/component and counterexample review, not proof every line or all future scenarios is correct; no product code changes in this receipt round"
+}

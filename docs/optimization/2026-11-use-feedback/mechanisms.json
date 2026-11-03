@@ -1,0 +1,2114 @@
+{
+  "format": 1,
+  "baseline": "baseline.json",
+  "coverage_meaning": "All historical object IDs are retained as investigation prompts, current anchors re-resolved; historical verdicts are not copied. New post-baseline mechanisms supplement them. Every runtime module has an owner; this is coverage preparation, not full code or design verification.",
+  "objects": [
+    {
+      "id": "A01",
+      "title": "产品范围与低负担委托",
+      "kind": "architecture",
+      "investigations": [
+        "T08"
+      ],
+      "question": "这种委托方式与初始化、人工介入需求是否一致？",
+      "anchors": [
+        {
+          "path": "README.zh-CN.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/SKILL.md",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#A01",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "A02",
+      "title": "协作宿主与本地运行器边界",
+      "kind": "architecture",
+      "investigations": [
+        "T08"
+      ],
+      "question": "成熟宿主原生能力、编排框架或当前分工的保证与成本如何比较？",
+      "anchors": [
+        {
+          "path": "docs/guides/architecture.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop",
+          "line": 47
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "Context",
+          "line": 35
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#A02",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "A03",
+      "title": "协议、判定、调用和存储分离",
+      "kind": "architecture",
+      "investigations": [
+        "T08"
+      ],
+      "question": "每一职责是否必要且可替换，是否有更成熟的组合或更小实现？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_contracts.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#A03",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "A04",
+      "title": "受控任务循环及完成语义",
+      "kind": "architecture",
+      "investigations": [
+        "T08"
+      ],
+      "question": "与成熟状态建模、持久工作流及宿主直接执行相比如何？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "State",
+          "line": 19
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.next",
+          "line": 486
+        },
+        {
+          "path": "skills/astrofairy/SKILL.md",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#A04",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "A05",
+      "title": "原始证据、事件与派生视图",
+      "kind": "architecture",
+      "investigations": [
+        "T08"
+      ],
+      "question": "事件化与内容寻址带来的保证、限制和成本是否值得？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "replay",
+          "line": 113
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.inspect",
+          "line": 536
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#A05",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "A06",
+      "title": "外置资产与任务化维护",
+      "kind": "architecture",
+      "investigations": [
+        "T08"
+      ],
+      "question": "与成熟记忆系统、工作流注册和版本库相比覆盖及学习效果如何？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.learning_task",
+          "line": 614
+        },
+        {
+          "path": "skills/astrofairy/references/learning.md",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#A06",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "A07",
+      "title": "共享 skill 加可选分发适配",
+      "kind": "architecture",
+      "investigations": [
+        "T08"
+      ],
+      "question": "共享契约及各宿主差异是否正确处理，维护成本如何？",
+      "anchors": [
+        {
+          "path": "docs/adr/0002-portable-standard-skill.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "pyproject.toml",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "dev/package_skill.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#A07",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "A08",
+      "title": "稳定核心与外围增长",
+      "kind": "architecture",
+      "investigations": [
+        "T08"
+      ],
+      "question": "新增职责、替换能力和规模增长时，复杂度是否真正留在外围？",
+      "anchors": [
+        {
+          "path": "governance.toml",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "AGENTS.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "docs/adr/0001-small-workshop.md",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#A08",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "A09",
+      "title": "整体组合及端到端保证",
+      "kind": "architecture",
+      "investigations": [
+        "T08"
+      ],
+      "question": "成熟组件的保证在连接处是否丢失，整体是否仍简洁、快速和可分析？",
+      "anchors": [
+        {
+          "path": "README.zh-CN.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "docs/guides/architecture.md",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#A09",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M01",
+      "title": "技能发现与调用入口",
+      "kind": "mechanism",
+      "investigations": [
+        "T01",
+        "T07"
+      ],
+      "question": "触发精度、误触发及宿主支持如何验证？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/SKILL.md",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M01",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M02",
+      "title": "条件资料与按需披露",
+      "kind": "mechanism",
+      "investigations": [
+        "T01"
+      ],
+      "question": "指针是否既准确又节约上下文？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/SKILL.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/references/host.md",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M02",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M03",
+      "title": "环境就绪诊断",
+      "kind": "mechanism",
+      "investigations": [
+        "T07"
+      ],
+      "question": "检测是否覆盖真实前提，错误解释能否支持低负担恢复？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_cli.py",
+          "symbol": "_run",
+          "line": 107
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M03",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M04",
+      "title": "数据目录与任务工作区",
+      "kind": "mechanism",
+      "investigations": [
+        "T07",
+        "T06"
+      ],
+      "question": "权限、平台、目录寿命和升级隔离是否成立？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": "Store.__init__",
+          "line": 65
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop._start",
+          "line": 92
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M04",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M05",
+      "title": "建任务、默认标准和附件快照",
+      "kind": "mechanism",
+      "investigations": [
+        "T01",
+        "T06"
+      ],
+      "question": "默认标准足够吗，材料保真与上下文供给是否一致？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.start",
+          "line": 108
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M05",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M06",
+      "title": "严格 JSON 与命令字段契约",
+      "kind": "mechanism",
+      "investigations": [
+        "T01",
+        "T06"
+      ],
+      "question": "与成熟模式校验相比接受域、错误和维护成本如何？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_contracts.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M06",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M07",
+      "title": "要求来源与修订",
+      "kind": "mechanism",
+      "investigations": [
+        "T01",
+        "T06"
+      ],
+      "question": "来源归属、修订授权与真实意图是否一致？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.submit",
+          "line": 360
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_contracts.py",
+          "symbol": "criteria_value",
+          "line": 118
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M07",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M08",
+      "title": "关键提问与输入转发",
+      "kind": "mechanism",
+      "investigations": [
+        "T01",
+        "T03"
+      ],
+      "question": "提问是否必要、回答是否正确进入后续目标与验收？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "admit_question",
+          "line": 281
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.submit",
+          "line": 360
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M08",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M09",
+      "title": "模型工作请求与报告",
+      "kind": "mechanism",
+      "investigations": [
+        "T01",
+        "T06"
+      ],
+      "question": "是否准确绑定输入、输出和执行者，协议负担是否值得？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop._request",
+          "line": 129
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.submit",
+          "line": 360
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M09",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M10",
+      "title": "工具注册、字段发现与能力目录",
+      "kind": "mechanism",
+      "investigations": [
+        "T01",
+        "T08"
+      ],
+      "question": "成熟工具接口与当前注册方式的覆盖、发现成本如何？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "Capability",
+          "line": 65
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "builtins",
+          "line": 311
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.catalog",
+          "line": 520
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M10",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M11",
+      "title": "动作准入、预算与重复防护",
+      "kind": "mechanism",
+      "investigations": [
+        "T03",
+        "T06"
+      ],
+      "question": "与幂等键、重试和执行租约等成熟机制的责任边界如何？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "admit_call",
+          "line": 203
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "require_open",
+          "line": 218
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "State.budget_left",
+          "line": 109
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M11",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M12",
+      "title": "调用前留痕与执行后观测",
+      "kind": "mechanism",
+      "investigations": [
+        "T06"
+      ],
+      "question": "副作用与日志之间的窗口如何处理；不确定性能否恢复？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.invoke",
+          "line": 152
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M12",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M13",
+      "title": "成果登记与版本绑定",
+      "kind": "mechanism",
+      "investigations": [
+        "T02"
+      ],
+      "question": "是否能定位真实最终交付物且使旧检查失效？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.submit",
+          "line": 360
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "State.artifact",
+          "line": 35
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M13",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M14",
+      "title": "文件捕获与类型标记",
+      "kind": "mechanism",
+      "investigations": [
+        "T02"
+      ],
+      "question": "类型、实际格式、读取预算和来源语义是否分开？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "_capture",
+          "line": 224
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M14",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M15",
+      "title": "内容访问与分段读取",
+      "kind": "mechanism",
+      "investigations": [
+        "T01",
+        "T03",
+        "T04"
+      ],
+      "question": "权限、编码、二进制处理及大材料读取如何比较？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "Context.content",
+          "line": 47
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "_read",
+          "line": 245
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M15",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M16",
+      "title": "机械检查器",
+      "kind": "mechanism",
+      "investigations": [
+        "T02",
+        "T06"
+      ],
+      "question": "能检什么、不能检什么，成熟格式工具如何接入？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "check_content",
+          "line": 279
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "_check",
+          "line": 298
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.check",
+          "line": 303
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M16",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M17",
+      "title": "语义审查、替代链和冲突",
+      "kind": "mechanism",
+      "investigations": [
+        "T02",
+        "T06"
+      ],
+      "question": "证据与判断能否验证，冲突和替代是否真实？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop._review",
+          "line": 276
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "admit_review",
+          "line": 256
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "State.active_reviews",
+          "line": 66
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "State.issues",
+          "line": 79
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M17",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M18",
+      "title": "关闭门与结果分类",
+      "kind": "mechanism",
+      "investigations": [
+        "T02",
+        "T06"
+      ],
+      "question": "结果分类是否准确，是否有错误完成或无法退出？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "State.complete",
+          "line": 88
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "admit_close",
+          "line": 287
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M18",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M19",
+      "title": "下一步工作包与调度",
+      "kind": "mechanism",
+      "investigations": [
+        "T01",
+        "T08"
+      ],
+      "question": "调度优先级、包大小与宿主实际推进是否协调？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.next",
+          "line": 486
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M19",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M20",
+      "title": "回执与交付导出",
+      "kind": "mechanism",
+      "investigations": [
+        "T02",
+        "T06"
+      ],
+      "question": "审核者能否还原内容组织；成果组合与后续更新如何？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.inspect",
+          "line": 536
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.deliver",
+          "line": 572
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M20",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M21",
+      "title": "SQLite 存储与事务",
+      "kind": "mechanism",
+      "investigations": [
+        "T06"
+      ],
+      "question": "实际事务与并发、崩溃、备份、迁移前提是否足够？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": "Store.__init__",
+          "line": 65
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": "Store.close",
+          "line": 132
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": "Store.transaction",
+          "line": 136
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": "Store.tasks",
+          "line": 208
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M21",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M22",
+      "title": "事件链、序号与重放",
+      "kind": "mechanism",
+      "investigations": [
+        "T03",
+        "T06"
+      ],
+      "question": "与成熟事件溯源相比一致性、篡改检测和成本如何？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": "Store.events",
+          "line": 161
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": "Store.append",
+          "line": 180
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "replay",
+          "line": 113
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.state",
+          "line": 82
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop._append",
+          "line": 126
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M22",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M23",
+      "title": "内容寻址与字节完整性",
+      "kind": "mechanism",
+      "investigations": [
+        "T02",
+        "T06"
+      ],
+      "question": "规范化、重复、完整性、真实性与保留策略如何界定？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": "Store.put",
+          "line": 145
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": "Store.get",
+          "line": 152
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_contracts.py",
+          "symbol": "canonical",
+          "line": 46
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_contracts.py",
+          "symbol": "digest",
+          "line": 55
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M23",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M24",
+      "title": "路径约束、原子写与文件权限",
+      "kind": "mechanism",
+      "investigations": [
+        "T02",
+        "T06"
+      ],
+      "question": "成熟文件操作实践、并发、竞态及持久性保证如何？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "Context.path",
+          "line": 40
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "atomic_write",
+          "line": 202
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "_write",
+          "line": 215
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M24",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M25",
+      "title": "重开、未决动作与迟到结果",
+      "kind": "mechanism",
+      "investigations": [
+        "T06"
+      ],
+      "question": "成熟恢复方案相比缺口、人工负担和可接受边界是什么？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "replay",
+          "line": 113
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.submit",
+          "line": 360
+        },
+        {
+          "path": "skills/astrofairy/references/review.md",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M25",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M26",
+      "title": "资产提案与工作流结构",
+      "kind": "mechanism",
+      "investigations": [
+        "T05"
+      ],
+      "question": "契约是否足以执行复用，是否存在过拟合或内容混杂？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.propose",
+          "line": 79
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M26",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M27",
+      "title": "候选验证任务与固定策略",
+      "kind": "mechanism",
+      "investigations": [
+        "T02",
+        "T05"
+      ],
+      "question": "机械和语义验证的充分性、独立性和成本如何？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "validation_criteria",
+          "line": 27
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.validation_task",
+          "line": 601
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M27",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M28",
+      "title": "采用与基准竞争",
+      "kind": "mechanism",
+      "investigations": [
+        "T05"
+      ],
+      "question": "并发采用、身份、信任及成熟度判断是否可靠？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.adopt",
+          "line": 140
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M28",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M29",
+      "title": "资产状态、版本、退役与回退",
+      "kind": "mechanism",
+      "investigations": [
+        "T04",
+        "T05"
+      ],
+      "question": "状态含义是否由证据支撑，版本选择和淘汰如何比较？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.status",
+          "line": 55
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.head",
+          "line": 63
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.get",
+          "line": 73
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library._event",
+          "line": 133
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.retire",
+          "line": 161
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M29",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M30",
+      "title": "资产检索与排序",
+      "kind": "mechanism",
+      "investigations": [
+        "T04"
+      ],
+      "question": "与全文、语义、混合及重排方案如何比相关性、漏检、延迟与成本？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.search",
+          "line": 166
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "_search",
+          "line": 254
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M30",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M31",
+      "title": "资产读取与精确版本钉选",
+      "kind": "mechanism",
+      "investigations": [
+        "T01",
+        "T04"
+      ],
+      "question": "检索结果到实际执行是否一致，旧版本与退役如何处理？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": "_asset",
+          "line": 262
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.invoke",
+          "line": 152
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M31",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M32",
+      "title": "反馈与独立维护任务",
+      "kind": "mechanism",
+      "investigations": [
+        "T05"
+      ],
+      "question": "回流触发、证据支持和实际后续收益如何评价？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.learning_task",
+          "line": 614
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.submit",
+          "line": 360
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M32",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M33",
+      "title": "资产分享与导入验证",
+      "kind": "mechanism",
+      "investigations": [
+        "T05",
+        "T06"
+      ],
+      "question": "可迁移依赖、来源可信度、隐私和本地复验是否完整？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.export",
+          "line": 187
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.import_bundle",
+          "line": 190
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M33",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M34",
+      "title": "被动工具说明与内容信任",
+      "kind": "mechanism",
+      "investigations": [
+        "T05",
+        "T06"
+      ],
+      "question": "资料、执行能力和授权的分界能否保持？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/references/learning.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.propose",
+          "line": 79
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M34",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M35",
+      "title": "资源限额与增长预算",
+      "kind": "mechanism",
+      "investigations": [
+        "T03"
+      ],
+      "question": "预算是否作用于真实成本，是否有移出预算文件的规避？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_contracts.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "governance.toml",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "dev/check.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M35",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M36",
+      "title": "CLI 错误、状态与诊断接口",
+      "kind": "mechanism",
+      "investigations": [
+        "T01",
+        "T03"
+      ],
+      "question": "错误语义是否有遗漏，调用者能否可靠判断和恢复？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_cli.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_errors.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/__main__.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M36",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M37",
+      "title": "自包含启动与可选 Python 包",
+      "kind": "mechanism",
+      "investigations": [
+        "T07"
+      ],
+      "question": "脱离仓库、site-packages 和平台默认路径后是否可运行？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/fairy.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "pyproject.toml",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_version.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/__init__.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M37",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M38",
+      "title": "便携 ZIP 内容过滤",
+      "kind": "mechanism",
+      "investigations": [
+        "T07"
+      ],
+      "question": "源、复制安装、ZIP 内容及许可是否一致？",
+      "anchors": [
+        {
+          "path": "dev/package_skill.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M38",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M39",
+      "title": "派生版本、许可与包元数据同步",
+      "kind": "mechanism",
+      "investigations": [
+        "T07"
+      ],
+      "question": "版本转换、错误输入和消费者漂移如何验证？",
+      "anchors": [
+        {
+          "path": "dev/sync_metadata.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "MANIFEST.in",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "LICENSE",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/LICENSE",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M39",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M40",
+      "title": "原生插件与市场清单",
+      "kind": "mechanism",
+      "investigations": [
+        "T07"
+      ],
+      "question": "各消费者实际解析、缓存和升级如何工作？",
+      "anchors": [
+        {
+          "path": ".claude-plugin/plugin.json",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M40",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M41",
+      "title": "可选 UI 元数据",
+      "kind": "mechanism",
+      "investigations": [
+        "T07"
+      ],
+      "question": "字段和发现行为是否符合对应宿主实际版本？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/agents/openai.yaml",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M41",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M42",
+      "title": "测试面、类型与规范检查",
+      "kind": "mechanism",
+      "investigations": [
+        "T09"
+      ],
+      "question": "检查是否覆盖真实义务，是否有镜像测试或未执行表面？",
+      "anchors": [
+        {
+          "path": "dev/check.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "dev/check_installation.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "dev/tests/test_metadata.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "dev/tests/test_package_skill.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "requirements-dev.lock",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M42",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M43",
+      "title": "提交门与 CI 构建",
+      "kind": "mechanism",
+      "investigations": [
+        "T09"
+      ],
+      "question": "本地与远程执行体、覆盖通道、权限及版本锚是否一致？",
+      "anchors": [
+        {
+          "path": ".githooks/pre-commit",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": ".github/workflows/check.yml",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M43",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M44",
+      "title": "文档、单源组织与公开边界",
+      "kind": "mechanism",
+      "investigations": [
+        "T08",
+        "T09"
+      ],
+      "question": "声明与行为能否双向追踪，治理和资料增长是否适度？",
+      "anchors": [
+        {
+          "path": "AGENTS.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "README.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "README.zh-CN.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": ".gitignore",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": ".gitattributes",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M44",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "M45",
+      "title": "研究来源与验证声明",
+      "kind": "mechanism",
+      "investigations": [
+        "T09"
+      ],
+      "question": "原始证据与研究结论是否可重建，权威与效果是否被混淆？",
+      "anchors": [
+        {
+          "path": "docs/reports/initial-validation.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "docs/reports/mattpocock-alignment.md",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#M45",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "C01",
+      "title": "首次任务到交付",
+      "kind": "composition",
+      "investigations": [
+        "T01",
+        "T02",
+        "T03",
+        "T07"
+      ],
+      "question": "初始化、准则、动作、检查与交付间是否存在缺口？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/SKILL.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#C01",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "C02",
+      "title": "要求变化到重新验收",
+      "kind": "composition",
+      "investigations": [
+        "T01",
+        "T02",
+        "T06"
+      ],
+      "question": "改变要求与改变成果的两种版本是否协同？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.submit",
+          "line": 360
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#C02",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "C03",
+      "title": "中断到恢复与迟到结果",
+      "kind": "composition",
+      "investigations": [
+        "T02",
+        "T03",
+        "T06"
+      ],
+      "question": "全链是否保持真实，用户需要多少排错能力？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#C03",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "C04",
+      "title": "经验到下一次任务收益",
+      "kind": "composition",
+      "investigations": [
+        "T01",
+        "T03",
+        "T04",
+        "T05"
+      ],
+      "question": "各连接处是否可达、有效并避免旧事实污染？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.learning_task",
+          "line": 614
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#C04",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "C05",
+      "title": "发送到接收端独立使用",
+      "kind": "composition",
+      "investigations": [
+        "T04",
+        "T05",
+        "T06"
+      ],
+      "question": "缺发送端数据库、私有文件或工具时能否成立？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.export",
+          "line": 187
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.import_bundle",
+          "line": 190
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#C05",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "C06",
+      "title": "公开源到多宿主安装与升级",
+      "kind": "composition",
+      "investigations": [
+        "T01",
+        "T07"
+      ],
+      "question": "安装、加载、行为及更新保留能否逐层对应？",
+      "anchors": [
+        {
+          "path": "README.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "dev/check_installation.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "dev/package_skill.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#C06",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "C07",
+      "title": "规模增长及外部能力替换",
+      "kind": "composition",
+      "investigations": [
+        "T03",
+        "T04",
+        "T05",
+        "T08"
+      ],
+      "question": "成本曲线、检索质量与核心变更量如何？",
+      "anchors": [
+        {
+          "path": "governance.toml",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#C07",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "C08",
+      "title": "权限与副作用贯穿路径",
+      "kind": "composition",
+      "investigations": [
+        "T06"
+      ],
+      "question": "只读、内部登记、实际写入和对外发布是否被正确区分？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/references/host.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#C08",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "U01",
+      "title": "使用者思路进步的证据路径",
+      "kind": "requirement probe",
+      "investigations": [
+        "T05"
+      ],
+      "question": "由哪些交互和记录证明用户逐渐更会表达与判断？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/SKILL.md",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#U01",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "U02",
+      "title": "重复任务成熟与回流触发",
+      "kind": "requirement probe",
+      "investigations": [
+        "T05"
+      ],
+      "question": "是否需要用户主动组织维护，何种证据可认定成熟？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.learning_task",
+          "line": 614
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#U02",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "U03",
+      "title": "检索需求的语义覆盖",
+      "kind": "requirement probe",
+      "investigations": [
+        "T04"
+      ],
+      "question": "现有实现满足哪些实际任务，需要哪些成熟检索能力？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.search",
+          "line": 166
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#U03",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "U04",
+      "title": "长期数据保留与版本演化",
+      "kind": "requirement probe",
+      "investigations": [
+        "T03",
+        "T06"
+      ],
+      "question": "在声明生命周期下如何保留、清理、升级并恢复？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#U04",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "U05",
+      "title": "原生宿主及平台支持证据",
+      "kind": "requirement probe",
+      "investigations": [
+        "T07"
+      ],
+      "question": "每类宿主、系统、调用方式和权限环境需要什么证据？",
+      "anchors": [
+        {
+          "path": "README.md",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "dev/check_installation.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#U05",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "U06",
+      "title": "审核者理解组织依据的能力",
+      "kind": "requirement probe",
+      "investigations": [
+        "T02",
+        "T06"
+      ],
+      "question": "能否从成果和回执看懂组织取舍及逐项事实来源？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.inspect",
+          "line": 536
+        },
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.deliver",
+          "line": 572
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#U06",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "U07",
+      "title": "未知效果恢复的操作闭环",
+      "kind": "requirement probe",
+      "investigations": [
+        "T03",
+        "T06"
+      ],
+      "question": "恢复责任、工具支持和人工负担是否符合可用目标？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.next",
+          "line": 486
+        },
+        {
+          "path": "skills/astrofairy/references/review.md",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "historical_origin": "docs/reviews/system-inventory.json#U07",
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "N01",
+      "title": "声明式工具契约、运行环境与 Schema 准入",
+      "kind": "post-baseline mechanism",
+      "investigations": [
+        "T01",
+        "T03",
+        "T06",
+        "T07"
+      ],
+      "question": "字段查询能否变成具体可执行引导；配置和运行时地板是否与用户负担匹配？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_contracts.py",
+          "symbol": "SchemaContract",
+          "line": 260
+        }
+      ],
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "N02",
+      "title": "权威尝试核对与当前执行完整性",
+      "kind": "post-baseline mechanism",
+      "investigations": [
+        "T02",
+        "T03",
+        "T06"
+      ],
+      "question": "预算、交付集合或引导改变能否破坏未知写操作核对和迟到冲突？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+          "symbol": "reconciliation_for",
+          "line": 171
+        }
+      ],
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "N03",
+      "title": "有界回包、免费文档选读与恢复标识",
+      "kind": "post-baseline mechanism",
+      "investigations": [
+        "T01",
+        "T03"
+      ],
+      "question": "响应预算与文本/工具定义预算是否误耦合；分页是否造成必需信息漏读？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_presentation.py",
+          "symbol": "encode_response",
+          "line": 39
+        }
+      ],
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "N04",
+      "title": "共享认证文档、局部读取与全量审计",
+      "kind": "post-baseline mechanism",
+      "investigations": [
+        "T01",
+        "T03",
+        "T06"
+      ],
+      "question": "局部/整体保证、缓存、存储增长和装载成本能否保持准确且合理？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_documents.py",
+          "symbol": "freeze",
+          "line": 557
+        }
+      ],
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "N05",
+      "title": "记录寿命、完整审计、备份与新目录恢复",
+      "kind": "post-baseline mechanism",
+      "investigations": [
+        "T02",
+        "T03",
+        "T06"
+      ],
+      "question": "集合成员、索引派生物、历史句柄和未知效果能否完整恢复？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_maintenance.py",
+          "symbol": "backup_state",
+          "line": 286
+        }
+      ],
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "N06",
+      "title": "初始约定严格归一化与附件原子捕获",
+      "kind": "post-baseline mechanism",
+      "investigations": [
+        "T01",
+        "T03",
+        "T06"
+      ],
+      "question": "原始请求、默认准则、长材料和多附件能否无额外用户组织地进入流程？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+          "symbol": "Workshop.start",
+          "line": 108
+        }
+      ],
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "N07",
+      "title": "候选策略验证与精确采用绑定",
+      "kind": "post-baseline mechanism",
+      "investigations": [
+        "T02",
+        "T05",
+        "T06"
+      ],
+      "question": "多产物下如何仍证明确切候选被规定策略验证，而非仅出现在任务中？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+          "symbol": "Library.adopt",
+          "line": 140
+        }
+      ],
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "N08",
+      "title": "真实测试收集与执行通道",
+      "kind": "post-baseline mechanism",
+      "investigations": [
+        "T09"
+      ],
+      "question": "修订后的验证是否真正执行原症状和正向路径，并避免结构校验冒充效果？",
+      "anchors": [
+        {
+          "path": "dev/run_tests.py",
+          "symbol": null,
+          "line": 1
+        },
+        {
+          "path": "dev/_testing.py",
+          "symbol": null,
+          "line": 1
+        }
+      ],
+      "status": "mapped_for_investigation_not_reverified"
+    },
+    {
+      "id": "N09",
+      "title": "哈希锁定依赖、就绪检查与首次启动",
+      "kind": "post-baseline mechanism",
+      "investigations": [
+        "T01",
+        "T07"
+      ],
+      "question": "安装后能否直接开始正常任务，初始化由谁执行、需要用户多少操作？",
+      "anchors": [
+        {
+          "path": "skills/astrofairy/scripts/astrofairy/_cli.py",
+          "symbol": "_run",
+          "line": 107
+        }
+      ],
+      "status": "mapped_for_investigation_not_reverified"
+    }
+  ],
+  "runtime_file_coverage": {
+    "skills/astrofairy/scripts/astrofairy/_documents.py": [
+      "N04"
+    ],
+    "skills/astrofairy/scripts/astrofairy/_maintenance.py": [
+      "N05"
+    ],
+    "skills/astrofairy/scripts/astrofairy/_library.py": [
+      "A06",
+      "M26",
+      "M27",
+      "M28",
+      "M29",
+      "M29",
+      "M29",
+      "M29",
+      "M29",
+      "M30",
+      "M33",
+      "M33",
+      "M34",
+      "C04",
+      "C05",
+      "C05",
+      "C07",
+      "U02",
+      "U03",
+      "U04",
+      "N07"
+    ],
+    "skills/astrofairy/scripts/astrofairy/_kernel.py": [
+      "A03",
+      "A04",
+      "A05",
+      "M08",
+      "M11",
+      "M11",
+      "M11",
+      "M13",
+      "M17",
+      "M17",
+      "M17",
+      "M18",
+      "M18",
+      "M22",
+      "M25",
+      "C02",
+      "C03",
+      "C08",
+      "N02"
+    ],
+    "skills/astrofairy/scripts/astrofairy/_version.py": [
+      "M37"
+    ],
+    "skills/astrofairy/scripts/astrofairy/_capabilities.py": [
+      "A02",
+      "M10",
+      "M10",
+      "M14",
+      "M15",
+      "M15",
+      "M16",
+      "M16",
+      "M24",
+      "M24",
+      "M24",
+      "M30",
+      "M31",
+      "C08"
+    ],
+    "skills/astrofairy/scripts/astrofairy/_cli.py": [
+      "M03",
+      "M36",
+      "N09"
+    ],
+    "skills/astrofairy/scripts/astrofairy/__init__.py": [
+      "M37"
+    ],
+    "skills/astrofairy/scripts/astrofairy/_presentation.py": [
+      "N03"
+    ],
+    "skills/astrofairy/scripts/astrofairy/__main__.py": [
+      "M36"
+    ],
+    "skills/astrofairy/scripts/astrofairy/_errors.py": [
+      "M36"
+    ],
+    "skills/astrofairy/scripts/astrofairy/_contracts.py": [
+      "A03",
+      "M06",
+      "M07",
+      "M23",
+      "M23",
+      "M35",
+      "N01"
+    ],
+    "skills/astrofairy/scripts/astrofairy/_store.py": [
+      "A03",
+      "A05",
+      "M04",
+      "M21",
+      "M21",
+      "M21",
+      "M21",
+      "M22",
+      "M22",
+      "M23",
+      "M23",
+      "C03",
+      "C07",
+      "U04"
+    ],
+    "skills/astrofairy/scripts/astrofairy/_runtime.py": [
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "M04",
+      "M05",
+      "M07",
+      "M08",
+      "M09",
+      "M09",
+      "M09",
+      "M10",
+      "M12",
+      "M13",
+      "M16",
+      "M17",
+      "M19",
+      "M20",
+      "M20",
+      "M22",
+      "M22",
+      "M25",
+      "M27",
+      "M31",
+      "M32",
+      "M32",
+      "C01",
+      "C02",
+      "C03",
+      "C04",
+      "C07",
+      "U02",
+      "U06",
+      "U06",
+      "U07",
+      "N06"
+    ]
+  }
+}

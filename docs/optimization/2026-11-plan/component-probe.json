@@ -1,0 +1,99 @@
+{
+  "format": 1,
+  "executed_at": "2026-11-02T11:00:17.140092+00:00",
+  "command": [
+    ".evaluation/optimization-design/20261102/env/bin/python",
+    ".evaluation/optimization-design/20261102/component_probe.py"
+  ],
+  "program_sha256": "b54aef0cc6e3da7c8a71c4b7906abecaf43f07b200fb8180c46437e9f872b42d",
+  "program": "from __future__ import annotations\nimport hashlib\nimport importlib.metadata\nimport json\nimport platform\nimport sqlite3\nimport tempfile\nimport subprocess\nimport sys\nfrom filelock import FileLock\nfrom pathlib import Path\n\nimport bagit\nimport lancedb\nfrom lancedb.index import FTS\n\nresults={'scope':'Component plumbing only; controlled vectors are not model embeddings or semantic-quality evidence',\n         'platform':platform.platform(),'versions':{name:importlib.metadata.version(name) for name in ['lancedb','fastembed','bagit','filelock']}}\nwith tempfile.TemporaryDirectory(prefix='astrofairy-design-') as temporary:\n    root=Path(temporary)\n    db=lancedb.connect(str(root/'search'))\n    table=db.create_table('assets',data=[\n        {'ref':'a','scope':'personal','text':'根据活动数据制作PPT汇报，核实报名和到场人数。','vector':[1.0,0.0,0.0]},\n        {'ref':'b','scope':'personal','text':'订单数据清洗，缺失值待确认，不补零。','vector':[0.0,1.0,0.0]},\n        {'ref':'c','scope':'team','text':'账号申请和员工入职清单。','vector':[0.0,0.0,1.0]}])\n    table.create_index('text',config=FTS(base_tokenizer='icu',stem=False,remove_stop_words=False,ascii_folding=False))\n    fts=table.search('缺失值',query_type='fts').limit(3).to_list()\n    hybrid=table.search(query_type='hybrid').vector([1.0,0.0,0.0]).text('PPT').limit(3).to_list()\n    filtered=table.search('清单',query_type='fts').where(\"scope = 'personal'\",prefilter=True).limit(3).to_list()\n    assert fts and fts[0]['ref']=='b'\n    assert hybrid and hybrid[0]['ref']=='a'\n    assert filtered==[]\n    hybrid_filtered=table.search(query_type='hybrid').vector([1.0,0.0,0.0]).text('PPT').where(\"scope = 'personal'\",prefilter=True).limit(3).to_list()\n    assert 'c' not in [r['ref'] for r in hybrid_filtered]\n    pinned_version=table.version\n    table.add([{'ref':'d','scope':'personal','text':'新增词项','vector':[0.0,0.0,1.0]}])\n    table.checkout(pinned_version)\n    assert table.count_rows()==3 and db.open_table('assets').count_rows()==4\n    lockpath=str(root/'projection.lock')\n    child=\"from filelock import FileLock,Timeout; import sys\\ntry:\\n with FileLock(sys.argv[1],timeout=0.1):pass\\nexcept Timeout:sys.exit(7)\"\n    lock=FileLock(lockpath)\n    with lock:\n        blocked=subprocess.run([sys.executable,'-c',child,lockpath],capture_output=True,timeout=20)\n    acquired=subprocess.run([sys.executable,'-c',child,lockpath],capture_output=True,timeout=20)\n    assert blocked.returncode==7 and acquired.returncode==0\n    results['filelock']={'backend':type(lock).__name__,'child_blocked_then_acquired':True,'limits':'Same-host native lock probe; not network/shared filesystem validation'}\n    results['lancedb']={'icu_fts_top':[row['ref'] for row in fts],'hybrid_rrf_top':[row['ref'] for row in hybrid],\n                        'prefilter_excludes_other_scope':filtered==[],'hybrid_prefilter_excludes_other_scope':True,'fixed_version_rows':3,'separate_latest_handle_rows':4,'fixed_version':pinned_version}\n    bagroot=root/'bag';bagroot.mkdir()\n    (bagroot/'report.md').write_text('Controlled original bytes',encoding='utf-8')\n    (bagroot/'copy.md').write_text('Controlled original bytes',encoding='utf-8')\n    package=bagit.make_bag(str(bagroot),checksums=['sha256'])\n    (bagroot/'receipt.json').write_text('{\"scope\":\"controlled\"}',encoding='utf-8')\n    package.save()\n    assert bagit.Bag(str(bagroot)).validate()\n    entries=sorted(bagit.Bag(str(bagroot)).payload_entries())\n    assert entries==['data/copy.md','data/report.md']\n    (bagroot/'data/report.md').write_text('tampered',encoding='utf-8')\n    try: bagit.Bag(str(bagroot)).validate()\n    except bagit.BagValidationError: detected=True\n    else: detected=False\n    assert detected\n    results['bagit']={'members':entries,'checksum_tamper_detected':detected,'receipt_is_tag_not_payload':not ('data/receipt.json' in entries)}\n    connection=sqlite3.connect(root/'blob.db');connection.execute('CREATE TABLE blobs (data BLOB)')\n    connection.execute('INSERT INTO blobs VALUES (zeroblob(?))',(32*1024*1024,))\n    chunk=b'x'*(1024*1024)\n    with connection.blobopen('blobs','data',1) as handle:\n        for _ in range(32):handle.write(chunk)\n    connection.commit();digest=hashlib.sha256()\n    with connection.blobopen('blobs','data',1,readonly=True) as handle:\n        while data:=handle.read(1024*1024):digest.update(data)\n    assert digest.hexdigest()==hashlib.sha256(chunk*32).hexdigest()\n    results['sqlite_blob']={'bytes':32*1024*1024,'chunk_bytes':len(chunk),'digest_verified':True,\n                            'limits':'Native API feasibility only; not new AstroFairy capture implementation or whole-process memory benchmark'}\n    connection.close()\nprint(json.dumps(results,ensure_ascii=False,indent=2))\n",
+  "exit_code": 0,
+  "stderr": "",
+  "result": {
+    "scope": "Component plumbing only; controlled vectors are not model embeddings or semantic-quality evidence",
+    "platform": "Linux-5.10.97-arm64-desktop-full-aarch64-with-glibc2.28",
+    "versions": {
+      "lancedb": "0.41.0",
+      "fastembed": "0.9.1",
+      "bagit": "1.9.0",
+      "filelock": "4.2.6"
+    },
+    "filelock": {
+      "backend": "UnixFileLock",
+      "child_blocked_then_acquired": true,
+      "limits": "Same-host native lock probe; not network/shared filesystem validation"
+    },
+    "lancedb": {
+      "icu_fts_top": [
+        "b"
+      ],
+      "hybrid_rrf_top": [
+        "a",
+        "b",
+        "c"
+      ],
+      "prefilter_excludes_other_scope": true,
+      "hybrid_prefilter_excludes_other_scope": true,
+      "fixed_version_rows": 3,
+      "separate_latest_handle_rows": 4,
+      "fixed_version": 2
+    },
+    "bagit": {
+      "members": [
+        "data/copy.md",
+        "data/report.md"
+      ],
+      "checksum_tamper_detected": true,
+      "receipt_is_tag_not_payload": true
+    },
+    "sqlite_blob": {
+      "bytes": 33554432,
+      "chunk_bytes": 1048576,
+      "digest_verified": true,
+      "limits": "Native API feasibility only; not new AstroFairy capture implementation or whole-process memory benchmark"
+    }
+  },
+  "installed_fastembed_catalog_subset": [
+    {
+      "model": "intfloat/multilingual-e5-large",
+      "sources": {
+        "hf": "Qdrant/multilingual-e5-large-onnx",
+        "url": null,
+        "_deprecated_tar_struct": true
+      },
+      "model_file": "model.onnx",
+      "description": "Text embeddings, Unimodal (text), Multilingual (~100 languages), 512 input tokens truncation, Prefixes for queries/documents: necessary, 2024 year.",
+      "license": "mit",
+      "size_in_GB": 2.24,
+      "additional_files": [
+        "model.onnx_data"
+      ],
+      "dim": 1024,
+      "tasks": {}
+    },
+    {
+      "model": "minishlab/potion-multilingual-128M",
+      "sources": {
+        "hf": "minishlab/potion-multilingual-128M",
+        "url": null,
+        "_deprecated_tar_struct": false
+      },
+      "model_file": "model.safetensors",
+      "description": "Text embeddings, Unimodal (text), Multilingual, 512 input tokens truncation, Prefixes for queries/documents: not necessary, 2025 year.",
+      "license": "mit",
+      "size_in_GB": 0.512,
+      "additional_files": [],
+      "dim": 256,
+      "tasks": {}
+    }
+  ],
+  "prior_probe_corrections": [
+    "Deprecated create_fts_index replaced by current create_index with FTS config",
+    "Bag.entries includes tag files; payload_entries is the correct payload assertion"
+  ],
+  "limits": [
+    "Controlled vectors, no actual embedding inference or model weights download",
+    "No product source, configuration, lock or product environment modified",
+    "This environment is a plumbing experiment, not locked production distribution"
+  ]
+}

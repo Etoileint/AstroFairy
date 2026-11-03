@@ -12,9 +12,9 @@ Give it a task, provide the relevant files, and answer an occasional consequenti
 Receive the result, a concise account of its assumptions and limitations, and a detailed receipt
 when you need to inspect the work.
 
-> Early alpha · `0.1.0a1`: the local runtime and portable skill are implemented and tested.
+> Early alpha · `0.1.0a2`: the local runtime and portable skill are implemented and tested.
 > Native application discovery, plugin management and update behavior have not been verified in every
-> installation target. See the [release notes and validation scope](docs/releases/v0.1.0a1.md).
+> installation target. See the [release notes and validation scope](docs/releases/v0.1.0a2.md).
 
 For a conceptual walkthrough, read [Understanding AstroFairy](docs/guides/understanding-astrofairy.md)
 (Chinese). The [review workspace](docs/reviews/README.md) contains the full architecture/mechanism inventory
@@ -33,26 +33,26 @@ Requirements:
   Future installer versions may change their requirements; manual copying does not require Node.js.
 - A writable, persistent data directory for task history and reusable assets.
 
-The agent prepares a local virtual environment once, following the [runtime preparation guide](skills/astrofairy/references/runtime.md),
+The agent prepares a local virtual environment once, following the [runtime preparation guide](skills/fairy/references/runtime.md),
 then reuses it. No global package install or silent dependency download is required.
 
 Install from GitHub into the current project:
 
 ```sh
-npx skills@latest add Etoileint/AstroFairy --skill astrofairy --copy
+npx skills@latest add Etoileint/AstroFairy --skill fairy --copy
 ```
 
 For this exact release with the verified installer, use:
 
 ```sh
-npx skills@1.7.4 add https://github.com/Etoileint/AstroFairy/tree/v0.1.0a1 --skill astrofairy --copy
+npx skills@1.7.4 add https://github.com/Etoileint/AstroFairy/tree/v0.1.0a2 --skill fairy --copy
 ```
 
 The installer lets you select the target agent. For an unattended, user-wide installation, specify
 the agent and add `-g --yes`:
 
 ```sh
-npx skills@latest add Etoileint/AstroFairy --skill astrofairy --agent codex --copy -g --yes
+npx skills@latest add Etoileint/AstroFairy --skill fairy --agent codex --copy -g --yes
 ```
 
 | Application | `--agent` value |
@@ -68,7 +68,7 @@ The tests do not establish that every native application loads or invokes the sk
 Private repositories require Git credentials with access to the repository.
 
 For a local checkout, replace `Etoileint/AstroFairy` with its directory path. For manual installation,
-copy the entire `skills/astrofairy/` folder into a skill directory supported by your application.
+copy the entire `skills/fairy/` folder into a skill directory supported by your application.
 The folder is self-contained; no separate `pip install` is needed. If the application does not show
 the new skill immediately, reload its skills or start a new session.
 
@@ -76,32 +76,35 @@ the new skill immediately, reload its skills or start a new session.
 
 For the first session, ask your agent:
 
-> Use astrofairy. Check the environment and initialize a persistent directory for tasks and reusable assets.
+> Use fairy (星灵). Check the environment and initialize a persistent directory for tasks and reusable assets.
 
 Then attach your materials and delegate the work:
 
-> Use astrofairy to make a presentation from this report for our internal review.
+> Use fairy to make a presentation from this report for our internal review.
 
-> Use astrofairy to compare these proposals and recommend a practical next step.
+> Use fairy to compare these proposals and recommend a practical next step.
 
 > Revise the result for the new audience, keeping the source figures unchanged.
 
 The agent chooses an approach, manages task identifiers and checks the actual result. It asks for
 your decision when that decision materially affects the outcome. Ordinary questions can be answered
-directly without opening a task. Explicitly naming `astrofairy` makes your intended skill clear;
+directly without opening a task. Explicitly naming `fairy` (or 星灵) makes your intended skill clear;
 automatic selection depends on the host application.
 
 ## How it works
 
-1. **Define:** capture the request and materials; derive the goal, checks and important assumptions.
-2. **Produce:** retrieve relevant assets and execute an appropriate workflow until an artifact exists.
-3. **Check:** run applicable mechanical checks and review the artifact against its semantic criteria.
-4. **Deliver:** return the artifact and receipt, with an honest complete, partial, failed or cancelled outcome.
+1. **Define:** capture the request and materials; derive the goal, checks, delivery roles and important assumptions. Refine the provisional default agreement for the actual task.
+2. **Produce:** retrieve relevant assets and execute an appropriate workflow until every formal member exists.
+3. **Check:** run applicable mechanical checks and review the current snapshot against its semantic criteria.
+4. **Deliver:** return every formal member in a fully validated BagIt directory plus its receipt, with an honest complete, partial, failed or cancelled outcome.
 
-Original inputs and output bytes are retained. Reviews bind to the agreement revision and immutable content,
-so a changed result needs fresh checks. Tool observations and model judgments remain distinguishable.
-The receipt records the goal, assumptions, inputs, actions and review basis for inspection.
-Development currently uses protocol/store format 7. Old stores are refused without migration; the agent
+Original inputs and member bytes are retained. A member has a canonical relative path, media type and role;
+a snapshot is the sorted, immutable member list. Reviews bind the agreement revision, criterion definition,
+scope and exact target, so a changed snapshot needs fresh semantic or collection checks. Pure content
+mechanical checks may be reused under identical identity. Unreplaced failures remain visible and require
+explicit disposition. Tool observations and model judgments remain distinguishable.
+The receipt records the goal, assumptions, inputs, snapshot members, actions and review basis for inspection.
+This release uses protocol/store format 10. Old stores are refused without migration; the agent
 should use a fresh approved state directory for new tasks.
 
 Agent-facing CLI responses have a fixed byte budget. Larger records remain available through immutable
@@ -112,9 +115,9 @@ This does not bound retained
 storage, replay time or the host's whole conversation context.
 
 Write tools may explicitly declare a trusted read reconciler. An authoritative confirmation can settle
-that exact attempt while preserving its original unknown observation; current artifact checks still apply.
+that exact attempt while preserving its original unknown observation; current snapshot checks still apply.
 Conflicting positive evidence remains visible, including after historical closure. Unsupported or
-ambiguous recovery retains partial, failed or cancelled outcomes. See the [recovery protocol](skills/astrofairy/references/review.md).
+ambiguous recovery retains partial, failed or cancelled outcomes. See the [recovery protocol](skills/fairy/references/review.md).
 
 The host supplies the model and task-specific tools. Document creation, rendering, browsing and other
 specialist capabilities depend on the tools available in that host; AstroFairy does not bundle every
@@ -124,7 +127,9 @@ file-format engine.
 
 Successful approaches, corrections, feedback and repeated task structures can support improvements
 to an external asset library. Methods and workflows are retrieved as needed rather than accumulated
-in always-loaded instructions.
+in always-loaded instructions. Discovery uses a local hybrid BM25/vector index over adopted heads;
+candidates and retired versions are excluded, and `assets search --refresh` explicitly prepares the fixed
+model/projection instead of downloading silently.
 
 After delivery, the agent can propose a reusable asset, validate it through a separate task and adopt
 it for trial or stable use. Assets can be revised or retired. Maintenance can also conclude that no
@@ -152,7 +157,9 @@ experience, long-term learning benefits and resource tradeoffs remain subjects f
 
 ```sh
 python -m venv .venv
-.venv/bin/python -m pip install --require-hashes --only-binary=:all: -r skills/astrofairy/scripts/requirements-runtime.lock
+.venv/bin/python -m pip install --require-hashes --only-binary=:all: -r skills/fairy/scripts/requirements-runtime.lock
+.venv/bin/python -m pip install --no-index --find-links skills/fairy/scripts/wheels --require-hashes -r skills/fairy/scripts/requirements-delivery.lock
+.venv/bin/python -m pip install --require-hashes --only-binary=:all: -r skills/fairy/scripts/requirements-search.lock
 .venv/bin/python -m pip install -r requirements-dev.lock
 .venv/bin/python -m pip install --no-deps --no-build-isolation -e .
 .venv/bin/python dev/check.py
@@ -168,7 +175,7 @@ Build the optional Python package and portable skill archive:
 .venv/bin/python dev/package_skill.py
 ```
 
-The standard skill folder is the canonical distribution unit. `dist/astrofairy.zip` contains that same
+The standard skill folder is the canonical distribution unit. `dist/fairy.zip` contains that same
 folder without development files. The optional wheel builds the same runtime source.
 `.claude-plugin/` provides optional native plugin metadata; native managed installation and updates
 have not been verified here. There is no marketplace listing implied by those files.
@@ -192,6 +199,12 @@ Validation is documented in the [initial report](docs/reports/initial-validation
 [operation guide](docs/guides/operation.md).
 The [repair workspace](docs/repairs/README.md) tracks changes and revalidation after the frozen initial review.
 The [release workflow](docs/guides/releasing.md) describes versioning, checks and artifact publication.
+The [optimization acceptance](docs/optimization/2026-11-acceptance/final-2026-11-03/README.md) records the latest scoped technical review.
+
+## Version history
+
+- `0.1.0a1` (2026-11-01): first public Alpha with traceable task delivery and external reusable assets.
+- `0.1.0a2` (2026-11-03): `fairy` entry, complete main instructions and stage packets, multi-file BagIt delivery, revised resource policy, local hybrid retrieval, and linked learning/governance with verified recovery. [Release notes](docs/releases/v0.1.0a2.md).
 
 ## Acknowledgments and license
 

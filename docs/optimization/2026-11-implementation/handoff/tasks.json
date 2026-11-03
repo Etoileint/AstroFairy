@@ -1,0 +1,217 @@
+{
+  "format": 1,
+  "kind": "execution_assignment_derived_from_existing_plan",
+  "authority": "docs/optimization/2026-11-plan/execution.md",
+  "design": "docs/optimization/2026-11-plan/design.md",
+  "dispositions": "docs/optimization/2026-11-plan/decisions.json",
+  "meaning": "This queue adds current execution ownership and starting state; it does not replace design or acceptance criteria. IDs/dependencies summarize the authoritative plan. No task is marked complete by packaging.",
+  "default_executor": "receiving_agent",
+  "final_verifier": "original_session",
+  "final_arbiter": "maintainer",
+  "tasks": [
+    {
+      "id": "W01",
+      "dependencies": [],
+      "status_at_handoff": "in_progress",
+      "executor": "receiving_agent",
+      "actions": [
+        "Finish the new content/member/snapshot and criterion-scope contracts in the active runtime; keep the resource foundation connected.",
+        "Bind required delivery roles, exact check identity and fixed candidate validation; remove obsolete contracts cleanly."
+      ],
+      "acceptance_refs": [
+        "V07",
+        "V08",
+        "V10",
+        "V11",
+        "V12"
+      ],
+      "done_rule": "Actual implementation and assigned evidence available; references to plan alone are not completion"
+    },
+    {
+      "id": "W02",
+      "dependencies": [
+        "W01"
+      ],
+      "status_at_handoff": "not_started",
+      "executor": "receiving_agent",
+      "actions": [
+        "Connect streaming capture, full collection publication/review and mature BagIt generation/full validation.",
+        "Carry all historical member references into audit/backup/restore; make interruption and late receipts reproducible."
+      ],
+      "acceptance_refs": [
+        "V06",
+        "V07",
+        "V08",
+        "V09",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V15",
+        "V23"
+      ],
+      "done_rule": "Actual implementation and assigned evidence available; references to plan alone are not completion"
+    },
+    {
+      "id": "W03",
+      "dependencies": [
+        "W01",
+        "W02"
+      ],
+      "status_at_handoff": "not_started",
+      "executor": "receiving_agent",
+      "actions": [
+        "Rename the sole installed skill to fairy across source, packaging and host metadata; do not add a forwarding skill.",
+        "Provide the regular executable loop in SKILL.md, exact stage packets and resumable prepare-delivery using recorded primitives."
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V02",
+        "V03",
+        "V04",
+        "V05",
+        "V13",
+        "V24"
+      ],
+      "done_rule": "Actual implementation and assigned evidence available; references to plan alone are not completion"
+    },
+    {
+      "id": "W04",
+      "dependencies": [
+        "W01"
+      ],
+      "status_at_handoff": "not_started",
+      "executor": "receiving_agent",
+      "actions": [
+        "Connect fixed local LanceDB ICU/BM25/vector/RRF and the default retrieval model profile, complete-body structural chunking and free necessary reads.",
+        "Enforce exact source-generation/profile/epoch/table-version pairing and native projection locking; connect maintenance decision, fixed adoption, reuse and sharing."
+      ],
+      "acceptance_refs": [
+        "V16",
+        "V17",
+        "V18",
+        "V19",
+        "V20",
+        "V21"
+      ],
+      "done_rule": "Actual implementation and assigned evidence available; references to plan alone are not completion"
+    },
+    {
+      "id": "W05",
+      "dependencies": [
+        "W02",
+        "W03",
+        "W04"
+      ],
+      "status_at_handoff": "not_started",
+      "executor": "receiving_agent",
+      "actions": [
+        "Close all 43 resource dispositions with actual consumers; finish free context/catalog reads and keep permission/evidence controls separate.",
+        "Measure representative file/aggregate/schema/lock/backup and actual workload behavior before freezing defaults; report real host resource measurements or unknown."
+      ],
+      "acceptance_refs": [
+        "V04",
+        "V05",
+        "V22",
+        "V23"
+      ],
+      "done_rule": "Actual implementation and assigned evidence available; references to plan alone are not completion"
+    },
+    {
+      "id": "W06",
+      "dependencies": [
+        "W03",
+        "W04",
+        "W05"
+      ],
+      "status_at_handoff": "not_started",
+      "executor": "receiving_agent",
+      "actions": [
+        "Freeze matched direct/skill cases and tuning/holdout retrieval labels; execute actual host/model paths, not prewritten reports or controlled vectors.",
+        "Measure behavioral quality, multilingual/body/applicability retrieval, reuse/correction/retirement/no-change net benefit and cold/warm resources; disclose unavailable evidence."
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V02",
+        "V03",
+        "V16",
+        "V17",
+        "V18",
+        "V19",
+        "V20",
+        "V21",
+        "V22"
+      ],
+      "done_rule": "Actual implementation and assigned evidence available; references to plan alone are not completion"
+    },
+    {
+      "id": "W07",
+      "dependencies": [
+        "W02",
+        "W04",
+        "W05"
+      ],
+      "status_at_handoff": "not_started",
+      "executor": "receiving_agent",
+      "actions": [
+        "Lock real core/search/model/build artifacts and run fresh wheel/skill/plugin installation plus recovery of all retained snapshots.",
+        "Update current architecture/protocol, bilingual README, complete entry and maintainer explanation to implemented behavior; keep old review/release identities."
+      ],
+      "acceptance_refs": [
+        "V02",
+        "V13",
+        "V14",
+        "V15",
+        "V23",
+        "V24"
+      ],
+      "done_rule": "Actual implementation and assigned evidence available; references to plan alone are not completion"
+    },
+    {
+      "id": "W08",
+      "dependencies": [
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07"
+      ],
+      "status_at_handoff": "awaiting_execution_return",
+      "executor": "receiving_agent_prepares_original_session_verifies",
+      "actions": [
+        "Prepare the sealed final source/evidence package, coverage and findings; give self-check results and an acceptance recommendation.",
+        "Stop modification after sealing and return the directory. Independent acceptance and final wrap-up belong to the original session."
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V02",
+        "V03",
+        "V04",
+        "V05",
+        "V06",
+        "V07",
+        "V08",
+        "V09",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V15",
+        "V16",
+        "V17",
+        "V18",
+        "V19",
+        "V20",
+        "V21",
+        "V22",
+        "V23",
+        "V24"
+      ],
+      "done_rule": "Only evidence preparation can be ready; independent acceptance stays pending original session"
+    }
+  ]
+}

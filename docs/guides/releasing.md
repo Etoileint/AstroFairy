@@ -9,7 +9,7 @@ does not publish to PyPI or list a plugin in a marketplace.
 
 1. Read the current repository instructions and obtain maintainer authorization to publish.
 2. Check the remote branch, existing tags and releases. Never replace an existing released version.
-3. Set the literal version in `skills/astrofairy/scripts/astrofairy/_version.py` and run
+3. Set the literal version in `skills/fairy/scripts/astrofairy/_version.py` and run
    `python dev/sync_metadata.py`. Use `v` plus the Python version as the Git tag, for example
    `v0.1.0a1`; plugin SemVer is generated under the [version contract](../adr/0007-package-to-plugin-version-contract.md).
 4. Update both READMEs and add release notes under `docs/releases/`. Describe observed support,

@@ -24,7 +24,7 @@ def run(arguments: list[str], directory: Path, env: dict[str, str], data: Any = 
         encoding="utf-8",
         input=json.dumps(data) if data is not None else None,
         check=True,
-        timeout=60,
+        timeout=600,
     )
     return json.loads(result.stdout)
 
@@ -44,7 +44,7 @@ def probe(
             "add",
             str(ROOT),
             "--skill",
-            "astrofairy",
+            "fairy",
             "--agent",
             agent,
             "--copy",
@@ -54,7 +54,7 @@ def probe(
         directory,
         env,
     )
-    launchers = list(directory.glob("**/skills/astrofairy/scripts/fairy.py"))
+    launchers = list(directory.glob("**/skills/fairy/scripts/fairy.py"))
     if len(launchers) != 1:
         raise ValueError(f"Expected one copied skill for {agent}: {launchers}")
     launcher = launchers[0]
@@ -69,14 +69,36 @@ def probe(
     def submit(data: dict[str, Any]) -> Any:
         return run([*command, "submit", task], directory, env, data)
 
+    submit(
+        {
+            "op": "revise",
+            "goal": packet["goal"],
+            "criteria": packet["criteria"],
+            "assumptions": packet["assumptions"],
+            "reason": "Refine the provisional agreement for this installation brief",
+        }
+    )
     request = submit({"op": "request", "purpose": "Write the installation brief"})
     content = (
         "The copied skill produced this brief using prepared runtime dependencies "
         "outside its source checkout."
     )
-    report = submit({"op": "report", "call": request["call"], "text": content, "name": "brief.md"})
+    report = submit({"op": "report", "call": request["call"], "text": content, "path": "brief.md"})
     ref = report["ref"]
-    submit({"op": "publish", "ref": ref})
+    submit(
+        {
+            "op": "publish",
+            "members": [
+                {
+                    "ref": ref,
+                    "path": report["path"],
+                    "bytes": report["bytes"],
+                    "media_type": report["media_type"],
+                    "role": "report",
+                }
+            ],
+        }
+    )
     submit({"op": "check"})
     submit(
         {

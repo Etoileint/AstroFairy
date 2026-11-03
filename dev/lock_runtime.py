@@ -66,7 +66,7 @@ def render(root: Path) -> dict[Path, str]:
             f"    --hash=sha256:{value}" + (" \\" if index < len(hashes) - 1 else "")
             for index, value in enumerate(hashes)
         )
-    base = root / "skills/astrofairy/scripts"
+    base = root / "skills/fairy/scripts"
     return {
         base / "requirements-runtime.lock": "\n".join(lines) + "\n",
         base / "astrofairy/_runtime_dependencies.json": json.dumps(pins, indent=2, sort_keys=True) + "\n",

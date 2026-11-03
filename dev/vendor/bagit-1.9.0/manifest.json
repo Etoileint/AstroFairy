@@ -1,0 +1,33 @@
+{
+  "format": 1,
+  "package": "bagit",
+  "version": "1.9.0",
+  "source": {
+    "url": "https://files.pythonhosted.org/packages/a1/a0/8866b4c6f894af0eb10e4964157f3241dd4117700fc010e7825471d51a13/bagit-1.9.0.tar.gz",
+    "metadata_url": "https://pypi.org/pypi/bagit/1.9.0/json",
+    "metadata_sha256": "7d70903e7327a2f53058d67412fac96f129cb843570776c9c820878f5cf316fe",
+    "file": "bagit-1.9.0.tar.gz",
+    "bytes": 23443,
+    "sha256": "9455006c2d1df88be95ec1fccabc5ea623389589ea4c85b3d85bd256f29d7656"
+  },
+  "build": {
+    "command": "pip wheel --no-deps --no-build-isolation --wheel-dir dev/vendor/bagit-1.9.0 dev/vendor/bagit-1.9.0/bagit-1.9.0.tar.gz",
+    "environment": {
+      "SETUPTOOLS_SCM_PRETEND_VERSION_FOR_BAGIT": "1.9.0"
+    },
+    "python": "3.12.13",
+    "pip": "25.0.1",
+    "setuptools": "84.2.1",
+    "wheel": "0.48.0",
+    "setuptools-scm": "10.3.4",
+    "vcs-versioning": "2.6.0",
+    "packaging": "26.3"
+  },
+  "output": {
+    "file": "bagit-1.9.0-py3-none-any.whl",
+    "bytes": 34677,
+    "sha256": "9a0a023f5012e567a99bf2714020c42f562fb550a9cd8d4ffe85cb2061f0a7b6"
+  },
+  "reason": "The official sdist declares version 1.9.0 and uses setuptools_scm without VCS metadata; the pinned build chain sets the declared sdist version explicitly and records every build input.",
+  "retrieved_at": "2026-11-02T19:23:29+00:00"
+}

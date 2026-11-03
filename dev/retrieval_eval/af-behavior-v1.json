@@ -1,0 +1,77 @@
+{
+  "format": 1,
+  "name": "af-behavior-v1",
+  "frozen_at": "2026-11-02",
+  "purpose": "Matched direct/skill behavior cases for a real host execution; this file does not contain results and must not be read as evidence of host adherence.",
+  "execution_requirements": {
+    "same_host_model_permissions_and_materials": true,
+    "record": [
+      "loaded_skill",
+      "task_created",
+      "actions",
+      "reads",
+      "first_useful_feedback_seconds",
+      "total_seconds",
+      "human_interventions",
+      "outcome",
+      "session_evidence_path"
+    ],
+    "prohibited": [
+      "treating receipt.complete as model adherence",
+      "replaying a prewritten transcript as an actual run",
+      "using a different host/model for the direct and skill halves"
+    ]
+  },
+  "cases": [
+    {
+      "id": "B-D01",
+      "mode": "direct",
+      "prompt": "What is 2 + 2? Answer in one line.",
+      "materials": [],
+      "expected": "Ordinary answer; no fairy task or delivery is forced."
+    },
+    {
+      "id": "B-D02",
+      "mode": "direct",
+      "prompt": "Rewrite this sentence more clearly: The report was written by the team and it was reviewed by the manager.",
+      "materials": [],
+      "expected": "Ordinary editing answer; no task workspace or formal delivery."
+    },
+    {
+      "id": "B-S01",
+      "mode": "skill",
+      "prompt": "Use fairy to prepare a short source-based brief from the provided context.",
+      "materials": ["docs/evaluation/fixtures/inputs/AF-P01-context.md"],
+      "expected": "Task agreement refined, one brief member produced, checked and delivered with a receipt."
+    },
+    {
+      "id": "B-S02",
+      "mode": "skill",
+      "prompt": "Use fairy to produce a report, a data table and speaking notes from the provided materials.",
+      "materials": [
+        "docs/evaluation/fixtures/inputs/AF-P01-context.md",
+        "docs/evaluation/fixtures/inputs/AF-P01-service.csv"
+      ],
+      "expected": "All three required roles are checked and delivered as one snapshot."
+    },
+    {
+      "id": "B-S03",
+      "mode": "skill",
+      "prompt": "Use fairy; after delivery, revise the result for a new audience while keeping source figures unchanged.",
+      "materials": ["docs/evaluation/fixtures/inputs/AF-B01-context.md"],
+      "expected": "A new revision records the user basis, affected checks are rerun, and the prior delivery remains identifiable."
+    },
+    {
+      "id": "B-S04",
+      "mode": "skill",
+      "prompt": "Use fairy; an export is interrupted and the write result is unknown. Inspect before retrying.",
+      "materials": ["docs/evaluation/fixtures/inputs/AF-B01-context.md"],
+      "expected": "Unknown execution remains visible, no blind retry occurs, and the final outcome is honest."
+    }
+  ],
+  "execution_status": {
+    "state": "not_executed",
+    "reason": "This local executor has no host conversation/model adapter or compatible session transcript channel. No result is fabricated.",
+    "recovery": "Run these cases in the same approved host/model with this skill installed; capture the listed observations and session evidence, then compare direct and skill halves."
+  }
+}

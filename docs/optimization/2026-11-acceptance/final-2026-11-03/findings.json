@@ -1,0 +1,253 @@
+{
+  "format": 1,
+  "reviewed_at": "2026-11-03T11:18:52.522867+00:00",
+  "phase": "received return plus root tail repair, independently reverified",
+  "scope": "Formal remaining gates A/B/C/REG-01, dependency checks of seven previously closed findings, and root tail transactional/recovery integration. Not universal host/platform or longitudinal validation.",
+  "previous_report": "../recheck-2026-11-03/findings.json",
+  "technical_verdict": "pass",
+  "product_accepted": false,
+  "product_acceptance_authority": "Maintainer; no product or release decision inferred from this technical report.",
+  "reviewed_return_manifest_sha256": "736b0fe3a14772bbe0c2c816b60d332e0ea728934ab96c721f468e78f8b0a612",
+  "reviewed_return_zip_sha256": "c04d5efe91ed873c246ef6daf219b099773dc9082786e2c37e9dcce352594684",
+  "input_manifest_sha256": "60efe30821a0294b285d9fe93c4ed8f1e90c4a2d1d272fdc3e159d63ee2a4192",
+  "received_source_files": 320,
+  "received_evidence_files": 96,
+  "final_identity_record": ".evaluation/optimization-acceptance/20261103-final/final-attestation.json",
+  "evidence_directory": ".evaluation/optimization-acceptance/20261103-final/",
+  "findings": [
+    {
+      "id": "STD-01",
+      "axis": "standards",
+      "title": "BagIt 实际版本与声明不一致",
+      "status": "closed",
+      "evidence_basis": "BagIt actual 1.0 header and receipt agree; full mature-library verification and idempotence pass.",
+      "evidence": [
+        "delivery-independent.json"
+      ]
+    },
+    {
+      "id": "STD-02",
+      "axis": "standards",
+      "title": "可移植路径的目录前缀冲突漏拒",
+      "status": "closed",
+      "evidence_basis": "Casefolded full path and directory prefix counterexamples refused; valid shared directories accepted.",
+      "evidence": [
+        "delivery-independent.json"
+      ]
+    },
+    {
+      "id": "STD-03",
+      "axis": "standards",
+      "title": "独立技能包中的运维入口断链",
+      "status": "closed",
+      "evidence_basis": "Self-contained skill rebuilt byte-identically; external-cwd isolated launcher and recorded-state recovery pass, repeated on post-tail artifact.",
+      "evidence": [
+        "skill-independent.json",
+        "distribution-post-tail.json"
+      ]
+    },
+    {
+      "id": "SPEC-01",
+      "axis": "spec",
+      "title": "中断接续丢失完整成员计划",
+      "status": "closed",
+      "evidence_basis": "Interrupted full plan preserved; restored home resumes b without original workspace a, retaining both captured bytes and roles.",
+      "evidence": [
+        "learning_atomic_recovery_probe.json",
+        "learning_postfix_regression_v2.log"
+      ]
+    },
+    {
+      "id": "SPEC-02",
+      "axis": "spec",
+      "title": "已有交付Bag未核对权威快照",
+      "status": "closed",
+      "evidence_basis": "38 internally valid re-sealed Bag counterexamples and authoritative blob corruption refused; correct Bag is idempotent.",
+      "evidence": [
+        "delivery-independent.json",
+        "tail-standards-delivery-review.json"
+      ]
+    },
+    {
+      "id": "SPEC-03",
+      "axis": "spec",
+      "title": "已有通过复用阻断合法失败重评",
+      "status": "closed",
+      "evidence_basis": "Legitimate failed-review re-evaluation rechecked by targeted production-path tests; old history retained.",
+      "evidence": [
+        "learning_postfix_regression_v2.log",
+        "post-tail-canonical.log"
+      ]
+    },
+    {
+      "id": "ROOT-01",
+      "axis": "retrieval_learning",
+      "title": "两路排名在融合前被跨路去重",
+      "status": "closed",
+      "evidence_basis": "Per-path asset contributions retained under weighted RRF; affected contract tests pass. Full quality evaluation remains bound to its original evidence.",
+      "evidence": [
+        "post-tail-canonical.log"
+      ]
+    },
+    {
+      "id": "ROOT-02",
+      "axis": "retrieval_learning",
+      "title": "首个模型准备入口形成循环",
+      "status": "closed",
+      "evidence_basis": "Real public downloader explicitly supports and receives revision/force_download; production preparation/hash checks pass empty/partial/same-length-corrupt/valid/failure-retry/wrong-path controlled cases. Ordinary missing-cache reads never download.",
+      "evidence": [
+        "model_prepare_probe.py",
+        "model-prepare-independent.json",
+        "real-e5-independent.log"
+      ]
+    },
+    {
+      "id": "ROOT-03",
+      "axis": "retrieval_learning",
+      "title": "模型profile与实际消费原件断开",
+      "status": "closed",
+      "evidence_basis": "Pinned directory, three declared SHA identities and offline embedding/tokenizer consumption retained; profile/runtime authority check and real cached model smoke pass.",
+      "evidence": [
+        "post-tail-canonical.log",
+        "real-e5-independent.log"
+      ]
+    },
+    {
+      "id": "ROOT-04",
+      "axis": "retrieval_learning",
+      "title": "学习与必需治理资产的职责未接齐",
+      "status": "closed",
+      "evidence_basis": "Atomic native/submit source-child-decision; 4 real SQLite write-failure cases roll back, same-seq concurrency yields one child; cross-session todos, governance scope/version/profile, and combined backup/restore pass.",
+      "evidence": [
+        "learning_atomic_recovery_probe.json",
+        "governance_postfix_probe.json",
+        "tail-standards-delivery-review.json"
+      ]
+    },
+    {
+      "id": "REG-01",
+      "axis": "spec_resource",
+      "title": "权威导出校验引入整文件双份物化",
+      "status": "closed",
+      "evidence_basis": "Streaming verification at 8/32/128 MiB has flat ~2.06 MiB Python allocation peak; no whole-file double materialization.",
+      "evidence": [
+        "delivery-independent.json"
+      ]
+    }
+  ],
+  "root_tail_repairs": [
+    {
+      "id": "TAIL-ATOMIC",
+      "parent": "ROOT-04",
+      "status": "closed",
+      "observation": "Child committed before source decision; injected source-write failure left orphan and retry created another child. Native entry omitted decision.",
+      "repair": "Single admitted transaction and one public execution path; source snapshot preserves original seq, response returns exact committed decision seq.",
+      "independent_evidence": [
+        "learning_atomic_recovery_probe.json",
+        "tail-standards-delivery-review.json"
+      ]
+    },
+    {
+      "id": "TAIL-RECOVERY",
+      "status": "closed",
+      "observation": "Recovery duplicate event white list did not include newly introduced learning and delivery-plan/progress events; typed links were not audited.",
+      "repair": "Replay owns recognized event kinds and refuses unknown; recovery audits source-child locator ownership/sequence and captured progress content refs/length. Added full interrupted-plan+learning restore/resume regression.",
+      "independent_evidence": [
+        "learning_atomic_recovery_probe.json",
+        "distribution-post-tail.json"
+      ]
+    },
+    {
+      "id": "TAIL-DISTRIBUTION",
+      "status": "closed",
+      "observation": "Sdist omitted locked vendored wheels/upstream tarball and search-requirements.in; extracted source could not validate its vendor or rebuild complete self-contained skill.",
+      "repair": "Standard MANIFEST generic resource extensions include all frozen build inputs and skill wheels. Owner test builds/extracts sdist, checks vendor identity and search lock, then compares rebuilt skill ZIP members byte for byte.",
+      "independent_evidence": [
+        "sdist-regression-red.log",
+        "sdist-regression-green.log",
+        "sdist-independent/review.json"
+      ]
+    }
+  ],
+  "counts": {
+    "original_closed": 10,
+    "original_open": 0,
+    "prior_regressions_closed": 1,
+    "root_tail_repairs_closed": 3,
+    "standards_open": 0,
+    "spec_open": 0,
+    "retrieval_learning_open": 0
+  },
+  "final_canonical": {
+    "command": ".venv/bin/python -B dev/check.py",
+    "exit_code": 0,
+    "runtime_collected": 195,
+    "runtime_passed": 194,
+    "runtime_skipped": 1,
+    "development_passed": 20,
+    "evidence": "final-canonical.log"
+  },
+  "separate_real_e5_smoke": {
+    "passed": 1,
+    "evidence": "real-e5-independent.log",
+    "cold_download": false
+  },
+  "final_distribution": {
+    "zip_members": 33,
+    "packaged_source_byte_equality": true,
+    "isolation": "Fresh /tmp homes and external cwd, Python -I; wheel installed with pip --target --no-deps into a fresh target, using already prepared runtime dependencies, not a fresh dependency environment.",
+    "cases": [
+      {
+        "entry": "portable_zip",
+        "passed": true,
+        "counts": {
+          "assets": 0,
+          "blobs": 1,
+          "document_nodes": 223,
+          "documents": 1,
+          "events": 5,
+          "store": 10,
+          "tasks": 2
+        }
+      },
+      {
+        "entry": "installed_wheel",
+        "passed": true,
+        "counts": {
+          "assets": 0,
+          "blobs": 1,
+          "document_nodes": 223,
+          "documents": 1,
+          "events": 5,
+          "store": 10,
+          "tasks": 2
+        }
+      }
+    ],
+    "artifact_identity_record": ".evaluation/optimization-acceptance/20261103-final/final-build-identity.json"
+  },
+  "roles": {
+    "root": "Receipt, independent download/API/model checks, root tail implementation, canonical checks, aggregation and sealing. Own tail independently reviewed.",
+    "final_delivery_review": "Read-only independent delivery/standards review and post-tail delivery continuity.",
+    "final_learning_review": "Read-only independent learning/governance review, real SQLite write failure, concurrency and integrated recovery."
+  },
+  "unchanged_limits": [
+    "Native host/model adherence not demonstrated",
+    "Windows/macOS/native plugin not exercised",
+    "Long-term user/team benefit remains unobserved"
+  ],
+  "limits_detail": [
+    "Controlled tiny-file network substitution tests real public downloader call contract and production hash gates, not real cold network elapsed/failure behavior.",
+    "Existing quality benchmark results remain bound to their original corpus/source; cached model smoke is not a new quality evaluation.",
+    "Post-tail wheel uses new pip target with prepared dependencies; full fresh dependency closure and native host lifecycle matrices were not repeated.",
+    "Document archive may retain unreferenced derived blocks on main transaction rollback. No cross-database atomicity, GC or durable request idempotency claim."
+  ],
+  "publication": {
+    "committed": false,
+    "pushed": false,
+    "tagged": false,
+    "released": false,
+    "public_release_version": "0.1.0a1",
+    "artifacts": "Private verification builds only; not release attachments."
+  }
+}

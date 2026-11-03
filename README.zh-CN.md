@@ -11,8 +11,8 @@ AstroFairy 是遵循 [Agent Skills 开放规范](https://agentskills.io/specific
 提出任务、提供相关文件，偶尔回答影响结果的关键问题，即可获得成果、简短的假设与限制说明，
 以及需要复核时可查看的详细回执。
 
-> 当前为早期 Alpha · `0.1.0a1`：本地运行器和便携 skill 已实现并测试；尚未逐一验证所有安装目标的
-> 原生应用发现、插件管理及更新行为。详见[发布说明与验证范围](docs/releases/v0.1.0a1.md)。
+> 当前为早期 Alpha · `0.1.0a2`：本地运行器和便携 skill 已实现并测试；尚未逐一验证所有安装目标的
+> 原生应用发现、插件管理及更新行为。详见[发布说明与验证范围](docs/releases/v0.1.0a2.md)。
 
 希望从逻辑理解整个项目，可以读[项目逻辑说明](docs/guides/understanding-astrofairy.md)。
 [复核工作区](docs/reviews/README.md)包含全量架构与机制台账及取证准备，不代表这些设计已经通过复核。
@@ -29,25 +29,25 @@ AstroFairy 是遵循 [Agent Skills 开放规范](https://agentskills.io/specific
   后续安装器版本可能调整要求；手动复制安装无需 Node.js。
 - 一个可写、可持久保存的数据目录，用于任务历史和可复用资产。
 
-智能体按[运行环境准备说明](skills/astrofairy/references/runtime.md)一次性准备本地虚拟环境并复用，
+智能体按[运行环境准备说明](skills/fairy/references/runtime.md)一次性准备本地虚拟环境并复用，
 无需使用者管理版本，也不全局安装或静默下载依赖。
 
 从 GitHub 安装到当前项目：
 
 ```sh
-npx skills@latest add Etoileint/AstroFairy --skill astrofairy --copy
+npx skills@latest add Etoileint/AstroFairy --skill fairy --copy
 ```
 
 需要固定本次发布及已验证安装器时，使用：
 
 ```sh
-npx skills@1.7.4 add https://github.com/Etoileint/AstroFairy/tree/v0.1.0a1 --skill astrofairy --copy
+npx skills@1.7.4 add https://github.com/Etoileint/AstroFairy/tree/v0.1.0a2 --skill fairy --copy
 ```
 
 安装器会让你选择目标应用。需要无人值守、用户级安装时，指定应用并添加 `-g --yes`：
 
 ```sh
-npx skills@latest add Etoileint/AstroFairy --skill astrofairy --agent codex --copy -g --yes
+npx skills@latest add Etoileint/AstroFairy --skill fairy --agent codex --copy -g --yes
 ```
 
 | 应用 | `--agent` 参数值 |
@@ -62,37 +62,39 @@ npx skills@latest add Etoileint/AstroFairy --skill astrofairy --agent codex --co
 私有仓库需要有访问权限的 Git 凭据。
 
 使用本地仓库时，把 `Etoileint/AstroFairy` 换成本机目录路径。手动安装时，将整个
-`skills/astrofairy/` 文件夹复制到应用支持的技能目录。该目录自带运行器，无需另行 `pip install`。
+`skills/fairy/` 文件夹复制到应用支持的技能目录。该目录自带运行器，无需另行 `pip install`。
 若应用未立即显示新技能，可以重新加载技能或新建会话。
 
 ## 使用
 
 首次会话可以对智能体说：
 
-> 使用 astrofairy，检查运行环境，并初始化用于保存任务和可复用资产的持久目录。
+> 使用 fairy（星灵），检查运行环境，并初始化用于保存任务和可复用资产的持久目录。
 
 之后提供材料，直接委托任务：
 
-> 用 astrofairy，根据这份报告做一份用于内部复盘的演示文稿。
+> 用 fairy（星灵），根据这份报告做一份用于内部复盘的演示文稿。
 
-> 用 astrofairy，对比这些方案并推荐可执行的下一步。
+> 用 fairy（星灵），对比这些方案并推荐可执行的下一步。
 
 > 根据新的受众修改成果，保持原始数据不变。
 
 智能体负责选择方法、管理任务编号和检查实际成果。当你的决定实质影响结果时，它会向你提问。
-普通问答可以直接回答，无需建立任务。明确提及 `astrofairy` 可以表达选用该技能的意图；
+普通问答可以直接回答，无需建立任务。明确提及 `fairy` 或「星灵」可以表达选用该技能的意图；
 自动选择行为由宿主应用决定。
 
 ## 工作方式
 
-1. **明确任务：** 保存请求和材料，推导目标、检查标准与重要假设。
-2. **执行产出：** 按需检索资产，选择合适工作流并执行，直到形成实际成果。
-3. **检查成果：** 执行适用的机械检查，依据语义准则审查成果。
-4. **交付结果：** 返回成果和回执，如实区分完整、部分、失败或取消的结果。
+1. **明确任务：** 保存请求和材料，推导目标、检查标准、交付职责与重要假设；默认约定为临时的，须按实际任务细化。
+2. **执行产出：** 按需检索资产，选择合适工作流并执行，直到所有正式成员实际形成。
+3. **检查成果：** 执行适用的机械检查，依据语义准则审查当前快照；准则可作用于内容、指定成员或整个集合。
+4. **交付结果：** 以完整校验的 BagIt 目录返回全部正式成员和回执，如实区分完整、部分、失败或取消的结果。
 
-原始材料和成果字节会被保留。检查绑定任务约定修订和内容摘要；重复登记相同内容会保留既有判断，内容真正改变后需要重新检查。
-工具观测与模型判断分别记录。回执保存目标、假设、输入、执行动作和审查依据，供后续复核。
-开发版当前使用协议及存储格式 7。旧数据库不迁移、不兼容，由智能体为新任务选用获准的新状态目录。
+原始材料与成员字节会被保留。成员具有规范相对路径、媒体类型和交付角色；快照是按路径排序的不可变成员清单。
+检查绑定任务约定修订、准则定义、作用域和确切靶标；新快照不继承语义或集合级判断，纯内容机械检查只在身份一致时复用。
+未替代的失败会持续显示并要求显式处置。工具观测与模型判断分别记录。
+回执保存目标、假设、输入、快照成员、执行动作和审查依据，供后续复核。
+本版使用协议及存储格式 10。旧数据库不迁移、不兼容，由智能体为新任务选用获准的新状态目录。
 
 面向智能体的命令回包有固定字节预算。较大的完整记录通过不可变文档和免费分段读取保留，
 智能体按需查看相关部分，快照共用不变内容。局部读取核对所读部分，另有完整审计检查整份文档。
@@ -100,7 +102,7 @@ npx skills@latest add Etoileint/AstroFairy --skill astrofairy --agent codex --co
 
 写工具可显式指定受信的只读核对工具，以权威结果确认原尝试，同时保留原来的未知观察；当前成果仍须独立检查。
 相互矛盾的正向证据持续显示争议，历史关闭之后也不会消失。无法核对或仍不确定时如实采用部分、失败或取消结果，
-详见[恢复协议](skills/astrofairy/references/review.md)。
+详见[恢复协议](skills/fairy/references/review.md)。
 
 模型和任务所需工具由宿主提供。文档制作、渲染、浏览等专门能力取决于宿主可用的工具；
 AstroFairy 没有内置所有文件格式的制作引擎。
@@ -108,7 +110,8 @@ AstroFairy 没有内置所有文件格式的制作引擎。
 ## 学习与分享
 
 成功方法、纠正、反馈和重复任务结构，都可以支持外置资产库的改进。
-方法和工作流按需检索，避免不断增加常驻指令。
+方法和工作流按需检索，避免不断增加常驻指令。检索使用本地 BM25/向量混合索引，只为活跃采用头建投影；
+候选和退役版本不进入普通发现；`assets search --refresh` 显式准备固定模型与投影，不会静默下载。
 
 交付后，智能体可以提出可复用资产，通过独立任务验证，再进入试用或稳定使用状态。
 资产可以修订或退役，维护也可以得出无需改变的结论。导出资产是可传输的 JSON 包，
@@ -131,7 +134,9 @@ AstroFairy 依靠智能体配合与本地检查运行，不隔离宿主，也不
 
 ```sh
 python -m venv .venv
-.venv/bin/python -m pip install --require-hashes --only-binary=:all: -r skills/astrofairy/scripts/requirements-runtime.lock
+.venv/bin/python -m pip install --require-hashes --only-binary=:all: -r skills/fairy/scripts/requirements-runtime.lock
+.venv/bin/python -m pip install --no-index --find-links skills/fairy/scripts/wheels --require-hashes -r skills/fairy/scripts/requirements-delivery.lock
+.venv/bin/python -m pip install --require-hashes --only-binary=:all: -r skills/fairy/scripts/requirements-search.lock
 .venv/bin/python -m pip install -r requirements-dev.lock
 .venv/bin/python -m pip install --no-deps --no-build-isolation -e .
 .venv/bin/python dev/check.py
@@ -147,7 +152,7 @@ python -m venv .venv
 .venv/bin/python dev/package_skill.py
 ```
 
-标准 skill 目录是主要分发单元。`dist/astrofairy.zip` 打包同一目录并排除开发文件，
+标准 skill 目录是主要分发单元。`dist/fairy.zip` 打包同一目录并排除开发文件，
 可选 wheel 从同一份运行器源码构建。`.claude-plugin/` 提供可选原生插件清单；
 本项目尚未验证原生托管安装与更新，这些文件不代表已在插件市场上架。
 
@@ -167,6 +172,12 @@ python -m astrofairy --home .fairy start --request 'Prepare a source-based proje
 具体操作见[运行指南](docs/guides/operation.md)。
 [修复工作区](docs/repairs/README.md)单独登记初版复核后的改动与重验。
 [发布流程](docs/guides/releasing.md)说明版本、检查和制品发布方法。
+[优化验收](docs/optimization/2026-11-acceptance/final-2026-11-03/README.md)保留本轮有范围的独立技术复验。
+
+## 版本历史
+
+- `0.1.0a1`（2026-11-01）：首个公开 Alpha，提供可追溯任务交付和外置可复用资产。
+- `0.1.0a2`（2026-11-03）：`fairy` 入口、完整主指令和阶段包、多文件 BagIt 交付、资源政策重整、本地混合检索，以及贯通的学习/治理与恢复验证。[发布说明](docs/releases/v0.1.0a2.md)。
 
 ## 致谢与许可证
 

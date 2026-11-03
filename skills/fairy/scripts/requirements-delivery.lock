@@ -1,0 +1,5 @@
+# Vendored from the official bagit 1.9.0 sdist with the fixed build chain recorded
+# in dev/vendor/bagit-1.9.0/manifest.json. Install with:
+#   pip install --no-index --find-links <skill-directory>/scripts/wheels --require-hashes -r <skill-directory>/scripts/requirements-delivery.lock
+bagit==1.9.0 \
+    --hash=sha256:9a0a023f5012e567a99bf2714020c42f562fb550a9cd8d4ffe85cb2061f0a7b6

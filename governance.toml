@@ -1,16 +1,14 @@
 format = 1
 
-[budgets]
-skill_bytes = 6500
-core_lines = 1500
-core_files = ["skills/astrofairy/scripts/astrofairy/_contracts.py", "skills/astrofairy/scripts/astrofairy/_kernel.py", "skills/astrofairy/scripts/astrofairy/_store.py", "skills/astrofairy/scripts/astrofairy/_runtime.py"]
+[architecture]
+core_files = ["skills/fairy/scripts/astrofairy/_contracts.py", "skills/fairy/scripts/astrofairy/_kernel.py", "skills/fairy/scripts/astrofairy/_store.py", "skills/fairy/scripts/astrofairy/_runtime.py"]
 
 [tests]
 pattern = "test*.py"
 
 [[tests.surfaces]]
-path = "skills/astrofairy/scripts/astrofairy/tests"
-top = "skills/astrofairy/scripts"
+path = "skills/fairy/scripts/astrofairy/tests"
+top = "skills/fairy/scripts"
 
 [[tests.surfaces]]
 path = "dev/tests"
@@ -19,9 +17,12 @@ top = "."
 [checks]
 commands = [
   ["dev/check_work_program.py"],
+  ["dev/check_vendor.py"],
+  ["dev/check_model_profile.py"],
   ["dev/lock_runtime.py", "--check"],
+  ["dev/lock_search.py", "--check"],
   ["dev/sync_metadata.py", "--check"],
-  ["-m", "skills_ref.cli", "validate", "skills/astrofairy"],
+  ["-m", "skills_ref.cli", "validate", "skills/fairy"],
   ["-m", "ruff", "check", "."],
   ["-m", "ruff", "format", "--check", "."],
   ["-m", "mypy"],

@@ -5,10 +5,11 @@ Independent project. Keep all project changes here; do not change sibling reposi
 | Topic | Authority / check |
 |---|---|
 | Architecture and trust boundary | [Architecture](docs/guides/architecture.md) |
-| Protocol | `python -m astrofairy schema`; implementation under `skills/astrofairy/scripts/astrofairy/` |
+| Protocol | `python -m astrofairy schema`; implementation under `skills/fairy/scripts/astrofairy/` |
 | Work and asset lifecycle | [Operation](docs/guides/operation.md) |
 | Overall review | [Review workspace](docs/reviews/README.md), [rounds](docs/reviews/INDEX.md); inventory/source checks: `python dev/check_review_preparation.py` (not a product-conformance check) |
 | Repairs | [Live repair status](docs/repairs/README.md); historical review stays bound to its frozen Git baseline |
+| Current optimization | [Live implementation status](docs/optimization/2026-11-implementation/README.md); [final technical acceptance](docs/optimization/2026-11-acceptance/final-2026-11-03/README.md); historical returns stay immutable |
 | Design decisions | [Core](docs/adr/0001-small-workshop.md), [distribution](docs/adr/0002-portable-standard-skill.md) |
 | Test and package checks | `python dev/check.py` |
 | Tool versions | `requirements-dev.lock`; no duplicated tool pins |
@@ -23,5 +24,6 @@ Never claim a model report is a tool observation. Checks bind task revision and 
 Unknown execution results remain unknown; task closure does not discard late observations or feedback.
 Development has no backward-compatibility burden. Replace obsolete contracts cleanly; do not add migrations,
 fallbacks or dual paths for old stores/interfaces. Preserve frozen review evidence as history.
-Learning updates assets through validation, not this file. Keep the skill entry and core within checked budgets.
+Learning updates assets through validation, not this file. Keep essential execution information in the skill
+entry. Review core responsibilities and size metrics; do not enforce arbitrary byte or physical-line caps.
 Run checks before committing; never skip hooks. Commits use Conventional Commits; do not commit unless asked.

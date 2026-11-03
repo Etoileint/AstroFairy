@@ -1,0 +1,3469 @@
+{
+  "format": 1,
+  "status": "independently_checked_technical_design_maintainer_adoption_pending",
+  "baseline_commit": "aaa9d3d930b94b7a46d9e47e0a226557c6340b43",
+  "inventory": "../2026-11-use-feedback/mechanisms.json",
+  "budget_inventory": "../2026-11-use-feedback/limits.json",
+  "authority_catalog": "sources.json",
+  "scope": "Whole design dispositions; no implementation/commit/publish claim",
+  "objects": [
+    {
+      "id": "A01",
+      "title": "产品范围与低负担委托",
+      "action": "retain-strengthen",
+      "rationale": "保留低人工负担；首用、目录和依赖由成熟组件和明确工作包组织，不让成员学习内部协议。",
+      "design_sections": [
+        "1",
+        "2",
+        "11"
+      ],
+      "work_packages": [
+        "W01",
+        "W06",
+        "W08"
+      ],
+      "authority_refs": [
+        "S01",
+        "S05",
+        "S16"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V06",
+        "V20"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "A02",
+      "title": "协作宿主与本地运行器边界",
+      "action": "retain",
+      "rationale": "沿用宿主模型、权限与真实工具；不重建代理平台，不把 skill 描述当宿主硬拦截。",
+      "design_sections": [
+        "1",
+        "2",
+        "11"
+      ],
+      "work_packages": [
+        "W01",
+        "W06",
+        "W08"
+      ],
+      "authority_refs": [
+        "S01",
+        "S05",
+        "S16"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V06",
+        "V20"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "A03",
+      "title": "协议、判定、调用和存储分离",
+      "action": "retain",
+      "rationale": "字段/准入/尝试/记录保持分责，通用实现可替换；禁止同义字段在主文、脚本各写一份。",
+      "design_sections": [
+        "1",
+        "2",
+        "11"
+      ],
+      "work_packages": [
+        "W01",
+        "W06",
+        "W08"
+      ],
+      "authority_refs": [
+        "S01",
+        "S05",
+        "S16"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V06",
+        "V20"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "A04",
+      "title": "受控任务循环及完成语义",
+      "action": "extend",
+      "rationale": "当前约定和正式集合为完成靶标；默认准则须细化，失败、未决写入和必要成员共同约束关闭。",
+      "design_sections": [
+        "1",
+        "2",
+        "11"
+      ],
+      "work_packages": [
+        "W01",
+        "W06",
+        "W08"
+      ],
+      "authority_refs": [
+        "S01",
+        "S05",
+        "S16"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V06",
+        "V20"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "A05",
+      "title": "原始证据、事件与派生视图",
+      "action": "retain",
+      "rationale": "原始字节、事件与判断保留各自证据等级，索引/回执只作派生。",
+      "design_sections": [
+        "1",
+        "2",
+        "11"
+      ],
+      "work_packages": [
+        "W01",
+        "W06",
+        "W08"
+      ],
+      "authority_refs": [
+        "S01",
+        "S05",
+        "S16"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V06",
+        "V20"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "A06",
+      "title": "外置资产与任务化维护",
+      "action": "extend",
+      "rationale": "任务化维护接纳正例、反馈、纠正及重复；维护决定可不变或暂缓，避免每次强制重流程。",
+      "design_sections": [
+        "1",
+        "2",
+        "11"
+      ],
+      "work_packages": [
+        "W01",
+        "W06",
+        "W08"
+      ],
+      "authority_refs": [
+        "S01",
+        "S05",
+        "S16"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V06",
+        "V20"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "A07",
+      "title": "共享 skill 加可选分发适配",
+      "action": "rework",
+      "rationale": "共享唯一 fairy 技能和成熟安装渠道，原生插件按宿主命名空间明确调用。",
+      "design_sections": [
+        "1",
+        "2",
+        "11"
+      ],
+      "work_packages": [
+        "W01",
+        "W06",
+        "W08"
+      ],
+      "authority_refs": [
+        "S01",
+        "S05",
+        "S16"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V06",
+        "V20"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "A08",
+      "title": "稳定核心与外围增长",
+      "action": "retain-strengthen",
+      "rationale": "取消物理行数防膨胀，按职责/依赖/删除测试控制；库、工作流和策略配置在外围增长。",
+      "design_sections": [
+        "1",
+        "2",
+        "11"
+      ],
+      "work_packages": [
+        "W01",
+        "W06",
+        "W08"
+      ],
+      "authority_refs": [
+        "S01",
+        "S05",
+        "S16"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V06",
+        "V20"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "A09",
+      "title": "整体组合及端到端保证",
+      "action": "extend",
+      "rationale": "以完整首用、修订、集合交付、恢复、检索再用闭环验证，不把局部通过累加成系统效果。",
+      "design_sections": [
+        "1",
+        "2",
+        "11"
+      ],
+      "work_packages": [
+        "W01",
+        "W06",
+        "W08"
+      ],
+      "authority_refs": [
+        "S01",
+        "S05",
+        "S16"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V06",
+        "V20"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M01",
+      "title": "技能发现与调用入口",
+      "action": "rework",
+      "rationale": "唯一 fairy 名称接标准目录、描述和宿主原生命令；自然语言选择仍软性。",
+      "design_sections": [
+        "3",
+        "4",
+        "11"
+      ],
+      "work_packages": [
+        "W03",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS05",
+        "S01",
+        "S02",
+        "S04",
+        "S05",
+        "S08",
+        "S19",
+        "S20",
+        "S21",
+        "S22",
+        "S23"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V02",
+        "V03",
+        "V04",
+        "V24"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M02",
+      "title": "条件资料与按需披露",
+      "action": "rework",
+      "rationale": "常规必需信息放主文及当前工作包；异常和作者参考按条件读，不能仅强化必须读取。",
+      "design_sections": [
+        "3",
+        "4"
+      ],
+      "work_packages": [
+        "W03"
+      ],
+      "authority_refs": [
+        "S01",
+        "S02",
+        "S05",
+        "S08"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V04"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M03",
+      "title": "环境就绪诊断",
+      "action": "extend",
+      "rationale": "就绪诊断区分核心/索引/模型，真实进度和恢复入口，安装使用锁定原件。",
+      "design_sections": [
+        "3",
+        "11"
+      ],
+      "work_packages": [
+        "W03",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS05",
+        "S01",
+        "S04",
+        "S19",
+        "S20",
+        "S21",
+        "S22",
+        "S23"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V02",
+        "V24"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M04",
+      "title": "数据目录与任务工作区",
+      "action": "rework",
+      "rationale": "platformdirs 负责平台目录；显式 home 优先、任务私有目录和旧格式写前拒绝保留。",
+      "design_sections": [
+        "3",
+        "5",
+        "6",
+        "7",
+        "8",
+        "11"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W03",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS04",
+        "DS05",
+        "DS06",
+        "S01",
+        "S04",
+        "S16",
+        "S17",
+        "S19",
+        "S20",
+        "S21",
+        "S22",
+        "S23"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V02",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V19",
+        "V23",
+        "V24"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M05",
+      "title": "建任务、默认标准和附件快照",
+      "action": "extend",
+      "rationale": "严格捕获原始请求/材料，默认准则 provisional，模型交付前完成任务特定约定。",
+      "design_sections": [
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W03",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS04",
+        "DS06",
+        "S01",
+        "S02",
+        "S05",
+        "S08",
+        "S16",
+        "S17"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V04",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V19",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M06",
+      "title": "严格 JSON 与命令字段契约",
+      "action": "retain-strengthen",
+      "rationale": "JSON Schema 成熟库与严格解析保留；字段语义从单源提供精确下一动作载荷。",
+      "design_sections": [
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W03",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS04",
+        "DS06",
+        "S01",
+        "S02",
+        "S05",
+        "S08",
+        "S16",
+        "S17"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V04",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V19",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M07",
+      "title": "要求来源与修订",
+      "action": "extend",
+      "rationale": "要求修订绑定来源/revision；改动后的检查依真实影响重做，不自行弱化用户目标。",
+      "design_sections": [
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W03",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS04",
+        "DS06",
+        "S01",
+        "S02",
+        "S05",
+        "S08",
+        "S16",
+        "S17"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V04",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V19",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M08",
+      "title": "关键提问与输入转发",
+      "action": "rework",
+      "rationale": "移除终身三问，保留一待答和必要性策略；主动指示无须配合内部次数。",
+      "design_sections": [
+        "3",
+        "4",
+        "8"
+      ],
+      "work_packages": [
+        "W03",
+        "W05"
+      ],
+      "authority_refs": [
+        "DS04",
+        "S01",
+        "S02",
+        "S05",
+        "S08",
+        "S18"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V04",
+        "V05",
+        "V22"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M09",
+      "title": "模型工作请求与报告",
+      "action": "retain-strengthen",
+      "rationale": "真实请求/报告保持，模型判断不抬成工具见证；上下文读取免占工作额度。",
+      "design_sections": [
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W03",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS04",
+        "DS06",
+        "S01",
+        "S02",
+        "S05",
+        "S08",
+        "S16",
+        "S17"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V04",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V19",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M10",
+      "title": "工具注册、字段发现与能力目录",
+      "action": "extend",
+      "rationale": "发现用分页/完整定义句柄，完整 schema 不受短说明限制；发现结果不授予权限。",
+      "design_sections": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "11"
+      ],
+      "work_packages": [
+        "W01",
+        "W03",
+        "W06",
+        "W08"
+      ],
+      "authority_refs": [
+        "S01",
+        "S02",
+        "S05",
+        "S08",
+        "S16"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V04",
+        "V06",
+        "V20"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M11",
+      "title": "动作准入、预算与重复防护",
+      "action": "rework",
+      "rationale": "调用额度改宽裕预警/最终保护，重复和权限准入仍独立；不假称调用数限制单次执行时长。",
+      "design_sections": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W05",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS04",
+        "DS06",
+        "S16",
+        "S17",
+        "S18"
+      ],
+      "acceptance_refs": [
+        "V04",
+        "V05",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V19",
+        "V22",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M12",
+      "title": "调用前留痕与执行后观测",
+      "action": "retain",
+      "rationale": "保留执行前尝试和执行后观察，未知写入绑定原尝试，不盲目自动续跑。",
+      "design_sections": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS04",
+        "DS06",
+        "S16",
+        "S17"
+      ],
+      "acceptance_refs": [
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V19",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M13",
+      "title": "成果登记与版本绑定",
+      "action": "rework",
+      "rationale": "从单 ref 改为完整不可变成员快照；同字节不同路径均有身份。",
+      "design_sections": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "work_packages": [
+        "W01",
+        "W02"
+      ],
+      "authority_refs": [
+        "DS03",
+        "DS06",
+        "S09",
+        "S10",
+        "S11"
+      ],
+      "acceptance_refs": [
+        "V06",
+        "V07",
+        "V08",
+        "V09",
+        "V10",
+        "V11",
+        "V12",
+        "V15"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M14",
+      "title": "文件捕获与类型标记",
+      "action": "extend",
+      "rationale": "流式捕获和类型元数据，内容大小与 JSON/字段额度分离，输出须真实观察且有权使用。",
+      "design_sections": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "work_packages": [
+        "W01",
+        "W02"
+      ],
+      "authority_refs": [
+        "DS03",
+        "DS06",
+        "S09",
+        "S10",
+        "S11"
+      ],
+      "acceptance_refs": [
+        "V06",
+        "V07",
+        "V08",
+        "V09",
+        "V10",
+        "V11",
+        "V12",
+        "V15"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M15",
+      "title": "内容访问与分段读取",
+      "action": "rework",
+      "rationale": "正文/资产/文档统一免费分段访问与句柄，短回包不限制原件长度。",
+      "design_sections": [
+        "3",
+        "4",
+        "8",
+        "9"
+      ],
+      "work_packages": [
+        "W03",
+        "W04",
+        "W05",
+        "W06"
+      ],
+      "authority_refs": [
+        "DS01",
+        "DS02",
+        "DS04",
+        "DS14",
+        "DS15",
+        "S01",
+        "S02",
+        "S05",
+        "S08",
+        "S14",
+        "S18"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V04",
+        "V05",
+        "V16",
+        "V17",
+        "V18",
+        "V19",
+        "V22"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M16",
+      "title": "机械检查器",
+      "action": "extend",
+      "rationale": "机械 checker 定义/参数/靶标固定，成员和集合分别覆盖；纯内容复用条件明确。",
+      "design_sections": [
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS03",
+        "DS04",
+        "DS06",
+        "S09",
+        "S10",
+        "S11",
+        "S16",
+        "S17"
+      ],
+      "acceptance_refs": [
+        "V06",
+        "V07",
+        "V08",
+        "V09",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V15",
+        "V19",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M17",
+      "title": "语义审查、替代链和冲突",
+      "action": "extend",
+      "rationale": "集合语义默认整份快照；失败适用性和显式重评保留，换名/重发不能清除失败。",
+      "design_sections": [
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "12"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS03",
+        "DS04",
+        "DS06",
+        "S09",
+        "S10",
+        "S11",
+        "S16",
+        "S17"
+      ],
+      "acceptance_refs": [
+        "V06",
+        "V07",
+        "V08",
+        "V09",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V15",
+        "V19",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M18",
+      "title": "关闭门与结果分类",
+      "action": "extend",
+      "rationale": "complete 需细化约定、必要交付职责、当前检查和执行完整性；partial 如实列缺口。",
+      "design_sections": [
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS03",
+        "DS04",
+        "DS06",
+        "S09",
+        "S10",
+        "S11",
+        "S16",
+        "S17"
+      ],
+      "acceptance_refs": [
+        "V06",
+        "V07",
+        "V08",
+        "V09",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V15",
+        "V19",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M19",
+      "title": "下一步工作包与调度",
+      "action": "rework",
+      "rationale": "阶段工作包包含确切命令载荷和恢复身份；prepare-delivery 只组合现有已记录原语。",
+      "design_sections": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "11"
+      ],
+      "work_packages": [
+        "W01",
+        "W03",
+        "W06",
+        "W08"
+      ],
+      "authority_refs": [
+        "S01",
+        "S02",
+        "S05",
+        "S08",
+        "S16"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V04",
+        "V06",
+        "V20"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M20",
+      "title": "回执与交付导出",
+      "action": "rework",
+      "rationale": "bagit-python 承担标准多文件打包和完整校验，根回执解释依据，正式成员均直接可访问。",
+      "design_sections": [
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS03",
+        "DS04",
+        "DS06",
+        "S09",
+        "S10",
+        "S11",
+        "S16",
+        "S17"
+      ],
+      "acceptance_refs": [
+        "V06",
+        "V07",
+        "V08",
+        "V09",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V15",
+        "V19",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M21",
+      "title": "SQLite 存储与事务",
+      "action": "retain-strengthen",
+      "rationale": "保留 SQLite 事务与 expected_seq；大 BLOB 用原生增量 I/O，不另造内容事务引擎。",
+      "design_sections": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS04",
+        "DS06",
+        "S16",
+        "S17"
+      ],
+      "acceptance_refs": [
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V19",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M22",
+      "title": "事件链、序号与重放",
+      "action": "retain-strengthen",
+      "rationale": "事件链与序号仍为事实；资产事件兼作可重放投影日志，幂等水位接线。",
+      "design_sections": [
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "12"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W04",
+        "W05",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS04",
+        "DS06",
+        "S16",
+        "S17",
+        "S18"
+      ],
+      "acceptance_refs": [
+        "V04",
+        "V05",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V18",
+        "V19",
+        "V22",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M23",
+      "title": "内容寻址与字节完整性",
+      "action": "extend",
+      "rationale": "内容摘要只标字节，不充当成员身份；历史快照所有引用纳入完整性审计。",
+      "design_sections": [
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS03",
+        "DS04",
+        "DS06",
+        "S09",
+        "S10",
+        "S11",
+        "S16",
+        "S17"
+      ],
+      "acceptance_refs": [
+        "V06",
+        "V07",
+        "V08",
+        "V09",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V15",
+        "V19",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M24",
+      "title": "路径约束、原子写与文件权限",
+      "action": "extend",
+      "rationale": "pathvalidate 加领域包含/冲突验证；私有暂存、同文件系统发布、输出权限延续。",
+      "design_sections": [
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS03",
+        "DS04",
+        "DS06",
+        "S09",
+        "S10",
+        "S11",
+        "S16",
+        "S17"
+      ],
+      "acceptance_refs": [
+        "V06",
+        "V07",
+        "V08",
+        "V09",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V15",
+        "V19",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M25",
+      "title": "重开、未决动作与迟到结果",
+      "action": "retain-strengthen",
+      "rationale": "保留未知动作核对和迟到事实；新回执单独版本，不修改历史完整性记录。",
+      "design_sections": [
+        "5",
+        "6",
+        "7",
+        "8",
+        "12"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS04",
+        "DS06",
+        "S16",
+        "S17"
+      ],
+      "acceptance_refs": [
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V19",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M26",
+      "title": "资产提案与工作流结构",
+      "action": "extend",
+      "rationale": "工作流包增加适用范围、依赖/输入、完成要求、来源案例和失效条件，原包为权威。",
+      "design_sections": [
+        "10"
+      ],
+      "work_packages": [
+        "W04",
+        "W06"
+      ],
+      "authority_refs": [
+        "S10",
+        "S16"
+      ],
+      "acceptance_refs": [
+        "V20",
+        "V21"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M27",
+      "title": "候选验证任务与固定策略",
+      "action": "strengthen",
+      "rationale": "固定策略必须验证确切候选及适用性，候选仅出现在交付集合不能算完成验证。",
+      "design_sections": [
+        "4",
+        "5",
+        "6",
+        "7",
+        "10"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W04",
+        "W06"
+      ],
+      "authority_refs": [
+        "DS03",
+        "DS06",
+        "S09",
+        "S10",
+        "S11",
+        "S16"
+      ],
+      "acceptance_refs": [
+        "V06",
+        "V07",
+        "V08",
+        "V09",
+        "V10",
+        "V11",
+        "V12",
+        "V15",
+        "V20",
+        "V21"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M28",
+      "title": "采用与基准竞争",
+      "action": "retain-strengthen",
+      "rationale": "采用/基准竞争在主库事务完成，检索近似相似不得自行采用或升级成熟度。",
+      "design_sections": [
+        "10"
+      ],
+      "work_packages": [
+        "W04",
+        "W06"
+      ],
+      "authority_refs": [
+        "S10",
+        "S16"
+      ],
+      "acceptance_refs": [
+        "V20",
+        "V21"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M29",
+      "title": "资产状态、版本、退役与回退",
+      "action": "extend",
+      "rationale": "新发现过滤权威可用头，历史钉选合法读取；修订/退役/回退不积累重复永久分支。",
+      "design_sections": [
+        "9",
+        "10",
+        "12"
+      ],
+      "work_packages": [
+        "W04",
+        "W06"
+      ],
+      "authority_refs": [
+        "DS01",
+        "DS02",
+        "DS14",
+        "DS15",
+        "S10",
+        "S14",
+        "S16"
+      ],
+      "acceptance_refs": [
+        "V16",
+        "V17",
+        "V18",
+        "V19",
+        "V20",
+        "V21"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M30",
+      "title": "资产检索与排序",
+      "action": "replace",
+      "rationale": "采用 LanceDB ICU/BM25/向量/RRF 和成熟嵌入，正文/结构索引，真实状态/代次过滤。",
+      "design_sections": [
+        "9",
+        "12"
+      ],
+      "work_packages": [
+        "W04",
+        "W06"
+      ],
+      "authority_refs": [
+        "DS01",
+        "DS02",
+        "DS14",
+        "DS15",
+        "S14"
+      ],
+      "acceptance_refs": [
+        "V16",
+        "V17",
+        "V18",
+        "V19"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M31",
+      "title": "资产读取与精确版本钉选",
+      "action": "extend",
+      "rationale": "短名单仅路由，执行前免费读必要适用信息和完整步骤，再核状态并钉确切版本。",
+      "design_sections": [
+        "3",
+        "4",
+        "9"
+      ],
+      "work_packages": [
+        "W03",
+        "W04",
+        "W06"
+      ],
+      "authority_refs": [
+        "DS01",
+        "DS02",
+        "DS14",
+        "DS15",
+        "S01",
+        "S02",
+        "S05",
+        "S08",
+        "S14"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V04",
+        "V16",
+        "V17",
+        "V18",
+        "V19"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M32",
+      "title": "反馈与独立维护任务",
+      "action": "extend",
+      "rationale": "交付后形成维护/暂缓/不变决定；信号保留 source task/seq/快照，后续会话可继续。",
+      "design_sections": [
+        "10"
+      ],
+      "work_packages": [
+        "W04",
+        "W06"
+      ],
+      "authority_refs": [
+        "S10",
+        "S16"
+      ],
+      "acceptance_refs": [
+        "V20",
+        "V21"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M33",
+      "title": "资产分享与导入验证",
+      "action": "extend",
+      "rationale": "版本化声明资产包、清理 provenance，本地验证再采用；不默认分享源任务私密材料。",
+      "design_sections": [
+        "5",
+        "6",
+        "7",
+        "8",
+        "10"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W04",
+        "W06",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS04",
+        "DS06",
+        "S10",
+        "S16",
+        "S17"
+      ],
+      "acceptance_refs": [
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V19",
+        "V20",
+        "V21",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M34",
+      "title": "被动工具说明与内容信任",
+      "action": "retain-strengthen",
+      "rationale": "工具说明和资产被视为数据，不能扩大宿主授权；namespace 不冒充 ACL。",
+      "design_sections": [
+        "5",
+        "6",
+        "7",
+        "8",
+        "10"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W04",
+        "W06",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS04",
+        "DS06",
+        "S10",
+        "S16",
+        "S17"
+      ],
+      "acceptance_refs": [
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V19",
+        "V20",
+        "V21",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M35",
+      "title": "资源限额与增长预算",
+      "action": "rework",
+      "rationale": "43 项按语义/传输/内部块/存储/执行保护分层；保留必要兜底而非全面删限。",
+      "design_sections": [
+        "8"
+      ],
+      "work_packages": [
+        "W05"
+      ],
+      "authority_refs": [
+        "DS04",
+        "S18"
+      ],
+      "acceptance_refs": [
+        "V04",
+        "V05",
+        "V22"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M36",
+      "title": "CLI 错误、状态与诊断接口",
+      "action": "extend",
+      "rationale": "结构化诊断带阶段/恢复身份，安全短错误外可续读；不静默截断，不伪造账单。",
+      "design_sections": [
+        "3",
+        "4",
+        "8"
+      ],
+      "work_packages": [
+        "W03",
+        "W05"
+      ],
+      "authority_refs": [
+        "DS04",
+        "S01",
+        "S02",
+        "S05",
+        "S08",
+        "S18"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V04",
+        "V05",
+        "V22"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M37",
+      "title": "自包含启动与可选 Python 包",
+      "action": "extend",
+      "rationale": "独立 wheel 和技能脚本仍可用；准备 core/search/model 有固定锁与可观察就绪。",
+      "design_sections": [
+        "3",
+        "11"
+      ],
+      "work_packages": [
+        "W03",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS05",
+        "S01",
+        "S04",
+        "S19",
+        "S20",
+        "S21",
+        "S22",
+        "S23"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V02",
+        "V24"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M38",
+      "title": "便携 ZIP 内容过滤",
+      "action": "retain-strengthen",
+      "rationale": "便携包仍同源白名单，新的 fairy 目录/锁/许可进入测试，不夹带缓存和私有原件。",
+      "design_sections": [
+        "3",
+        "11"
+      ],
+      "work_packages": [
+        "W03",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS05",
+        "S01",
+        "S04",
+        "S19",
+        "S20",
+        "S21",
+        "S22",
+        "S23"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V02",
+        "V24"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M39",
+      "title": "派生版本、许可与包元数据同步",
+      "action": "retain-strengthen",
+      "rationale": "版本/许可/技能名/元数据单源核验；模型许可及权重身份独立登记。",
+      "design_sections": [
+        "3",
+        "11"
+      ],
+      "work_packages": [
+        "W03",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS05",
+        "S01",
+        "S04",
+        "S19",
+        "S20",
+        "S21",
+        "S22",
+        "S23"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V02",
+        "V24"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M40",
+      "title": "原生插件与市场清单",
+      "action": "rework",
+      "rationale": "插件/市场指向唯一 fairy，并按原生命名空间展示；不增薄转发技能。",
+      "design_sections": [
+        "3",
+        "11"
+      ],
+      "work_packages": [
+        "W03",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS05",
+        "S01",
+        "S04",
+        "S19",
+        "S20",
+        "S21",
+        "S22",
+        "S23"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V02",
+        "V24"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M41",
+      "title": "可选 UI 元数据",
+      "action": "rework",
+      "rationale": "UI 默认提示与 fairy 身份同源，软性匹配和宿主差异明确。",
+      "design_sections": [
+        "3",
+        "11"
+      ],
+      "work_packages": [
+        "W03",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS05",
+        "S01",
+        "S04",
+        "S19",
+        "S20",
+        "S21",
+        "S22",
+        "S23"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V02",
+        "V24"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M42",
+      "title": "测试面、类型与规范检查",
+      "action": "extend",
+      "rationale": "保留风格/类型/真实收集门，新增集合、行为、检索、资源和恢复真实验证。",
+      "design_sections": [
+        "11"
+      ],
+      "work_packages": [
+        "W06",
+        "W07",
+        "W08"
+      ],
+      "authority_refs": [
+        "S01",
+        "S11",
+        "S16"
+      ],
+      "acceptance_refs": [
+        "V15",
+        "V23",
+        "V24"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M43",
+      "title": "提交门与 CI 构建",
+      "action": "retain-strengthen",
+      "rationale": "提交/CI 不绕门；组件与模型锁、分发同源、实际安装进入相应执行通道。",
+      "design_sections": [
+        "11"
+      ],
+      "work_packages": [
+        "W06",
+        "W07",
+        "W08"
+      ],
+      "authority_refs": [
+        "S01",
+        "S11",
+        "S16"
+      ],
+      "acceptance_refs": [
+        "V15",
+        "V23",
+        "V24"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M44",
+      "title": "文档、单源组织与公开边界",
+      "action": "extend",
+      "rationale": "更新架构/协议/主文/中英说明及给维护者的讲解；历史报告保持原基准不倒写。",
+      "design_sections": [
+        "1",
+        "2",
+        "11"
+      ],
+      "work_packages": [
+        "W01",
+        "W06",
+        "W07",
+        "W08"
+      ],
+      "authority_refs": [
+        "S01",
+        "S05",
+        "S11",
+        "S16"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V06",
+        "V15",
+        "V20",
+        "V23",
+        "V24"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "M45",
+      "title": "研究来源与验证声明",
+      "action": "retain-strengthen",
+      "rationale": "每项成熟采用绑定权威原件、实际接口和接线验收；声明不超过实际探针/模型/平台证据。",
+      "design_sections": [
+        "11"
+      ],
+      "work_packages": [
+        "W06",
+        "W07",
+        "W08"
+      ],
+      "authority_refs": [
+        "S01",
+        "S11",
+        "S16"
+      ],
+      "acceptance_refs": [
+        "V15",
+        "V23",
+        "V24"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "C01",
+      "title": "首次任务到交付",
+      "action": "rework",
+      "rationale": "首用自动就绪、完整主文、工作包、低负担约定、多文件交付连续跑通。",
+      "design_sections": [
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "11"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W03",
+        "W05",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS03",
+        "DS04",
+        "DS05",
+        "DS06",
+        "S01",
+        "S02",
+        "S04",
+        "S05",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S18",
+        "S19",
+        "S20",
+        "S21",
+        "S22",
+        "S23"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V02",
+        "V03",
+        "V04",
+        "V05",
+        "V06",
+        "V07",
+        "V08",
+        "V09",
+        "V10",
+        "V11",
+        "V12",
+        "V15",
+        "V22",
+        "V24"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "C02",
+      "title": "要求变化到重新验收",
+      "action": "extend",
+      "rationale": "新指示产生真实 revision/检查变化；模型解释组织依据而非要求成员操作状态机。",
+      "design_sections": [
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W03",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS03",
+        "DS04",
+        "DS06",
+        "S01",
+        "S02",
+        "S05",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S16",
+        "S17"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V04",
+        "V06",
+        "V07",
+        "V08",
+        "V09",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V15",
+        "V19",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "C03",
+      "title": "中断到恢复与迟到结果",
+      "action": "extend",
+      "rationale": "中断保留已提交阶段，未知动作核对，迟到事实产生新回执，不重试有风险原语。",
+      "design_sections": [
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W05",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS03",
+        "DS04",
+        "DS06",
+        "S09",
+        "S10",
+        "S11",
+        "S16",
+        "S17",
+        "S18"
+      ],
+      "acceptance_refs": [
+        "V04",
+        "V05",
+        "V06",
+        "V07",
+        "V08",
+        "V09",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V15",
+        "V19",
+        "V22",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "C04",
+      "title": "经验到下一次任务收益",
+      "action": "rework",
+      "rationale": "成功/纠正信号形成资产，混合检索找到并判适用，实际再用净收益独立验收。",
+      "design_sections": [
+        "3",
+        "4",
+        "8",
+        "9",
+        "10"
+      ],
+      "work_packages": [
+        "W03",
+        "W04",
+        "W05",
+        "W06"
+      ],
+      "authority_refs": [
+        "DS01",
+        "DS02",
+        "DS04",
+        "DS14",
+        "DS15",
+        "S01",
+        "S02",
+        "S05",
+        "S08",
+        "S10",
+        "S14",
+        "S16",
+        "S18"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V04",
+        "V05",
+        "V16",
+        "V17",
+        "V18",
+        "V19",
+        "V20",
+        "V21",
+        "V22"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "C05",
+      "title": "发送到接收端独立使用",
+      "action": "extend",
+      "rationale": "接收端不依赖原任务私有库；导入候选验证确切内容，传播不等于采用。",
+      "design_sections": [
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W04",
+        "W06",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS01",
+        "DS02",
+        "DS04",
+        "DS06",
+        "DS14",
+        "DS15",
+        "S10",
+        "S14",
+        "S16",
+        "S17"
+      ],
+      "acceptance_refs": [
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V16",
+        "V17",
+        "V18",
+        "V19",
+        "V20",
+        "V21",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "C06",
+      "title": "公开源到多宿主安装与升级",
+      "action": "rework",
+      "rationale": "标准 skill/wheel/plugin 同源，现有宿主原生方式验证；无开发期兼容别名。",
+      "design_sections": [
+        "3",
+        "4",
+        "11"
+      ],
+      "work_packages": [
+        "W03",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS05",
+        "S01",
+        "S02",
+        "S04",
+        "S05",
+        "S08",
+        "S19",
+        "S20",
+        "S21",
+        "S22",
+        "S23"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V02",
+        "V03",
+        "V04",
+        "V24"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "C07",
+      "title": "规模增长及外部能力替换",
+      "action": "extend",
+      "rationale": "分块、索引投影和资源策略可变，核心不随资产/工具增长改分支；ANN 后续按量测启用。",
+      "design_sections": [
+        "1",
+        "2",
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
+      "work_packages": [
+        "W01",
+        "W04",
+        "W05",
+        "W06",
+        "W08"
+      ],
+      "authority_refs": [
+        "DS01",
+        "DS02",
+        "DS04",
+        "DS14",
+        "DS15",
+        "S01",
+        "S05",
+        "S10",
+        "S14",
+        "S16",
+        "S18"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V04",
+        "V05",
+        "V06",
+        "V16",
+        "V17",
+        "V18",
+        "V19",
+        "V20",
+        "V21",
+        "V22"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "C08",
+      "title": "权限与副作用贯穿路径",
+      "action": "retain-strengthen",
+      "rationale": "资产、预处理组合和成熟组件不越权限；所有真实副作用仍由已有准入及观察承接。",
+      "design_sections": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS04",
+        "DS06",
+        "S16",
+        "S17"
+      ],
+      "acceptance_refs": [
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V19",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "U01",
+      "title": "使用者思路进步的证据路径",
+      "action": "bound-claim",
+      "rationale": "收集真实提问/反馈变化作长期证据，不把短期技术通过冒称人已进步。",
+      "design_sections": [
+        "10"
+      ],
+      "work_packages": [
+        "W04",
+        "W06"
+      ],
+      "authority_refs": [
+        "S10",
+        "S16"
+      ],
+      "acceptance_refs": [
+        "V20",
+        "V21"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "U02",
+      "title": "重复任务成熟与回流触发",
+      "action": "extend",
+      "rationale": "成熟度看声明适用性、正反例和净收益，允许成功沉淀与不变，不用固定次数晋升。",
+      "design_sections": [
+        "10"
+      ],
+      "work_packages": [
+        "W04",
+        "W06"
+      ],
+      "authority_refs": [
+        "S10",
+        "S16"
+      ],
+      "acceptance_refs": [
+        "V20",
+        "V21"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "U03",
+      "title": "检索需求的语义覆盖",
+      "action": "rework",
+      "rationale": "中文长句/同义/跨语/正文与不适用独立留出检验，完整字段与算法贡献分离。",
+      "design_sections": [
+        "9"
+      ],
+      "work_packages": [
+        "W04",
+        "W06"
+      ],
+      "authority_refs": [
+        "DS01",
+        "DS02",
+        "DS14",
+        "DS15",
+        "S14"
+      ],
+      "acceptance_refs": [
+        "V16",
+        "V17",
+        "V18",
+        "V19"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "U04",
+      "title": "长期数据保留与版本演化",
+      "action": "retain-strengthen",
+      "rationale": "历史捕获及事件不删；新开发格式写前拒绝、旧数据保留，不承诺无限磁盘或旧协议兼容。",
+      "design_sections": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W05",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS04",
+        "DS06",
+        "S16",
+        "S17",
+        "S18"
+      ],
+      "acceptance_refs": [
+        "V04",
+        "V05",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V19",
+        "V22",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "U05",
+      "title": "原生宿主及平台支持证据",
+      "action": "bound-claim",
+      "rationale": "支持矩阵以实际 wheel/宿主任务为准，不把标准目录正确当所有宿主安装已证。",
+      "design_sections": [
+        "3",
+        "11"
+      ],
+      "work_packages": [
+        "W03",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS05",
+        "S01",
+        "S04",
+        "S19",
+        "S20",
+        "S21",
+        "S22",
+        "S23"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V02",
+        "V24"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "U06",
+      "title": "审核者理解组织依据的能力",
+      "action": "extend",
+      "rationale": "直接成果链接加组织理由/关键依据/假设/检查范围，完整回执另查，避免流水账代解释。",
+      "design_sections": [
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS03",
+        "DS04",
+        "DS06",
+        "S09",
+        "S10",
+        "S11",
+        "S16",
+        "S17"
+      ],
+      "acceptance_refs": [
+        "V06",
+        "V07",
+        "V08",
+        "V09",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V15",
+        "V19",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "U07",
+      "title": "未知效果恢复的操作闭环",
+      "action": "retain-strengthen",
+      "rationale": "核对原尝试的操作路径暴露于 next，不能靠口头确认抹去未知写入。",
+      "design_sections": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W05",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS04",
+        "DS06",
+        "S16",
+        "S17",
+        "S18"
+      ],
+      "acceptance_refs": [
+        "V04",
+        "V05",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V19",
+        "V22",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "N01",
+      "title": "声明式工具契约、运行环境与 Schema 准入",
+      "action": "extend",
+      "rationale": "保留声明式合同及成熟 schema 库，扩大合理合同初值并按确切字段生成载荷。",
+      "design_sections": [
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "11"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W03",
+        "W05",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS04",
+        "DS05",
+        "DS06",
+        "S01",
+        "S02",
+        "S04",
+        "S05",
+        "S08",
+        "S16",
+        "S17",
+        "S18",
+        "S19",
+        "S20",
+        "S21",
+        "S22",
+        "S23"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V02",
+        "V03",
+        "V04",
+        "V05",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V19",
+        "V22",
+        "V23",
+        "V24"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "N02",
+      "title": "权威尝试核对与当前执行完整性",
+      "action": "retain-strengthen",
+      "rationale": "当前完整性从原尝试及权威观察核对，迟到事实不被旧 complete 记录覆盖。",
+      "design_sections": [
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W05",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS03",
+        "DS04",
+        "DS06",
+        "S09",
+        "S10",
+        "S11",
+        "S16",
+        "S17",
+        "S18"
+      ],
+      "acceptance_refs": [
+        "V04",
+        "V05",
+        "V06",
+        "V07",
+        "V08",
+        "V09",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V15",
+        "V19",
+        "V22",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "N03",
+      "title": "有界回包、免费文档选读与恢复标识",
+      "action": "rework",
+      "rationale": "统一免费读取和分页、受控回包、精确恢复 ID；回包保护不挤压工作执行额度。",
+      "design_sections": [
+        "3",
+        "4",
+        "8"
+      ],
+      "work_packages": [
+        "W03",
+        "W05"
+      ],
+      "authority_refs": [
+        "DS04",
+        "S01",
+        "S02",
+        "S05",
+        "S08",
+        "S18"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V04",
+        "V05",
+        "V22"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "N04",
+      "title": "共享认证文档、局部读取与全量审计",
+      "action": "retain",
+      "rationale": "保留认证文档结构、免费选择读取和全量审计，内部节点/扇出/缓存不盲目扩大。",
+      "design_sections": [
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W03",
+        "W05",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS04",
+        "DS06",
+        "S01",
+        "S02",
+        "S05",
+        "S08",
+        "S16",
+        "S17",
+        "S18"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V04",
+        "V05",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V19",
+        "V22",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "N05",
+      "title": "记录寿命、完整审计、备份与新目录恢复",
+      "action": "extend",
+      "rationale": "所有历史集合纳入备份闭包；主库先文档后保证仍有效，检索缓存恢复后重建。",
+      "design_sections": [
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "12"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W05",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS03",
+        "DS04",
+        "DS06",
+        "S09",
+        "S10",
+        "S11",
+        "S16",
+        "S17",
+        "S18"
+      ],
+      "acceptance_refs": [
+        "V04",
+        "V05",
+        "V06",
+        "V07",
+        "V08",
+        "V09",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V15",
+        "V19",
+        "V22",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "N06",
+      "title": "初始约定严格归一化与附件原子捕获",
+      "action": "extend",
+      "rationale": "原始请求严格归一化及附件原子捕获保持；允许大请求引用而非静默截掉。",
+      "design_sections": [
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W03",
+        "W05",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS04",
+        "DS06",
+        "S01",
+        "S02",
+        "S05",
+        "S08",
+        "S16",
+        "S17",
+        "S18"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03",
+        "V04",
+        "V05",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V19",
+        "V22",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "N07",
+      "title": "候选策略验证与精确采用绑定",
+      "action": "strengthen",
+      "rationale": "候选验证精确内容/策略与通过证据绑定，集合成员包含关系不能替代。",
+      "design_sections": [
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "10"
+      ],
+      "work_packages": [
+        "W01",
+        "W02",
+        "W04",
+        "W06",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS03",
+        "DS04",
+        "DS06",
+        "S09",
+        "S10",
+        "S11",
+        "S16",
+        "S17"
+      ],
+      "acceptance_refs": [
+        "V06",
+        "V07",
+        "V08",
+        "V09",
+        "V10",
+        "V11",
+        "V12",
+        "V13",
+        "V14",
+        "V15",
+        "V19",
+        "V20",
+        "V21",
+        "V23"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "N08",
+      "title": "真实测试收集与执行通道",
+      "action": "extend",
+      "rationale": "真实测试收集与 CI/dev 执行渠道保留并扩展，禁止只有目录无执行通道。",
+      "design_sections": [
+        "11"
+      ],
+      "work_packages": [
+        "W06",
+        "W07",
+        "W08"
+      ],
+      "authority_refs": [
+        "S01",
+        "S11",
+        "S16"
+      ],
+      "acceptance_refs": [
+        "V15",
+        "V23",
+        "V24"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    },
+    {
+      "id": "N09",
+      "title": "哈希锁定依赖、就绪检查与首次启动",
+      "action": "extend",
+      "rationale": "哈希锁定核心/检索/构建及模型，用户首启动有准备进度，不使用本轮临时探针环境分发。",
+      "design_sections": [
+        "3",
+        "4",
+        "11"
+      ],
+      "work_packages": [
+        "W03",
+        "W07"
+      ],
+      "authority_refs": [
+        "DS05",
+        "S01",
+        "S02",
+        "S04",
+        "S05",
+        "S08",
+        "S19",
+        "S20",
+        "S21",
+        "S22",
+        "S23"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V02",
+        "V03",
+        "V04",
+        "V24"
+      ],
+      "meaning": "Design disposition, not a claim of implemented or reverified runtime behavior"
+    }
+  ],
+  "resource_decisions": [
+    {
+      "id": "B01",
+      "name": "任务提问总量",
+      "action": "remove",
+      "target": "无累计硬限；一次一个待答，澄清按必要性推进",
+      "rationale": "3 次终身额度误把资源轻量变成行为不足；疲劳和必要性由 agent 判断",
+      "design_section": "8",
+      "work_packages": [
+        "W03"
+      ],
+      "acceptance_refs": [
+        "V04"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B02",
+      "name": "同时待答问题",
+      "action": "retain",
+      "target": "同时 1 个待答对象",
+      "rationale": "是交互清晰性约束，可包含并列简单选项，不是累计问答预算",
+      "design_section": "8",
+      "work_packages": [
+        "W03"
+      ],
+      "acceptance_refs": [
+        "V04"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B03",
+      "name": "默认调用预算",
+      "action": "replace",
+      "target": "预警 128；最终 1024 个已登记工作调用/任务；上下文和目录读免计",
+      "rationale": "宽裕初值用于防重复失控；实际费用/时间由宿主另记，额度调整须留授权依据",
+      "design_section": "8",
+      "work_packages": [
+        "W05"
+      ],
+      "acceptance_refs": [
+        "V05",
+        "V22"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B04",
+      "name": "skill 入口体积",
+      "action": "remove",
+      "target": "取消 6500 字节提交硬限；正文规模审查",
+      "rationale": "官方约 5000 token 建议是写作指导；必需执行信息不能因物理字节被外推",
+      "design_section": "8",
+      "work_packages": [
+        "W03"
+      ],
+      "acceptance_refs": [
+        "V01",
+        "V03"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B05",
+      "name": "四文件核心体积",
+      "action": "remove",
+      "target": "取消 1500 物理行硬门；保留规模/依赖审查",
+      "rationale": "职责、接口和重复决定复杂度，移动文件不证明核心稳定",
+      "design_section": "8",
+      "work_packages": [
+        "W01"
+      ],
+      "acceptance_refs": [
+        "V03"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B06",
+      "name": "普通 blob",
+      "action": "replace",
+      "target": "单内容 256 MiB；任务捕获总量 2 GiB；流块 1 MiB",
+      "rationale": "较大正常材料和多文件可工作；流式 I/O 后须实测内存/磁盘和聚合边界",
+      "design_section": "8",
+      "work_packages": [
+        "W05"
+      ],
+      "acceptance_refs": [
+        "V06",
+        "V22"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B07",
+      "name": "命令 JSON 输入",
+      "action": "retain",
+      "target": "命令 JSON 16 MiB，超限明确拒绝",
+      "rationale": "命令控制面与文件数据面不同；不通过全量 JSON 运输大二进制",
+      "design_section": "8",
+      "work_packages": [
+        "W05"
+      ],
+      "acceptance_refs": [
+        "V22"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B08",
+      "name": "默认字符串字段",
+      "action": "replace",
+      "target": "普通语义文本字段 1 MiB 初值；大请求/原件用捕获引用",
+      "rationale": "解除 24 KiB 字段通用限制；不给大原件静默截断，结构和来源仍验证",
+      "design_section": "8",
+      "work_packages": [
+        "W05"
+      ],
+      "acceptance_refs": [
+        "V03",
+        "V22"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B09",
+      "name": "CLI JSON 回包",
+      "action": "retain",
+      "target": "24 KiB wire envelope，完整内容可免费续读",
+      "rationale": "传输保护不是语义/原件大小上限；工作包分页带足必需信息和定位",
+      "design_section": "8",
+      "work_packages": [
+        "W03"
+      ],
+      "acceptance_refs": [
+        "V03",
+        "V22"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B10",
+      "name": "普通内容读取",
+      "action": "merge",
+      "target": "content.read 与免费文档读取统一；最多请求 24576 字符且按 wire 缩页",
+      "rationale": "取消 6144 字符且计工作额度的独立路径；两种字符/字节单位不能混用",
+      "design_section": "8",
+      "work_packages": [
+        "W03"
+      ],
+      "acceptance_refs": [
+        "V05",
+        "V22"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B11",
+      "name": "文档读取请求",
+      "action": "retain",
+      "target": "24576 字符请求页，实际 UTF-8 wire 可缩页",
+      "rationale": "已有免费认证读取可继续；原件总长不受分页长度限制",
+      "design_section": "8",
+      "work_packages": [
+        "W03"
+      ],
+      "acceptance_refs": [
+        "V03",
+        "V22"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B12",
+      "name": "工具定义",
+      "action": "replace",
+      "target": "整份工具定义 3 MiB 初值",
+      "rationale": "工具合同有实际复杂度，扩大而不混同短目录项；按类型验证和大小保护",
+      "design_section": "8",
+      "work_packages": [
+        "W05"
+      ],
+      "acceptance_refs": [
+        "V22"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B13",
+      "name": "单个 Schema",
+      "action": "replace",
+      "target": "每份 Schema 1 MiB 初值",
+      "rationale": "成熟 schema 库继续解释；大小和计算复杂度分别保护",
+      "design_section": "8",
+      "work_packages": [
+        "W05"
+      ],
+      "acceptance_refs": [
+        "V22"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B14",
+      "name": "Schema 分析图",
+      "action": "replace",
+      "target": "Schema 图访问 65536 状态初值",
+      "rationale": "不是允许指数爆炸；与实际准入算法/时间一起测，正常合同不能被小额误拒",
+      "design_section": "8",
+      "work_packages": [
+        "W05"
+      ],
+      "acceptance_refs": [
+        "V22"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B15",
+      "name": "资产检索默认返回",
+      "action": "replace",
+      "target": "默认短名单 8 个资产；候选池每路 100",
+      "rationale": "展示规模与召回候选分开，按资产聚合去重；实际留出评测定型",
+      "design_section": "8",
+      "work_packages": [
+        "W04"
+      ],
+      "acceptance_refs": [
+        "V16",
+        "V17"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B16",
+      "name": "资产检索最大返回",
+      "action": "replace",
+      "target": "普通搜索页默认 50、最多 200，提供游标",
+      "rationale": "分页不是只搜前 10 项；top-k 与全目录浏览协议分别说明",
+      "design_section": "8",
+      "work_packages": [
+        "W04"
+      ],
+      "acceptance_refs": [
+        "V16",
+        "V18"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B17",
+      "name": "参与检索词",
+      "action": "remove",
+      "target": "取消前 16 词静默裁切；按实际模型 tokenizer 分解和保留覆盖",
+      "rationale": "中文空格不是语义单位；保留原查询和改写身份，任何拒绝/分段可见",
+      "design_section": "8",
+      "work_packages": [
+        "W04"
+      ],
+      "acceptance_refs": [
+        "V16"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B18",
+      "name": "工具目录默认/最大",
+      "action": "replace",
+      "target": "能力目录默认 12、页最大 100，有游标",
+      "rationale": "短说明用于路由，完整定义另免费读；不强迫全量装上下文",
+      "design_section": "8",
+      "work_packages": [
+        "W03"
+      ],
+      "acceptance_refs": [
+        "V05",
+        "V22"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B19",
+      "name": "非 workflow 资产正文",
+      "action": "merge",
+      "target": "去掉非工作流特有 1 MiB 资产文种限；统一 16 MiB 包/捕获引用",
+      "rationale": "同一资产协议不因 kind 走不同文本限制；大原件仍走流式捕获",
+      "design_section": "8",
+      "work_packages": [
+        "W04"
+      ],
+      "acceptance_refs": [
+        "V20",
+        "V22"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B20",
+      "name": "资产摘要",
+      "action": "replace",
+      "target": "摘要 4 KiB 初值",
+      "rationale": "扩大合理摘要空间，摘要仍非完整方法/适用条件，正文可读取",
+      "design_section": "8",
+      "work_packages": [
+        "W05"
+      ],
+      "acceptance_refs": [
+        "V16",
+        "V22"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B21",
+      "name": "工具描述",
+      "action": "replace",
+      "target": "能力描述 4 KiB 初值",
+      "rationale": "说明足以准确路由，不替代工具完整 schema；防无限目录载荷",
+      "design_section": "8",
+      "work_packages": [
+        "W05"
+      ],
+      "acceptance_refs": [
+        "V22"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B22",
+      "name": "输出文件名",
+      "action": "replace",
+      "target": "成熟通用可移植路径验证加 NFC/碰撞/包含规则",
+      "rationale": "移除任意 200 字节文件名上限；实际平台字节长度和保留名限制仍有效",
+      "design_section": "8",
+      "work_packages": [
+        "W02"
+      ],
+      "acceptance_refs": [
+        "V07",
+        "V14"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B23",
+      "name": "普通标识/能力标识",
+      "action": "retain",
+      "target": "machine id 80 / capability name 128 ASCII",
+      "rationale": "是稳定机器标识格式，不是自然语言输入预算",
+      "design_section": "8",
+      "work_packages": [
+        "W01"
+      ],
+      "acceptance_refs": [
+        "V22"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B24",
+      "name": "工作区路径字段",
+      "action": "replace",
+      "target": "路径独立可移植 profile，不借用 24576 字符上下文额度",
+      "rationale": "相对路径/目录冲突/平台限制来自路径合同；命令总大小仍有界",
+      "design_section": "8",
+      "work_packages": [
+        "W02"
+      ],
+      "acceptance_refs": [
+        "V14"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B25",
+      "name": "公开错误诊断",
+      "action": "retain-strengthen",
+      "target": "安全错误文本 4 KiB；诊断节点访问 4096",
+      "rationale": "错误保护保留，结构化恢复 ID 和安全续读补足定位；不能原样泄漏秘密",
+      "design_section": "8",
+      "work_packages": [
+        "W03"
+      ],
+      "acceptance_refs": [
+        "V13",
+        "V22"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B26",
+      "name": "回包控制字符串",
+      "action": "retain",
+      "target": "控制标量 128 字节",
+      "rationale": "只作用于类型明确的短控制标识，不套入用户正文或说明",
+      "design_section": "8",
+      "work_packages": [
+        "W01"
+      ],
+      "acceptance_refs": [
+        "V22"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B27",
+      "name": "文档节点",
+      "action": "retain",
+      "target": "认证文档节点 16 KiB",
+      "rationale": "已有结构边界，不是资料大小上限；无证据不破坏认证层",
+      "design_section": "8",
+      "work_packages": [
+        "W07"
+      ],
+      "acceptance_refs": [
+        "V23"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B28",
+      "name": "标量分块",
+      "action": "retain",
+      "target": "标量分块 2048 字符",
+      "rationale": "内部存储切分，保留免费读取和跨块正确性",
+      "design_section": "8",
+      "work_packages": [
+        "W07"
+      ],
+      "acceptance_refs": [
+        "V23"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B29",
+      "name": "树扇出",
+      "action": "retain",
+      "target": "文档树扇出 16",
+      "rationale": "内部树结构，优化须以证据替换而非放宽所有数字",
+      "design_section": "8",
+      "work_packages": [
+        "W07"
+      ],
+      "acceptance_refs": [
+        "V23"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B30",
+      "name": "读取验证缓存",
+      "action": "retain",
+      "target": "文档节点缓存 128",
+      "rationale": "内部缓存初值，不限原件；数据量增长性能另实测",
+      "design_section": "8",
+      "work_packages": [
+        "W07"
+      ],
+      "acceptance_refs": [
+        "V23"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B31",
+      "name": "键导航前缀",
+      "action": "retain",
+      "target": "键前缀 16 字符",
+      "rationale": "既有索引表示参数，不能误当语义字段上限",
+      "design_section": "8",
+      "work_packages": [
+        "W07"
+      ],
+      "acceptance_refs": [
+        "V23"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B32",
+      "name": "全量审计文本片段",
+      "action": "retain",
+      "target": "审计文本块 8192 字符",
+      "rationale": "全量审计分块大小，不是只审前 8192 字符",
+      "design_section": "8",
+      "work_packages": [
+        "W07"
+      ],
+      "acceptance_refs": [
+        "V23"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B33",
+      "name": "常规 SQLite 忙等待",
+      "action": "replace",
+      "target": "SQLite 忙锁默认 30 秒",
+      "rationale": "单次锁等待与整体执行时间分离，失败可恢复，按竞争实测校准",
+      "design_section": "8",
+      "work_packages": [
+        "W05"
+      ],
+      "acceptance_refs": [
+        "V22"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B34",
+      "name": "文档原生初始化锁",
+      "action": "replace",
+      "target": "文档初始化锁默认 30 秒",
+      "rationale": "与统一锁策略同源但作用域明确；不冒称全局操作 30 秒完成",
+      "design_section": "8",
+      "work_packages": [
+        "W05"
+      ],
+      "acceptance_refs": [
+        "V22"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B35",
+      "name": "备份连接忙等待",
+      "action": "replace",
+      "target": "备份源/目标忙锁默认 30 秒",
+      "rationale": "不再用独立 1 秒误判正常竞争；备份整体截止另设",
+      "design_section": "8",
+      "work_packages": [
+        "W05"
+      ],
+      "acceptance_refs": [
+        "V22",
+        "V23"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B36",
+      "name": "每库备份截止时间",
+      "action": "replace",
+      "target": "每库备份整体截止默认 300 秒，可授权配置",
+      "rationale": "进度回调截止非实时强杀保证；大库需实际测量，不无限等待",
+      "design_section": "8",
+      "work_packages": [
+        "W05"
+      ],
+      "acceptance_refs": [
+        "V22",
+        "V23"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B37",
+      "name": "备份页批次/忙重试间隔",
+      "action": "retain",
+      "target": "备份 128 页/步；忙时 sleep 0.05 秒",
+      "rationale": "原生备份内部批量参数，保留测量后再调",
+      "design_section": "8",
+      "work_packages": [
+        "W07"
+      ],
+      "acceptance_refs": [
+        "V23"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B38",
+      "name": "备份 manifest",
+      "action": "retain",
+      "target": "备份固定 schema manifest 16 KiB",
+      "rationale": "是小型元数据而非所有内容；显式拒超限，不借此截断对象全集",
+      "design_section": "8",
+      "work_packages": [
+        "W07"
+      ],
+      "acceptance_refs": [
+        "V23"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B39",
+      "name": "恢复流复制块",
+      "action": "retain",
+      "target": "恢复复制块 1 MiB",
+      "rationale": "流式内部参数，保持全量 digest/EOF 正确性",
+      "design_section": "8",
+      "work_packages": [
+        "W07"
+      ],
+      "acceptance_refs": [
+        "V23"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B40",
+      "name": "安装验证子进程",
+      "action": "replace",
+      "target": "开发/就绪依赖安装单次 600 秒初值",
+      "rationale": "与普通任务时间独立，安装有进度和真实失败；冷模型准备不计伪工作调用",
+      "design_section": "8",
+      "work_packages": [
+        "W07"
+      ],
+      "acceptance_refs": [
+        "V02",
+        "V24"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B41",
+      "name": "交接 JSON 默认/提交包",
+      "action": "retain",
+      "target": "开发交接元数据 16 MiB；submission 1 MiB",
+      "rationale": "开发工具保护与产品无关；实测增长需要时单独授权配置，不扩散到产品合同",
+      "design_section": "8",
+      "work_packages": [
+        "W07"
+      ],
+      "acceptance_refs": [
+        "V24"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B42",
+      "name": "资产导入输入的有界读取",
+      "action": "strengthen",
+      "target": "JSON 进口 16 MiB；读取 +1 后必须显式超限拒绝",
+      "rationale": "有界 read 不等于已有超限分支；统一严格解析 helper，禁止静默丢尾",
+      "design_section": "8",
+      "work_packages": [
+        "W04"
+      ],
+      "acceptance_refs": [
+        "V21",
+        "V22"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    },
+    {
+      "id": "B43",
+      "name": "资产正文与定位器切换",
+      "action": "merge",
+      "target": "取消 asset.read 单独 24 KiB 开关；统一免费分页/句柄",
+      "rationale": "需要的方法正文不能因包较大被计入工作次数；传输保护仍保留",
+      "design_section": "8",
+      "work_packages": [
+        "W03"
+      ],
+      "acceptance_refs": [
+        "V03",
+        "V05"
+      ],
+      "qualification": "Engineering initial or retained mechanism parameter, not an external standard mandate; effective values must pass W05/affected validation before distribution freeze"
+    }
+  ],
+  "unbounded_or_host_managed": [
+    "Host tokens/cost/time remain real host measurements or unknown; do not fabricate billing",
+    "Trusted arbitrary same-process handler cancellation depends on host/adapter; call quotas are not timeouts",
+    "Retained history has no automatic deletion in this design; capacity monitoring and recoverable disk-full failure remain required"
+  ],
+  "calibration_rule": "New numeric values are deliberately generous implementation inputs, not measured promises. W05 tests normal workloads and explicit abnormal cases, records actual default changes, then freezes the single typed policy. It cannot waive permission, evidence, integrity or exact-target invariants."
+}

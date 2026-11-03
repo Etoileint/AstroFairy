@@ -1,0 +1,217 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AstroFairy optimization implementation return for original-session review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "claim",
+    "input_manifest_sha256",
+    "product_accepted",
+    "independent_acceptance",
+    "work",
+    "report_file",
+    "coverage_file",
+    "runs_file",
+    "metrics_file",
+    "findings_file",
+    "source_manifest_file",
+    "source_zip_file",
+    "evidence_inventory_file"
+  ],
+  "properties": {
+    "format": {
+      "const": 1
+    },
+    "claim": {
+      "const": "for_original_session_review"
+    },
+    "input_manifest_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "product_accepted": {
+      "const": false
+    },
+    "independent_acceptance": {
+      "const": "pending_original_session"
+    },
+    "work": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08"
+      ],
+      "properties": {
+        "W01": {
+          "$ref": "#/$defs/work"
+        },
+        "W02": {
+          "$ref": "#/$defs/work"
+        },
+        "W03": {
+          "$ref": "#/$defs/work"
+        },
+        "W04": {
+          "$ref": "#/$defs/work"
+        },
+        "W05": {
+          "$ref": "#/$defs/work"
+        },
+        "W06": {
+          "$ref": "#/$defs/work"
+        },
+        "W07": {
+          "$ref": "#/$defs/work"
+        },
+        "W08": {
+          "$ref": "#/$defs/return_preparation"
+        }
+      }
+    },
+    "report_file": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\).+$"
+    },
+    "coverage_file": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\).+$"
+    },
+    "runs_file": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\).+$"
+    },
+    "metrics_file": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\).+$"
+    },
+    "findings_file": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\).+$"
+    },
+    "source_manifest_file": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\).+$"
+    },
+    "source_zip_file": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\).+$"
+    },
+    "evidence_inventory_file": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\).+$"
+    }
+  },
+  "$defs": {
+    "work": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "implementation",
+        "verification",
+        "basis",
+        "evidence"
+      ],
+      "properties": {
+        "implementation": {
+          "enum": [
+            "complete",
+            "partial",
+            "not_started",
+            "blocked"
+          ]
+        },
+        "verification": {
+          "enum": [
+            "passed",
+            "limited",
+            "not_run",
+            "failed"
+          ]
+        },
+        "basis": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\).+$"
+          },
+          "uniqueItems": true
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "verification": {
+                "const": "passed"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evidence": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "return_preparation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "preparation",
+        "independent_acceptance",
+        "basis",
+        "evidence"
+      ],
+      "properties": {
+        "preparation": {
+          "enum": [
+            "ready",
+            "partial",
+            "blocked",
+            "not_started"
+          ]
+        },
+        "independent_acceptance": {
+          "const": "pending_original_session"
+        },
+        "basis": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\).+$"
+          },
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}

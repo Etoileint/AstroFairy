@@ -44,7 +44,7 @@ def render(root: Path) -> dict[Path, bytes]:
         "description": metadata["description"],
         "author": {"name": author},
         "license": metadata["license"],
-        "skills": ["./skills/astrofairy"],
+        "skills": ["./skills/fairy"],
     }
     marketplace = {
         "name": metadata["name"],
@@ -58,7 +58,7 @@ def render(root: Path) -> dict[Path, bytes]:
         root / ".claude-plugin/marketplace.json": (
             json.dumps(marketplace, ensure_ascii=False, indent=2) + "\n"
         ).encode("utf-8"),
-        root / "skills/astrofairy/LICENSE": (root / "LICENSE").read_bytes(),
+        root / "skills/fairy/LICENSE": (root / "LICENSE").read_bytes(),
     }
 
 

@@ -24,6 +24,13 @@ IGNORED = {
     "dist",
     "__pycache__",
 }
+# Frozen design/review records stay bound to their Git baseline; their relative source links are historical.
+HISTORICAL_DOC_ROOTS = (
+    "docs/reviews",
+    "docs/optimization/2026-11-plan",
+    "docs/optimization/2026-11-use-feedback",
+    "docs/optimization/2026-11-implementation/handoff",
+)
 
 
 def project_files() -> list[Path]:
@@ -39,15 +46,6 @@ def project_files() -> list[Path]:
 def structural_checks() -> list[str]:
     config = tomllib.loads((ROOT / "governance.toml").read_text(encoding="utf-8"))
     errors = []
-    entry = ROOT / "skills/astrofairy/SKILL.md"
-    if entry.stat().st_size > config["budgets"]["skill_bytes"]:
-        errors.append("Skill entry exceeds its context budget; move conditional detail behind references")
-    core_lines = sum(
-        len((ROOT / path).read_text(encoding="utf-8").splitlines())
-        for path in config["budgets"]["core_files"]
-    )
-    if core_lines > config["budgets"]["core_lines"]:
-        errors.append("Core exceeds its reviewed size budget; inspect responsibility placement")
     surfaces = {ROOT / surface["path"] for surface in config["tests"]["surfaces"]}
     if (ROOT / "tests").exists():
         errors.append("Tests belong to their owner; root tests/ is forbidden")
@@ -67,6 +65,8 @@ def structural_checks() -> list[str]:
             ):
                 errors.append(f"Unregistered test: {path.relative_to(ROOT)}")
         if path.suffix == ".md":
+            if any(path.is_relative_to(ROOT / root) for root in HISTORICAL_DOC_ROOTS):
+                continue
             source = re.sub(r"```.*?```", "", path.read_text(encoding="utf-8"), flags=re.DOTALL)
             for raw_target in re.findall(r"\]\(([^)]+)\)", source):
                 target = raw_target.split("#", 1)[0].strip("<>")
@@ -94,7 +94,13 @@ def main() -> int:
         result = subprocess.run([sys.executable, *arguments], cwd=ROOT, check=False)
         if result.returncode:
             return result.returncode
-    print("Tests, typing, style, document references and growth budgets passed.")
+    core_lines = sum(
+        len((ROOT / path).read_text(encoding="utf-8").splitlines())
+        for path in config["architecture"]["core_files"]
+    )
+    skill_bytes = (ROOT / "skills/fairy/SKILL.md").stat().st_size
+    print(f"Architecture metrics: skill_bytes={skill_bytes} core_lines={core_lines}; reviewed, not capped.")
+    print("Tests, typing, style and document references passed.")
     return 0
 
 

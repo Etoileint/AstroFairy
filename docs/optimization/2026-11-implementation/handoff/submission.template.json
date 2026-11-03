@@ -1,0 +1,65 @@
+{
+  "format": 1,
+  "claim": "for_original_session_review",
+  "input_manifest_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "product_accepted": false,
+  "independent_acceptance": "pending_original_session",
+  "work": {
+    "W01": {
+      "implementation": "partial",
+      "verification": "limited",
+      "basis": "Inherited resource foundation only; see input progress. No new verification claimed.",
+      "evidence": []
+    },
+    "W02": {
+      "implementation": "not_started",
+      "verification": "not_run",
+      "basis": "Replace with actual work and evidence, not the plan.",
+      "evidence": []
+    },
+    "W03": {
+      "implementation": "not_started",
+      "verification": "not_run",
+      "basis": "Replace with actual work and evidence, not the plan.",
+      "evidence": []
+    },
+    "W04": {
+      "implementation": "not_started",
+      "verification": "not_run",
+      "basis": "Replace with actual work and evidence, not the plan.",
+      "evidence": []
+    },
+    "W05": {
+      "implementation": "not_started",
+      "verification": "not_run",
+      "basis": "Replace with actual work and evidence, not the plan.",
+      "evidence": []
+    },
+    "W06": {
+      "implementation": "not_started",
+      "verification": "not_run",
+      "basis": "Replace with actual work and evidence, not the plan.",
+      "evidence": []
+    },
+    "W07": {
+      "implementation": "not_started",
+      "verification": "not_run",
+      "basis": "Replace with actual work and evidence, not the plan.",
+      "evidence": []
+    },
+    "W08": {
+      "preparation": "not_started",
+      "independent_acceptance": "pending_original_session",
+      "basis": "Return preparation is not independent acceptance.",
+      "evidence": []
+    }
+  },
+  "report_file": "report.md",
+  "coverage_file": "coverage.json",
+  "runs_file": "runs.json",
+  "metrics_file": "metrics.json",
+  "findings_file": "findings.json",
+  "source_manifest_file": "source-manifest.json",
+  "source_zip_file": "source.zip",
+  "evidence_inventory_file": "evidence-inventory.json"
+}

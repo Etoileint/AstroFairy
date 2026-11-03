@@ -1,0 +1,29 @@
+{
+  "format": 1,
+  "checked_at": "2026-11-02T11:04:53.687278+00:00",
+  "scope": "Plan mechanical integrity, source/program identities, full disposition coverage and unchanged existing project files; not semantic conformance or implementation acceptance",
+  "counts": {
+    "baseline_files": 200,
+    "objects": 78,
+    "budgets": 43,
+    "primary_sources": 42
+  },
+  "preparation_and_document_structure": {
+    "scope": "Preparation integrity, source/anchor coverage and document structure only; not product or semantic design acceptance",
+    "baseline_files": 200,
+    "objects": 78,
+    "runtime_modules": 14,
+    "limits": 43,
+    "sources": 25,
+    "observations": 5,
+    "errors": [],
+    "passed": true
+  },
+  "component_probe_record_identity_verified": true,
+  "independent_design_sha256": "0f4b50ad0c99a46122c99e1b6d5e4a5bdfc0111d7e76e84331a9b16ca254c9e8",
+  "product_source_configuration_locks_unchanged": true,
+  "program_sha256": "23b6277ced46c5ea1c9844a3c29e336fb2c2ba11194c3cd98e7a8d888ee076b9",
+  "program": "from pathlib import Path\nimport json,hashlib,re,subprocess,datetime\nroot=Path.cwd()\nplan=Path('docs/optimization/2026-11-plan')\nprep=Path('docs/optimization/2026-11-use-feedback')\nerrors=[]\ndef check(ok,message):\n if not ok:errors.append(message)\ndef sha(data):return hashlib.sha256(data).hexdigest()\ndef read(path):return json.loads(Path(path).read_text(encoding='utf-8'))\nbase=read(prep/'baseline.json')\ncheck(subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()==base['head_commit'],'HEAD changed')\nfor row in base['files']:check(sha(Path(row['path']).read_bytes())==row['worktree_sha256'],'Baseline worktree changed: '+row['path'])\ndecisions=read(plan/'decisions.json');objects=read(prep/'mechanisms.json')['objects'];limits=read(prep/'limits.json')['entries']\nfor label,actual,expected in [('objects',decisions['objects'],objects),('budgets',decisions['resource_decisions'],limits)]:\n check(len(actual)==len({r['id'] for r in actual})==len(expected),label+' duplicate/count mismatch')\n check({r['id'] for r in actual}=={r['id'] for r in expected},label+' IDs mismatch')\n for row in actual:\n  check(bool(row['rationale']) and bool(row['action']),label+' missing rationale')\n  check(set(row['work_packages'])<=set(f'W{i:02}' for i in range(1,9)),label+' invalid work package')\n  check(set(row['acceptance_refs'])<=set(f'V{i:02}' for i in range(1,25)),label+' invalid case')\nsources=read(plan/'sources.json');check(sha((plan/sources['base_catalog']).read_bytes())==sources['base_catalog_sha256'],'Base source catalog drift')\nall_sources=read(prep/'sources.json')['sources']+sources['additional']\nsource_ids={r['id'] for r in all_sources}\ncheck(len(source_ids)==len(all_sources)==42,'Source ID mismatch')\nfor row in all_sources:\n check(sha(Path(row['local_snapshot']).read_bytes())==row['sha256'],'Source identity mismatch '+row['id'])\nfor row in decisions['objects']:check(set(row['authority_refs'])<=source_ids,'Unknown authority '+row['id'])\nprobe=read(plan/'component-probe.json')\ncheck(sha(probe['program'].encode())==probe['program_sha256'],'Embedded probe program identity mismatch')\ncheck(sha(Path('.evaluation/optimization-design/20261102/component_probe.py').read_bytes())==probe['program_sha256'],'Local probe identity mismatch')\ncheck(probe['exit_code']==0,'Component probe failed')\ncheck(probe['result']['scope'].startswith('Component plumbing only'),'Probe scope overclaim')\ncheck(sha((plan/'design.md').read_bytes())=='0f4b50ad0c99a46122c99e1b6d5e4a5bdfc0111d7e76e84331a9b16ca254c9e8','Independent checked design identity drift')\nfor path in list(plan.glob('*.md'))+list(Path('docs/audit').rglob('*.md')):\n text=path.read_text(encoding='utf-8')\n check(not re.search(r'许愿|孩子|傻子|愿望|\\bwish(?:es|ing)?\\b',text,re.I),'Public terminology '+str(path))\n check(all(line==line.rstrip() for line in text.splitlines()),'Trailing whitespace '+str(path))\n(plan/'plan-check.json').write_text('{\"status\":\"checking\"}\\n',encoding='utf-8')\nprior=subprocess.run(['python','-B','.evaluation/optimization-preparation/20261102/check.py'],capture_output=True,text=True)\ncheck(prior.returncode==0,'Preparation and global document structure check: '+prior.stdout+prior.stderr)\nprepresult=json.loads(prior.stdout) if prior.returncode==0 else None\ncheck(subprocess.run(['git','diff','--check'],capture_output=True).returncode==0,'git diff whitespace check')\nprogram=Path(__file__).read_text(encoding='utf-8')\nresult={'format':1,'checked_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'scope':'Plan mechanical integrity, source/program identities, full disposition coverage and unchanged existing project files; not semantic conformance or implementation acceptance','counts':{'baseline_files':len(base['files']),'objects':len(objects),'budgets':len(limits),'primary_sources':len(all_sources)},'preparation_and_document_structure':prepresult,'component_probe_record_identity_verified':True,'independent_design_sha256':sha((plan/'design.md').read_bytes()),'product_source_configuration_locks_unchanged':not any(e.startswith('Baseline worktree changed:') for e in errors),'program_sha256':sha(program.encode()),'program':program,'errors':errors,'passed':not errors}\n(plan/'plan-check.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')\nprint(json.dumps({k:v for k,v in result.items() if k not in ['program','preparation_and_document_structure']},ensure_ascii=False,indent=2))\nraise SystemExit(0 if not errors else 1)\n",
+  "errors": [],
+  "passed": true
+}

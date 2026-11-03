@@ -1,0 +1,193 @@
+{
+  "format": 1,
+  "name": "af-retrieval-v1",
+  "frozen_at": "2026-11-02",
+  "purpose": "Frozen tuning and holdout labels for local multilingual asset retrieval; labels are engineering fixtures, not a statistical population.",
+  "assets": [
+    {
+      "name": "meeting-brief",
+      "scope": "personal",
+      "kind": "guide",
+      "summary": "把会议材料整理成一页决策简报",
+      "tags": ["会议", "简报", "决策"],
+      "content": "先写会议目标、与会人和需要的决策，再列事实、分歧和选项。行动项必须写负责人和截止日。正文最后给出一页结论。适用条件：已有会议记录或议程。不适用于没有明确决策点的纯信息同步。",
+      "evidence": [{"source": "task:fixture-meeting", "note": "Fixture represents a reviewed meeting brief."}]
+    },
+    {
+      "name": "data-cleaning",
+      "scope": "personal",
+      "kind": "workflow",
+      "summary": "订单数据清洗与质量核对",
+      "tags": ["数据清洗", "订单", "质量"],
+      "content": {
+        "steps": [
+          {"instruction": "读取订单表并列出字段、缺失值和重复键；缺失值只标记，不补零。", "done": "字段清单、缺失统计和重复键报告形成"},
+          {"instruction": "按订单号核对金额、数量与状态，记录无法解释的差异。", "done": "差异清单与处理建议形成"},
+          {"instruction": "输出清洗后的数据和变更日志，保留原始行数。", "done": "清洗数据与变更日志一致且行数可追溯"}
+        ]
+      },
+      "evidence": [{"source": "task:fixture-cleaning", "note": "Fixture represents an observed cleaning workflow."}]
+    },
+    {
+      "name": "slide-outline",
+      "scope": "personal",
+      "kind": "workflow",
+      "summary": "演示文稿大纲与讲稿分工",
+      "tags": ["PPT", "演示", "讲稿"],
+      "content": {
+        "steps": [
+          {"instruction": "先写听众、目标、三条结论和证据，再排章节。", "done": "一页叙事骨架和证据清单形成"},
+          {"instruction": "每页只保留一个观点，讲稿补充口头解释；图表标注来源。", "done": "大纲、讲稿和图表来源一致"},
+          {"instruction": "按 10 分钟试讲压缩，删除重复内容。", "done": "试讲时长和删改记录形成"}
+        ]
+      },
+      "evidence": [{"source": "task:fixture-slides", "note": "Fixture represents an observed slide workflow."}]
+    },
+    {
+      "name": "risk-review",
+      "scope": "personal",
+      "kind": "guide",
+      "summary": "变更前的风险复核清单",
+      "tags": ["风险", "复核", "变更"],
+      "content": "按影响范围、可逆性、数据敏感度和外部依赖评估风险。高风险变更必须有回滚步骤、负责人和观察窗口。风险接受需要记录理由和到期日。适用条件：生产变更或对外发布。不适用于日常只读查询。",
+      "evidence": [{"source": "task:fixture-risk", "note": "Fixture represents a reviewed change risk guide."}]
+    },
+    {
+      "name": "vendor-compare",
+      "scope": "team",
+      "kind": "case",
+      "summary": "供应商方案的总拥有成本比较",
+      "tags": ["供应商", "TCO", "采购"],
+      "content": "比较报价、实施成本、迁移成本、运维人力和退出成本。把一次性费用与年度费用分开，按三年总拥有成本汇总。SLA 违约条款、数据导出能力和涨价上限必须单列。适用条件：至少两个候选方案。",
+      "evidence": [{"source": "task:fixture-vendor", "note": "Fixture represents an observed vendor comparison."}]
+    },
+    {
+      "name": "weekly-report",
+      "scope": "personal",
+      "kind": "profile",
+      "summary": "周报结构与状态更新",
+      "tags": ["周报", "状态", "汇报"],
+      "content": "周报按目标进展、风险、下周计划和需要的支持组织。状态使用固定词表：正常、风险、阻塞。没有变化的目标只写一行，避免重复背景。数字必须给出来源日期。",
+      "evidence": [{"source": "task:fixture-weekly", "note": "Fixture represents a reviewed weekly template."}]
+    },
+    {
+      "name": "customer-interview",
+      "scope": "personal",
+      "kind": "workflow",
+      "summary": "用户访谈问题清单与记录",
+      "tags": ["访谈", "用户", "问题"],
+      "content": {
+        "steps": [
+          {"instruction": "先写研究问题和目标人群，避免把假设写成问题。", "done": "研究问题和样本条件明确"},
+          {"instruction": "按行为、动机、替代方案和障碍设计开放式问题，不诱导答案。", "done": "问题清单覆盖四类且无诱导"},
+          {"instruction": "访谈后 24 小时内整理原话、标签和反例。", "done": "记录含原话、标签和反例"}
+        ]
+      },
+      "evidence": [{"source": "task:fixture-interview", "note": "Fixture represents an observed interview workflow."}]
+    },
+    {
+      "name": "incident-postmortem",
+      "scope": "personal",
+      "kind": "workflow",
+      "summary": "事故复盘时间线与改进项",
+      "tags": ["事故", "复盘", "时间线"],
+      "content": {
+        "steps": [
+          {"instruction": "用时间线记录发现、响应、缓解和恢复，所有时间为本地时间加时区。", "done": "时间线完整且时间可核对"},
+          {"instruction": "区分直接原因、促成因素和系统性风险，不追究个人。", "done": "原因分类有证据支持"},
+          {"instruction": "为每个改进项写负责人、截止日和验证方式；关联编号 AF-INC-042。", "done": "改进项可跟踪并关联验证"}
+        ]
+      },
+      "evidence": [{"source": "task:fixture-incident", "note": "Fixture represents an observed postmortem."}]
+    },
+    {
+      "name": "budget-forecast",
+      "scope": "personal",
+      "kind": "guide",
+      "summary": "预算预测与超支预警",
+      "tags": ["预算", "预测", "预警"],
+      "content": "按固定成本、变动成本和一次性投入拆分预测。给出基准、乐观和保守三种情景。超支预警阈值建议设为批准的 5% 或 10%，并写明触发后的审批路径。假设必须标注来源和有效期。",
+      "evidence": [{"source": "task:fixture-budget", "note": "Fixture represents a reviewed budget guide."}]
+    },
+    {
+      "name": "translation-style",
+      "scope": "team",
+      "kind": "guide",
+      "summary": "中英技术文档翻译风格",
+      "tags": ["翻译", "中英", "风格"],
+      "content": "保留术语表的一致译法，首次出现给英文原词。中文避免长定语，英文避免堆叠名词。数字、单位和代码不翻译。交付前做术语、数字和链接三项核对。适用条件：中英技术文档；不适用于文学翻译。",
+      "evidence": [{"source": "task:fixture-translation", "note": "Fixture represents a reviewed translation style guide."}]
+    },
+    {
+      "name": "research-summary",
+      "scope": "personal",
+      "kind": "guide",
+      "summary": "文献摘要与证据分级",
+      "tags": ["文献", "摘要", "证据"],
+      "content": "按问题、方法、样本、结果和限制写摘要。区分随机对照、观察研究和专家意见的证据强度。不能只写结论；样本偏差和利益冲突必须记录。留存率、转化率等指标要注明时间窗口。",
+      "evidence": [{"source": "task:fixture-research", "note": "Fixture represents a reviewed research summary guide."}]
+    },
+    {
+      "name": "launch-checklist",
+      "scope": "personal",
+      "kind": "workflow",
+      "summary": "发布前检查清单与角色分工",
+      "tags": ["发布", "清单", "RACI"],
+      "content": {
+        "steps": [
+          {"instruction": "用 RACI 明确负责、批准、咨询和知会角色。", "done": "每个检查项都有负责人和批准人"},
+          {"instruction": "检查回滚方案、监控告警、客服话术和数据备份。", "done": "四项证据齐全"},
+          {"instruction": "发布后 30 分钟观察错误率和延迟，异常时按阈值回滚。", "done": "观察记录和决定形成"}
+        ]
+      },
+      "evidence": [{"source": "task:fixture-launch", "note": "Fixture represents an observed launch checklist."}]
+    }
+  ],
+  "tuning": [
+    {"id": "T01", "category": "metadata", "query": "会议简报", "relevant": [{"name": "meeting-brief", "grade": 2}]},
+    {"id": "T02", "category": "body_only", "query": "数据清洗 不补零", "relevant": [{"name": "data-cleaning", "grade": 2}]},
+    {"id": "T03", "category": "metadata", "query": "PPT 讲稿", "relevant": [{"name": "slide-outline", "grade": 2}]},
+    {"id": "T04", "category": "identifier", "query": "AF-INC-042", "relevant": [{"name": "incident-postmortem", "grade": 2}]},
+    {"id": "T05", "category": "metadata", "query": "供应商 TCO", "relevant": [{"name": "vendor-compare", "grade": 2}]},
+    {"id": "T06", "category": "multilingual", "query": "给管理层做汇报材料", "relevant": [{"name": "weekly-report", "grade": 2}, {"name": "slide-outline", "grade": 1}]},
+    {"id": "T07", "category": "applicability", "query": "发布前风险检查", "relevant": [{"name": "launch-checklist", "grade": 2}, {"name": "risk-review", "grade": 1}]},
+    {"id": "T08", "category": "body_only", "query": "事故复盘时间线", "relevant": [{"name": "incident-postmortem", "grade": 2}]},
+    {"id": "T09", "category": "long_chinese", "query": "会议行动项负责人", "relevant": [{"name": "meeting-brief", "grade": 2}, {"name": "launch-checklist", "grade": 1}]},
+    {"id": "T10", "category": "body_only", "query": "预算情景和审批", "relevant": [{"name": "budget-forecast", "grade": 2}]},
+    {"id": "T11", "category": "applicability", "query": "客户访谈问题", "relevant": [{"name": "customer-interview", "grade": 2}]},
+    {"id": "T12", "category": "multilingual", "query": "SLA 条款比较", "relevant": [{"name": "vendor-compare", "grade": 2}]}
+  ],
+  "holdout": [
+    {"id": "H01", "category": "long_chinese", "query": "把本周的订单数据整理一下，缺失值先标出来，不要自己补零，然后给管理层一页结论", "relevant": [{"name": "data-cleaning", "grade": 2}]},
+    {"id": "H02", "category": "short_term", "query": "复盘", "relevant": [{"name": "incident-postmortem", "grade": 2}]},
+    {"id": "H03", "category": "synonym", "query": "事故回顾会议怎么开", "relevant": [{"name": "incident-postmortem", "grade": 2}]},
+    {"id": "H04", "category": "multilingual", "query": "季度 business review 的汇报材料怎么组织", "relevant": [{"name": "weekly-report", "grade": 2}, {"name": "slide-outline", "grade": 1}]},
+    {"id": "H05", "category": "body_only", "query": "RACI 角色怎么分配", "relevant": [{"name": "launch-checklist", "grade": 2}]},
+    {"id": "H06", "category": "body_only", "query": "留存率下降时先看什么", "relevant": [{"name": "research-summary", "grade": 2}]},
+    {"id": "H07", "category": "identifier", "query": "AF-INC-042 的改进项", "relevant": [{"name": "incident-postmortem", "grade": 2}]},
+    {"id": "H08", "category": "applicability", "query": "客户访谈的问题清单", "relevant": [{"name": "customer-interview", "grade": 2}]},
+    {"id": "H09", "category": "multilingual", "query": "PPT 大纲和 speaker notes 怎么分工", "relevant": [{"name": "slide-outline", "grade": 2}]},
+    {"id": "H10", "category": "english", "query": "postmortem timeline template", "relevant": [{"name": "incident-postmortem", "grade": 2}]},
+    {"id": "H11", "category": "synonym", "query": "供应商总拥有成本比较", "relevant": [{"name": "vendor-compare", "grade": 2}, {"name": "budget-forecast", "grade": 1}]},
+    {"id": "H12", "category": "long_chinese", "query": "会议纪要的行动项负责人", "relevant": [{"name": "meeting-brief", "grade": 2}, {"name": "launch-checklist", "grade": 1}]},
+    {"id": "H13", "category": "body_only", "query": "预算超支预警阈值", "relevant": [{"name": "budget-forecast", "grade": 2}]},
+    {"id": "H14", "category": "body_only", "query": "不要补零", "relevant": [{"name": "data-cleaning", "grade": 2}]},
+    {"id": "H15", "category": "body_only", "query": "SLA 违约怎么记录", "relevant": [{"name": "vendor-compare", "grade": 2}]},
+    {"id": "H16", "category": "applicability", "query": "中英技术文档术语表怎么统一", "relevant": [{"name": "translation-style", "grade": 2}]},
+    {"id": "H17", "category": "long_chinese", "query": "文献摘要怎么说明证据强度", "relevant": [{"name": "research-summary", "grade": 2}]},
+    {"id": "H18", "category": "applicability", "query": "发布前回滚和监控检查", "relevant": [{"name": "launch-checklist", "grade": 2}, {"name": "risk-review", "grade": 1}]},
+    {"id": "H19", "category": "long_chinese", "query": "给管理层做一页周报，状态用正常风险阻塞，数字标来源", "relevant": [{"name": "weekly-report", "grade": 2}, {"name": "slide-outline", "grade": 1}]},
+    {"id": "H20", "category": "long_chinese", "query": "怎么把会议记录整理成决策和行动项", "relevant": [{"name": "meeting-brief", "grade": 2}, {"name": "launch-checklist", "grade": 1}]}
+  ],
+  "negative": [
+    {"id": "N01", "category": "negative", "query": "如何申请签证"},
+    {"id": "N02", "category": "negative", "query": "把合同翻译成日文"},
+    {"id": "N03", "category": "negative", "query": "预测明天股票价格"},
+    {"id": "N04", "category": "negative", "query": "招聘面试候选人"}
+  ],
+  "filter_cases": [
+    {"id": "F01", "query": "供应商", "scope": "team", "kind": null},
+    {"id": "F02", "query": "数据", "scope": null, "kind": "workflow"},
+    {"id": "F03", "query": "翻译", "scope": "personal", "kind": null}
+  ]
+}

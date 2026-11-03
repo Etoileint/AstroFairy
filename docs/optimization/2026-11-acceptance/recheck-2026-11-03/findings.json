@@ -1,0 +1,154 @@
+{
+  "format": 1,
+  "reviewed_at": "2026-11-03T09:10:38.411384+00:00",
+  "technical_verdict": "targeted_rework_required",
+  "product_accepted": false,
+  "basis_previous_return_manifest_sha256": "94ee37c04dcca101124e928ca8500fe62666748d565f63ebc3fca074c4cea93b",
+  "reviewed_return_manifest_sha256": "60efe30821a0294b285d9fe93c4ed8f1e90c4a2d1d272fdc3e159d63ee2a4192",
+  "reviewed_source_zip_sha256": "e55b5320add3ae07e56cc777db6b28376322c3bd0addf618a38b6ec7852b7eb2",
+  "received_source_files": 315,
+  "received_evidence_files": 68,
+  "original_findings": [
+    {
+      "id": "STD-01",
+      "status": "closed",
+      "axis": "standards",
+      "title": "BagIt 实际版本与声明不一致",
+      "evidence_basis": "实际生成1.0 header、回执声明、成熟库完整校验和正确交付幂等通过。"
+    },
+    {
+      "id": "STD-02",
+      "status": "closed",
+      "axis": "standards",
+      "title": "可移植路径的目录前缀冲突漏拒",
+      "evidence_basis": "4组大小写/嵌套/逆序前缀冲突拒绝，2组合法路径通过。"
+    },
+    {
+      "id": "STD-03",
+      "status": "closed",
+      "axis": "standards",
+      "title": "独立技能包中的运维入口断链",
+      "evidence_basis": "重建包与技能源逐字节一致；独立安装后start/backup/verify/restore/audit通过。"
+    },
+    {
+      "id": "SPEC-01",
+      "status": "closed",
+      "axis": "spec",
+      "title": "中断接续丢失完整成员计划",
+      "evidence_basis": "重开Workshop并删除已捕获a工作区后，仅续b仍交完整a/b及原a字节/角色。"
+    },
+    {
+      "id": "SPEC-02",
+      "status": "partially_repaired_open",
+      "axis": "spec",
+      "title": "已有交付Bag未核对权威快照",
+      "evidence_basis": "已拒绝原字节重封反例，但额外payload重封仍被接受；spec.goal/outcome/reviews改写后重封仍被接受。实际文件集未等于账本快照，完整回执未绑定账本投影。",
+      "priority": "P1",
+      "anchors": [
+        {
+          "path": "skills/fairy/scripts/astrofairy/_delivery.py",
+          "line": 130
+        }
+      ]
+    },
+    {
+      "id": "SPEC-03",
+      "status": "closed",
+      "axis": "spec",
+      "title": "已有通过复用阻断合法失败重评",
+      "evidence_basis": "content/member/collection三scope A→B失败→A均产生真实新检查，seq前进并保留旧失败历史。"
+    },
+    {
+      "id": "ROOT-01",
+      "status": "closed",
+      "axis": "retrieval_learning",
+      "title": "两路排名在融合前被跨路去重",
+      "evidence_basis": "两路各自重复块/跨路重叠情况下，各项分数与既定加权RRF公式完全一致；B>A。"
+    },
+    {
+      "id": "ROOT-02",
+      "status": "partially_repaired_open",
+      "axis": "retrieval_learning",
+      "title": "首个模型准备入口形成循环",
+      "evidence_basis": "产品虽传revision/force_download，锁定FastEmbed的实际download_model只收到local_files_only/specific_model_path；未按pin准备。HEAD不同会下载后拒绝，同长度损坏的强制重下也无保障。SDK对部分大小异常本有重下载，不能夸大为全部损坏失效。",
+      "priority": "P1",
+      "anchors": [
+        {
+          "path": "skills/fairy/scripts/astrofairy/_search.py",
+          "line": 186
+        }
+      ],
+      "sdk_contract": "fastembed/text/onnx_embedding.py download_model invocation drops revision/force_download"
+    },
+    {
+      "id": "ROOT-03",
+      "status": "closed",
+      "axis": "retrieval_learning",
+      "title": "模型profile与实际消费原件断开",
+      "evidence_basis": "固定目录的3份声明模型文件SHA256门及离线实际加载已生效；空缓存普通查询不触发构造/下载；真实E5缓存冒烟通过。准备入口另由ROOT-02承接。"
+    },
+    {
+      "id": "ROOT-04",
+      "status": "partially_repaired_open",
+      "axis": "retrieval_learning",
+      "title": "学习与必需治理资产的职责未接齐",
+      "evidence_basis": "结构字段/投影、defer/no_change记录、手工治理refs已补；maintain未记录源决定/子任务链接，历史defer不随解决关闭，新任务无旧待办，仍缺无需任务号的发现入口和按范围提示治理候选。",
+      "priority": "P1",
+      "anchors": [
+        {
+          "path": "skills/fairy/scripts/astrofairy/_runtime.py",
+          "line": 535
+        },
+        {
+          "path": "skills/fairy/scripts/astrofairy/_runtime.py",
+          "line": 1043
+        }
+      ]
+    }
+  ],
+  "new_findings": [
+    {
+      "id": "REG-01",
+      "axis": "spec_resource",
+      "status": "confirmed_open",
+      "priority": "P2",
+      "title": "权威导出校验引入整文件双份物化",
+      "anchors": [
+        {
+          "path": "skills/fairy/scripts/astrofairy/_delivery.py",
+          "line": 154
+        }
+      ],
+      "evidence_basis": "_verify使用path.read_bytes和store.get同时保留完整成员。独立仅测既有bag校验：8MiB/32MiB文件Python分配峰值约16MiB/64MiB。不是总RSS/OOM试验。",
+      "authority": "design §8 streaming capture/hash/export; RW2 must preserve W05 resource guarantees"
+    }
+  ],
+  "counts": {
+    "original_closed": 7,
+    "original_partially_open": 3,
+    "new_confirmed": 1
+  },
+  "canonical_check": {
+    "exit_code": 0,
+    "runtime_collected": 189,
+    "runtime_skipped": 1,
+    "development_tests": 19
+  },
+  "separate_real_e5_smoke": {
+    "exit_code": 0,
+    "tests": 1,
+    "scope": "Fixed verified cache, real local model; not cold download or host adherence"
+  },
+  "roles": {
+    "original_session": "root",
+    "independent_standards": "rework_standards",
+    "independent_spec": "rework_spec",
+    "arbiter": "maintainer"
+  },
+  "unchanged_limits": [
+    "Native host/model adherence not demonstrated",
+    "Windows/macOS/native plugin not exercised",
+    "Long-term user/team benefit remains unobserved"
+  ],
+  "source_change_in_this_review": "No product code or submitted evidence changed; only acceptance records and status notes added"
+}

@@ -1,0 +1,188 @@
+{
+  "format": 1,
+  "baseline": "baseline.json",
+  "program_observations": {
+    "format": 1,
+    "captured_at": "2026-11-02T09:53:43.037114+00:00",
+    "program_sha256": "5fd8aeb3b9820282bb687e63d2e664934320263e06cabf136728e15c357be34b",
+    "execution_scope": "Real current Python runtime and SQLite in auto-cleaned temporary directory; no business model/API/host invocation or original-user-trace reproduction",
+    "observations": [
+      {
+        "id": "E01",
+        "published_history": [
+          "report.md",
+          "data.csv"
+        ],
+        "exported_files": [
+          "data.csv",
+          "receipt.json"
+        ],
+        "previous_review_rejection": {
+          "code": "stale",
+          "message": "Review must bind the current artifact"
+        },
+        "premature_complete_rejection": {
+          "code": "not_ready",
+          "message": "Required checks, answers or execution results remain unresolved"
+        },
+        "interpretation": "Formal export is current-object-only; history is retained. Fixture semantic passes establish no business completeness."
+      },
+      {
+        "id": "E02",
+        "searches": [
+          {
+            "query": "PPT",
+            "hits": [
+              "presentation-probe"
+            ]
+          },
+          {
+            "query": "演示文稿",
+            "hits": []
+          },
+          {
+            "query": "帮我根据附件做一份PPT汇报",
+            "hits": []
+          },
+          {
+            "query": "PPT 汇报",
+            "hits": [
+              "presentation-probe"
+            ]
+          },
+          {
+            "query": "缺失值",
+            "hits": []
+          }
+        ],
+        "body_only_term": "缺失值",
+        "interpretation": "Adopted fixture asset; no semantic retrieval or body indexing. This does not test host query rewriting or general user success rates."
+      },
+      {
+        "id": "E03",
+        "completed_question_rounds": 3,
+        "fourth_question": {
+          "code": "limit",
+          "message": "Question budget reached or a question is already pending"
+        },
+        "unsolicited_answer_accepted": true
+      },
+      {
+        "id": "E04",
+        "default_calls": 16,
+        "remaining": 0,
+        "required_check_rejection": {
+          "code": "budget",
+          "message": "Invocation budget exhausted; deliver honestly or request help"
+        },
+        "partial_export_available": true,
+        "interpretation": "Calls can be set higher at creation; this proves current default/admission behavior, not that ordinary tasks always exhaust it."
+      },
+      {
+        "id": "E05",
+        "observed_names": [
+          "original.txt",
+          "copy.txt"
+        ],
+        "equal_content_refs": true,
+        "published_name_from_first_ref": "copy.txt",
+        "interpretation": "Content-addressed storage deduplicates correctly, but output descriptor lookup keyed only by digest cannot select the earlier distinct name."
+      }
+    ]
+  },
+  "reproduction_program": {
+    "local_path": ".evaluation/optimization-preparation/20261102/probes.py",
+    "sha256": "5fd8aeb3b9820282bb687e63d2e664934320263e06cabf136728e15c357be34b",
+    "source_utf8": "from __future__ import annotations\n\nimport hashlib\nimport json\nimport sys\nimport tempfile\nfrom datetime import UTC, datetime\nfrom pathlib import Path\n\nROOT = Path(sys.argv[1]).resolve()\nsys.path.insert(0, str(ROOT / 'skills/astrofairy/scripts'))\nfrom astrofairy import FairyError, Workshop\n\n\ndef rejected(action):\n    try:\n        action()\n    except FairyError as error:\n        return {'code': error.code, 'message': error.message}\n    raise AssertionError('Expected rejection did not occur')\n\n\ndef produce(workshop, task, name, content):\n    call = workshop.submit(task, {'op': 'request', 'purpose': 'Controlled fixture: ' + name})\n    return workshop.submit(task, {'op': 'report', 'call': call['call'], 'text': content, 'name': name})['ref']\n\n\ndef review(workshop, task, criterion='goal'):\n    workshop.submit(task, {'op': 'review', 'criterion': criterion, 'verdict': 'pass',\n                            'basis': 'Controlled protocol fixture only; not business or human acceptance'})\n\n\nwith tempfile.TemporaryDirectory(prefix='astrofairy-preparation-') as temporary:\n    with Workshop(Path(temporary) / 'state') as workshop:\n        task = workshop.start('Controlled publication and export probe')\n        premature = rejected(lambda: workshop.submit(task, {'op': 'close', 'outcome': 'complete'}))\n        refs = []\n        for name, content in [('report.md', 'Controlled report bytes'), ('data.csv', 'item,value\\na,1\\n')]:\n            ref = produce(workshop, task, name, content)\n            refs.append(ref)\n            workshop.submit(task, {'op': 'publish', 'ref': ref})\n            workshop.check(task)\n            review(workshop, task)\n        previous = rejected(lambda: workshop.submit(task, {'op': 'review', 'criterion': 'goal',\n                                                         'ref': refs[0], 'verdict': 'pass', 'basis': 'Previous target probe'}))\n        delivery = workshop.submit(task, {'op': 'close', 'outcome': 'complete'})\n        exported = sorted(path.name for path in Path(delivery['receipt_path']).parent.iterdir())\n        retained = [item['name'] for item in workshop.inspect(task)['artifacts']]\n        assert retained == ['report.md', 'data.csv']\n        assert exported == ['data.csv', 'receipt.json']\n        assert premature['code'] == 'not_ready' and previous['code'] == 'stale'\n        e01 = {'id':'E01','published_history':retained,'exported_files':exported,\n               'previous_review_rejection':previous,'premature_complete_rejection':premature,\n               'interpretation':'Formal export is current-object-only; history is retained. Fixture semantic passes establish no business completeness.'}\n\n        proposal = {'name':'presentation-probe','scope':'personal','kind':'workflow',\n                    'summary':'制作 PPT 汇报','tags':['PPT','汇报'],\n                    'content':{'steps':[{'instruction':'核实缺失值，不补零，制作汇报','done':'内容与来源一致'}]},\n                    'evidence':[{'source':'controlled-fixture','note':'Mechanism probe only'}]}\n        asset = workshop.library.propose(proposal)\n        validation = workshop.validation_task(asset)\n        workshop.check(validation)\n        review(workshop, validation, 'asset-fitness')\n        workshop.submit(validation, {'op':'close','outcome':'complete'})\n        workshop.library.adopt(asset, validation)\n        queries=['PPT','演示文稿','帮我根据附件做一份PPT汇报','PPT 汇报','缺失值']\n        searches=[{'query':query,'hits':[row['name'] for row in workshop.library.search(query)]} for query in queries]\n        assert [bool(row['hits']) for row in searches] == [True, False, False, True, False]\n        e02={'id':'E02','searches':searches,'body_only_term':'缺失值',\n             'interpretation':'Adopted fixture asset; no semantic retrieval or body indexing. This does not test host query rewriting or general user success rates.'}\n\n        task=workshop.start('Controlled question-count probe')\n        for index in range(3):\n            workshop.submit(task, {'op':'ask','question':'Controlled decision','recommendation':'A'})\n            workshop.submit(task, {'op':'answer','text':f'Controlled answer {index}'})\n        fourth=rejected(lambda: workshop.submit(task, {'op':'ask','question':'Fourth decision','recommendation':'A'}))\n        assert fourth['code']=='limit'\n        workshop.submit(task, {'op':'answer','text':'Controlled unsolicited steering is still recordable'})\n        e03={'id':'E03','completed_question_rounds':3,'fourth_question':fourth,'unsolicited_answer_accepted':True}\n\n        task=workshop.start('Controlled default-call budget probe')\n        starting=workshop.next(task)['budget_left']\n        for index in range(starting):\n            ref=produce(workshop, task, f'probe-{index}.txt', f'Controlled bytes {index}')\n        workshop.submit(task, {'op':'publish','ref':ref})\n        check=rejected(lambda: workshop.check(task))\n        assert starting==16 and check['code']=='budget'\n        assert workshop.next(task)['budget_left']==0\n        review(workshop,task)\n        partial=workshop.submit(task, {'op':'close','outcome':'partial'})\n        assert partial['outcome']=='partial'\n        e04={'id':'E04','default_calls':starting,'remaining':0,'required_check_rejection':check,\n             'partial_export_available':True,'interpretation':'Calls can be set higher at creation; this proves current default/admission behavior, not that ordinary tasks always exhaust it.'}\n\n        task=workshop.start('Controlled equal-bytes different-names probe')\n        first=produce(workshop,task,'original.txt','Identical controlled bytes')\n        second=produce(workshop,task,'copy.txt','Identical controlled bytes')\n        observations=[item['name'] for call in workshop.inspect(task)['calls'] for item in call['outputs']]\n        workshop.submit(task, {'op':'publish','ref':first})\n        chosen=workshop.next(task)['artifact']['name']\n        assert first==second and observations==['original.txt','copy.txt'] and chosen=='copy.txt'\n        e05={'id':'E05','observed_names':observations,'equal_content_refs':True,'published_name_from_first_ref':chosen,\n             'interpretation':'Content-addressed storage deduplicates correctly, but output descriptor lookup keyed only by digest cannot select the earlier distinct name.'}\n\nresult={'format':1,'captured_at':datetime.now(UTC).isoformat(),'program_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),\n        'execution_scope':'Real current Python runtime and SQLite in auto-cleaned temporary directory; no business model/API/host invocation or original-user-trace reproduction',\n        'observations':[e01,e02,e03,e04,e05]}\nsys.stdout.write(json.dumps(result,ensure_ascii=False,indent=2)+'\\n')\n",
+    "usage": "Use an already prepared virtual environment satisfying the pinned runtime dependencies. Keep the venv interpreter path itself; do not resolve its symlink to a base interpreter. Write source_utf8 to a temporary .py file, then run VENV_PYTHON -B PROGRAM REPOSITORY_ROOT. It creates and removes its own temporary state and calls no business model. The successful primary invocation used .venv/bin/python. An unprepared system interpreter is expected to refuse readiness, not to be repaired by bypassing pins."
+  },
+  "historical_evidence": [
+    {
+      "path": "docs/evaluation/results/acceptance-20261101/acceptance.md",
+      "sha256": "92742b91090e0158dd9f92a243c50c3f288b3e31fc7f01469eabaf6164d46114",
+      "availability": "tracked repository document"
+    },
+    {
+      "path": "docs/evaluation/results/acceptance-20261101/corrections.md",
+      "sha256": "73c6d8c7cf756ec1b3853f13d378312bb29949a48bae47d672507ff825e4891b",
+      "availability": "tracked repository document"
+    },
+    {
+      "path": "docs/evaluation/results/release-20261101.md",
+      "sha256": "b67e161da92355c6cd7e267f80c33be669c8e7262c7fb8dcfc9168b8637ce16d",
+      "availability": "tracked repository document"
+    },
+    {
+      "path": ".evaluation/product-validation/acceptance-20261101/independent/retrieval-reproduction.json",
+      "sha256": "363f9a43eb5b743865611e1a6f683a5fdc83e25bf40178ee36e473e4f1b68fa3",
+      "availability": "local cache only"
+    },
+    {
+      "path": ".evaluation/product-validation/run-20261101-p03p07/return/submission.json",
+      "sha256": "943a6d67bdd11afccc3070ef2756d4831744cf269671704e405ecaba0f828fb0",
+      "availability": "local cache only"
+    }
+  ],
+  "historical_retrieval": {
+    "id": "EH01",
+    "corpus_docs": 12,
+    "queries": 8,
+    "literal_recall_at_3": 0.688,
+    "fts5_recall_at_3": 0.75,
+    "top1_hits_both": 8,
+    "semantic_run": false,
+    "limits": "Fields and algorithm changed together; small constructed corpus; neither algorithm causality nor production quality nor a backend decision follows."
+  },
+  "maintainer_observation": {
+    "stage": "initial trial reported in conversation",
+    "trial_count": null,
+    "host": null,
+    "model": null,
+    "installation_mode": null,
+    "original_trace": null,
+    "meaning": "Real maintainer feedback; not a controlled team-member study, not absence of human feedback, and not a replacement for frozen P05 records.",
+    "source": "Maintainer messages in this conversation; not the original task execution trace",
+    "excerpts": [
+      {
+        "feedback": "UF01",
+        "text": "有没有方便一些的加载技能的方式？比如：fairy，帮我***，类似这样的"
+      },
+      {
+        "feedback": "UF02",
+        "text": "我说的不遵守是指的有agent明确加载了skill，但未完全遵守。"
+      },
+      {
+        "feedback": "UF03",
+        "text": "agent用的时候说最后成果只能有一个，所以他有好几个文件都是绕着交的。"
+      },
+      {
+        "feedback": "UF02",
+        "text": "ai在没有主skill提供足够信息的情况下很容易不去看外置。"
+      },
+      {
+        "feedback": "UF04",
+        "text": "不能过于为了轻量而轻量，轻量指的是机制吧。"
+      },
+      {
+        "feedback": "UF05",
+        "text": "但是我不是专家，这个需要你来分析"
+      },
+      {
+        "feedback": "scope",
+        "text": "当然，我只是初步试用了一下。"
+      },
+      {
+        "feedback": "merge",
+        "text": "2 4是一个问题，不要分开。"
+      }
+    ]
+  },
+  "not_executed": [
+    "Original maintainer failure trace reproduction",
+    "Matched real-model instruction-layout comparison",
+    "New native host activation/update trials",
+    "Embedding/vector/hybrid retrieval benchmark",
+    "Human review-comprehension or long-term learning trial",
+    "Product code fixes or release"
+  ]
+}

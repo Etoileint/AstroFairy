@@ -1,0 +1,721 @@
+{
+  "format": 1,
+  "baseline": "baseline.json",
+  "entries": [
+    {
+      "id": "B01",
+      "name": "任务提问总量",
+      "value": 3,
+      "unit": "questions",
+      "kind": "hard_behavior",
+      "scope": "task lifetime",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_contracts.py",
+        "symbol": null,
+        "line": 25
+      },
+      "behavior": "第四次 ask 拒绝；主动转发 answer 不受此计数约束",
+      "investigation": "必要提问和用户新增要求是否应由进展/疲劳策略管理？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B02",
+      "name": "同时待答问题",
+      "value": 1,
+      "unit": "pending question",
+      "kind": "protocol guard",
+      "scope": "one task",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_kernel.py",
+        "symbol": null,
+        "line": 283
+      },
+      "behavior": "已有待答问题时再次 ask 拒绝",
+      "investigation": "保留单个待答对象能否仍容纳简明组合问题且不增加用户管理？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B03",
+      "name": "默认调用预算",
+      "value": 16,
+      "unit": "registered calls",
+      "kind": "configurable default plus hard admission",
+      "scope": "one task; set at creation",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_contracts.py",
+        "symbol": null,
+        "line": 24
+      },
+      "behavior": "注册工具及模型 request 计数；next/文档读取等免费，机械检查仍收费；无当前调整命令",
+      "investigation": "以何种成本/无进展依据制定宽裕默认和最终兜底，避免阻断检查/恢复？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B04",
+      "name": "skill 入口体积",
+      "value": 6500,
+      "unit": "UTF-8 bytes",
+      "kind": "development hard gate",
+      "scope": "SKILL.md",
+      "anchor": {
+        "path": "governance.toml",
+        "symbol": null,
+        "line": 4
+      },
+      "behavior": "超出则结构检查失败",
+      "investigation": "必要常规指令是否应优先，体积改作审查信号？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B05",
+      "name": "四文件核心体积",
+      "value": 1500,
+      "unit": "physical lines",
+      "kind": "development hard gate",
+      "scope": "four listed files",
+      "anchor": {
+        "path": "governance.toml",
+        "symbol": null,
+        "line": 5
+      },
+      "behavior": "超出则结构检查失败",
+      "investigation": "如何检查职责增长，避免通过压缩或搬移代码迎合行数？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B06",
+      "name": "普通 blob",
+      "value": 16777216,
+      "unit": "bytes",
+      "kind": "storage admission",
+      "scope": "each captured input/output/blob",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_contracts.py",
+        "symbol": null,
+        "line": 22
+      },
+      "behavior": "单项超限拒绝；不是全库容量或所有事件 payload 上限",
+      "investigation": "普通文档大小、流式处理和内存保护应分别如何定义？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B07",
+      "name": "命令 JSON 输入",
+      "value": 16777216,
+      "unit": "bytes",
+      "kind": "input admission",
+      "scope": "CLI spec/submit/proposal inputs via _input; asset import has a separate bounded read",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_cli.py",
+        "symbol": null,
+        "line": 36
+      },
+      "behavior": "复用 blob 值；不是所有 Python 调用的输入上限",
+      "investigation": "命令信封与附件是否应分离预算？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B08",
+      "name": "默认字符串字段",
+      "value": 24576,
+      "unit": "UTF-8 bytes",
+      "kind": "generic field admission",
+      "scope": "text_value default across goal/request/basis/etc",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_contracts.py",
+        "symbol": null,
+        "line": 83
+      },
+      "behavior": "超限拒绝；部分字段有特定覆盖",
+      "investigation": "是否把回包尺寸错误投射到语义字段？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B09",
+      "name": "CLI JSON 回包",
+      "value": 24576,
+      "unit": "bytes including newline",
+      "kind": "transport envelope",
+      "scope": "every CLI response",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_presentation.py",
+        "symbol": null,
+        "line": 41
+      },
+      "behavior": "大值转不可变文档；不是内容丢弃或任务总上下文上限",
+      "investigation": "如何减少拆读负担并保证必要控制信息完整到达？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B10",
+      "name": "普通内容读取",
+      "value": 6144,
+      "unit": "Unicode characters",
+      "kind": "fragment ceiling",
+      "scope": "content.read per counted call",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+        "symbol": null,
+        "line": 248
+      },
+      "behavior": "默认与最大均6144；每段消耗调用",
+      "investigation": "正常长资料阅读的成本及与调用预算组合是否合理？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B11",
+      "name": "文档读取请求",
+      "value": 24576,
+      "unit": "Unicode characters",
+      "kind": "fragment request ceiling",
+      "scope": "free document read",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_presentation.py",
+        "symbol": null,
+        "line": 79
+      },
+      "behavior": "最终回包按字节再缩小；完整内容仍可续读",
+      "investigation": "字符和字节单位是否明晰，是否可提供阶段必要摘要/材料？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B12",
+      "name": "工具定义",
+      "value": 24576,
+      "unit": "bytes",
+      "kind": "contract admission",
+      "scope": "whole capability definition",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+        "symbol": null,
+        "line": 117
+      },
+      "behavior": "超限拒绝，不能由回包分页自动豁免",
+      "investigation": "工具契约尺寸应独立于传输预算吗？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B13",
+      "name": "单个 Schema",
+      "value": 24576,
+      "unit": "bytes",
+      "kind": "contract admission",
+      "scope": "each input/output Schema",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_contracts.py",
+        "symbol": null,
+        "line": 268
+      },
+      "behavior": "超限拒绝",
+      "investigation": "合理复杂工具是否被不相干回包值限制？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B14",
+      "name": "Schema 分析图",
+      "value": 4096,
+      "unit": "visited states",
+      "kind": "analysis safety bound",
+      "scope": "one schema validation",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_contracts.py",
+        "symbol": null,
+        "line": 292
+      },
+      "behavior": "超限拒绝",
+      "investigation": "限值与内存/时间风险的依据、错误和恢复是什么？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B15",
+      "name": "资产检索默认返回",
+      "value": 3,
+      "unit": "matches",
+      "kind": "selection default",
+      "scope": "one search",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+        "symbol": null,
+        "line": 166
+      },
+      "behavior": "可以请求更多",
+      "investigation": "候选召回数量与最终上下文数量如何分开？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B16",
+      "name": "资产检索最大返回",
+      "value": 10,
+      "unit": "matches",
+      "kind": "hard result ceiling",
+      "scope": "one search",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+        "symbol": null,
+        "line": 24
+      },
+      "behavior": "没有分页游标",
+      "investigation": "能否扩大候选、分页并保留完整可发现性？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B17",
+      "name": "参与检索词",
+      "value": 16,
+      "unit": "whitespace-separated terms",
+      "kind": "silent query truncation",
+      "scope": "one search",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+        "symbol": null,
+        "line": 169
+      },
+      "behavior": "后续词被忽略；不是中文分词器",
+      "investigation": "是否应显式反馈、查询规范化或由成熟检索器处理？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B18",
+      "name": "工具目录默认/最大",
+      "value": [
+        8,
+        20
+      ],
+      "unit": "matches",
+      "kind": "catalog policy",
+      "scope": "one capability query",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_runtime.py",
+        "symbol": null,
+        "line": 520
+      },
+      "behavior": "无页游标，通过query缩小",
+      "investigation": "工具发现是否可达完整目录且无需人工设计关键词？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B19",
+      "name": "非 workflow 资产正文",
+      "value": 1048576,
+      "unit": "UTF-8 bytes",
+      "kind": "asset admission",
+      "scope": "one text asset",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+        "symbol": null,
+        "line": 108
+      },
+      "behavior": "超限拒绝；结构化workflow受逐字段及整体blob边界约束",
+      "investigation": "不同资产类型边界为何不同，是否符合实际手册规模？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B20",
+      "name": "资产摘要",
+      "value": 1000,
+      "unit": "UTF-8 bytes",
+      "kind": "field admission",
+      "scope": "one summary",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_library.py",
+        "symbol": null,
+        "line": 88
+      },
+      "behavior": "超限拒绝",
+      "investigation": "摘要用于发现时的信息充分性如何评测？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B21",
+      "name": "工具描述",
+      "value": 512,
+      "unit": "UTF-8 bytes",
+      "kind": "field admission",
+      "scope": "one capability description",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+        "symbol": null,
+        "line": 93
+      },
+      "behavior": "超限拒绝",
+      "investigation": "能否清楚提供用途、适用条件和前提？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B22",
+      "name": "输出文件名",
+      "value": 200,
+      "unit": "UTF-8 bytes; schema also maxLength characters",
+      "kind": "path profile",
+      "scope": "one file name",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_contracts.py",
+        "symbol": null,
+        "line": 90
+      },
+      "behavior": "单层文件名；禁止斜杠等",
+      "investigation": "多文件路径、跨平台碰撞和内容身份如何分离？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B23",
+      "name": "普通标识/能力标识",
+      "value": [
+        80,
+        128
+      ],
+      "unit": "ASCII characters",
+      "kind": "identifier profile",
+      "scope": "names and capability names",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_contracts.py",
+        "symbol": null,
+        "line": 26
+      },
+      "behavior": "受正则约束",
+      "investigation": "保留格式完整性，是否需独立于自然语言可读名称？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B24",
+      "name": "工作区路径字段",
+      "value": 24576,
+      "unit": "Unicode characters",
+      "kind": "schema field bound",
+      "scope": "registered path parameters",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+        "symbol": null,
+        "line": 164
+      },
+      "behavior": "仍需平台路径支持/安全检查",
+      "investigation": "明确声明单位与实际路径限制，不能当作可用路径承诺？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B25",
+      "name": "公开错误诊断",
+      "value": 4096,
+      "unit": "bytes and traversal-count caps",
+      "kind": "diagnostic safety",
+      "scope": "one diagnostic",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_errors.py",
+        "symbol": null,
+        "line": 7
+      },
+      "behavior": "超限或不安全诊断回退安全通用错误",
+      "investigation": "能否保留排障定位/另读证据且不泄露敏感内容？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B26",
+      "name": "回包控制字符串",
+      "value": 128,
+      "unit": "UTF-8 bytes",
+      "kind": "control-envelope projection",
+      "scope": "selected scalar strings",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_presentation.py",
+        "symbol": null,
+        "line": 33
+      },
+      "behavior": "不合条件不放控制摘要，原文仍在文档",
+      "investigation": "控制信息选择会不会遗漏恢复所需信息？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B27",
+      "name": "文档节点",
+      "value": 16384,
+      "unit": "bytes",
+      "kind": "storage layout bound",
+      "scope": "each archive node",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_documents.py",
+        "symbol": null,
+        "line": 21
+      },
+      "behavior": "超限拒绝，普通文档通过分块",
+      "investigation": "属于内部布局，变更须评估兼容格式与完整性成本",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B28",
+      "name": "标量分块",
+      "value": 2048,
+      "unit": "Unicode characters",
+      "kind": "storage layout parameter",
+      "scope": "archive scalar chunks",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_documents.py",
+        "symbol": null,
+        "line": 22
+      },
+      "behavior": "影响分块数量/选读成本，不限制原文总量",
+      "investigation": "按增长、Unicode和读取分布衡量，而非一律扩大",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B29",
+      "name": "树扇出",
+      "value": 16,
+      "unit": "children",
+      "kind": "storage layout parameter",
+      "scope": "archive tree groups",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_documents.py",
+        "symbol": null,
+        "line": 23
+      },
+      "behavior": "影响索引形态",
+      "investigation": "是否维持已有正确性及可接受读写成本？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B30",
+      "name": "读取验证缓存",
+      "value": 128,
+      "unit": "nodes",
+      "kind": "memory bound",
+      "scope": "per archive reader",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_documents.py",
+        "symbol": null,
+        "line": 24
+      },
+      "behavior": "只缓存有限已验证节点",
+      "investigation": "是否与实际局部/全量读取代价匹配？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B31",
+      "name": "键导航前缀",
+      "value": 16,
+      "unit": "Unicode characters",
+      "kind": "navigation parameter",
+      "scope": "archive key prefix",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_documents.py",
+        "symbol": null,
+        "line": 25
+      },
+      "behavior": "完整键仍需验证，不截断逻辑键",
+      "investigation": "属于索引实现，不是语义信息预算",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B32",
+      "name": "全量审计文本片段",
+      "value": 8192,
+      "unit": "Unicode characters",
+      "kind": "streaming parameter",
+      "scope": "canonical digest loop",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_documents.py",
+        "symbol": null,
+        "line": 649
+      },
+      "behavior": "分段计算完整摘要",
+      "investigation": "只影响操作粒度，应与总量/峰值内存区别",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B33",
+      "name": "常规 SQLite 忙等待",
+      "value": 10,
+      "unit": "seconds",
+      "kind": "contention timeout",
+      "scope": "main/archive/audit connections",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_store.py",
+        "symbol": null,
+        "line": 24
+      },
+      "behavior": "超时失败，不代表整个调用限时",
+      "investigation": "竞争、恢复与用户反馈是否合理？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B34",
+      "name": "文档原生初始化锁",
+      "value": 10,
+      "unit": "seconds",
+      "kind": "lock timeout",
+      "scope": "archive schema writer admission",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_documents.py",
+        "symbol": null,
+        "line": 183
+      },
+      "behavior": "无软锁回退；保留稳定锁文件",
+      "investigation": "合理等待可配置性与失败状态处理？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B35",
+      "name": "备份连接忙等待",
+      "value": 1,
+      "unit": "second",
+      "kind": "contention timeout",
+      "scope": "backup source and destination",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_maintenance.py",
+        "symbol": null,
+        "line": 264
+      },
+      "behavior": "不是备份总量限制",
+      "investigation": "区分单次竞争和整体截止时间",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B36",
+      "name": "每库备份截止时间",
+      "value": 60,
+      "unit": "seconds",
+      "kind": "progress-callback deadline",
+      "scope": "each database copy",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_maintenance.py",
+        "symbol": null,
+        "line": 268
+      },
+      "behavior": "进度回调检查截止时间；不是严格实时硬中断，保留部分目录",
+      "investigation": "规模增长时应采用何种截止、取消及进展策略？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B37",
+      "name": "备份页批次/忙重试间隔",
+      "value": [
+        128,
+        0.05
+      ],
+      "unit": "pages / seconds",
+      "kind": "copy batch parameter",
+      "scope": "SQLite backup",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_maintenance.py",
+        "symbol": null,
+        "line": 276
+      },
+      "behavior": "批量复制和忙等待睡眠",
+      "investigation": "性能参数与任务可完成性上限分开",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B38",
+      "name": "备份 manifest",
+      "value": 16384,
+      "unit": "bytes",
+      "kind": "input safety bound",
+      "scope": "backup verification manifest",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_maintenance.py",
+        "symbol": null,
+        "line": 317
+      },
+      "behavior": "超限拒绝",
+      "investigation": "元数据结构变化后是否仍有理由及可诊断失败？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B39",
+      "name": "恢复流复制块",
+      "value": 1048576,
+      "unit": "bytes",
+      "kind": "streaming parameter",
+      "scope": "restore copy",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_maintenance.py",
+        "symbol": null,
+        "line": 346
+      },
+      "behavior": "按块复制，非备份总量上限",
+      "investigation": "保持流式，不把块大小当文件限额",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B40",
+      "name": "安装验证子进程",
+      "value": 60,
+      "unit": "seconds",
+      "kind": "developer-test timeout",
+      "scope": "installation fixture commands",
+      "anchor": {
+        "path": "dev/check_installation.py",
+        "symbol": null,
+        "line": 27
+      },
+      "behavior": "只作用开发检查",
+      "investigation": "慢网络/首次安装怎样区分环境和产品故障？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B41",
+      "name": "交接 JSON 默认/提交包",
+      "value": [
+        16777216,
+        1048576
+      ],
+      "unit": "bytes",
+      "kind": "developer-evidence admission",
+      "scope": "handoff metadata / submission",
+      "anchor": {
+        "path": "dev/check_validation_handoff.py",
+        "symbol": null,
+        "line": 23
+      },
+      "behavior": "只作用评测交接，不是团队工作预算",
+      "investigation": "保持研究与运行参数分离，实际证据规模是否合理？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B42",
+      "name": "资产导入输入的有界读取",
+      "value": 16777217,
+      "unit": "bytes",
+      "kind": "bounded read, not equivalent to explicit size rejection",
+      "scope": "资产导入输入的有界读取",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_cli.py",
+        "symbol": null,
+        "line": 191
+      },
+      "behavior": "read 最多 blob 上限+1，然后解析；不同于 _input 的显式超限检查",
+      "investigation": "有界读取、完整输入验证、尾随数据和过大输入的行为是否一致且可解释？",
+      "decision": "not_selected"
+    },
+    {
+      "id": "B43",
+      "name": "资产正文与定位器切换",
+      "value": 24576,
+      "unit": "bytes",
+      "kind": "response routing threshold",
+      "scope": "资产正文与定位器切换",
+      "anchor": {
+        "path": "skills/astrofairy/scripts/astrofairy/_capabilities.py",
+        "symbol": null,
+        "line": 268
+      },
+      "behavior": "超过阈值只返回 ref/名称/摘要及 content.read 指引；后续普通内容片段读取仍计调用",
+      "investigation": "是否把必需资产内容隐藏在额外收费读取后，阈值与模型信息充分性如何协调？",
+      "decision": "not_selected"
+    }
+  ],
+  "unbounded_or_host_managed": [
+    {
+      "resource": "Actual model tokens, currency and whole-task wall time",
+      "scope": "host managed; runner call counts are not measurements of these resources"
+    },
+    {
+      "resource": "Retained disk, events, assets, documents and replay cost",
+      "scope": "no total quota, expiry, GC or replay checkpoint"
+    },
+    {
+      "resource": "Registered handler execution duration and generic event payload size",
+      "scope": "no universal local handler deadline or generic serialized event-payload cap; individual contract/blob/CLI bounds do not imply an aggregate cap"
+    }
+  ],
+  "excluded_from_budget_inventory": "Version identities, SHA256 lengths, permission modes, mandatory nonempty values and closed enum vocabularies are format/safety invariants, not savings budgets. They are not proposed for relaxation."
+}
