@@ -155,6 +155,10 @@ experience, long-term learning benefits and resource tradeoffs remain subjects f
 
 ## Development
 
+New contributors and coding agents: start with [CONTRIBUTING.md](CONTRIBUTING.md) and
+[current status](STATUS.md). They identify current rules, live issues, historical records, validation
+levels and evidence access. `CLAUDE.md` imports the shared `AGENTS.md` instructions.
+
 ```sh
 python -m venv .venv
 .venv/bin/python -m pip install --require-hashes --only-binary=:all: -r skills/fairy/scripts/requirements-runtime.lock
@@ -189,7 +193,7 @@ python -m astrofairy --home .fairy start --request 'Prepare a source-based proje
 ```
 
 The parser owns command fields, `requirements-dev.lock` owns development tool versions, and
-`governance.toml` declares test surfaces and growth budgets. After changing package metadata or the
+`governance.toml` declares test surfaces, check commands and architecture metrics. After changing package metadata or the
 root license, run `python dev/sync_metadata.py`; check mode and CI reject stale generated files.
 Package releases use three numeric components with optional a/b/rc prereleases. The development
 generator uses packaging.Version normalization for plugin SemVer; epoch/post/dev/local forms outside

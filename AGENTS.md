@@ -1,15 +1,20 @@
 # AstroFairy development
 
 Independent project. Keep all project changes here; do not change sibling repositories.
+Before implementation, read [current status](STATUS.md) and [contributor guide](CONTRIBUTING.md).
+Use this project's [GitHub Issues](https://github.com/Etoileint/AstroFairy/issues); reports need verification.
+When using an authorized external development organization, load its original router/method packages
+and follow the [scope rules](CONTRIBUTING.md#external-development-organization); keep all project records here.
 
 | Topic | Authority / check |
 |---|---|
+| Developer entry and evidence | [Contributing](CONTRIBUTING.md), [status](STATUS.md), [evidence access](docs/development/evidence.md) |
 | Architecture and trust boundary | [Architecture](docs/guides/architecture.md) |
 | Protocol | `python -m astrofairy schema`; implementation under `skills/fairy/scripts/astrofairy/` |
 | Work and asset lifecycle | [Operation](docs/guides/operation.md) |
-| Overall review | [Review workspace](docs/reviews/README.md), [rounds](docs/reviews/INDEX.md); inventory/source checks: `python dev/check_review_preparation.py` (not a product-conformance check) |
-| Repairs | [Live repair status](docs/repairs/README.md); historical review stays bound to its frozen Git baseline |
-| Current optimization | [Live implementation status](docs/optimization/2026-11-implementation/README.md); [final technical acceptance](docs/optimization/2026-11-acceptance/final-2026-11-03/README.md); historical returns stay immutable |
+| Historical reviews | [Review workspace](docs/reviews/README.md), [rounds](docs/reviews/INDEX.md); inventory/source checks: `python dev/check_review_preparation.py` (not a product-conformance check) |
+| Repair lineage | [Earlier repairs and continuing observations](docs/repairs/README.md); use STATUS.md for current work; historical review stays bound to its frozen Git baseline |
+| Completed optimization | [Implementation record](docs/optimization/2026-11-implementation/README.md); [final technical acceptance](docs/optimization/2026-11-acceptance/final-2026-11-03/README.md); historical returns stay immutable |
 | Design decisions | [Core](docs/adr/0001-small-workshop.md), [distribution](docs/adr/0002-portable-standard-skill.md) |
 | Test and package checks | `python dev/check.py` |
 | Tool versions | `requirements-dev.lock`; no duplicated tool pins |

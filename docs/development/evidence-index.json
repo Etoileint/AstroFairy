@@ -1,0 +1,52 @@
+{
+  "format": 1,
+  "prepared_on": "2026-11-05",
+  "release": {
+    "tag": "v0.1.0a2",
+    "commit": "1574ce89dd2e29e9a3b0be5997302b32b0bfe335",
+    "url": "https://github.com/Etoileint/AstroFairy/releases/tag/v0.1.0a2",
+    "published_at": "2026-11-03T12:26:07Z"
+  },
+  "bundle": {
+    "name": "astrofairy-v0.1.0a2-evidence.zip",
+    "bytes": 22611447,
+    "sha256": "b79b9196c0f5ef40d371de67de47347a42b1b25ba487a2f35c5f693608e7c8f5",
+    "local_path": ".evaluation/development-handoff/2026-11-05/astrofairy-v0.1.0a2-evidence.zip",
+    "availability": "maintainer-held transfer bundle; not uploaded to a public release",
+    "inventory_entries": 320,
+    "source_snapshot_records": 194,
+    "source_snapshot_files": 191,
+    "scope": "Final optimization evidence seal, received targeted-rework package, release execution and published assets, plus all recorded and hashed source snapshots in the review/feedback/design catalogs.",
+    "excluded": [
+      "model weights",
+      "virtual environments",
+      "package/download caches",
+      "real task homes",
+      "private external development organization",
+      "older raw review/repair runs not included by the scoped seals or source catalogs"
+    ]
+  },
+  "sealed_acceptance": {
+    "source_manifest_sha256": "b04116016746aa462e88130e0ed56ed682f26e5ecdedde7cd3da4ef059b8bdfe",
+    "evidence_zip_sha256": "1f6a6016b7246a00494d59d8d554b72925a4a107286fe4df141afa20f71aa53a",
+    "source_files": 323,
+    "evidence_files": 50
+  },
+  "received_return": {
+    "source_manifest_sha256": "736b0fe3a14772bbe0c2c816b60d332e0ea728934ab96c721f468e78f8b0a612",
+    "evidence_files": 96
+  },
+  "public_checks": [
+    {
+      "branch": "main",
+      "url": "https://github.com/Etoileint/AstroFairy/actions/runs/41628414958",
+      "conclusion_at_release": "success"
+    },
+    {
+      "branch": "tag",
+      "url": "https://github.com/Etoileint/AstroFairy/actions/runs/41628640927",
+      "conclusion_at_release": "success"
+    }
+  ],
+  "interpretation": "Availability and byte identity only; historical findings retain their original baselines and limits. No new host/platform/semantic or long-term acceptance claim."
+}

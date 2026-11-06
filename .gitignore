@@ -11,5 +11,6 @@ __pycache__/
 .cache/
 .mypy_cache/
 .ruff_cache/
+CLAUDE.local.md
 build/
 dist/

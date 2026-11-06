@@ -1,4 +1,4 @@
-include README.md README.zh-CN.md LICENSE pyproject.toml AGENTS.md governance.toml requirements-dev.lock
+include README.md README.zh-CN.md LICENSE pyproject.toml AGENTS.md CLAUDE.md CONTRIBUTING.md STATUS.md governance.toml requirements-dev.lock
 recursive-include dev *.py *.json *.source *.in *.whl *.tar.gz
 recursive-include skills *.md *.py *.yaml *.json *.lock *.whl
 include skills/fairy/LICENSE

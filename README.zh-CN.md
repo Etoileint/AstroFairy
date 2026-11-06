@@ -132,6 +132,10 @@ AstroFairy 依靠智能体配合与本地检查运行，不隔离宿主，也不
 
 ## 开发
 
+新接手的开发者或 agent 先读[贡献与开发指南](CONTRIBUTING.md)和[当前开发状态](STATUS.md)，
+据此区分现行规则、GitHub待核实问题、历史记录、检查层次及证据获取方式。
+`CLAUDE.md` 使用原生导入加载同一份 `AGENTS.md`。
+
 ```sh
 python -m venv .venv
 .venv/bin/python -m pip install --require-hashes --only-binary=:all: -r skills/fairy/scripts/requirements-runtime.lock
@@ -164,7 +168,7 @@ python -m astrofairy --home .fairy doctor
 python -m astrofairy --home .fairy start --request 'Prepare a source-based project brief'
 ```
 
-解析器是命令字段单源，`requirements-dev.lock` 是开发工具版本单源，`governance.toml` 声明测试面和增长预算。
+解析器是命令字段单源，`requirements-dev.lock` 是开发工具版本单源，`governance.toml` 声明测试面、检查命令和架构度量。
 修改包元数据或根 LICENSE 后，运行 `python dev/sync_metadata.py`；检查模式和 CI 会拒绝过期的派生文件。
 包版本采用三段数字，可带 a/b/rc 预发布标记；开发生成器用 packaging.Version 规范化后派生插件 SemVer，
 超出声明范围的 epoch/post/dev/local 等形式在生成前拒绝，详见[版本契约](docs/adr/0007-package-to-plugin-version-contract.md)。
