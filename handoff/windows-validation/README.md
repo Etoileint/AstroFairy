@@ -1,5 +1,10 @@
 # Windows 原生验证：第二轮统一复测
 
+> 本任务已完成并通过[独立验收](../../docs/audit/changes/2026-11-08_windows-round2-acceptance.md)。
+> 这是冻结的历史验证任务，复验须取得`3645fc6a601b5e162f801d6e62b96c7ee1c8b025`及其任务材料。
+> 当前发布源码已有版本和文档更新，不应直接对当前工作树运行旧候选身份校验；
+> 旧任务正文、制品与摘要解释冻结对象，不承担新版本的发布身份。
+
 仓库 `Etoileint/AstroFairy`，分支 `handoff/windows-validation-20261108`，
 [草稿 PR #5](https://github.com/Etoileint/AstroFairy/pull/5)。双方仅通过 GitHub 交接。
 

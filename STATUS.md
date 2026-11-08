@@ -12,6 +12,11 @@
 4. 接手验收取证时，先读[证据获取与复验](docs/development/evidence.md)。
    使用维护者外部开发组织时，按[组织接入规则](CONTRIBUTING.md#external-development-organization)加载原件。
 
+## 当前发版
+
+维护者已接受本批修复，并于2026-11-08授权推送发布`0.1.0a3` Alpha。正在执行标准发布门；
+[本版说明](docs/releases/v0.1.0a3.md)列明变更、原生证据和发布后观察。正式发布事实以GitHub Release为准。
+
 ## 已发布基准
 
 - [0.1.0a2 Alpha](https://github.com/Etoileint/AstroFairy/releases/tag/v0.1.0a2)，2026-11-03 发布。
@@ -25,69 +30,63 @@
 
 ## 当前收到的问题
 
-四条公开反馈**保持开放**。W1–W5实现与三轮定向返工已回交；此前4类P2定向整改独立复验通过。
-最新Windows主证据包已完整取得并逐件核验，支持若干原生功能通过，但完整检查及托管Linux/Windows CI仍失败，
-见[原件收件复核](docs/audit/changes/2026-11-08_windows-validation-evidence-review.md)。专项未整体验收，未合并/发布。
-验证候选已固化为`c9824b24b1627dd10de70fbcfe028a0dc9dfcfd5`，通过独立GitHub交接分支流转，不并入主分支。
-Issue中的复现步骤和建议是待核实材料，不自动成为实现要求。
+四条公开反馈保持开放；实现与三轮定向返工已完成独立技术复验。
+**Windows第二轮指定复测已通过，无新增返工项**，见
+[原件查收与独立验收](docs/audit/changes/2026-11-08_windows-round2-acceptance.md)。
+维护者已接受本批修复并授权新Alpha发布；剩余集成与真实使用观察按发布后范围保留，不冒称全量验证完成。
 
-| 入口 | 已确认根因 | 仍须观察 |
+| 入口 | 已确认根因 | 当前验证与剩余范围 |
 |---|---|---|
-| [#1](https://github.com/Etoileint/AstroFairy/issues/1) | 宿主marker求值导致Windows条件依赖遗漏 | 本候选原生Windows哈希安装与完整任务 |
-| [#2](https://github.com/Etoileint/AstroFairy/issues/2) | 空活跃库显式refresh跳过准备，doctor只看依赖元数据 | 冷下载/中断恢复、跨进程缓存准备；不能用已有缓存推理替代 |
-| [#3](https://github.com/Etoileint/AstroFairy/issues/3) | BagIt上游路径表示与项目POSIX分类边界不一致 | 原生Windows完整BagIt及junction/reparse负例 |
-| [#4](https://github.com/Etoileint/AstroFairy/issues/4) | close/晚到事实提交后导出失败仍被推断为delivered，不限于Windows | 原生平台及真实host按准确控制接续；本机关闭/导出/恢复回归已通过 |
+| [#1](https://github.com/Etoileint/AstroFairy/issues/1) | 宿主marker求值导致Windows条件依赖遗漏 | Windows条件依赖、真实导入、完整任务及新环境CI已通过；不据此宣称所有平台认证 |
+| [#2](https://github.com/Etoileint/AstroFairy/issues/2) | 空活跃库显式refresh跳过准备，doctor只看依赖元数据 | 机制回归、六文件消费审定及Linux既有缓存E5已通过；真实冷下载/中断、独立进程缓存争用和Windows E5仍待观察 |
+| [#3](https://github.com/Etoileint/AstroFairy/issues/3) | BagIt上游路径表示与项目POSIX分类边界不一致 | Windows单/多文件及子目录BagIt、home外四处junction的ordinary/repair和三制品任务通过；不声称穷尽所有重解析点或Windows ACL |
+| [#4](https://github.com/Etoileint/AstroFairy/issues/4) | close/晚到事实提交后导出失败仍被推断为delivered，不限于Windows | 原生关闭/导出/恢复owner回归通过；T34真实host按准确控制接续仍待观察 |
 
-[专项供料](docs/repairs/2026-11-platform-readiness-delivery/supply.md)保留根因试验与权威依据，
-[方案入口](docs/repairs/2026-11-platform-readiness-delivery/README.md)、
-[ADR-0012](docs/adr/0012-platform-readiness-and-delivery-observation.md)与
-[实施计划](docs/repairs/2026-11-platform-readiness-delivery/plan.md)分别承担设计、机制与分派。
-实施同时覆盖历史receipt/当前checker分责、交付redirect拒绝、模型六文件完整消费义务及显式重复验证。
+### 当前候选和已取得的验证
 
-最新[第三次返工独立复验](docs/repairs/2026-11-platform-readiness-delivery/acceptance-recheck3-2026-11-08/README.md)：
-STD01实际工具摘要、F1完整交付进度、F2事务体原生异常确定性、F3未知invoked调用身份均闭合；
-STD02–06、SPEC01–03、GAP01/T35及原REG02保持通过。规范轴0项open，方案轴0项open。
-主验收者独立完整检查249项运行（默认1skip）＋42项开发、真实E5既有缓存推理通过；
-两轴定向测试、原始探针、分发源码核对与封存wheel交付通过。计数重叠，不合计唯一覆盖。
+- 产品候选：`c9824b24b1627dd10de70fbcfe028a0dc9dfcfd5`；测试修正候选：
+  `6ced5c9a1a59d0f615c0f324564f48955c58fed1`；GitHub交接HEAD：
+  `3645fc6a601b5e162f801d6e62b96c7ee1c8b025`。产品runtime、锁、协议及版本未因测试修正改变。
+- [交接任务](handoff/windows-validation/README.md)与[草稿PR #5](https://github.com/Etoileint/AstroFairy/pull/5)
+  仍是GitHub取件/回交通道；维护者本机旧ZIP不再是Windows取件前提。
+- Windows第二轮ZIP69,575字节，整体及62件清单原件全部核验，前后377项源码/制品身份一致。
+  26条外层命令均exit0；255运行（248通过、7项允许skip）＋42开发通过。
+  7项skip为3项POSIX专项、2项真实WinError1314文件symlink和2项真实模型；目录junction实际执行。
+  源/wheel/sdist/ZIP各8条CLI均在checkout外完成任务及上游BagIt验证，制品来源核对通过。
+- 同一交接HEAD的[PR CI](https://github.com/Etoileint/AstroFairy/actions/runs/42523300428)与
+  [push CI](https://github.com/Etoileint/AstroFairy/actions/runs/42523294898)均通过：
+  Linux x86_64/Windows x64完整门、smoke、wheel/sdist构建和skill打包均实际执行。
+  Linux aarch64本机255运行（默认1skip）＋42开发与同一collector演练此前通过；平台结果各自保留。
+- 第一轮87,226字节/148件原件已核验；当时完整门与CI失败的结论保留。
+  后续已修正测试连接生命周期、工具发现及原生断言，不能再将旧失败表述为当前CI状态。
 
-原T04/T10/T11/T13/T14/T32/T34仍partial，见
-[剩余验证与收口](docs/repairs/2026-11-platform-readiness-delivery/acceptance-recheck3-2026-11-08/remaining-validation.md)。
-Linux x86_64及Windows x64已取得首轮执行证据，但完整门失败；新测试候选待统一复验。macOS等未被本轮认证。
-冷下载/中断、跨进程缓存锁、完整skills CLI矩阵、真实host交互尚未验证；配置矩阵、模拟和暖缓存均不能抵销。
-本轮不新增代码返工单，转入原计划剩余验证；不发布跨平台修复声明或关闭Issue。
-维护者提供Windows开发机后，已完成[Windows验证移交包准备](docs/audit/changes/2026-11-08_windows-validation-handoff.md)：
-当时固定未提交源码、必要Git历史、三制品及原生任务单已封装，本机恢复演练通过；该条保留准备时点含义。
-维护者随后指定双方仅通过GitHub通信，现行取件入口改为[Windows交接任务](handoff/windows-validation/README.md)，
-见[GitHub交接记录](docs/audit/changes/2026-11-08_github-windows-handoff.md)。分支为`handoff/windows-validation-20261108`，
-通过对应草稿PR回交证据；上述本机ZIP保留为历史准备产物，不再要求Windows端取得它。
-Windows主ZIP已通过GitHub四片回交，87,226字节及SHA256匹配，148件登记文件全部核验一致。
-安装、原生导入、单/多文件BagIt和三制品最小任务的开发机原始结果已取得；不再要求重传主包。
-独立CI已证明安装/pip check成功，但完整检查失败，后续smoke/构建被中止。
-报告的跨盘ValueError漏捕获分类与CI原始trace不符；源码已有FairyError封装，不能直接照建议补catch。
-uv夹具硬编码和多处测试SQLite连接生命周期问题已独立核实；路径/权限能力断言也需按原生语义修正。
-已在[PR补件请求](https://github.com/Etoileint/AstroFairy/pull/5#issuecomment-6725855866)给出完整ZIP的GitHub分片回交方法和两项repair补测要求。
-执行者已[撤回跨盘漏捕获分类并报告repair补测](https://github.com/Etoileint/AstroFairy/pull/5#issuecomment-6726087047)。
-现有证据还有少量覆盖限界：补测脚本/新日志尚未随包提供，原junction目标在home内；纳入下一轮正式用例统一复验。
-上述四组机制须统一修正并复验，不据已有通过项放行红色CI。
-维护者随后授权继续，四组[跨平台测试修正](docs/audit/changes/2026-11-08_cross-platform-test-repair.md)已实施：
-本机255运行（默认1skip）＋42开发通过，两轴独立复核0open，产品runtime和依赖锁未改。
-新的测试候选已固化为`6ced5c9a1a59d0f615c0f324564f48955c58fed1`，见
-[第二轮统一复测](docs/audit/changes/2026-11-08_windows-validation-round2.md)；三制品从Git归档重建，
-统一收集/发送入口与前后身份核验已准备。本机通过不替代CI/Windows原生结果，旧失败及未执行范围不改写。
+### 仍须推进的既有工作
 
-| 历史关口 | 冻结结论 |
-|---|---|
-| [W1–W5实施回交](docs/audit/changes/2026-11-08_platform-readiness-implementation.md) | 实现与执行者自检完成，交原会话W6验收 |
-| [首轮独立验收](docs/repairs/2026-11-platform-readiness-delivery/acceptance-2026-11-08/README.md) | 确认规范、实现及范围内遗漏，需返工 |
-| [首轮返工独立复验](docs/repairs/2026-11-platform-readiness-delivery/acceptance-recheck-2026-11-08/README.md) | 部分闭合，仍有缺口及返工回归 |
-| [第二次返工独立复验](docs/repairs/2026-11-platform-readiness-delivery/acceptance-recheck2-2026-11-08/README.md) | 多项闭合，剩4类P2 |
-| [第三次返工回交](docs/audit/changes/2026-11-08_platform-readiness-rework3.md) | 执行者完成4类机制修复与自检；独立结论以上述最新复验为准 |
+T10真实冷下载/中断恢复、T11独立进程缓存争用、Windows真实E5推理、完整skills CLI安装矩阵，
+以及T34真实宿主的准备/失败调查/交付恢复/学习。T32三制品独立运行部分通过，不替代完整安装矩阵。
+这些是原计划剩余观察，不增加新的平台承诺，也不自动要求对已通过的修正重复返工。
+macOS及其他解释器/架构未由本轮认证。
 
-最新回交证据在本机忽略的`.evaluation/issue-repair-implementation/rework3-2026-11-08/`，
-独立复验在`.evaluation/issue-repair-acceptance/recheck3-20261108/`；普通clone不含，转交须附原件与哈希。
-旧回交与旧验收不改写；各自的未执行范围不能因新测试通过而自动消失。
-原实施分派的授权不等于发布授权。后续GitHub交接限独立分支与对应草稿PR的验证通信；不授权主分支合并、
-打tag、发布、四条用户Issue状态/评论变更或兄弟仓写入。
+原范围、根因及权威依据见[专项供料](docs/repairs/2026-11-platform-readiness-delivery/supply.md)、
+[方案](docs/repairs/2026-11-platform-readiness-delivery/README.md)、
+[ADR-0012](docs/adr/0012-platform-readiness-and-delivery-observation.md)及
+[实施计划](docs/repairs/2026-11-platform-readiness-delivery/plan.md)。
+[第三次返工独立复验](docs/repairs/2026-11-platform-readiness-delivery/acceptance-recheck3-2026-11-08/README.md)
+保留STD01、F1/F2/F3等技术闭合及两轴0open结论；其
+[剩余表](docs/repairs/2026-11-platform-readiness-delivery/acceptance-recheck3-2026-11-08/remaining-validation.md)
+保留当时基准，新取得的平台结果以上述最新查收为准。
+
+历史入口：[首轮独立验收](docs/repairs/2026-11-platform-readiness-delivery/acceptance-2026-11-08/README.md)、
+[首轮返工复验](docs/repairs/2026-11-platform-readiness-delivery/acceptance-recheck-2026-11-08/README.md)、
+[第二次返工复验](docs/repairs/2026-11-platform-readiness-delivery/acceptance-recheck2-2026-11-08/README.md)、
+[第一轮Windows原件复核](docs/audit/changes/2026-11-08_windows-validation-evidence-review.md)、
+[跨平台测试修正](docs/audit/changes/2026-11-08_cross-platform-test-repair.md)和
+[第二轮交接准备](docs/audit/changes/2026-11-08_windows-validation-round2.md)。旧记录、原件和旧失败不改写。
+本轮原件位于本机忽略目录`.evaluation/windows-acceptance/round2-20261108/`，公开GitHub分片及摘要
+登记在最新查收记录；普通clone不假定含有维护者的本机证据。
+
+最新授权包括AstroFairy的正常提交/推送、合并收口、新Alpha标签和GitHub预发布。
+四条用户Issue状态/评论及兄弟仓写入仍不在本次操作范围；后续发现按新证据处理。
 
 ## 已完成批次与仍待观察的效果
 

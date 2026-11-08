@@ -1,6 +1,6 @@
 {
   "name": "astrofairy",
-  "version": "0.1.0-alpha.2",
+  "version": "0.1.0-alpha.3",
   "description": "Structured AI task delivery with traceable checks and reusable workflows",
   "author": {
     "name": "Etoileint"

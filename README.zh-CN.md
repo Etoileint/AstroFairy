@@ -11,8 +11,8 @@ AstroFairy 是遵循 [Agent Skills 开放规范](https://agentskills.io/specific
 提出任务、提供相关文件，偶尔回答影响结果的关键问题，即可获得成果、简短的假设与限制说明，
 以及需要复核时可查看的详细回执。
 
-> 当前为早期 Alpha · `0.1.0a2`：本地运行器和便携 skill 已实现并测试；尚未逐一验证所有安装目标的
-> 原生应用发现、插件管理及更新行为。详见[发布说明与验证范围](docs/releases/v0.1.0a2.md)。
+> 当前为早期 Alpha · `0.1.0a3`：本地运行器和便携 skill 已实现并测试；尚未逐一验证所有安装目标的
+> 原生应用发现、插件管理及更新行为。详见[发布说明与验证范围](docs/releases/v0.1.0a3.md)。
 
 希望从逻辑理解整个项目，可以读[项目逻辑说明](docs/guides/understanding-astrofairy.md)。
 [复核工作区](docs/reviews/README.md)包含全量架构与机制台账及取证准备，不代表这些设计已经通过复核。
@@ -41,7 +41,7 @@ npx skills@latest add Etoileint/AstroFairy --skill fairy --copy
 需要固定本次发布及已验证安装器时，使用：
 
 ```sh
-npx skills@1.7.4 add https://github.com/Etoileint/AstroFairy/tree/v0.1.0a2 --skill fairy --copy
+npx skills@1.7.4 add https://github.com/Etoileint/AstroFairy/tree/v0.1.0a3 --skill fairy --copy
 ```
 
 安装器会让你选择目标应用。需要无人值守、用户级安装时，指定应用并添加 `-g --yes`：
@@ -178,12 +178,15 @@ python -m astrofairy --home .fairy start --request 'Prepare a source-based proje
 具体操作见[运行指南](docs/guides/operation.md)。
 [修复工作区](docs/repairs/README.md)单独登记初版复核后的改动与重验。
 [发布流程](docs/guides/releasing.md)说明版本、检查和制品发布方法。
-[优化验收](docs/optimization/2026-11-acceptance/final-2026-11-03/README.md)保留本轮有范围的独立技术复验。
+[优化验收](docs/optimization/2026-11-acceptance/final-2026-11-03/README.md)保留此前优化的技术复验；
+[Windows原生验收](docs/audit/changes/2026-11-08_windows-round2-acceptance.md)记录本次平台与交付修正的新增证据。
 
 ## 版本历史
 
 - `0.1.0a1`（2026-11-01）：首个公开 Alpha，提供可追溯任务交付和外置可复用资产。
 - `0.1.0a2`（2026-11-03）：`fairy` 入口、完整主指令和阶段包、多文件 BagIt 交付、资源政策重整、本地混合检索，以及贯通的学习/治理与恢复验证。[发布说明](docs/releases/v0.1.0a2.md)。
+
+- `0.1.0a3`（2026-11-08）：通用条件依赖锁、显式模型准备与诊断、Windows BagIt/junction 原生验证，以及保留已提交事实的交付恢复和稳定回执。[发布说明](docs/releases/v0.1.0a3.md)。
 
 ## 致谢与许可证
 

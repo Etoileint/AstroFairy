@@ -12,9 +12,9 @@ Give it a task, provide the relevant files, and answer an occasional consequenti
 Receive the result, a concise account of its assumptions and limitations, and a detailed receipt
 when you need to inspect the work.
 
-> Early alpha · `0.1.0a2`: the local runtime and portable skill are implemented and tested.
+> Early alpha · `0.1.0a3`: the local runtime and portable skill are implemented and tested.
 > Native application discovery, plugin management and update behavior have not been verified in every
-> installation target. See the [release notes and validation scope](docs/releases/v0.1.0a2.md).
+> installation target. See the [release notes and validation scope](docs/releases/v0.1.0a3.md).
 
 For a conceptual walkthrough, read [Understanding AstroFairy](docs/guides/understanding-astrofairy.md)
 (Chinese). The [review workspace](docs/reviews/README.md) contains the full architecture/mechanism inventory
@@ -45,7 +45,7 @@ npx skills@latest add Etoileint/AstroFairy --skill fairy --copy
 For this exact release with the verified installer, use:
 
 ```sh
-npx skills@1.7.4 add https://github.com/Etoileint/AstroFairy/tree/v0.1.0a2 --skill fairy --copy
+npx skills@1.7.4 add https://github.com/Etoileint/AstroFairy/tree/v0.1.0a3 --skill fairy --copy
 ```
 
 The installer lets you select the target agent. For an unattended, user-wide installation, specify
@@ -210,12 +210,15 @@ Validation is documented in the [initial report](docs/reports/initial-validation
 [operation guide](docs/guides/operation.md).
 The [repair workspace](docs/repairs/README.md) tracks changes and revalidation after the frozen initial review.
 The [release workflow](docs/guides/releasing.md) describes versioning, checks and artifact publication.
-The [optimization acceptance](docs/optimization/2026-11-acceptance/final-2026-11-03/README.md) records the latest scoped technical review.
+The [optimization acceptance](docs/optimization/2026-11-acceptance/final-2026-11-03/README.md) records the earlier optimization review;
+[native Windows acceptance](docs/audit/changes/2026-11-08_windows-round2-acceptance.md) records the new platform and delivery evidence.
 
 ## Version history
 
 - `0.1.0a1` (2026-11-01): first public Alpha with traceable task delivery and external reusable assets.
 - `0.1.0a2` (2026-11-03): `fairy` entry, complete main instructions and stage packets, multi-file BagIt delivery, revised resource policy, local hybrid retrieval, and linked learning/governance with verified recovery. [Release notes](docs/releases/v0.1.0a2.md).
+
+- `0.1.0a3` (2026-11-08): universal conditional dependency locks, explicit model preparation and diagnostics, native Windows BagIt/junction validation, and recoverable delivery with committed facts and stable receipts. [Release notes](docs/releases/v0.1.0a3.md).
 
 ## Acknowledgments and license
 
