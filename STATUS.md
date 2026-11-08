@@ -12,21 +12,16 @@
 4. 接手验收取证时，先读[证据获取与复验](docs/development/evidence.md)。
    使用维护者外部开发组织时，按[组织接入规则](CONTRIBUTING.md#external-development-organization)加载原件。
 
-## 当前发版
-
-维护者已接受本批修复，并于2026-11-08授权推送发布`0.1.0a3` Alpha。正在执行标准发布门；
-[本版说明](docs/releases/v0.1.0a3.md)列明变更、原生证据和发布后观察。正式发布事实以GitHub Release为准。
-
 ## 已发布基准
 
-- [0.1.0a2 Alpha](https://github.com/Etoileint/AstroFairy/releases/tag/v0.1.0a2)，2026-11-03 发布。
-- 源提交：`1574ce89dd2e29e9a3b0be5997302b32b0bfe335`；技能目录和调用名为 `fairy`。
-- 0.1.0a2 的发布事实为协议及存储格式10、文档归档格式1；当前开发工作树已推进到协议11、
-  阶段包2、回执投影2、存储10、归档1。开发期没有旧库迁移或接口兼容负担。
-- [本版双语说明](docs/releases/v0.1.0a2.md)、[项目逻辑讲解](docs/guides/understanding-astrofairy.md)。
-- 发布时主分支及标签 CI 通过；附件下载、校验和、固定版本安装及新依赖环境验证通过。
-  [主分支 CI](https://github.com/Etoileint/AstroFairy/actions/runs/41628414958)与
-  [标签 CI](https://github.com/Etoileint/AstroFairy/actions/runs/41628640927)是公开记录。
+- [0.1.0a3 Alpha](https://github.com/Etoileint/AstroFairy/releases/tag/v0.1.0a3)，2026-11-08已公开预发布。
+- 源提交：`b31b1cc5266178f43785dc157538d72757863100`；技能目录和调用名为`fairy`。
+- 本版协议11、阶段包2、回执投影2、存储10、归档1；没有旧库迁移/兼容承诺，使用获准的新home。
+- [双语发布说明](docs/releases/v0.1.0a3.md)、[项目逻辑讲解](docs/guides/understanding-astrofairy.md)、
+  [发布执行与附件核验](docs/audit/changes/2026-11-08_v0.1.0a3-published.md)。
+- 源提交的候选/main/tag两平台CI均通过；Git归档制品、三种独立安装、固定标签安装器复制、
+  草稿及公开附件下载校验均通过。Alpha发布不代表全部长期效果验证已完成。
+- 此前[0.1.0a2](docs/releases/v0.1.0a2.md)及更早发布保留原标签/附件/历史结论，不覆盖。
 
 ## 当前收到的问题
 
