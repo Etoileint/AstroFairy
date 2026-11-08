@@ -4,6 +4,7 @@
 
 | 日期 | 对象 | 技术状态 | 维护者裁定 |
 |---|---|---|---|
+| 2026-11-08 | [Windows第二轮统一复测交接](changes/2026-11-08_windows-validation-round2.md) | 新候选、Git归档三制品、统一取证与GitHub回交 | 待CI/原生复验；不合并/发布 |
 | 2026-11-08 | [跨平台测试与CI机制修正](changes/2026-11-08_cross-platform-test-repair.md) | 四组测试修正、255运行＋42开发与两轴复核通过，产品runtime未改 | 待新候选两平台CI及Windows统一复验；不合并/发布 |
 | 2026-11-08 | [Windows原件收件复核](changes/2026-11-08_windows-validation-evidence-review.md) | 原ZIP/148件文件核验通过，原生安装/BagIt/制品结果已证；完整检查仍红，收敛四组测试/CI修正与覆盖限界 | 本轮收件完成；尚未整体验收，不合并/发布 |
 | 2026-11-08 | [Windows回交初步查收与CI核验](changes/2026-11-08_windows-validation-intake.md) | 收到部分通过报告，原ZIP待补；两平台CI失败，独立核实uv夹具/测试连接与断言问题，纠正跨盘漏捕获分类 | 尚未完成原件验收；待补件/repair与跨平台检查修正，不合并/发布 |

@@ -2,8 +2,8 @@
   "format": 1,
   "repository": "Etoileint/AstroFairy",
   "branch": "handoff/windows-validation-20261108",
-  "candidate_commit": "c9824b24b1627dd10de70fbcfe028a0dc9dfcfd5",
-  "candidate_manifest_sha256": "411ebf25e4de98a68916e9624ec7a68864fd765db08f00ad2be7e656f97618bf",
+  "candidate_commit": "6ced5c9a1a59d0f615c0f324564f48955c58fed1",
+  "candidate_manifest_sha256": "7671d958af0288c2a66be3c2005b637afa567644551762f656a46cf5932bad32",
   "accepted_precommit_manifest_sha256": "0a2038eb32494ad75164a00a43eb5dba9529f225d12778d5e4060afc812c2166",
   "navigation_overlays": [
     "STATUS.md",
@@ -13,17 +13,17 @@
     {
       "path": "handoff/windows-validation/artifacts/astrofairy-0.1.0a2-py3-none-any.whl",
       "bytes": 92362,
-      "sha256": "55d746e8f55792ccebc1e829237ecfcd8026b8823b752dfcfed958a2b3616029"
+      "sha256": "2561d55a7b168cf5e859c8987c0760f94f32afe05feb52f6d23ef45f660ac6ad"
     },
     {
       "path": "handoff/windows-validation/artifacts/astrofairy-0.1.0a2.tar.gz",
-      "bytes": 1496042,
-      "sha256": "bc208fdd463976a51c8fbd4296bd3d81794411ee39bbf956ddec2d1a7ed5c7d9"
+      "bytes": 1506742,
+      "sha256": "9441a8603445a9ae11b124d642883e2ada42e32fb2e57d5810ec389ef454c7f3"
     },
     {
       "path": "handoff/windows-validation/artifacts/fairy.zip",
       "bytes": 191393,
-      "sha256": "2cb7f705a883eca07a3abdc9c1c2ebc1bae3930fdbecf2923a213cbd9e921d2e"
+      "sha256": "18f1f85cca8255c3226846801bd90cc774aacd5b4b1d698b274f4fd60ad7d344"
     }
   ],
   "purpose": "Native Windows validation and GitHub-only evidence handoff; not a release",
@@ -45,6 +45,10 @@
     "skills/fairy/scripts/astrofairy/_runtime_dependencies.json"
   ],
   "handoff_documents": [
-    "docs/audit/changes/2026-11-08_github-windows-handoff.md"
-  ]
+    "docs/audit/changes/2026-11-08_windows-validation-round2.md"
+  ],
+  "product_candidate_commit": "c9824b24b1627dd10de70fbcfe028a0dc9dfcfd5",
+  "previous_handoff_commit": "3f402b42797694d752c6cde7452980f0febbf14c",
+  "round": 2,
+  "manifest_scope": "All candidate Git files outside handoff/; carrier artifacts are separately sealed in assignment.json"
 }

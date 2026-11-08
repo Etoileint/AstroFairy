@@ -52,7 +52,7 @@ STD02–06、SPEC01–03、GAP01/T35及原REG02保持通过。规范轴0项open�
 
 原T04/T10/T11/T13/T14/T32/T34仍partial，见
 [剩余验证与收口](docs/repairs/2026-11-platform-readiness-delivery/acceptance-recheck3-2026-11-08/remaining-validation.md)。
-最低必需矩阵中Linux x86_64、Windows x64尚未取得本候选执行证据；macOS等也未被本轮认证。
+Linux x86_64及Windows x64已取得首轮执行证据，但完整门失败；新测试候选待统一复验。macOS等未被本轮认证。
 冷下载/中断、跨进程缓存锁、完整skills CLI矩阵、真实host交互尚未验证；配置矩阵、模拟和暖缓存均不能抵销。
 本轮不新增代码返工单，转入原计划剩余验证；不发布跨平台修复声明或关闭Issue。
 维护者提供Windows开发机后，已完成[Windows验证移交包准备](docs/audit/changes/2026-11-08_windows-validation-handoff.md)：
@@ -71,7 +71,9 @@ uv夹具硬编码和多处测试SQLite连接生命周期问题已独立核实；
 上述四组机制须统一修正并复验，不据已有通过项放行红色CI。
 维护者随后授权继续，四组[跨平台测试修正](docs/audit/changes/2026-11-08_cross-platform-test-repair.md)已实施：
 本机255运行（默认1skip）＋42开发通过，两轴独立复核0open，产品runtime和依赖锁未改。
-下一步固化新的测试候选、更新GitHub交接并统一复跑CI/Windows；旧CI失败与原未执行范围不改写。
+新的测试候选已固化为`6ced5c9a1a59d0f615c0f324564f48955c58fed1`，见
+[第二轮统一复测](docs/audit/changes/2026-11-08_windows-validation-round2.md)；三制品从Git归档重建，
+统一收集/发送入口与前后身份核验已准备。本机通过不替代CI/Windows原生结果，旧失败及未执行范围不改写。
 
 | 历史关口 | 冻结结论 |
 |---|---|

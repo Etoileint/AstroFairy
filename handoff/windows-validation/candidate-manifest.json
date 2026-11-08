@@ -1,6 +1,7 @@
 {
   "format": 1,
-  "candidate_commit": "c9824b24b1627dd10de70fbcfe028a0dc9dfcfd5",
+  "candidate_commit": "6ced5c9a1a59d0f615c0f324564f48955c58fed1",
+  "scope": "All candidate Git files outside handoff/; carrier artifacts are separately sealed in assignment.json",
   "files": [
     {
       "path": ".claude-plugin/marketplace.json",
@@ -82,9 +83,9 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 7773,
-      "sha256": "93045ab629ccfa043b859c2b5be652d6059c48b61148520f4235b51d0fd87e4c",
-      "git_blob": "e714100ebb255bd279999e93d9869928ab5f87c2"
+      "bytes": 9974,
+      "sha256": "6d8e19137cfc4ee632dfde43697e027a4f1f7c2e2e9d70328f021410b8e626e1",
+      "git_blob": "9d570980c86131733295c77f09f6bf36c13c8fcc"
     },
     {
       "path": "dev/__init__.py",
@@ -556,9 +557,9 @@
     },
     {
       "path": "dev/smoke_task.py",
-      "bytes": 4035,
-      "sha256": "fba7c27e0f3b4c3fce31433cf9a8c9694e521f54ad84974b92519e0e414cfb31",
-      "git_blob": "634ca6b3fbe21a6b265f9aa7844186550f6a5a44"
+      "bytes": 6164,
+      "sha256": "b670545250996b46739d665e6cf5d4cd7237792bc617ee5ac1750bc0ca031c88",
+      "git_blob": "63cd00c2d385e62fd7959cb3b47f7b3fc331f664"
     },
     {
       "path": "dev/sync_metadata.py",
@@ -574,15 +575,15 @@
     },
     {
       "path": "dev/tests/test_dependency_lock.py",
-      "bytes": 21650,
-      "sha256": "f217aa4364d76bf2b8cc0ade2f72140dd762a0973fff80598fca8671f16d8cd6",
-      "git_blob": "7ecdd4babd05e24e7875df0e784be55b7f4f769a"
+      "bytes": 21906,
+      "sha256": "67cb5963622732f1a43491f9c75fb6dde804a5d9512cb8ec6af2d1fbc05cd260",
+      "git_blob": "90ae86edcb475d7f011a5fdce8a5cba2303978b8"
     },
     {
       "path": "dev/tests/test_metadata.py",
-      "bytes": 4960,
-      "sha256": "a92a7422815dd797e99b2eaad1547c0545a17b0f1f89c9412f76f5dfd3abfea4",
-      "git_blob": "bc5dbc5e53d3eb39142009010311679f8a729b51"
+      "bytes": 4973,
+      "sha256": "7fd9500b8c8109a049a125355e2691f140420f0daae356a995b6cd9e95f3f5cf",
+      "git_blob": "b25e57e0b922a6fc49c55bf9ae31765adf7f2025"
     },
     {
       "path": "dev/tests/test_model_profile.py",
@@ -718,9 +719,9 @@
     },
     {
       "path": "docs/audit/INDEX.md",
-      "bytes": 6681,
-      "sha256": "b7dbcb02a5898c137cd78eaaa4365728e26a25c30810b78a22b4029577287b80",
-      "git_blob": "e04e5ab04d3f0da7bd198f6575049aa7b37650de"
+      "bytes": 7831,
+      "sha256": "3d358e1338a3365956cb90c1abb79eea165b62b9bc338bbbc1d06e8dd11d040b",
+      "git_blob": "2dd5fdb4ede513186225dcec817443de66e2199b"
     },
     {
       "path": "docs/audit/changes/2026-11-02_bagit-delivery.md",
@@ -819,6 +820,18 @@
       "git_blob": "65a2e6502f09f1cca8043d90c58bf12b1eb5f053"
     },
     {
+      "path": "docs/audit/changes/2026-11-08_cross-platform-test-repair.md",
+      "bytes": 4283,
+      "sha256": "16e2af357516523c3412dedfe06726d19e35cacde7a3146fccae56adaffac2fd",
+      "git_blob": "4c14c31f4a26621428dc4886dcfc91230d5c2343"
+    },
+    {
+      "path": "docs/audit/changes/2026-11-08_github-windows-handoff.md",
+      "bytes": 2621,
+      "sha256": "b955ddd2cd70249eceba0832e085f37a4e2dc88142e7889118c58899f327595e",
+      "git_blob": "27c1596685fdfc3429ab49dbadb83efe14a03154"
+    },
+    {
       "path": "docs/audit/changes/2026-11-08_platform-readiness-acceptance.md",
       "bytes": 1725,
       "sha256": "e2281c8cd21d407196544c376d1abaab47a153ea869ee4be31d5d5d5d670e735",
@@ -873,10 +886,22 @@
       "git_blob": "37e05dbfce265ba03d5ee3272b40c135064b778f"
     },
     {
+      "path": "docs/audit/changes/2026-11-08_windows-validation-evidence-review.md",
+      "bytes": 6723,
+      "sha256": "8d0b92c02feb33076fd9e0b77395f1b8b819e7cf6d324e5af9e9d3d96b6aebb6",
+      "git_blob": "724413ad243f37ea3247468f7f866471873b741f"
+    },
+    {
       "path": "docs/audit/changes/2026-11-08_windows-validation-handoff.md",
       "bytes": 3123,
       "sha256": "64b8c0876104dc1014342808ce07008d2d6eaab2832edaaaf3a179f314967711",
       "git_blob": "445b75216362db2c5a6280aa127a266a0e49aac6"
+    },
+    {
+      "path": "docs/audit/changes/2026-11-08_windows-validation-intake.md",
+      "bytes": 5334,
+      "sha256": "484c61206b6cf8fcb37f57e332caf28cb98d7b83a2225547c83cb012c2c7d037",
+      "git_blob": "a121b48939a8ab666ff589ecdc1f7812878ba474"
     },
     {
       "path": "docs/development/evidence-index.json",
@@ -2032,9 +2057,9 @@
     },
     {
       "path": "skills/fairy/scripts/astrofairy/tests/_support.py",
-      "bytes": 7344,
-      "sha256": "6ba0aab26fcb5492fd478756ee1941a379aa80ff9a2de80e6e73cd26c9683d7c",
-      "git_blob": "ecd81cd6e2fd32bc0bea2c55ff488906b7f7db07"
+      "bytes": 9264,
+      "sha256": "78c9619882bb5aa58b191b860ce58505180ff08b736b8adbb3e5e8e2bb3054e8",
+      "git_blob": "9ef8359943e80f2d884a0a61647bd97b408827db"
     },
     {
       "path": "skills/fairy/scripts/astrofairy/tests/fixtures/receipt-projection-2.json",
@@ -2056,9 +2081,9 @@
     },
     {
       "path": "skills/fairy/scripts/astrofairy/tests/test_bag_delivery.py",
-      "bytes": 11345,
-      "sha256": "ccec4ab5ab7458ce9eff2376db25895f0466841da78406d79a7d0d99da65c760",
-      "git_blob": "767ca92b847206a888a8ad7fdd9b5721033f0abc"
+      "bytes": 11691,
+      "sha256": "18604cc54265cefaf54cd28a231ff8a677d383362514c1a9cf90835363c33e1c",
+      "git_blob": "acffa17a6b11a68dc5420a2eb29b08da4158a6c8"
     },
     {
       "path": "skills/fairy/scripts/astrofairy/tests/test_cli.py",
@@ -2068,27 +2093,27 @@
     },
     {
       "path": "skills/fairy/scripts/astrofairy/tests/test_delivery_boundaries.py",
-      "bytes": 5784,
-      "sha256": "de86af152c3a28f9ae25db92a86f29d59b20f1dbd03178a351a942240dd0851c",
-      "git_blob": "7efd27ae46f2ac05e887a9090509e8c72e86ac8f"
+      "bytes": 7780,
+      "sha256": "b77ec63fda7e69b214f861b82f47222c4a26087969310c773849832ce48e4fa8",
+      "git_blob": "29a47d1d4f24d71fcdcf220916708fb925c27ad9"
     },
     {
       "path": "skills/fairy/scripts/astrofairy/tests/test_delivery_hardening.py",
-      "bytes": 33479,
-      "sha256": "46fb2452cf9c24bdf86172e611ee14db5aa7a11cba341025a47ffe21c9b74a48",
-      "git_blob": "01fa929b5791761d49b757a21520e11a4f7e129c"
+      "bytes": 34753,
+      "sha256": "2030d14f314b54352ea9c8e74a352bfbca48e5919c58419ef020c2d5c0a4eb65",
+      "git_blob": "a2938f139fdd355eb4e1b9e1255c8a80acbe393c"
     },
     {
       "path": "skills/fairy/scripts/astrofairy/tests/test_delivery_recovery.py",
-      "bytes": 20322,
-      "sha256": "e51d3bdac161344908eec802ae9c69e5dc674b0dea20265b0de4e8cdc18a565b",
-      "git_blob": "f1c521c19f5c4ca1ed811652f4c5df408aca7abb"
+      "bytes": 20304,
+      "sha256": "d9a1db9a907b787d6f7608854cdd46b6916c9b3ae86b2f5770e9e9d60c6e87c6",
+      "git_blob": "cd206c3c135d884425822f85f1d0acee833d6535"
     },
     {
       "path": "skills/fairy/scripts/astrofairy/tests/test_documents.py",
-      "bytes": 12227,
-      "sha256": "88ed06847b997110cc7ac8cb4e6f53827966f9058a541c4887a346891bc2e4b7",
-      "git_blob": "d8f0fabdc70f68a54776e2a9af4164aff34b2a26"
+      "bytes": 12666,
+      "sha256": "fced51d38427e5ca5ba1dba00d80e5cd3e546a3ca2b1b503975495511a45b423",
+      "git_blob": "89e1de376f299336fcef6707746e439c4244c8e5"
     },
     {
       "path": "skills/fairy/scripts/astrofairy/tests/test_fairy_stage_packets.py",
@@ -2110,9 +2135,9 @@
     },
     {
       "path": "skills/fairy/scripts/astrofairy/tests/test_maintenance.py",
-      "bytes": 13856,
-      "sha256": "17e579d4a4859f1c41f3c2847e826249d776f59f41fed3d118807db1b88c1ecb",
-      "git_blob": "6cd3f8c95e32d15000f42a11d048e78604273dcd"
+      "bytes": 14203,
+      "sha256": "e81af56d9d23c46094685adba98bdefa8fecb6d5e85d91c550693bf79b8af758",
+      "git_blob": "f30f7399be2b0fcf56c6cd1487e615862b0be71a"
     },
     {
       "path": "skills/fairy/scripts/astrofairy/tests/test_member_snapshot_contracts.py",
@@ -2122,9 +2147,9 @@
     },
     {
       "path": "skills/fairy/scripts/astrofairy/tests/test_presentation.py",
-      "bytes": 13317,
-      "sha256": "ae9998c59deea9dc7dd76b7fbb67407127cba9d2c0fc8dbb96b94399b073ef7b",
-      "git_blob": "11b911556f641564b097a07e070583d8d20c0526"
+      "bytes": 13344,
+      "sha256": "2a009ce74b187d806986a220e9b90de08fd5b8f93885e8ab8084c53e5912b471",
+      "git_blob": "cda8302aa661cf34223aa00a4eaa3e8dc9c249fa"
     },
     {
       "path": "skills/fairy/scripts/astrofairy/tests/test_receipt_golden.py",
@@ -2134,9 +2159,9 @@
     },
     {
       "path": "skills/fairy/scripts/astrofairy/tests/test_reconciliation.py",
-      "bytes": 12817,
-      "sha256": "79c18168b666fa280e7284fd252d7848b3d3da9b32a3b097c1b0292fbe5daff3",
-      "git_blob": "4b45b7d1804aaf9fdb312a0489c8868b8fa854e0"
+      "bytes": 12869,
+      "sha256": "934f6010baf2b9e2bfcf7f33d9f2fc2c444236847cda4ee5bc60553c68838cab",
+      "git_blob": "d59da742eefbea512b3a43e05bba5d6390423ffc"
     },
     {
       "path": "skills/fairy/scripts/astrofairy/tests/test_resource_limits.py",
@@ -2176,9 +2201,9 @@
     },
     {
       "path": "skills/fairy/scripts/astrofairy/tests/test_sqlite_runtime.py",
-      "bytes": 4893,
-      "sha256": "4f36a6873c85ea91409cc3e071dad2fe15e79731a6fe48ded717a856c10783c0",
-      "git_blob": "fbca572dc21e3b3043e5d46dea8b724501162ac9"
+      "bytes": 4931,
+      "sha256": "13758916142a7864b56b9dbddfb5df5bf6e5b31c0a127bd57aebbc21b396d2a1",
+      "git_blob": "7d7ce34620e8c2ee0f67c96b779b9ebc594c6083"
     },
     {
       "path": "skills/fairy/scripts/astrofairy/tests/test_storage_errors.py",

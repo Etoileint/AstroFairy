@@ -1,47 +1,43 @@
-# Windows 原生验证交接
+# Windows 原生验证：第二轮统一复测
 
-从 GitHub 本交接分支取得任务、候选、制品；结果回到该分支对应的草稿 PR。无需本机旧验证包或私有开发组织。
+仓库 `Etoileint/AstroFairy`，分支 `handoff/windows-validation-20261108`，
+[草稿 PR #5](https://github.com/Etoileint/AstroFairy/pull/5)。双方仅通过 GitHub 交接。
 
-- 仓库：`Etoileint/AstroFairy`；分支：`handoff/windows-validation-20261108`。
-- 固定候选提交：`c9824b24b1627dd10de70fbcfe028a0dc9dfcfd5`。本交接提交只增加任务/制品/校验和当前导航；产品字节与候选一致。
-- [assignment.json](assignment.json)钉住源码、制品与权限；[candidate-manifest.json](candidate-manifest.json)来自候选Git blob。
-- 上轮4类P2已闭合，当前工作是原计划剩余验证，不是重新开发。现状见[STATUS](../../STATUS.md)，
-  规则见[AGENTS](../../AGENTS.md)和[CONTRIBUTING](../../CONTRIBUTING.md)。
-- 包名仍含`0.1.0a2`，但[artifacts/](artifacts/)是本候选已验字节，不是已发布tag的旧附件；不得按版本号另取旧包。
+第一轮原始 ZIP 已完整收到：87,226 字节、148 件清单文件全部核验；无需重传。
+这轮统一复测测试连接生命周期、工具环境发现、原生路径断言及安全负例。
+产品运行时代码与 `c9824b24b1627dd10de70fbcfe028a0dc9dfcfd5` 一致；
+新的测试源码候选、清单和三制品身份以 [assignment.json](assignment.json) 为准。
+旧交接及制品保留在 `3f402b42797694d752c6cde7452980f0febbf14c` 的 Git 历史中。
+当前制品虽然仍叫 `0.1.0a2`，属于开发候选，不能用已发布旧附件替代。
 
-## 权限和回交边界
+## 权限
 
-只在新验证checkout、独立venv、夹具、模型缓存和证据目录内写入，不触碰其他项目和业务数据。
-不修改产品/锁/协议，不改skip放宽门槛，不提交修复、合并、打tag、发布或变更Issue状态。
-失败先区分产品根因、测试夹具和环境限制，保留最小复现与建议，交原会话处理。
-不私自提权、全局装包或调整系统安全策略；只采集试验数据，不公开凭证、完整环境变量和个人/业务资料。
+仅在本项目独立 checkout、venv、临时夹具和 `.evaluation` 证据目录写入。
+不修改产品、锁、测试或 skip，不绕 hooks，不合并、不打 tag、不发布、不变更用户 Issue。
+不使用业务数据、凭证、完整环境变量；不提权、不开 Developer Mode、不改变系统安全策略。
+失败也回交原始记录，不要求先修成绿色；新发现由原会话分析处理。
 
-GitHub是双方通信通道。执行者可在**本分支对应的草稿PR**回复验证报告和原始证据，未执行不标通过。
-原始ZIP可用PR附件回交；也可按文件在评论给出原始UTF-8文本、路径和摘要。原始失败日志不能只剩截屏或概述。
-本机完整检查失败可能阻止正常Git提交，禁止绕过hooks；通过PR回交失败不要求先把失败候选伪装为绿色。
-如无可用附件/评论写权限，明确回报通道缺口，不谎称原件已上传。
+## 取件
 
-## 1. GitHub取件与环境准备
-
-最低目标 Windows x64 / CPython3.12。记录真实Windows版本/架构、Python/SQLite/Git、文件系统和验证起始HEAD。
-不能用WSL、Linux容器或Windows路径模拟代替Windows本机。
-
-在有写权限的位置使用新目录（可调整末尾目录名）：
+使用原生 Windows x64 / CPython 3.12；WSL 或容器不能替代。
+先检查工作树，保留已有证据；旧 checkout 有未提交修改时，另建新 clone，不能覆盖。
 
 ```powershell
-git -c core.autocrlf=false clone --branch handoff/windows-validation-20261108 https://github.com/Etoileint/AstroFairy.git AstroFairy-validation
-Set-Location AstroFairy-validation
+git -c core.autocrlf=false clone --branch handoff/windows-validation-20261108 https://github.com/Etoileint/AstroFairy.git AstroFairy-round2
+Set-Location AstroFairy-round2
 git config core.autocrlf false
 git config core.hooksPath .githooks
 py -3.12 handoff/windows-validation/verify_candidate.py
 ```
 
-保留完整Git历史，不使用浅克隆或单独GitHub源码ZIP；历史测试依赖旧blob。
-校验器必须成功，记录当前HEAD及固定candidate提交，后续验证和回交前再运行，证明产品字节未变。
-它只核对身份，不代表Windows功能通过。唯一允许的候选旧文件覆盖是交接导航（STATUS/审计索引）；
-所有产品、锁、测试、原设计与已有报告仍逐字节核对。
+保留完整 Git 历史。若复用干净旧 checkout，可正常 fetch 后 fast-forward 到 PR 最新明确任务提交。
+开始前将 `git rev-parse HEAD` 与 PR 最新任务核对；身份校验必须通过。
+清单来自候选 Git blob，覆盖 `handoff/` 外源码；交接目录是独立载体，三件制品另有摘要。
+仅当前状态/审计索引允许导航覆盖；校验通过只证明身份，不代表功能通过。
 
-PowerShell逐条执行并记录退出码；无需激活venv或修改ExecutionPolicy：
+新 checkout 按下列命令准备。已有正确环境可复用，但仍执行 pip check，并保留准备失败记录；
+PowerShell 每条命令后检查 `$LASTEXITCODE`，失败先停下排查，不将后续成功代替前项结果。
+无需激活或更改 ExecutionPolicy。
 
 ```powershell
 py -3.12 -m venv .venv
@@ -52,70 +48,54 @@ $fairyPython = Join-Path (Get-Location) '.venv\Scripts\python.exe'
 & $fairyPython -m pip install -r requirements-dev.lock
 & $fairyPython -m pip install --no-deps --no-build-isolation -e .
 & $fairyPython -m pip check
-& $fairyPython -B dev/check.py
-& $fairyPython -B dev/smoke_task.py
 ```
 
-每条失败都保留stdout、stderr和退出码；不要把管道最后一个命令成功当作此前成功。
-禁止降版本、去掉hash、换镜像、换其他模型或只保留无依赖安装来让验收变绿。
-缺Git或CPython时使用维护者认可的官方安装方式；不要私自提权安装或覆盖已有环境。
+开发工具为版本 pin，core/delivery/search 才是哈希锁，不混称。
+不降版本、删 hash 或换旧制品。若环境准备失败，先向 PR 回交精确命令、退出码及原始日志。
 
-## 2. 核心原生验证（优先完成）
+## 统一执行
 
-| 对象 | 必须观察 |
-|---|---|
-| T04 / Issue #1 | 从全新venv完成core/delivery/search哈希安装和pip check；记录colorama、win32-setctime的实际安装版本。实际导入lancedb、fastembed、onnxruntime、tokenizers，元数据存在不能当ABI可用 |
-| T13 / Issue #3 | 原生`dev/smoke_task.py`实际创建并full-validate BagIt；补多文件/含子目录交付，确认payload未误分类为tag；项目权威校验与上游校验均通过 |
-| T14 | 用Windows真实junction/reparse分别覆盖home下deliveries祖先、task目录、目标seq目录和payload后代；ordinary deliver与repair都拒绝，不跟随、不移动链接，外部sentinel字节不变，权威任务事实不丢 |
-| T25/T26 / Issue #4 | 普通坏包显式repair先验新包、隔离旧对象且保留；覆盖隔离前、两rename之间、发布后的失败。错误进度与实际目录相符。关闭/晚到事实保留，重开后只恢复deliver，不重放业务效果 |
-| T29 | 对应owner回归保持；未知提交的call和调查动作可用，原始数据库错误不被rollback/释放错误遮蔽。受控代理与真实原生错误分别标明 |
+下面一个命令会执行完整门、原生任务、真实依赖导入和三制品独立安装任务。
+目录必须是新的；失败仍产生 ZIP，完整执行通常需要数分钟，取决于新 venv 的下载速度。
+不会下载模型权重，不要求管理员权限或 Node。
 
-安全负例的“外部”仅指测试home外、仍在本次夹具范围内的目录。保留sentinel前后hash与实际lstat属性。
-移除junction只能移除链接本身；不递归删除外部目标。没有权限创建某种链接时登记未执行和环境原因，不能标通过。
-普通symlink可能受Developer Mode/权限限制；不得自动改变系统策略。junction是独立原生负例，不用symlink模拟代替。
-不必制造所有未知重解析点类型；明确已测类型及尚未覆盖范围。
+```powershell
+& $fairyPython -B handoff/windows-validation/collect.py --out .evaluation/windows-round2
+```
 
-已知待原生判定的测试夹具：`dev/tests/test_dependency_lock.py`的真实target布局用例含`.venv/bin/uv`与POSIX目录；
-部分交付测试使用`chmod(0)`或普通symlink。Windows的chmod并不等于POSIX权限拒绝。
-完整检查仍须实际执行；若因此失败，记录精确test/traceback及实际产品旁证，回交跨平台夹具修正建议，
-不能改skip、只跑子集或预期异常后把原始完整检查记为通过。可继续独立执行其他原生项并逐项回交。
+收集器记录源码前后身份、平台/Python/SQLite、每条命令 argv/cwd/起止时间/退出码及 stdout/stderr 原始字节。
+逐 CLI 输入/输出以 JSON/Base64 保留，程序随包；`launch_error` 表示没有成功启动，`exit=-1` 为本地标记。
+wheel/sdist/ZIP 各用新 venv，在 checkout 外以隔离解释器运行 doctor→完整任务→上游 BagIt 校验，
+wheel/sdist 还核对实际导入来自对应 venv；ZIP 明确使用其自身 launcher。
 
-## 3. 分发与宿主验证
+完整门含 255 项运行和 42 项开发测试；计数不是唯一覆盖量。
+Windows 上三个 POSIX 权限/DAC 用例应明确 skip；两个真实模型用例按缓存/显式开启条件 skip。
+两个文件 symlink 用例仅在真实 WinError 1314 时允许能力 skip；其他错误继续失败。
+目录安全测试在 Windows 使用真实 junction，无需普通 symlink 权限，不能因缺 Developer Mode 跳过。
+正式 owner 用例覆盖 home 外 sentinel 的 ancestor/task/sequence/payload 四处，ordinary/repair 均拒绝，
+任务事实及目标不变；这是已测 junction 范围，不代表穷尽所有重解析点或 Windows ACL 认证。
 
-用本交接目录`handoff/windows-validation/artifacts/`三件原制品分别做wheel、sdist、skill ZIP独立安装/运行（T32）：
-新venv、准备锁定依赖、pip check、doctor无副作用、最小完整任务、实际BagIt校验。
-源checkout不可通过CWD/PYTHONPATH/旧editable安装暗中供包；记录实际`astrofairy.__file__`，确认来自目标安装。
-skill ZIP使用其中的`fairy/scripts/fairy.py`及已准备解释器；源码不能依赖本机维护者路径。
-不要用相同版本号从PyPI/GitHub另下的旧版替换此处制品。
+测试失败不要自行改代码。可加新的、独立的最小探针和原始日志解释根因；额外探针必须连脚本一起回交。
+若收集器本身在产 ZIP 前异常，保留现有输出与 traceback，不能删除失败目录后只报重试成功。
 
-有可用真实agent时，按fairy主skill执行一个小的多文件交付任务，再执行一次受控交付失败后的接续（T34）；
-记录agent是否读到关键步骤、是否实际按调查/deliver接续、是否交付全部成员与可审核回执。
-脚本调用CLI属于协议/安装证据，不能冒称真实模型遵循率或长期用户效果。
-完整skills CLI安装矩阵如未执行，仍保留未执行，不因某一个宿主成功而全绿。
+## 回交
 
-## 4. 后续集成项
+输出包括 `.evaluation/windows-round2/`、同名 `.zip` 和 `.zip.sha256`。
+先检查包内没有真实敏感信息；本轮脚本只使用生成的测试数据，不读取完整环境或凭证。
+已登录 GitHub CLI 后，用显式发送命令向授权 PR #5 回交 ZIP 分片：
 
-冷下载/中断恢复（T10）和独立进程缓存锁（T11）可在Windows或后续Linux验证中执行，单独记录。
-先完成无需大模型权重的原生安装、路径与交付项，再安排2GB级固定模型下载与真实推理；
-完整冷下载会占带宽/磁盘，未准备好时准确回交未执行，不能把空库返回/已有缓存hash当下载或推理通过。
-不得将Linux aarch64既有缓存和二进制环境复制到Windows当作全新安装。
+```powershell
+& $fairyPython -B handoff/windows-validation/send.py .evaluation/windows-round2.zip
+```
 
-## 5. 回交
+发送前验证 sidecar；每片含整体 bytes/SHA256 和 part/parts，接收者按字节重组验证。
+中途失败保留已发评论，报告成功片号；重新发送相同包时按整体身份去重，不能覆盖或删旧证据。
+如无 CLI/写权限，可在同一 PR 附件上传原 ZIP 并提供校验和；明确通道缺口，不宣称已上传。
+另外评论简述平台、完整门结果、实际 skip、原生 junction 和三制品结果，以及 ZIP 身份和发现。
+只向本草稿 PR 发任务证据，不向用户 Issue 或其他服务发消息。
 
-输出到`.evaluation/windows-validation/return/`并生成回交ZIP。按上方授权在本分支草稿PR回交报告与原件，由原会话独立验收。
-
-可用`gh pr list --repo Etoileint/AstroFairy --head handoff/windows-validation-20261108 --state open`找到交接PR，
-再用`gh pr comment NUMBER --repo Etoileint/AstroFairy --body-file .evaluation/windows-validation/return/report.md`回交报告。
-多行正文使用真实UTF-8文件；不要把日志塞进shell字符串。附件或分文件原始文本及哈希必须可供另一机器取得。
-不需要推送修复或修改其他PR/Issue；评论不得包含真实数据或凭证。
-
-- `report.md`：每个T和Issue的pass/fail/not_run、准确范围、发现与下一步；不代维护者最终接受。
-- `environment.json`：OS/架构、Python/SQLite/Git、依赖及文件系统；不收集完整环境变量、凭证或业务文件。
-- `runs.json`：每条命令参数数组、cwd、开始/结束时间、exit、stdout/stderr文件；保留失败尝试。
-- `findings.json`：产品/夹具/环境分类、最小复现、预期与实际、源码位置、敏感信息已去除。
-- `coverage.json`：T04/T10/T11/T13/T14/T25/T26/T29/T32/T34逐项证据索引及未覆盖范围。
-- `source-before.json`、`source-after.json`：固定候选manifest的present文件SHA256及deleted状态；证明验证前后产品是否改变。
-- `evidence-inventory.json`：所有回交原件的相对路径、字节数、SHA256（不包含自身）；同时给出整个回交ZIP的SHA256。
-- 对失败或unknown保留调用/任务/序号及实际存储/目录观察。可分享纯测试数据库/包；不放venv、模型权重、用户真实数据和密码。
-
-原会话根据GitHub原始证据独立验收；Linux x86_64 CI、其他平台及未执行集成项继续各自登记，不能由Windows结果推定。
+收集器的 `checks_passed` 只表示其已执行检查通过，不代维护者验收，也不代表原计划全部闭合。
+冷下载/中断 T10、跨进程模型缓存 T11、真实 E5 推理、完整 skills CLI 安装矩阵和真实宿主 T34
+仍分开登记；本轮不擅自执行约 2GB 模型下载或将脚本任务冒称真实 agent 遵循率。
+此前单/多文件与子目录 BagIt 原件已收到，不要求重做旧包；本轮以规范化正式用例及新三制品日志消除补件缺口。
+Linux x86_64 与 Windows 托管 CI 各自实际执行，不由本机或开发机结果互相推定。
