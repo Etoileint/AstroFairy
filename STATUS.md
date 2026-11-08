@@ -26,7 +26,8 @@
 ## 当前收到的问题
 
 四条公开反馈**保持开放**。W1–W5实现与三轮定向返工已回交；最新W6独立复验确认已登记整改发现闭合，
-**本轮定向整改技术复验通过**。原生/集成验证仍有缺口，专项未整体验收；维护者最终接受、提交/推送/发布未发生。
+**本轮定向整改技术复验通过**。原生/集成验证仍有缺口，专项未整体验收；维护者最终接受与发布未发生。
+验证候选已固化为`c9824b24b1627dd10de70fbcfe028a0dc9dfcfd5`，通过独立GitHub交接分支流转，不并入主分支。
 Issue中的复现步骤和建议是待核实材料，不自动成为实现要求。
 
 | 入口 | 已确认根因 | 仍须观察 |
@@ -55,6 +56,9 @@ STD02–06、SPEC01–03、GAP01/T35及原REG02保持通过。规范轴0项open�
 本轮不新增代码返工单，转入原计划剩余验证；不发布跨平台修复声明或关闭Issue。
 维护者提供Windows开发机后，已完成[Windows验证移交包准备](docs/audit/changes/2026-11-08_windows-validation-handoff.md)：
 固定未提交源码、必要Git历史、三制品及原生任务单已封装，本机恢复演练通过；Windows端尚未执行，待回交原始证据。
+维护者随后指定双方仅通过GitHub通信，现行取件入口改为[Windows交接任务](handoff/windows-validation/README.md)，
+见[GitHub交接记录](docs/audit/changes/2026-11-08_github-windows-handoff.md)。分支为`handoff/windows-validation-20261108`，
+通过对应草稿PR回交证据；上述本机ZIP保留为历史准备产物，不再要求Windows端取得它。
 
 | 历史关口 | 冻结结论 |
 |---|---|
@@ -67,7 +71,8 @@ STD02–06、SPEC01–03、GAP01/T35及原REG02保持通过。规范轴0项open�
 最新回交证据在本机忽略的`.evaluation/issue-repair-implementation/rework3-2026-11-08/`，
 独立复验在`.evaluation/issue-repair-acceptance/recheck3-20261108/`；普通clone不含，转交须附原件与哈希。
 旧回交与旧验收不改写；各自的未执行范围不能因新测试通过而自动消失。
-维护者曾指示另一agent实施、原会话最终独立验收；该分派不包含外部消息、提交、推送、发布、关闭Issue或兄弟仓写入。
+原实施分派的授权不等于发布授权。后续GitHub交接限独立分支与对应草稿PR的验证通信；不授权主分支合并、
+打tag、发布、四条用户Issue状态/评论变更或兄弟仓写入。
 
 ## 已完成批次与仍待观察的效果
 

@@ -1,0 +1,50 @@
+{
+  "format": 1,
+  "repository": "Etoileint/AstroFairy",
+  "branch": "handoff/windows-validation-20261108",
+  "candidate_commit": "c9824b24b1627dd10de70fbcfe028a0dc9dfcfd5",
+  "candidate_manifest_sha256": "411ebf25e4de98a68916e9624ec7a68864fd765db08f00ad2be7e656f97618bf",
+  "accepted_precommit_manifest_sha256": "0a2038eb32494ad75164a00a43eb5dba9529f225d12778d5e4060afc812c2166",
+  "navigation_overlays": [
+    "STATUS.md",
+    "docs/audit/INDEX.md"
+  ],
+  "artifacts": [
+    {
+      "path": "handoff/windows-validation/artifacts/astrofairy-0.1.0a2-py3-none-any.whl",
+      "bytes": 92362,
+      "sha256": "55d746e8f55792ccebc1e829237ecfcd8026b8823b752dfcfed958a2b3616029"
+    },
+    {
+      "path": "handoff/windows-validation/artifacts/astrofairy-0.1.0a2.tar.gz",
+      "bytes": 1496042,
+      "sha256": "bc208fdd463976a51c8fbd4296bd3d81794411ee39bbf956ddec2d1a7ed5c7d9"
+    },
+    {
+      "path": "handoff/windows-validation/artifacts/fairy.zip",
+      "bytes": 191393,
+      "sha256": "2cb7f705a883eca07a3abdc9c1c2ebc1bae3930fdbecf2923a213cbd9e921d2e"
+    }
+  ],
+  "purpose": "Native Windows validation and GitHub-only evidence handoff; not a release",
+  "validation_partial": [
+    "T04",
+    "T10",
+    "T11",
+    "T13",
+    "T14",
+    "T32",
+    "T34"
+  ],
+  "product_modification_authorized": false,
+  "return_channel": "Draft pull request for this head branch; comments and original evidence attachments. Do not bypass hooks to transmit failures.",
+  "deleted_paths": [
+    "dev/lock_runtime.py",
+    "dev/lock_search.py",
+    "dev/tests/test_runtime_lock.py",
+    "skills/fairy/scripts/astrofairy/_runtime_dependencies.json"
+  ],
+  "handoff_documents": [
+    "docs/audit/changes/2026-11-08_github-windows-handoff.md"
+  ]
+}
