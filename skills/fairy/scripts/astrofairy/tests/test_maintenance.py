@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import sqlite3
-from contextlib import contextmanager
+from contextlib import closing, contextmanager
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 from unittest.mock import patch
@@ -88,11 +88,14 @@ class MaintenanceTests(WorkshopTest):
                     with self.assertRaises(FairyError):
                         audit_state(home)
 
-    def test_absent_archive_is_allowed_but_dangling_archive_is_not_omitted(self) -> None:
+    def test_absent_archive_is_allowed(self) -> None:
         self.workshop.start("Optional archive admission")
         self.assertEqual(audit_state(self.home)["documents"], 0)
         backup_state(self.home, self.home.parent / "absent-archive")
-        (self.home / "documents.sqlite3").symlink_to(self.home / "missing-target")
+
+    def test_dangling_archive_is_not_omitted(self) -> None:
+        self.workshop.start("Dangling archive admission")
+        self.file_symlink(self.home / "documents.sqlite3", self.home / "missing-target")
         with self.assertRaises(FairyError):
             audit_state(self.home)
         partial = self.home.parent / "invalid-archive"
@@ -214,7 +217,7 @@ class MaintenanceTests(WorkshopTest):
         self.assertEqual(caught.exception.code, "incomplete_restore")
         self.assertEqual((target / "workshop.sqlite3").read_bytes(), before)
 
-    def test_manifest_mutations_symlink_existing_destination_and_missing_ref_refuse(self) -> None:
+    def test_manifest_mutations_existing_destination_and_missing_ref_refuse(self) -> None:
         task = self.workshop.start("Capture a referenced blob")
         ref = self.produce(task)["ref"]
         backup = self.home.parent / "backup"
@@ -241,15 +244,21 @@ class MaintenanceTests(WorkshopTest):
             backup_state(self.home, backup)
         with self.assertRaises(FileExistsError):
             restore_state(backup, self.home)
-        image = backup / "workshop.sqlite3"
-        saved = backup.parent / "saved.sqlite3"
-        image.rename(saved)
-        image.symlink_to(saved)
-        with self.assertRaises(FairyError):
-            verify_backup(backup)
         self.workshop.store.connection.execute("DELETE FROM blobs WHERE ref = ?", (ref,))
         with self.assertRaises(FairyError):
             audit_state(self.home)
+
+    def test_linked_backup_file_is_refused(self) -> None:
+        task = self.workshop.start("Linked backup file")
+        self.produce(task)
+        backup = self.home.parent / "backup"
+        backup_state(self.home, backup)
+        image = backup / "workshop.sqlite3"
+        saved = backup.parent / "saved.sqlite3"
+        image.rename(saved)
+        self.file_symlink(image, saved)
+        with self.assertRaises(FairyError):
+            verify_backup(backup)
 
     def test_typed_locator_archive_and_asset_metadata_corruption_refuse(self) -> None:
         ref = self.workshop.library.propose(self.proposal())
@@ -261,7 +270,7 @@ class MaintenanceTests(WorkshopTest):
         self.finish(task, "asset-fitness")
         child = self.workshop.learning_task(task)
         source = self.workshop.state(child).inputs[0]["source_document"]
-        with sqlite3.connect(self.home / "documents.sqlite3") as connection:
+        with closing(sqlite3.connect(self.home / "documents.sqlite3")) as connection, connection:
             connection.execute("DELETE FROM nodes WHERE ref = ?", (source["document"],))
         with self.assertRaises(FairyError):
             audit_state(self.home)

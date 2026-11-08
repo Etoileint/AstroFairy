@@ -32,7 +32,7 @@ class MetadataTests(unittest.TestCase):
         self.assertEqual(json.loads(self.manifest.read_bytes())["version"], "1.2.3-rc.4")
         original = self.manifest.read_bytes()
         self.source("1.2.3")
-        self.assertIn(".claude-plugin/plugin.json", sync(self.root, check=True))
+        self.assertIn(str(self.manifest.relative_to(self.root)), sync(self.root, check=True))
         self.assertEqual(self.manifest.read_bytes(), original)
         self.assertEqual(json.loads(render(self.root)[self.manifest])["version"], "1.2.3")
 

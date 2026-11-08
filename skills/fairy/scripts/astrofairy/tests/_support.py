@@ -1,7 +1,11 @@
 from __future__ import annotations
 
+import base64
 import json
+import os
+import shutil
 import sqlite3
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -120,6 +124,53 @@ class WorkshopTest(unittest.TestCase):
         self.home = Path(self.temporary.name) / "state"
         self.workshop = Workshop(self.home, search=LiteralSearch(self.home))
         self.addCleanup(self.workshop.store.close)
+
+    @staticmethod
+    def remove_directory_redirect(path: Path) -> None:
+        if path.is_junction():
+            path.rmdir()
+        elif path.is_symlink():
+            path.unlink()
+
+    def directory_redirect(self, path: Path, target: Path) -> str:
+        if os.name == "nt":
+            powershell = shutil.which("powershell.exe")
+            if powershell is None:
+                raise FileNotFoundError("Windows native junction tests require Windows PowerShell")
+            command = (
+                "New-Item -ItemType Junction -Path $env:ASTROFAIRY_TEST_LINK "
+                "-Value $env:ASTROFAIRY_TEST_TARGET -ErrorAction Stop | Out-Null"
+            )
+            subprocess.run(
+                [
+                    powershell,
+                    "-NoProfile",
+                    "-NonInteractive",
+                    "-EncodedCommand",
+                    base64.b64encode(command.encode("utf-16-le")).decode("ascii"),
+                ],
+                env={**os.environ, "ASTROFAIRY_TEST_LINK": str(path), "ASTROFAIRY_TEST_TARGET": str(target)},
+                capture_output=True,
+                check=True,
+            )
+            self.assertTrue(path.is_junction())
+            kind = "junction"
+        else:
+            path.symlink_to(target, target_is_directory=True)
+            self.assertTrue(path.is_symlink())
+            kind = "symbolic_link"
+        self.addCleanup(self.remove_directory_redirect, path)
+        return kind
+
+    def file_symlink(self, path: Path, target: Path) -> None:
+        try:
+            path.symlink_to(target)
+        except OSError as exc:
+            if os.name == "nt" and getattr(exc, "winerror", None) == 1314:
+                self.skipTest(
+                    "Native file symlink privilege unavailable (WinError 1314); junction tests still run"
+                )
+            raise
 
     def produce(
         self,

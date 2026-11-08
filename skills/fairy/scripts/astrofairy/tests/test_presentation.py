@@ -3,6 +3,7 @@ from __future__ import annotations
 import builtins
 import io
 import sqlite3
+from contextlib import closing
 from importlib.metadata import version
 from types import SimpleNamespace
 from typing import Any
@@ -122,14 +123,13 @@ class PresentationTests(WorkshopTest):
         task = self.workshop.start("Work")
         descriptor = freeze(self.home, {"text": "large" * 10000}, task=task)
         path = self.home / "documents.sqlite3"
-        with sqlite3.connect(path) as database:
+        with closing(sqlite3.connect(path)) as database, database:
             before = database.execute("SELECT count(*), sum(length(payload)) FROM nodes").fetchone()
         self.assertEqual(freeze(self.home, {"text": "large" * 10000}, task=task), descriptor)
-        with sqlite3.connect(path) as database:
+        with closing(sqlite3.connect(path)) as database, database:
             self.assertEqual(
                 database.execute("SELECT count(*), sum(length(payload)) FROM nodes").fetchone(), before
             )
-        self.assertEqual(path.stat().st_mode & 0o777, 0o600)
         for owner in [None, "a" * 32]:
             with self.assertRaises(FairyError):
                 read_document(self.home, descriptor["document"], task=owner)
@@ -150,7 +150,7 @@ class PresentationTests(WorkshopTest):
             "read", descriptor["document"], "--task", task, "--pointer", "/text", "--limit", "1"
         )
         self.assertEqual((status, page["text"]), (0, '"'))
-        with sqlite3.connect(path) as database:
+        with closing(sqlite3.connect(path)) as database, database:
             row = database.execute(
                 "SELECT payload FROM nodes WHERE ref=?", (descriptor["document"],)
             ).fetchone()

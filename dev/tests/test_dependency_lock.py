@@ -8,6 +8,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import venv
 from pathlib import Path
 from unittest.mock import patch
 
@@ -17,6 +18,7 @@ from dev.lock_dependencies import (
     Pin,
     _active,
     _cross_profile_consistency,
+    _dev_tool_pin,
     _environment_selections,
     _environments,
     _freeze_metadata,
@@ -230,26 +232,27 @@ class DependencyLockTests(unittest.TestCase):
             self.assertEqual(command[:2], [sys.executable, "-I"])
             self.assertIn("-m", command)
 
-    def test_tool_executable_digest_is_the_upstream_target_binary(self) -> None:
+    def test_tool_digest_follows_upstream_resolution_in_an_isolated_venv(self) -> None:
         import uv  # noqa: PLC0415 - only the selected interpreter's package identifies the binary.
 
         directory = ROOT / ".test-runs"
         directory.mkdir(exist_ok=True)
         with tempfile.TemporaryDirectory(dir=directory) as temporary:
             prefix = Path(temporary) / "toolenv"
-            completed = subprocess.run(
-                [sys.executable, "-m", "venv", "--without-pip", str(prefix)],
-                capture_output=True,
-                text=True,
-                check=False,
+            builder = venv.EnvBuilder(with_pip=False)
+            builder.create(prefix)
+            python = Path(builder.ensure_directories(prefix).env_exec_cmd)
+            purelib = Path(
+                subprocess.check_output(
+                    [str(python), "-I", "-c", "import sysconfig; print(sysconfig.get_path('purelib'))"],
+                    text=True,
+                    encoding="utf-8",
+                ).strip()
             )
-            self.assertEqual(completed.returncode, 0, completed.stderr)
-            purelib = prefix / "lib/python3.12/site-packages"
             shutil.copytree(Path(uv.__file__).parent, purelib / "uv")
             (purelib / "bin").mkdir()
-            shutil.copyfile(ROOT / ".venv/bin/uv", purelib / "bin/uv")
-            (purelib / "bin/uv").chmod(0o755)
-            python = prefix / "bin/python"
+            binary = Path(uv.find_uv_bin())
+            shutil.copy2(binary, purelib / "bin" / binary.name)
             with patch.object(sys, "executable", str(python)):
                 command = _uv_command(ROOT)
                 executable = _uv_executable(command)
@@ -261,11 +264,13 @@ class DependencyLockTests(unittest.TestCase):
                 check=True,
             ).stdout.strip()
             self.assertEqual(executable, Path(actual))
+            self.assertNotEqual(executable, python.with_name(binary.name))
             self.assertEqual(digest, hashlib.sha256(Path(actual).read_bytes()).hexdigest())
             version = subprocess.run(
                 [*command, "--version"], capture_output=True, text=True, check=True
             ).stdout.split()
-            self.assertEqual(version[1], "0.13.7")
+            policy = _read_config(ROOT)["policy"]
+            self.assertEqual(version[1], _dev_tool_pin(ROOT, policy["uv_pin_name"], policy["uv_pin_file"]))
 
     def test_check_rejects_a_missing_recorded_tool_digest(self) -> None:
         directory = ROOT / ".test-runs"

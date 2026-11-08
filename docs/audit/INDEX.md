@@ -4,6 +4,9 @@
 
 | 日期 | 对象 | 技术状态 | 维护者裁定 |
 |---|---|---|---|
+| 2026-11-08 | [跨平台测试与CI机制修正](changes/2026-11-08_cross-platform-test-repair.md) | 四组测试修正、255运行＋42开发与两轴复核通过，产品runtime未改 | 待新候选两平台CI及Windows统一复验；不合并/发布 |
+| 2026-11-08 | [Windows原件收件复核](changes/2026-11-08_windows-validation-evidence-review.md) | 原ZIP/148件文件核验通过，原生安装/BagIt/制品结果已证；完整检查仍红，收敛四组测试/CI修正与覆盖限界 | 本轮收件完成；尚未整体验收，不合并/发布 |
+| 2026-11-08 | [Windows回交初步查收与CI核验](changes/2026-11-08_windows-validation-intake.md) | 收到部分通过报告，原ZIP待补；两平台CI失败，独立核实uv夹具/测试连接与断言问题，纠正跨盘漏捕获分类 | 尚未完成原件验收；待补件/repair与跨平台检查修正，不合并/发布 |
 | 2026-11-08 | [GitHub Windows验证交接](changes/2026-11-08_github-windows-handoff.md) | 已验产品固化候选；交接任务、三制品和身份校验进入独立分支 | 通过交接分支/草稿PR流转；Windows待验证，不合并/发布 |
 | 2026-11-08 | [Windows原生验证移交准备](changes/2026-11-08_windows-validation-handoff.md) | 固定候选源码/Git历史/三制品与任务包就绪；本机恢复、身份核验通过 | Windows尚未执行；未提交/发布 |
 | 2026-11-08 | [平台与交付W6第三次返工独立复验](changes/2026-11-08_platform-readiness-recheck3.md) | 4类P2闭合、两轴0open；核源/71件证据、249运行＋42开发及真实缓存推理通过 | 本轮定向整改技术通过；原生/集成验证未完，未整体验收/发布 |

@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import sqlite3
 from concurrent.futures import ThreadPoolExecutor
+from contextlib import closing
 from pathlib import Path
 from threading import Event
 from typing import Any
@@ -64,7 +65,7 @@ class ReconciliationTests(WorkshopTest):
         self.executions += 1
         self.assertIsNotNone(context.call_id)
         self.assertFalse(context.store.connection.in_transaction)
-        with sqlite3.connect(context.store.home / "workshop.sqlite3") as connection:
+        with closing(sqlite3.connect(context.store.home / "workshop.sqlite3")) as connection, connection:
             rows = connection.execute(
                 "SELECT payload FROM events WHERE task=? AND kind='invoked' ORDER BY seq DESC",
                 (context.state.task,),

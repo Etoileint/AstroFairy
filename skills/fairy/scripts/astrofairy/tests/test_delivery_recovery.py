@@ -212,11 +212,11 @@ class DeliveryRecoveryTests(WorkshopTest):
             self.workshop.submit(task, {"op": "close", "outcome": "complete"})
         external = Path(self.temporary.name) / "outside"
         external.mkdir()
-        (self.home / "deliveries").symlink_to(external, target_is_directory=True)
+        kind = self.directory_redirect(self.home / "deliveries", external)
         with self.assertRaises(FairyError) as caught:
             self.workshop.deliver(task, repair=True)
         self.assertEqual(caught.exception.code, "unsafe_delivery")
-        self.assertEqual(caught.exception.details["reason"], "symbolic_link")
+        self.assertEqual(caught.exception.details["reason"], kind)
         self.assertEqual(list(external.iterdir()), [])
 
     def test_self_consistent_replacement_is_not_accepted_as_current(self) -> None:

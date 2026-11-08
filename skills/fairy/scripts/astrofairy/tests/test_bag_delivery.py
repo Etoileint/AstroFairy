@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import hashlib
+import os
 import shutil
+import unittest
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import replace
 from functools import partial
@@ -61,7 +63,7 @@ class BagDeliveryTests(WorkshopTest):
             ],
         )
         self.assertEqual(
-            sorted(bagit.Bag(str(bag)).payload_entries()),
+            sorted(Path(name).as_posix() for name in bagit.Bag(str(bag)).payload_entries()),
             ["data/data/data.csv", "data/report.md"],
         )
         self.assertTrue(bagit.Bag(str(bag)).validate())
@@ -71,8 +73,6 @@ class BagDeliveryTests(WorkshopTest):
         )
         for path in delivery["files"].values():
             self.assertTrue(Path(path).is_file())
-            self.assertEqual(Path(path).stat().st_mode & 0o777, 0o600)
-        self.assertEqual((bag / "data").stat().st_mode & 0o777, 0o700)
         self.assertNotIn("receipt.json", bagit.Bag(str(bag)).payload_entries())
         self.assertTrue((bag / "README.txt").is_file())
         receipt = parse_json((bag / "receipt.json").read_text(encoding="utf-8"))
@@ -83,6 +83,13 @@ class BagDeliveryTests(WorkshopTest):
         again = self.workshop.deliver(task)
         self.assertEqual(again["bag_path"], delivery["bag_path"])
         self.assertTrue(bagit.Bag(str(bag)).validate())
+
+    @unittest.skipUnless(os.name == "posix", "POSIX file modes; native redirect tests cover Windows paths")
+    def test_posix_delivery_permissions(self) -> None:
+        _task, delivery = self.multi_member_task()
+        for path in delivery["files"].values():
+            self.assertEqual(Path(path).stat().st_mode & 0o777, 0o600)
+        self.assertEqual((Path(delivery["bag_path"]) / "data").stat().st_mode & 0o777, 0o700)
 
     def test_tampered_missing_extra_and_tag_changes_are_refused(self) -> None:
         task, delivery = self.multi_member_task()

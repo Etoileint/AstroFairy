@@ -7,6 +7,7 @@ from typing import Any
 from unittest.mock import patch
 
 from astrofairy import FairyError, _delivery
+from astrofairy._contracts import canonical
 from astrofairy._delivery import _manifest_identity
 from astrofairy.tests._support import WorkshopTest
 
@@ -75,20 +76,52 @@ class DeliveryBoundaryTests(WorkshopTest):
         root = Path(self.temporary.name) / "bag"
         self.assertEqual(_manifest_identity("data\\sub\\file.txt", root), "data/sub/file.txt")
         self.assertEqual(_manifest_identity("data//sub/file.txt", root), "data/sub/file.txt")
-        for raw, message in (
-            ("..\\evil.txt", "escapes"),
-            ("C:\\outside.txt", "foreign absolute"),
-            ("\\\\server\\share\\file.txt", "UNC"),
-            ("/etc/passwd", "outside the bag root"),
-        ):
-            with self.subTest(raw=raw), self.assertRaisesRegex(FairyError, message):
+        for raw in ("..\\evil.txt", "C:\\outside.txt", "\\\\server\\share\\file.txt", "/etc/passwd"):
+            with self.subTest(raw=raw), self.assertRaises(FairyError) as caught:
                 _manifest_identity(raw, root)
+            self.assertEqual(caught.exception.code, "integrity")
+
+    def test_native_redirects_at_every_delivery_boundary_refuse_ordinary_and_repair(self) -> None:
+        for position in ("ancestor", "task", "sequence", "payload"):
+            with self.subTest(position=position):
+                task, bag = self.closed_task()
+                outside = self.home.parent / ("outside-" + position)
+                outside.mkdir()
+                self.assertFalse(outside.is_relative_to(self.home))
+                sentinel = outside / "sentinel.txt"
+                sentinel.write_bytes(b"Keep this external target unchanged")
+                before = canonical(self.workshop.store.events(task))
+                link = {
+                    "ancestor": self.home / "deliveries",
+                    "task": bag.parent,
+                    "sequence": bag,
+                    "payload": bag / "data" / "linked",
+                }[position]
+                saved = self.home.parent / ("saved-" + position)
+                exists = link.exists()
+                if exists:
+                    link.rename(saved)
+                try:
+                    self.directory_redirect(link, outside)
+                    for repair in (False, True):
+                        with self.subTest(repair=repair), self.assertRaises(FairyError) as caught:
+                            self.workshop.deliver(task, repair=repair)
+                        self.assertEqual(caught.exception.code, "unsafe_delivery")
+                        self.assertEqual(sentinel.read_bytes(), b"Keep this external target unchanged")
+                        self.assertEqual([p.name for p in outside.iterdir()], ["sentinel.txt"])
+                        self.assertEqual(canonical(self.workshop.store.events(task)), before)
+                    expected = "verify_delivery" if position == "payload" else "inspect_delivery"
+                    self.assertEqual(self.workshop.next(task)["action"], expected)
+                finally:
+                    self.remove_directory_redirect(link)
+                    if exists:
+                        saved.rename(link)
 
     def test_ancestor_redirect_is_refused_without_touching_the_target(self) -> None:
         task = self.ready_task()
         external = Path(self.temporary.name) / "outside"
         external.mkdir()
-        (self.home / "deliveries").symlink_to(external, target_is_directory=True)
+        self.directory_redirect(self.home / "deliveries", external)
         response = self.workshop.submit(task, {"op": "close", "outcome": "complete"})
         delivery = response["delivery"]
         self.assertEqual(delivery["state"], "failed")
@@ -103,7 +136,7 @@ class DeliveryBoundaryTests(WorkshopTest):
         external = Path(self.temporary.name) / "outside"
         external.mkdir()
         (self.home / "deliveries").mkdir()
-        (self.home / "deliveries" / task).symlink_to(external, target_is_directory=True)
+        self.directory_redirect(self.home / "deliveries" / task, external)
         response = self.workshop.submit(task, {"op": "close", "outcome": "complete"})
         self.assertEqual(response["delivery"]["state"], "failed")
         self.assertEqual(list(external.iterdir()), [])
@@ -114,15 +147,15 @@ class DeliveryBoundaryTests(WorkshopTest):
         external = Path(self.temporary.name) / "outside"
         external.mkdir()
         shutil.rmtree(final)
-        final.symlink_to(external, target_is_directory=True)
+        self.directory_redirect(final, external)
         with self.assertRaises(FairyError) as caught:
             self.workshop.deliver(task)
         self.assertEqual(caught.exception.code, "unsafe_delivery")
         self.assertEqual(list(external.iterdir()), [])
-        final.unlink()
+        self.remove_directory_redirect(final)
         regenerated = self.workshop.deliver(task)
         bag_path = Path(regenerated["bag_path"])
-        (bag_path / "data" / "linked").symlink_to(external, target_is_directory=True)
+        self.directory_redirect(bag_path / "data" / "linked", external)
         with self.assertRaises(FairyError) as caught:
             self.workshop.deliver(task)
         self.assertEqual(caught.exception.code, "unsafe_delivery")

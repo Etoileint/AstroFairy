@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 import hashlib
+import os
 import sqlite3
 import sys
+import unittest
 from concurrent.futures import ThreadPoolExecutor
-from contextlib import contextmanager
+from contextlib import closing, contextmanager
 from typing import TYPE_CHECKING
 from unittest.mock import patch
 
@@ -26,7 +28,7 @@ class DocumentTests(WorkshopTest):
     def test_bulk_audit_checks_shared_scalars_once_and_incoming_edges_before_seen(self) -> None:
         for number in range(24):
             freeze(self.home, {"items": list(range(number + 1)), "seq": number})
-        with sqlite3.connect(self.home / "documents.sqlite3") as database:
+        with closing(sqlite3.connect(self.home / "documents.sqlite3")) as database, database:
             bodies = [
                 documents.parse_json(row[0].decode("utf-8"))
                 for row in database.execute("SELECT payload FROM nodes")
@@ -66,12 +68,17 @@ class DocumentTests(WorkshopTest):
             self.assertEqual(len(set(roots)), 1)
             lock = home / "documents.sqlite3.init.lock"
             inode = lock.stat().st_ino
-            self.assertEqual(lock.stat().st_mode & 0o777, 0o600)
             freeze(home, {"different": number})
             self.assertEqual(lock.stat().st_ino, inode)
             with patch("filelock.FileLock", side_effect=AssertionError("Read acquired a lock")):
                 self.assertEqual(read_document(home, roots[0], pointer="/items/0")["text"], "0")
                 self.assertEqual(audit_document(home, roots[0])["integrity"], "full")
+
+    @unittest.skipUnless(os.name == "posix", "POSIX file modes; not a Windows ACL assertion")
+    def test_posix_archive_and_initialization_lock_permissions(self) -> None:
+        freeze(self.home, {"value": "private"})
+        for name in ("documents.sqlite3", "documents.sqlite3.init.lock"):
+            self.assertEqual((self.home / name).stat().st_mode & 0o777, 0o600)
 
     def test_native_only_lock_failure_timeout_and_connection_cleanup(self) -> None:
         def timeout(*_args: object, **_kwargs: object) -> NoReturn:
@@ -163,7 +170,7 @@ class DocumentTests(WorkshopTest):
                 pending.append(parent.archive.expect(edge))
             damaged = pending[-1].ref
         path = self.home / "documents.sqlite3"
-        with sqlite3.connect(path) as database:
+        with closing(sqlite3.connect(path)) as database, database:
             data = database.execute("SELECT payload FROM nodes WHERE ref=?", (damaged,)).fetchone()[0]
             database.execute("UPDATE nodes SET payload=? WHERE ref=?", (data + b" ", damaged))
         self.assertEqual(read_document(self.home, ref, pointer="/tiny")["text"], '"ok"')
@@ -203,7 +210,7 @@ class DocumentTests(WorkshopTest):
             items.append(hashlib.shake_256(str(number).encode()).hexdigest(4096))
             roots.append(freeze(self.home, {"history": items, "seq": number})["document"])
             if number + 1 in {16, 32, 64}:
-                with sqlite3.connect(self.home / "documents.sqlite3") as database:
+                with closing(sqlite3.connect(self.home / "documents.sqlite3")) as database, database:
                     measurements.append(
                         database.execute("SELECT sum(length(payload)) FROM nodes").fetchone()[0]
                     )
@@ -212,7 +219,7 @@ class DocumentTests(WorkshopTest):
         self.assertEqual(read_document(self.home, roots[0], pointer="/seq")["text"], "0")
         before = measurements[-1]
         self.assertEqual(freeze(self.home, {"history": items, "seq": 63})["document"], roots[-1])
-        with sqlite3.connect(self.home / "documents.sqlite3") as database:
+        with closing(sqlite3.connect(self.home / "documents.sqlite3")) as database, database:
             self.assertEqual(database.execute("SELECT sum(length(payload)) FROM nodes").fetchone()[0], before)
 
     def test_archive_metadata_refusal_and_missing_reader_do_not_initialize(self) -> None:
@@ -222,7 +229,7 @@ class DocumentTests(WorkshopTest):
         self.assertFalse(home.exists())
         home.mkdir()
         path = home / "documents.sqlite3"
-        with sqlite3.connect(path) as database:
+        with closing(sqlite3.connect(path)) as database, database:
             database.execute("CREATE TABLE sentinel(value TEXT)")
             database.execute("INSERT INTO sentinel VALUES ('keep')")
         before = path.read_bytes()

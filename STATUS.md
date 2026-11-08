@@ -25,8 +25,9 @@
 
 ## 当前收到的问题
 
-四条公开反馈**保持开放**。W1–W5实现与三轮定向返工已回交；最新W6独立复验确认已登记整改发现闭合，
-**本轮定向整改技术复验通过**。原生/集成验证仍有缺口，专项未整体验收；维护者最终接受与发布未发生。
+四条公开反馈**保持开放**。W1–W5实现与三轮定向返工已回交；此前4类P2定向整改独立复验通过。
+最新Windows主证据包已完整取得并逐件核验，支持若干原生功能通过，但完整检查及托管Linux/Windows CI仍失败，
+见[原件收件复核](docs/audit/changes/2026-11-08_windows-validation-evidence-review.md)。专项未整体验收，未合并/发布。
 验证候选已固化为`c9824b24b1627dd10de70fbcfe028a0dc9dfcfd5`，通过独立GitHub交接分支流转，不并入主分支。
 Issue中的复现步骤和建议是待核实材料，不自动成为实现要求。
 
@@ -55,10 +56,22 @@ STD02–06、SPEC01–03、GAP01/T35及原REG02保持通过。规范轴0项open�
 冷下载/中断、跨进程缓存锁、完整skills CLI矩阵、真实host交互尚未验证；配置矩阵、模拟和暖缓存均不能抵销。
 本轮不新增代码返工单，转入原计划剩余验证；不发布跨平台修复声明或关闭Issue。
 维护者提供Windows开发机后，已完成[Windows验证移交包准备](docs/audit/changes/2026-11-08_windows-validation-handoff.md)：
-固定未提交源码、必要Git历史、三制品及原生任务单已封装，本机恢复演练通过；Windows端尚未执行，待回交原始证据。
+当时固定未提交源码、必要Git历史、三制品及原生任务单已封装，本机恢复演练通过；该条保留准备时点含义。
 维护者随后指定双方仅通过GitHub通信，现行取件入口改为[Windows交接任务](handoff/windows-validation/README.md)，
 见[GitHub交接记录](docs/audit/changes/2026-11-08_github-windows-handoff.md)。分支为`handoff/windows-validation-20261108`，
 通过对应草稿PR回交证据；上述本机ZIP保留为历史准备产物，不再要求Windows端取得它。
+Windows主ZIP已通过GitHub四片回交，87,226字节及SHA256匹配，148件登记文件全部核验一致。
+安装、原生导入、单/多文件BagIt和三制品最小任务的开发机原始结果已取得；不再要求重传主包。
+独立CI已证明安装/pip check成功，但完整检查失败，后续smoke/构建被中止。
+报告的跨盘ValueError漏捕获分类与CI原始trace不符；源码已有FairyError封装，不能直接照建议补catch。
+uv夹具硬编码和多处测试SQLite连接生命周期问题已独立核实；路径/权限能力断言也需按原生语义修正。
+已在[PR补件请求](https://github.com/Etoileint/AstroFairy/pull/5#issuecomment-6725855866)给出完整ZIP的GitHub分片回交方法和两项repair补测要求。
+执行者已[撤回跨盘漏捕获分类并报告repair补测](https://github.com/Etoileint/AstroFairy/pull/5#issuecomment-6726087047)。
+现有证据还有少量覆盖限界：补测脚本/新日志尚未随包提供，原junction目标在home内；纳入下一轮正式用例统一复验。
+上述四组机制须统一修正并复验，不据已有通过项放行红色CI。
+维护者随后授权继续，四组[跨平台测试修正](docs/audit/changes/2026-11-08_cross-platform-test-repair.md)已实施：
+本机255运行（默认1skip）＋42开发通过，两轴独立复核0open，产品runtime和依赖锁未改。
+下一步固化新的测试候选、更新GitHub交接并统一复跑CI/Windows；旧CI失败与原未执行范围不改写。
 
 | 历史关口 | 冻结结论 |
 |---|---|

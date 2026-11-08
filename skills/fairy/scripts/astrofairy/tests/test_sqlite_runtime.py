@@ -67,6 +67,7 @@ class SqliteRuntimeTests(WorkshopTest):
                 if existing:
                     home.mkdir(mode=0o750)
                     (home / "workshop.sqlite3").write_bytes(b"Preserve actual preexisting bytes")
+                    mode = home.stat().st_mode
                 with patch("astrofairy._store.sqlite3.connect", side_effect=impaired):
                     doctor = _run(_parser().parse_args(["--home", str(home), "doctor"]))
                     self.assertFalse(doctor["ready"])
@@ -77,7 +78,7 @@ class SqliteRuntimeTests(WorkshopTest):
                     self.assertEqual(caught.exception.code, "runtime_setup_required")
                     self.assertNotIn("SYNTHETIC_SECRET", str(caught.exception.as_dict()))
                 if existing:
-                    self.assertEqual(home.stat().st_mode & 0o777, 0o750)
+                    self.assertEqual(home.stat().st_mode, mode)
                     self.assertEqual(
                         (home / "workshop.sqlite3").read_bytes(), b"Preserve actual preexisting bytes"
                     )

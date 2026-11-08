@@ -2,7 +2,10 @@ from __future__ import annotations
 
 import io
 import json
+import os
 import sqlite3
+import unittest
+from contextlib import closing
 from pathlib import Path
 from typing import Any
 from unittest.mock import patch
@@ -98,12 +101,12 @@ class DeliveryHardeningTests(WorkshopTest):
         external = Path(self.temporary.name) / "outside"
         external.mkdir()
         (external / "keep").write_text("sentinel", encoding="utf-8")
-        (bag / "data" / "linked").symlink_to(external, target_is_directory=True)
+        self.directory_redirect(bag / "data" / "linked", external)
         with self.assertRaises(FairyError) as caught:
             self.workshop.deliver(task, repair=True)
         self.assertEqual(caught.exception.code, "unsafe_delivery")
         self.assertEqual(list((self.home / "deliveries" / task).glob(".quarantine-*")), [])
-        self.assertTrue((bag / "data" / "linked").is_symlink())
+        self.assertTrue((bag / "data" / "linked").is_symlink() or (bag / "data" / "linked").is_junction())
         self.assertEqual((external / "keep").read_text(encoding="utf-8"), "sentinel")
 
     def test_post_commit_sqlite_export_error_preserves_recovery(self) -> None:
@@ -157,7 +160,7 @@ class DeliveryHardeningTests(WorkshopTest):
         self.assertEqual(delivery["state"], "failed")
         self.assertEqual(delivery["selected_seq"], selected["actual"])
         self.assertEqual(delivery["committed_seq"], selected["actual"])
-        self.assertTrue(str(delivery["target"]).endswith(f"/{selected['actual']}"))
+        self.assertEqual(Path(delivery["target"]), self.home / "deliveries" / task / str(selected["actual"]))
         self.assertEqual(self.workshop.state(task).seq, selected["actual"] + 1)
 
     def test_repair_postpublication_failure_reports_progress(self) -> None:
@@ -372,6 +375,9 @@ class DeliveryHardeningTests(WorkshopTest):
         self.assertEqual(call["invoked_seq"], before + 1)
         self.assertEqual(sentinel.read_text(encoding="utf-8"), "completed")
 
+    @unittest.skipUnless(
+        os.name == "posix", "POSIX directory DAC; native junction and denied-walk tests run on Windows"
+    )
     def test_unreadable_old_tree_is_not_quarantined_or_followed(self) -> None:
         task = self.ready()
         closed = self.complete(task)
@@ -394,6 +400,29 @@ class DeliveryHardeningTests(WorkshopTest):
         self.assertTrue(bag.is_dir())
         self.assertTrue((blocked / "link").is_symlink())
         self.assertEqual((external / "keep").read_text(encoding="utf-8"), "sentinel")
+
+    def test_denied_tree_walk_refuses_repair_on_every_platform(self) -> None:
+        task = self.ready()
+        closed = self.complete(task)
+        bag = Path(closed["bag_path"])
+        (bag / "receipt.json").write_bytes(b"{}")
+        walk = os.walk
+
+        def denied(path: Any, *args: Any, **kwargs: Any) -> Any:
+            if Path(path) == bag:
+                kwargs["onerror"](PermissionError("controlled directory traversal denial"))
+                return iter(())
+            return walk(path, *args, **kwargs)
+
+        with (
+            patch("astrofairy._delivery.os.walk", side_effect=denied),
+            self.assertRaises(FairyError) as caught,
+        ):
+            self.workshop.deliver(task, repair=True)
+        self.assertEqual(caught.exception.code, "unsafe_delivery")
+        self.assertEqual(caught.exception.details["reason"], "unreadable_subtree")
+        self.assertTrue(bag.is_dir())
+        self.assertEqual(list(bag.parent.glob(".quarantine-*")), [])
 
     def test_postpublication_guard_failure_reports_full_progress(self) -> None:
         task = self.ready()
@@ -555,7 +584,7 @@ class DeliveryHardeningTests(WorkshopTest):
         self.assertEqual(error.details["seq"], before)
         self.assertEqual(self.workshop.state(task).seq, before)
         self.assertIsNone(self.workshop.state(task).outcome)
-        with sqlite3.connect(self.home / "workshop.sqlite3") as observer:
+        with closing(sqlite3.connect(self.home / "workshop.sqlite3")) as observer, observer:
             kinds = [row[0] for row in observer.execute("SELECT kind FROM events WHERE task=?", (task,))]
         self.assertNotIn("closed", kinds)
 
@@ -612,7 +641,7 @@ class DeliveryHardeningTests(WorkshopTest):
         self.assertIsInstance(error.__cause__.__cause__, sqlite3.OperationalError)
         self.assertEqual(str(error.__cause__.__cause__), "controlled statement acknowledgment loss")
         self.assertTrue(real.in_transaction)
-        with sqlite3.connect(self.home / "workshop.sqlite3") as observer:
+        with closing(sqlite3.connect(self.home / "workshop.sqlite3")) as observer, observer:
             self.assertEqual(
                 observer.execute("SELECT MAX(seq) FROM events WHERE task=?", (task,)).fetchone()[0],
                 before + 1,
