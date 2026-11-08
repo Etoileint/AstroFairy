@@ -15,7 +15,6 @@ from dev.package_skill import ROOT, package
 class DistributionTests(unittest.TestCase):
     def test_sdist_retains_locked_inputs_and_rebuilds_identical_skill(self) -> None:
         from dev.check_vendor import validate  # noqa: PLC0415 - compares original and extracted authority.
-        from dev.lock_search import render  # noqa: PLC0415 - compares original and extracted authority.
 
         directory = ROOT / ".test-runs"
         directory.mkdir(exist_ok=True)
@@ -35,10 +34,9 @@ class DistributionTests(unittest.TestCase):
             probe = (
                 "import runpy,sys; from pathlib import Path; root=Path(sys.argv[1]); "
                 "vendor=runpy.run_path(str(root/'dev/check_vendor.py'))['validate'](); "
-                "lock=runpy.run_path(str(root/'dev/lock_search.py'))['render'](write=False); "
-                "lock_path=root/'skills/fairy/scripts/requirements-search.lock'; "
-                "assert lock==lock_path.read_text(encoding='utf-8'); "
-                "print(vendor); runpy.run_path(str(root/'dev/package_skill.py'))['package'](root/'dist')"
+                "lock=runpy.run_path(str(root/'dev/lock_dependencies.py'))['check'](root); "
+                "print(vendor); print(lock); "
+                "runpy.run_path(str(root/'dev/package_skill.py'))['package'](root/'dist')"
             )
             checked = subprocess.run(
                 [sys.executable, "-I", "-c", probe, str(source)],
@@ -50,10 +48,13 @@ class DistributionTests(unittest.TestCase):
             )
             self.assertEqual(checked.returncode, 0, checked.stdout + checked.stderr)
             self.assertIn(str(validate()["wheel_sha256"]), checked.stdout)
+            self.assertIn("'core': 10", checked.stdout)
+            self.assertIn("'search': 41", checked.stdout)
             self.assertEqual(
-                render(write=False),
+                (ROOT / "skills/fairy/scripts/requirements-search.lock").read_text(encoding="utf-8"),
                 (source / "skills/fairy/scripts/requirements-search.lock").read_text(encoding="utf-8"),
             )
+            self.assertTrue((source / "dev/dependency-profiles.toml").is_file())
             original = package(folder / "original")
             with zipfile.ZipFile(original) as expected, zipfile.ZipFile(source / "dist/fairy.zip") as rebuilt:
                 self.assertEqual(rebuilt.namelist(), expected.namelist())

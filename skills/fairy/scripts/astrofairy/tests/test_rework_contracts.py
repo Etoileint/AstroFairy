@@ -15,7 +15,7 @@ from astrofairy.tests.test_search_contracts import HashEmbedder
 class ReworkContractTests(WorkshopTest):
     def complete(self, task: str) -> dict:
         self.workshop.submit(task, {"op": "check"})
-        return self.workshop.submit(task, {"op": "close", "outcome": "complete"})
+        return self.workshop.submit(task, {"op": "close", "outcome": "complete"})["delivery"]
 
     def test_interrupted_prepare_keeps_full_plan_and_resume_uses_it(self) -> None:
         task = self.workshop.start(
@@ -45,7 +45,7 @@ class ReworkContractTests(WorkshopTest):
         (workspace / "b.txt").write_text("second", encoding="utf-8")
         result = self.workshop.prepare_delivery(task, {"members": [{"path": "b.txt", "role": "main"}]})
         self.assertEqual([item["path"] for item in result["members"]], ["a.txt", "b.txt"])
-        delivery = self.workshop.submit(task, {"op": "close", "outcome": "complete"})
+        delivery = self.workshop.submit(task, {"op": "close", "outcome": "complete"})["delivery"]
         self.assertEqual(sorted(delivery["files"]), ["a.txt", "b.txt"])
         self.assertEqual(Path(delivery["files"]["a.txt"]).read_text(), "first")
 
@@ -75,7 +75,7 @@ class ReworkContractTests(WorkshopTest):
         )
         output = self.produce(task)
         self.workshop.submit(task, {"op": "check"})
-        delivery = self.workshop.submit(task, {"op": "close", "outcome": "complete"})
+        delivery = self.workshop.submit(task, {"op": "close", "outcome": "complete"})["delivery"]
         bag_root = Path(delivery["bag_path"])
         self.assertEqual((bag_root / "bagit.txt").read_text().splitlines()[0], "BagIt-Version: 1.0")
         receipt = parse_json((bag_root / "receipt.json").read_text(encoding="utf-8"))
@@ -105,7 +105,7 @@ class ReworkContractTests(WorkshopTest):
         )
         self.produce(task)
         self.workshop.submit(task, {"op": "check"})
-        delivery = self.workshop.submit(task, {"op": "close", "outcome": "complete"})
+        delivery = self.workshop.submit(task, {"op": "close", "outcome": "complete"})["delivery"]
         bag_root = Path(delivery["bag_path"])
         extra = bag_root / "data" / "unselected.txt"
         extra.write_text("not selected\n", encoding="utf-8")

@@ -1,0 +1,34 @@
+{
+  "consumed_files": {
+    "config.json": "optional_but_fixed",
+    "model.onnx": "required",
+    "model.onnx_data": "required",
+    "special_tokens_map.json": "optional_but_fixed",
+    "tokenizer.json": "required",
+    "tokenizer_config.json": "required"
+  },
+  "format": 1,
+  "package": "fastembed",
+  "policy": "All six files are required at the fixed revision. Changing the fastembed version, wheel identity or consumer source reopens this audit explicitly.",
+  "sources": {
+    "fastembed/common/preprocessor_utils.py": {
+      "consumes": [
+        "tokenizer.json",
+        "tokenizer_config.json",
+        "config.json",
+        "special_tokens_map.json"
+      ],
+      "sha256": "9961a4ca6ef2b0f29425df3b9cbf7f4d82a1d6534c2b363eac8af589a07b4f8f"
+    },
+    "fastembed/text/pooled_embedding.py": {
+      "consumes": [
+        "model.onnx",
+        "model.onnx_data"
+      ],
+      "sha256": "dbe109d19a65091ad76ebfb48d394f5a9f1bbd158408bbc6ca48e40dea335da9"
+    }
+  },
+  "version": "0.9.1",
+  "wheel_filename": "fastembed-0.9.1-py3-none-any.whl",
+  "wheel_sha256": "95042ac7f685bda6697861066d49f8b119fbde8b75ed5162bbb7e84e2dad0e1d"
+}

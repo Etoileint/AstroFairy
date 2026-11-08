@@ -20,7 +20,7 @@ and follow the [scope rules](CONTRIBUTING.md#external-development-organization);
 | Tool versions | `requirements-dev.lock`; no duplicated tool pins |
 
 Python 3.12+, hash-locked JSON Schema runtime, private modules and explicit public exports.
-Runtime pins: `pyproject.toml`; generated lock/diagnostics: `python dev/lock_runtime.py --check`.
+Runtime pins: `pyproject.toml`; one development lock entry: `python dev/lock_dependencies.py --check` (update only with `--update` and review every delta).
 Public prose and interfaces use neutral, professional task terminology.
 Tests belong to their code owner; `governance.toml` declares their execution surfaces.
 Keep protocol validation, invocation and event storage distinct. Task-specific policy belongs to assets.

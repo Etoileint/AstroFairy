@@ -60,11 +60,21 @@ data after execution, leaves an unknown result and blocks identical retries.
 Exports are reproducible projections; a failed export can be regenerated from the store. Delivery uses the
 vendored bagit wheel with an explicit BagIt 1.0 header and regenerated tag manifest: formal members stream
 into `data/`, payload/tag manifests are generated, full byte validation runs in a private staging directory,
-and publication is an atomic rename to a new task/seq directory. Existing same-seq bags are revalidated
-against the authoritative task/revision/seq, snapshot member set, receipt and each member digest, so an
-internally consistent replacement bag is rejected. They are reused, never overwritten; late facts create a
-new seq directory. BagIt library calls are serialized against their process-wide cwd change. Local manifest
-hashes prove byte consistency, not external authenticity or semantic quality.
+and publication is an atomic rename to a new task/seq directory. Library-exposed manifest keys are converted
+from their host path flavor to canonical POSIX relative identities before payload/tag classification and
+set comparison; absolute, drive, UNC, escaping and post-conversion colliding keys are refused. Every path
+from the approved canonical home through `deliveries/<task>/<seq>`, the lock and staging is checked for
+symlinks and Windows junctions/reparse points without following redirects; the same check is repeated under
+the delivery lock before publication. Existing same-seq bags are revalidated against the
+authoritative task/revision/seq, snapshot member set, receipt projection (format 2) and each member digest,
+so an internally consistent replacement bag or a receipt that depends on the current checker registry is
+rejected. They are reused, never overwritten; late facts create a new seq directory. An existing invalid
+derived export is refused with a repair route; `deliver --repair` builds and validates a replacement first,
+quarantines the old directory without deleting it, and publishes under the same lock. Path-safety refusals
+(`unsafe_delivery`) are never repaired by moving or following the object; repair rechecks the old tree
+before quarantine and reports completed actions/quarantine identity on any later failure. BagIt library calls
+are serialized against their process-wide cwd change. Local manifest hashes prove byte consistency, not
+external authenticity or semantic quality.
 
 Writes may explicitly pin a trusted read reconciler and its definition before effects. The committed
 invocation id is supplied to handlers for attempt correlation. Within that task a pinned reconciler name
@@ -75,13 +85,22 @@ another acceptance command/event or overwriting the original handler result. No 
 automatic retry or provider exactly-once guarantee follows.
 
 Current execution integrity is separate from historical outcome. Conflicts block complete and future
-adoption, survive later matching/unknown facts, and remain visible in next/inspect/delivery. Late facts
-commit before a closed receipt is refreshed. Each export uses one snapshot and is serialized with event
-writers in a separate transaction; projection failure cannot undo a fact. Snapshot seq exposes staleness;
-old distributed files and adopted assets are not automatically revoked. Unsupported recovery remains explicit.
+adoption, survive later matching/unknown facts, and remain visible in next/inspect/observations. Late facts
+commit before a shared post-commit receipt refresh; export failure returns `committed=true` with the
+operation identity and a `deliver` recovery command and never retracts the fact. Each export selects one
+frozen event snapshot in a short read transaction, builds the receipt from recorded facts and recorded
+checker identities, and then exports outside the database transaction under the per-task delivery lock.
+Another writer may advance the stream after selection; the result binds its own seq and `next` subsequently
+targets the new seq. A changed installed checker registry changes only the separate current assessment; a current runtime that
+lacks a required mechanical checker fails current acceptance/applicability closed, while the historical
+receipt remains reusable.
+Snapshot seq exposes staleness; old distributed files and adopted assets are not automatically revoked.
+Unsupported recovery remains explicit.
 
-Development uses store format 10 and protocol 10. Existing unsupported or malformed store metadata is refused
-before DDL. There are no migrations or compatibility branches; use a fresh approved home for new tasks.
+Development uses store format 10, protocol 11, stage packet 2 and receipt projection format 2. Existing
+unsupported or malformed store metadata is refused before DDL. There are no task-store migrations or
+compatibility branches; use a fresh approved home for new tasks. An unsupported derived receipt format is
+rebuilt explicitly with repair.
 
 Registered tools expose immutable JSON Schema value contracts. python-jsonschema performs validation;
 the local static profile disallows foreign retrieval, dynamic binding and unknown/deprecated schema keywords.
@@ -111,8 +130,9 @@ inputs, parameters, workflow steps, body and evidence;
 structure-aware splitting uses the fixed model tokenizer and a bounded token budget without silently
 truncating the remainder. Retrieval fuses LanceDB BM25 with ICU segmentation and exact-vector E5-large results using
 weighted RRF (full-text 2:1) over per-path asset ranks. The fixed profile records fusion weights,
-model source/revision/file SHA256, tokenizer, prefixes, normalization,
-field scope and backend version.
+model source/revision, the six actually consumed file hashes (ONNX model, external data, tokenizer and
+three tokenizer/config JSON files), tokenizer, prefixes, normalization, field scope and backend version.
+Dependency upgrades reopen the consumer audit that fixes this file set.
 
 Each projection records `source_generation` (maximum asset-event sequence), a local epoch, the profile id
 and the LanceDB table version. Index writes happen first; the pointer is committed in the main database
@@ -120,11 +140,17 @@ only after they finish. A query takes one short SQLite read snapshot for G, acti
 requires the pointer G to equal G exactly and the profile/epoch to match, releases the transaction, then
 opens a separate table handle and selects the recorded version. Filters use exact asset refs; candidates
 and retired versions are excluded from ordinary discovery. Missing, stale, mismatched or unavailable
-indexes return `search_not_ready` with the preparation route; they never become an empty success. The
-explicit `assets search --refresh` preparation downloads the fixed revision with the locked SDK, verifies
-every declared model file SHA256, and then uses the same fixed directory for the tokenizer and embeddings.
-Ordinary search passes `local_files_only=True` and an explicit fixed directory; it does not download or
-start another revision. The index is a rebuildable cache; SQLite asset events remain the authority. The agent
+indexes return `search_not_ready` with the offending stage and a preparation route; they never become an
+empty success. `assets prepare` is the shared explicit preparation service: it downloads the fixed revision
+when absent with the locked SDK, re-verifies every consumed file by streamed SHA-256 (bypassing an earlier
+in-process verification), and builds no projection or inference. `assets search --refresh` composes that
+same service with projection refresh. An explicit refresh on an empty active library returns
+`projection.state=empty` together with the preparation result; a plain empty-library query neither loads
+the model nor creates a projection. Competing preparations serialize on the shared cache. Ordinary search
+passes `local_files_only=True` and an explicit fixed directory; it does not download or start another
+revision. `doctor` observes dependency metadata, model presence and projection separately: presence is
+never `verified`, default doctor does not open the task database or hash weights, and
+`doctor --verify-search` performs the streamed byte verification without download or inference. The index is a rebuildable cache; SQLite asset events remain the authority. The agent
 short list defaults to 8 and ordinary CLI pages to 50, both capped at 200; an opaque cursor binds the
 query, scope, kind, source generation, profile, table and version. Empty queries browse active heads
 without model execution. Fusion uses per-path asset ranks with weighted RRF (full-text 2:1), so adding
@@ -134,12 +160,14 @@ Maintenance uses ordinary tasks. Adoption requires successful validation of the 
 including an asset-fitness judgment. Changed bases reject stale adoption. Sharing transports an asset package,
 never installs code, and requires local validation after import. Scope is a local namespace.
 Retirement excludes an asset from active selection; immutable history supports inspection and new rollback proposals.
-Learning freezes the source snapshot, creates its maintenance task and appends the linked source decision
-in one main-database transaction. Its input identifies the source task and sequence before that decision;
-the reply identifies the committed decision sequence. Either write failing rolls back the child, blobs
-and source decision together; the separate document archive may retain unreferenced derived blocks.
-Each delivery offers an explicit `maintain`, `defer` or `no_change` learning decision; unresolved deferrals
-remain discoverable across tasks and sessions through `todos`, as well as the source's `next` packet.
+Learning freezes the source's recorded history (replayed without the current checker registry) with a
+separately labelled current assessment, creates its maintenance task and appends the linked source
+decision in one main-database transaction. Its input identifies the source task and sequence before that
+decision; the reply identifies the committed decision sequence. Either write failing rolls back the child,
+blobs and source decision together; the separate document archive may retain unreferenced derived blocks.
+Each closed task offers an explicit `maintain`, `defer` or `no_change` learning decision, whether or not a
+local export currently validates; unresolved deferrals remain discoverable across tasks and sessions
+through `todos`, as well as the source's `next` packet.
 Asset packages may declare structured applicability/dependencies/invalidation, which stay in the
 package and enter the retrieval projection. A task agreement may fix adopted governance asset refs; those
 assets are pinned by `asset.read` and remain independent of search top-k. A successful decision advances

@@ -38,6 +38,7 @@ class State:
     question_count: int = 0
     outcome: str | None = None
     checker_contracts: dict[str, str] = field(default_factory=dict)
+    live_checkers: bool = False
 
     @property
     def snapshot(self) -> dict[str, Any] | None:
@@ -212,7 +213,7 @@ class State:
         if self.execution_conflicts():
             return "inspect_conflict"
         if self.outcome is not None:
-            return "delivered"
+            return "closed"
         if self.complete():
             return "close"
         if self.question is not None:
@@ -454,11 +455,11 @@ def review_is_grounded(
         or review.get("checker_contract") != call["contract_ref"]
     ):
         return False
-    if (
-        checker_contracts is not None
-        and capability in checker_contracts
-        and checker_contracts[capability] != call["contract_ref"]
-    ):
+    recorded_contract = None if checker_contracts is None else checker_contracts.get(capability)
+    if state.live_checkers:
+        if recorded_contract != call["contract_ref"]:
+            return False
+    elif recorded_contract is not None and recorded_contract != call["contract_ref"]:
         return False
     target = review.get("target")
     if not isinstance(target, dict):

@@ -2,7 +2,14 @@ name: Check
 on: [push, pull_request]
 jobs:
   check:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1, verified against official tag
         with:
@@ -15,6 +22,8 @@ jobs:
       - run: 'python -m pip install --require-hashes --only-binary=:all: -r skills/fairy/scripts/requirements-search.lock'
       - run: python -m pip install -r requirements-dev.lock
       - run: python -m pip install --no-deps --no-build-isolation -e .
+      - run: python -m pip check
       - run: python dev/check.py
+      - run: python dev/smoke_task.py
       - run: python -m build --no-isolation
       - run: python dev/package_skill.py

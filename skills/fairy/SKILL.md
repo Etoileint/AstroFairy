@@ -26,17 +26,25 @@ python <skill-directory>/scripts/fairy.py --home <approved-data-directory> ...
 ```
 
 On first use, run `doctor`. It checks the interpreter, locked dependencies, SQLite capabilities, BagIt
-delivery readiness and directory ancestry without creating task data. If preparation is needed, follow
+delivery readiness, directory ancestry, search dependency metadata and model-file presence without
+creating task data. Its search observation is layered: dependency metadata, model presence and an
+unchecked projection are distinct facts. `doctor --verify-search` additionally stream-hashes the six
+fixed model files without downloading, indexing or inference. If preparation is needed, follow
 [runtime preparation](references/runtime.md) once in an approved directory and reuse that interpreter.
 The launcher never installs packages silently. Keep the same home to resume a task; `next TASK` is a
 read-only stage packet and does not consume the invocation budget.
 
-The packet has the current `task`, `revision`, `seq`, `action`, `payload`, `completion` and `recovery`
-fields. Read them in that order. `payload` is a template generated from the current agreement and recorded
-outputs; replace angle-bracket text and choose roles/targets/verdicts from the actual work. A template is
-not evidence and does not authorize a side effect. Submit it only through the runner's admission boundary.
-Use free `read DOCUMENT [--task TASK] --pointer /FIELD` for history or deferred responses; `next` reports
-`deferred` handles rather than inventing missing values.
+The packet has the current `task`, `revision`, `seq`, `action`, `payload`, `acceptance`, `delivery` and
+`recovery` fields. Read them in that order. `acceptance.assessment.missing_checkers` lists mechanical
+checker capabilities absent from the current runtime; a missing current checker fails current
+applicability closed even when historical receipts stay valid. `payload` is a template generated from the current agreement
+and recorded outputs; replace angle-bracket text and choose roles/targets/verdicts from the actual work.
+A template is not evidence and does not authorize a side effect. Submit it only through the runner's
+admission boundary. `acceptance` reports current content/evidence acceptance with the current checker
+assessment identity; it is not proof that a local bag exists. `delivery` reports a cheap observation of
+the export at the packet's seq (`absent`, `unverified`, `unsafe` or `not_closed`); a previous process
+success never makes it `validated`. Use free `read DOCUMENT [--task TASK] --pointer /FIELD` for history
+or deferred responses; `next` reports `deferred` handles rather than inventing missing values.
 
 ## Define the agreement
 
@@ -70,9 +78,13 @@ explicit user requirements needs a new forwarded answer as `user_basis`.
 
 Before organizing the work, check relevant adopted methods with `assets search QUERY`. The local hybrid
 index combines BM25/ICU, multilingual E5 vectors and weighted RRF; candidates and retired versions are
-excluded. If it returns `search_not_ready`, run `assets search --refresh` once; it explicitly downloads
-and verifies the fixed model revision and files, then rebuilds the projection. Ordinary searches use the
-fixed local directory and never download another revision. Read the short list and applicability; similarity is not permission to execute
+excluded. If it returns `search_not_ready`, check the error's `stage` field. For the model stage, run
+`assets prepare` once: it downloads (when absent) and verifies the fixed revision's six consumed files
+using SHA-256, with no projection build and no inference. `assets search --refresh` composes the same
+preparation service with a projection rebuild. Ordinary searches use the fixed local directory and never
+download another revision. An explicit refresh on an empty active library still prepares the model and
+returns `projection.state=empty` with the preparation result; a plain empty-library query does not load
+the model. Read the short list and applicability; similarity is not permission to execute
 a method. Empty queries browse active heads; `--scope` and `--kind` narrow discovery. `asset.search`
 defaults to 8 results; continue a larger page with `cursor`/`next_cursor` (up to 200 per page). Reading
 returned context with `content.read` or `asset.read` is free; model requests, searches, checks, writes
@@ -153,13 +165,38 @@ Close with the actual outcome:
 current checks passing, no unresolved failure or question, and settled execution. Otherwise return an
 honest `partial`, `failed` or `cancelled` result with the specific gap.
 
+Closing records the outcome; it does not by itself prove a local export. The response keeps the
+operation identity (`task`, committed `seq`, `outcome`) and adds a `delivery` object. A successful export
+has `delivery.state=validated` with the exported revision/seq/snapshot, `files`, `bag_path`,
+`receipt_path`, `instructions_path`, `artifact_path` (single file) and verification depth/time. Complete
+the delivery step on that result; do not loop back through `next` demanding a permanent validated state.
+
+If export fails, the recorded close/fact remains committed: read `delivery.state=failed`, its
+`committed`/`committed_seq`, `selection`/`selected_seq` (the frozen snapshot actually selected; `unknown`
+when selection had not completed), the typed `error` and the recovery command. Do not repeat the effect,
+close, report, feedback, learning decision or other recorded action. Run `deliver TASK` to retry only the
+derived export. A rejected transaction reports `details.committed=false`; a COMMIT whose outcome cannot
+be confirmed reports `committed="unknown"` and must be inspected, never blindly repeated. A failed write
+handler reports `effect_state="unknown"` for the external effect, not commit certainty. An invoke failure
+keeps `call`, `operation`, `known_seq`, `attempted_seq` and `recovery.command = inspect TASK --history`;
+inspect before retrying a rejected or unconfirmed invocation. A delivery failure after validated staging
+keeps `task`/`completed`/`published` and any `quarantined` identity with `recovery = deliver TASK`, including
+native rename, post-publication inspection and lock-release failures. A later `next` reports `deliver`, `verify_delivery` (candidate exists; run ordinary
+`deliver` to fully validate) or `inspect_delivery` (unsafe/inaccessible path; inspect before acting) and
+keeps `inspect_conflict` first when execution conflicts exist.
+
 The runner builds a standard BagIt 1.0 directory with an explicit `BagIt-Version: 1.0` header under
-`deliveries/<task>/<seq>/`: `data/` holds the formal
-members, with payload/tag manifests, receipt and a concise README. It performs full byte validation and
-publishes atomically. Give the user the direct `files` links plus `bag_path`, `receipt_path` and
-`instructions_path`. A single file also has `artifact_path`. Existing same-seq deliveries are revalidated
-and reused; late facts create a new seq directory without rewriting the old one. Use `deliver TASK` to
-regenerate or revalidate an export.
+`deliveries/<task>/<seq>/`: `data/` holds the formal members, with payload/tag manifests, a receipt
+projection (format 2, stable for the same seq and recorded checker identities) and a concise README. It
+performs full byte validation and publishes atomically. Existing same-seq deliveries are revalidated and
+reused; late facts create a new seq directory without rewriting the old one. Use
+`deliver TASK [--expected-seq S]` to regenerate or revalidate an export. If an existing derived export
+is invalid or uses an unsupported projection, ordinary deliver refuses with a repair command; use
+`deliver TASK --repair --expected-seq S` to build and fully validate a replacement first, quarantine the
+old directory without deleting it, and publish. Path-safety refusals use `unsafe_delivery`: repair never
+moves or follows a redirect or an unsafe descendant (symlink/junction/reparse), and a failure after
+publication reports the completed quarantine/publication actions and their identities. Never point
+repair at the task database.
 
 ## Short example
 
@@ -186,7 +223,8 @@ python <skill-directory>/scripts/fairy.py --home <home> submit TASK --file close
 - [Learning](references/learning.md): after real feedback, when a reusable method or maintenance decision is supported.
 - [Operation](references/operation.md): backup, restore and administrative state recovery.
 
-After delivery, `next` offers an explicit learning decision: `maintain`, `defer` or `no_change`. Record
+After a task is closed, `next` offers an explicit learning decision: `maintain`, `defer` or `no_change`,
+independently of whether the local export currently validates. Record
 real feedback when available. A maintain decision records the source decision and creates a normal
 maintenance task linked by id; deferred items remain visible as todos and `todos` discovers them across
 tasks; no-change is a valid evidence-backed conclusion. Prefer revision or retirement over accumulation.

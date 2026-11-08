@@ -105,14 +105,17 @@ are described in [evidence.md](docs/development/evidence.md).
 
 ```sh
 ASTROFAIRY_MODEL_CACHE="$PWD/.cache/fastembed" .venv/bin/python -B dev/evaluate_retrieval.py --root .evaluation/retrieval-check --out .evaluation/retrieval-check/results.json
+.venv/bin/python -B -m astrofairy --home .evaluation/preparation-check doctor --verify-search
 ASTROFAIRY_TEST_E5=1 ASTROFAIRY_MODEL_CACHE="$PWD/.cache/fastembed" .venv/bin/python -B -m unittest astrofairy.tests.test_search_contracts.SearchContractTests.test_real_e5_model_smoke_when_explicitly_enabled -v
 .venv/bin/python -B dev/evaluate_learning.py --root .evaluation/learning-check --out .evaluation/learning-check/results.json
 .venv/bin/python -B dev/verify_recovery.py --help
 ```
 
-The retrieval fixture seeds adopted assets before refresh. Empty-library preparation is separately
-reported in issue #2; do not use an empty-library success as proof that the model has been prepared.
-Set `ASTROFAIRY_MODEL_CACHE` for learning evaluation too. Real E5 has substantial disk/memory cost; see
+The retrieval fixture seeds adopted assets before refresh. An explicit refresh on an empty active library
+now runs the shared preparation and reports `projection.state=empty`; use `doctor --verify-search` for a
+byte-only model check and `assets prepare` for explicit preparation without a projection. A test double or
+an empty-library response still does not prove that the real fixed model was downloaded or that inference
+works. Set `ASTROFAIRY_MODEL_CACHE` for learning evaluation too. Real E5 has substantial disk/memory cost; see
 the measured [release limits](docs/releases/v0.1.0a2.md). The evaluation scripts currently use Unix
 resource accounting. Do not infer Windows/macOS or native-agent coverage from these Linux runs.
 

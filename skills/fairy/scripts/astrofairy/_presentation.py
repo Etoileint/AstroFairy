@@ -20,16 +20,40 @@ _SCALARS = {
     "action",
     "status",
     "outcome",
+    "committed",
+    "committed_seq",
     "budget_left",
     "execution_settled",
     "ready",
     "resource_warning",
     "provisional",
 }
+_DELIVERY_SCALARS = {"state", "task", "seq", "target", "committed", "committed_seq", "selected_seq"}
+
+
+def _delivery_control(value: Any) -> dict[str, Any]:
+    if not isinstance(value, dict):
+        return {}
+    summary = {
+        key: item
+        for key, item in value.items()
+        if key in _DELIVERY_SCALARS
+        and (
+            type(item) in {int, bool, type(None)}
+            or (isinstance(item, str) and len(item.encode("utf-8")) <= LIMITS.control_scalar_bytes)
+        )
+    }
+    error = value.get("error")
+    if isinstance(error, dict) and isinstance(error.get("error"), str):
+        summary["error"] = error["error"]
+    recovery = value.get("recovery")
+    if isinstance(recovery, dict) and isinstance(recovery.get("command"), str):
+        summary["recovery"] = recovery["command"]
+    return summary
 
 
 def controls(value: dict[str, Any], task: str | None) -> dict[str, Any]:
-    result = {
+    result: dict[str, Any] = {
         key: item
         for key, item in value.items()
         if key in _IDENTITIES and isinstance(item, str) and _TASK.fullmatch(item)
@@ -45,6 +69,9 @@ def controls(value: dict[str, Any], task: str | None) -> dict[str, Any]:
             or (isinstance(item, str) and len(item.encode("utf-8")) <= LIMITS.control_scalar_bytes)
         )
     )
+    delivery = _delivery_control(value.get("delivery"))
+    if delivery:
+        result["delivery"] = delivery
     return result
 
 

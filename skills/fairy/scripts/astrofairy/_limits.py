@@ -64,6 +64,7 @@ class Limits:
     handoff_json_bytes: int = _limit(16 * MiB, "B41", "bytes", "development handoff metadata")
     submission_bytes: int = _limit(1 * MiB, "B41", "bytes", "development submission document")
     delivery_lock_seconds: int = _limit(30, "B33", "seconds", "delivery directory serialization")
+    model_prepare_lock_seconds: int = _limit(300, "B42", "seconds", "shared model-cache preparation")
 
     def manifest(self) -> list[dict[str, Any]]:
         return [

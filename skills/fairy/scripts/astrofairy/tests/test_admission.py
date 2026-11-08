@@ -168,13 +168,16 @@ class AdmissionTests(WorkshopTest):
                     "BEGIN SELECT RAISE(ABORT, 'injected decision failure'); END"
                 )
                 try:
-                    with self.assertRaises(sqlite3.IntegrityError):
+                    with self.assertRaises(FairyError) as caught:
                         if native:
                             self.workshop.learning_task(task, seq)
                         else:
                             self.workshop.submit(task, {"op": "learn", "expected_seq": seq})
                 finally:
                     self.workshop.store.connection.execute("DROP TRIGGER fail_learning")
+                self.assertEqual(caught.exception.code, "storage_failed")
+                self.assertFalse(caught.exception.details["committed"])
+                self.assertIsInstance(caught.exception.__cause__.__cause__, sqlite3.IntegrityError)
                 self.assertEqual(self.workshop.store.tasks(), tasks)
                 self.assertEqual(canonical(self.workshop.inspect(task, history=True)), history)
                 self.assertEqual(

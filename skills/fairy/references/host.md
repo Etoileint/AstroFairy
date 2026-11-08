@@ -2,19 +2,30 @@
 
 The conversation host does the reasoning. The local runner manages state and evidence.
 Use a single approved writable home. Keep returned task and call ids; users need not manage them.
-This development checkout uses protocol/store format 10. Unsupported existing stores are refused without
-migration; choose a fresh approved home for new work.
+This development checkout uses protocol 11, stage packet 2, receipt projection 2 and store format 10.
+Unsupported existing stores or receipts are refused without a task-store migration; choose a fresh
+approved home for new work. An unsupported derived receipt can be rebuilt explicitly with `deliver --repair`.
 Use `capabilities --query TEXT` for bounded summary pages (default 12, up to 100, `--cursor`), then
 `capabilities --name NAME` for a tool's
 actual inputSchema and optional outputSchema. Read full definitions only when needed.
 `next` is a read-only stage packet and may be repeated without consuming invocation budget. It returns
-`stage_packet_version`, `task`, `revision`, `seq`, `action`, `payload`, `completion` and `recovery`.
+`stage_packet_version` (2), `task`, `revision`, `seq`, `action`, `payload`, `acceptance`, `delivery`,
+`deliver_command`, `inspect_command` and `recovery`.
 `payload` is a submission template generated from the current agreement and recorded outputs; replace
 angle-bracket text and choose roles/targets/verdicts from the actual work. A template is not evidence and
-does not authorize an effect. `completion` reports provisional state, required roles/criteria, open issues,
-unresolved failures, pending questions and execution settlement. `recovery` gives task/seq/revision,
-workspace, snapshot, pending calls and the free-read route. Historical details remain available through
-free `read` fragments; do not infer missing values from a deferred handle.
+does not authorize an effect. `acceptance` reports current content/evidence acceptance (provisional state,
+required roles/criteria, open issues, unresolved failures, pending questions, execution settlement) with
+the current checker-contract assessment identity; it does not certify a local export. `delivery` is a
+cheap observation for the packet's seq: `not_closed`, `absent`, `unverified` or `unsafe`.
+`acceptance.assessment.missing_checkers` names mechanical capabilities absent from the current runtime;
+missing current checkers make current acceptance fail closed while historical receipts remain reusable. A prior
+process's success never makes it permanently `validated`; a successful `deliver` returns
+`delivery.state=validated` for the operation that just completed. Closed tasks map to action `deliver`
+(absent), `verify_delivery` (candidate exists; run ordinary `deliver` to fully validate) or
+`inspect_delivery` (unsafe/inaccessible path); `inspect_conflict` keeps precedence. Use
+`deliver_command`/`inspect_command` when present. `recovery` gives task/seq/revision, workspace, snapshot,
+pending calls and the free-read route. Historical details remain available through free `read`
+fragments; do not infer missing values from a deferred handle.
 `schema` is generated from the parser's field table. `expected_seq` rejects stale submissions.
 A single-event submit's `seq` identifies its own committed event, not any later concurrent writer.
 Refresh next to observe later facts; successful receipt refresh may use a newer snapshot.
@@ -152,9 +163,10 @@ Look up the accepted value contract through `capabilities --name NAME`. Invalid 
 before invocation or budget charge. Asset search uses the local LanceDB BM25/ICU + vector weighted-RRF projection;
 default 8, maximum 200, optional `cursor`, `scope`/`kind`. Results include the source generation, fixed model profile
 and table version. An empty query browses active heads. A missing/stale projection or model returns
-`search_not_ready` with `assets search --refresh` as the explicit preparation route; that refresh downloads
-and SHA256-verifies the fixed revision, while ordinary search passes the fixed local directory and never
-downloads. Reading an adopted asset pins its exact version and exposes structured applicability,
+`search_not_ready` with the offending `stage` and a recovery route: `assets prepare` (download when absent,
+SHA-256 verify six fixed files, no index, no inference) or `assets search --refresh` (same preparation plus
+projection rebuild). An explicit refresh on an empty active library returns `projection.state=empty` with
+the preparation result; ordinary search passes the fixed local directory and never downloads. Reading an adopted asset pins its exact version and exposes structured applicability,
 dependencies and invalidation.
 Read large inputs with bounded `content.read` fragments.
 
@@ -167,6 +179,22 @@ Run `{"op":"check"}` for mechanical criteria, then semantic reviews:
 Add `"target":"CONTENT_REFERENCE"` or `"target":"data/table.csv"` when a criterion has multiple current
 targets; collection criteria usually have one snapshot target. Use `fail` or `unknown` when appropriate.
 Close with `{"op":"close","outcome":"complete"}`.
+The close response keeps the operation identity (`task`, committed `seq`, `outcome`) and adds `delivery`.
+A validated delivery carries the exported revision/seq/snapshot, paths, files and verification depth/time;
+export failure carries `state=failed`, `committed=true`, `committed_seq`, `selection`/`selected_seq` and
+`target` for the frozen export snapshot actually selected (`unknown`/null when selection did not complete),
+the typed error and `recovery.command = deliver TASK`. SQLite and other storage failures during export use
+the same envelope rather than a context-free generic error. Export failure never retracts the committed
+close/fact; do not retry the effect, close, report, feedback or learning decision. Rejected transactions
+carry `details.committed=false`; a COMMIT whose outcome cannot be confirmed carries `committed="unknown"`.
+A failed write handler carries `effect_state="unknown"` for the external effect, not commit certainty.
+An invoke failure keeps `task`, `call`, `operation`, `known_seq` (last confirmed seq) and `attempted_seq`
+(the invocation event that may exist) plus `recovery.command = inspect TASK --history`. Unknown or rejected
+invocations must be inspected before any retry; the handler may not have run, and a lost commit acknowledgment
+does not authorize replay. A delivery failure after validated staging, including a native `OSError` from a
+rename, post-publication check or lock release, retains `task`/`completed`/`published` and `quarantined` when
+present plus `recovery = deliver TASK`; a lock-release failure does not turn a published result into an
+unidentified generic failure.
 Reviews bind the agreement revision, criterion fingerprint, checker contract, scope and exact target.
 Semantic reviews bind the current snapshot. A new snapshot does not inherit semantic or collection-level
 judgments; pure content mechanical observations may be reused when criterion, checker contract,
@@ -182,7 +210,12 @@ with `bagit.txt`, a SHA256 payload manifest, tag manifests, `bag-info.txt`, `rec
 Generation uses the vendored BagIt
 wheel and performs full byte validation, never fast validation. An existing same-seq directory is revalidated
 and returned without overwriting; late facts create a new seq directory and leave the old delivery intact.
-`deliver <task>` can regenerate or revalidate that export. `inspect <task> --history` shows events.
+`deliver <task> [--expected-seq S]` can regenerate or revalidate that export; a stale expected seq is a
+conflict. `deliver <task> --repair --expected-seq S` builds and fully validates a replacement first,
+quarantines an invalid derived directory without deleting it, and publishes; path-safety refusals use
+`unsafe_delivery` and are never moved or followed. A repair failure after quarantine or publication
+reports `completed`, `published` and the quarantine identity, so the host can recover without claiming the
+old state was untouched. `inspect <task> --history` shows events.
 Invocation budget limits new calls. Existing reports, answers, publication and semantic review remain
 available at zero budget; required mechanical checks still need a registered call. Follow current issues.
 Resource policy defaults are a warning at 128 calls and a final limit at 1024; the W05 calibration froze

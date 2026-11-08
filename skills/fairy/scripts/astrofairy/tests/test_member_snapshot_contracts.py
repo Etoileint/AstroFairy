@@ -54,7 +54,7 @@ class MemberSnapshotContractTests(WorkshopTest):
         self.assertEqual({member["ref"] for member in snapshot["members"]}, {first["ref"]})
         self.workshop.submit(task, {"op": "check"})
         self.semantic(task)
-        delivery = self.workshop.submit(task, {"op": "close", "outcome": "complete"})
+        delivery = self.workshop.submit(task, {"op": "close", "outcome": "complete"})["delivery"]
         self.assertEqual(sorted(delivery["files"]), ["a.txt", "b.txt"])
         self.assertEqual(
             [Path(delivery["files"][name]).read_text(encoding="utf-8") for name in ("a.txt", "b.txt")],

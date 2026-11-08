@@ -1,0 +1,486 @@
+{
+  "description": "Frozen event-to-receipt golden for projection format 2; changing semantics requires a new projection format.",
+  "events": [
+    {
+      "kind": "created",
+      "payload": {
+        "inputs": [],
+        "origin": "host_report",
+        "spec": {
+          "assumptions": [
+            "The report is the only member"
+          ],
+          "criteria": [
+            {
+              "basis": "Provisional interpretation of the task request",
+              "checker": "semantic",
+              "description": "The report answers the stated goal",
+              "id": "goal",
+              "origin": "derived",
+              "parameters": {},
+              "required": true,
+              "scope": "collection",
+              "target": null
+            },
+            {
+              "basis": "Provisional interpretation of the task request",
+              "checker": "nonempty",
+              "description": "The delivered collection is nonempty",
+              "id": "usable",
+              "origin": "derived",
+              "parameters": {},
+              "required": true,
+              "scope": "collection",
+              "target": null
+            }
+          ],
+          "effects": [
+            "read",
+            "reason",
+            "write"
+          ],
+          "goal": "Produce a short checked report",
+          "governance": [],
+          "governance_scope": [],
+          "provisional": false,
+          "request": "Prepare a grounded delivery receipt",
+          "required_roles": [
+            "report"
+          ],
+          "resources": {
+            "fingerprint": "067ca221caf04841171803ee378ad2a3ed631382c6ef92c24cd6c48b8f74e884",
+            "policy": {
+              "format": 1,
+              "warning_calls": 128,
+              "work_calls": 1024
+            }
+          }
+        }
+      },
+      "seq": 1
+    },
+    {
+      "kind": "invoked",
+      "payload": {
+        "capability": "host.model",
+        "effect": "reason",
+        "id": "d2cc9c4ed4fe41d1a61aedcb04b9a4cc",
+        "operation": "host.model:8786efbdfc3011479b34ee0112ebb07602329645cc44ec4f6807251723014b56",
+        "origin": "runner",
+        "purpose": "Write the report",
+        "refs": []
+      },
+      "seq": 2
+    },
+    {
+      "kind": "observed",
+      "payload": {
+        "call": "d2cc9c4ed4fe41d1a61aedcb04b9a4cc",
+        "origin": "model",
+        "outputs": [
+          {
+            "bytes": 30,
+            "media_type": "text/markdown",
+            "path": "report.md",
+            "ref": "9eba62b70d064b152d1864ab9d9e429567144d00d27209411455551a19a45836"
+          }
+        ],
+        "status": "ok"
+      },
+      "seq": 3
+    },
+    {
+      "kind": "published",
+      "payload": {
+        "format": 1,
+        "members": [
+          {
+            "bytes": 30,
+            "media_type": "text/markdown",
+            "path": "report.md",
+            "ref": "9eba62b70d064b152d1864ab9d9e429567144d00d27209411455551a19a45836",
+            "role": "report"
+          }
+        ],
+        "origin": "runner",
+        "ref": "0843ca8a47c00f3ca9c7b3c5d27a6140892b8d277dc48a851f0875f675f48026"
+      },
+      "seq": 4
+    },
+    {
+      "kind": "invoked",
+      "payload": {
+        "capability": "snapshot.check",
+        "contract_ref": "28dd3e670e7a6e9e33fd9a9700f3cde0a5db640cba12f6b4e83b8c1d7717ecd6",
+        "counted": true,
+        "effect": "read",
+        "id": "3fe0e82fe33644d08c1571b9ee6af296",
+        "operation": "snapshot.check:53ae7c3c07455a243077eaf56c3129bf8ddd4a62cc312cba0191a1431bde6fd6",
+        "origin": "runner",
+        "parameters": {
+          "checker": "nonempty",
+          "parameters": {},
+          "paths": [
+            "report.md"
+          ],
+          "snapshot": "0843ca8a47c00f3ca9c7b3c5d27a6140892b8d277dc48a851f0875f675f48026"
+        },
+        "reconciler": null,
+        "reconciles": null,
+        "revision": 1
+      },
+      "seq": 5
+    },
+    {
+      "kind": "observed",
+      "payload": {
+        "call": "3fe0e82fe33644d08c1571b9ee6af296",
+        "origin": "tool",
+        "outputs": [],
+        "result": {
+          "basis": "All checked members contain bytes",
+          "checked": {
+            "checker": "nonempty",
+            "parameters": {},
+            "paths": [
+              "report.md"
+            ],
+            "snapshot": "0843ca8a47c00f3ca9c7b3c5d27a6140892b8d277dc48a851f0875f675f48026"
+          },
+          "outputs": [],
+          "verdict": "pass"
+        },
+        "status": "ok"
+      },
+      "seq": 6
+    },
+    {
+      "kind": "reviewed",
+      "payload": {
+        "basis": "All checked members contain bytes",
+        "call": "3fe0e82fe33644d08c1571b9ee6af296",
+        "checker_capability": "snapshot.check",
+        "checker_contract": "28dd3e670e7a6e9e33fd9a9700f3cde0a5db640cba12f6b4e83b8c1d7717ecd6",
+        "criterion": "usable",
+        "criterion_fingerprint": "bd078402368460f84e59d466dbdf08481de8b49d6785f0d13cb318773e93d231",
+        "evidence": [
+          "9eba62b70d064b152d1864ab9d9e429567144d00d27209411455551a19a45836"
+        ],
+        "producer": "tool:nonempty",
+        "replaces": [],
+        "revision": 1,
+        "scope": "collection",
+        "snapshot": "0843ca8a47c00f3ca9c7b3c5d27a6140892b8d277dc48a851f0875f675f48026",
+        "target": {
+          "paths": [
+            "report.md"
+          ],
+          "scope": "collection",
+          "snapshot": "0843ca8a47c00f3ca9c7b3c5d27a6140892b8d277dc48a851f0875f675f48026"
+        },
+        "verdict": "pass"
+      },
+      "seq": 7
+    },
+    {
+      "kind": "reviewed",
+      "payload": {
+        "basis": "The report directly states the checked receipt content",
+        "call": null,
+        "checker_capability": null,
+        "checker_contract": null,
+        "criterion": "goal",
+        "criterion_fingerprint": "a151602373165a07aafe1985b73825dcad8594706275bbef61e8d3487415c71f",
+        "evidence": [
+          "9eba62b70d064b152d1864ab9d9e429567144d00d27209411455551a19a45836"
+        ],
+        "producer": "model",
+        "replaces": [],
+        "revision": 1,
+        "scope": "collection",
+        "snapshot": "0843ca8a47c00f3ca9c7b3c5d27a6140892b8d277dc48a851f0875f675f48026",
+        "target": {
+          "paths": [
+            "report.md"
+          ],
+          "scope": "collection",
+          "snapshot": "0843ca8a47c00f3ca9c7b3c5d27a6140892b8d277dc48a851f0875f675f48026"
+        },
+        "verdict": "pass"
+      },
+      "seq": 8
+    },
+    {
+      "kind": "closed",
+      "payload": {
+        "note": "",
+        "origin": "runner",
+        "outcome": "complete"
+      },
+      "seq": 9
+    },
+    {
+      "kind": "feedback",
+      "payload": {
+        "kind": "positive",
+        "origin": "user_report",
+        "text": "The receipt layout was easy to inspect"
+      },
+      "seq": 10
+    }
+  ],
+  "format": 1,
+  "receipt": {
+    "body": {
+      "assets": [],
+      "bag": {
+        "format": "bagit-1.0",
+        "payload_manifest": "manifest-sha256.txt",
+        "validation": "full"
+      },
+      "calls": [
+        {
+          "call": "d2cc9c4ed4fe41d1a61aedcb04b9a4cc",
+          "capability": "host.model",
+          "effect": "reason",
+          "id": "d2cc9c4ed4fe41d1a61aedcb04b9a4cc",
+          "invoked_seq": 2,
+          "operation": "host.model:8786efbdfc3011479b34ee0112ebb07602329645cc44ec4f6807251723014b56",
+          "origin": "model",
+          "outputs": [
+            {
+              "bytes": 30,
+              "media_type": "text/markdown",
+              "path": "report.md",
+              "ref": "9eba62b70d064b152d1864ab9d9e429567144d00d27209411455551a19a45836"
+            }
+          ],
+          "purpose": "Write the report",
+          "refs": [],
+          "status": "ok"
+        },
+        {
+          "call": "3fe0e82fe33644d08c1571b9ee6af296",
+          "capability": "snapshot.check",
+          "contract_ref": "28dd3e670e7a6e9e33fd9a9700f3cde0a5db640cba12f6b4e83b8c1d7717ecd6",
+          "counted": true,
+          "effect": "read",
+          "id": "3fe0e82fe33644d08c1571b9ee6af296",
+          "invoked_seq": 5,
+          "operation": "snapshot.check:53ae7c3c07455a243077eaf56c3129bf8ddd4a62cc312cba0191a1431bde6fd6",
+          "origin": "tool",
+          "outputs": [],
+          "parameters": {
+            "checker": "nonempty",
+            "parameters": {},
+            "paths": [
+              "report.md"
+            ],
+            "snapshot": "0843ca8a47c00f3ca9c7b3c5d27a6140892b8d277dc48a851f0875f675f48026"
+          },
+          "reconciler": null,
+          "reconciles": null,
+          "result": {
+            "basis": "All checked members contain bytes",
+            "checked": {
+              "checker": "nonempty",
+              "parameters": {},
+              "paths": [
+                "report.md"
+              ],
+              "snapshot": "0843ca8a47c00f3ca9c7b3c5d27a6140892b8d277dc48a851f0875f675f48026"
+            },
+            "outputs": [],
+            "verdict": "pass"
+          },
+          "revision": 1,
+          "status": "ok"
+        }
+      ],
+      "delivery_files": {
+        "data/report.md": {
+          "bytes": 30,
+          "media_type": "text/markdown",
+          "role": "report"
+        }
+      },
+      "delivery_plan": null,
+      "delivery_progress": [],
+      "execution_conflicts": [],
+      "execution_settled": true,
+      "feedback": [
+        {
+          "kind": "positive",
+          "origin": "user_report",
+          "seq": 10,
+          "text": "The receipt layout was easy to inspect"
+        }
+      ],
+      "format": 2,
+      "governance": [],
+      "inputs": [],
+      "issues": [],
+      "learning_decisions": [],
+      "missing_delivery_members": [],
+      "missing_governance": [],
+      "missing_roles": [],
+      "outcome": "complete",
+      "resources": {
+        "exhausted": false,
+        "fingerprint": "067ca221caf04841171803ee378ad2a3ed631382c6ef92c24cd6c48b8f74e884",
+        "free_calls": 0,
+        "policy": {
+          "format": 1,
+          "warning_calls": 128,
+          "work_calls": 1024
+        },
+        "remaining_calls": 1022,
+        "used_calls": 2,
+        "warning": false
+      },
+      "reviews": [
+        {
+          "basis": "All checked members contain bytes",
+          "call": "3fe0e82fe33644d08c1571b9ee6af296",
+          "checker_capability": "snapshot.check",
+          "checker_contract": "28dd3e670e7a6e9e33fd9a9700f3cde0a5db640cba12f6b4e83b8c1d7717ecd6",
+          "criterion": "usable",
+          "criterion_fingerprint": "bd078402368460f84e59d466dbdf08481de8b49d6785f0d13cb318773e93d231",
+          "evidence": [
+            "9eba62b70d064b152d1864ab9d9e429567144d00d27209411455551a19a45836"
+          ],
+          "id": 7,
+          "producer": "tool:nonempty",
+          "replaces": [],
+          "revision": 1,
+          "scope": "collection",
+          "snapshot": "0843ca8a47c00f3ca9c7b3c5d27a6140892b8d277dc48a851f0875f675f48026",
+          "target": {
+            "paths": [
+              "report.md"
+            ],
+            "scope": "collection",
+            "snapshot": "0843ca8a47c00f3ca9c7b3c5d27a6140892b8d277dc48a851f0875f675f48026"
+          },
+          "verdict": "pass"
+        },
+        {
+          "basis": "The report directly states the checked receipt content",
+          "call": null,
+          "checker_capability": null,
+          "checker_contract": null,
+          "criterion": "goal",
+          "criterion_fingerprint": "a151602373165a07aafe1985b73825dcad8594706275bbef61e8d3487415c71f",
+          "evidence": [
+            "9eba62b70d064b152d1864ab9d9e429567144d00d27209411455551a19a45836"
+          ],
+          "id": 8,
+          "producer": "model",
+          "replaces": [],
+          "revision": 1,
+          "scope": "collection",
+          "snapshot": "0843ca8a47c00f3ca9c7b3c5d27a6140892b8d277dc48a851f0875f675f48026",
+          "target": {
+            "paths": [
+              "report.md"
+            ],
+            "scope": "collection",
+            "snapshot": "0843ca8a47c00f3ca9c7b3c5d27a6140892b8d277dc48a851f0875f675f48026"
+          },
+          "verdict": "pass"
+        }
+      ],
+      "revision": 1,
+      "role_coverage": {
+        "report": 1
+      },
+      "seq": 10,
+      "snapshot": {
+        "format": 1,
+        "members": [
+          {
+            "bytes": 30,
+            "media_type": "text/markdown",
+            "path": "report.md",
+            "ref": "9eba62b70d064b152d1864ab9d9e429567144d00d27209411455551a19a45836",
+            "role": "report"
+          }
+        ],
+        "origin": "runner",
+        "ref": "0843ca8a47c00f3ca9c7b3c5d27a6140892b8d277dc48a851f0875f675f48026",
+        "seq": 4
+      },
+      "snapshots": [
+        {
+          "format": 1,
+          "members": [
+            {
+              "bytes": 30,
+              "media_type": "text/markdown",
+              "path": "report.md",
+              "ref": "9eba62b70d064b152d1864ab9d9e429567144d00d27209411455551a19a45836",
+              "role": "report"
+            }
+          ],
+          "origin": "runner",
+          "ref": "0843ca8a47c00f3ca9c7b3c5d27a6140892b8d277dc48a851f0875f675f48026",
+          "seq": 4
+        }
+      ],
+      "spec": {
+        "assumptions": [
+          "The report is the only member"
+        ],
+        "criteria": [
+          {
+            "basis": "Provisional interpretation of the task request",
+            "checker": "semantic",
+            "description": "The report answers the stated goal",
+            "id": "goal",
+            "origin": "derived",
+            "parameters": {},
+            "required": true,
+            "scope": "collection",
+            "target": null
+          },
+          {
+            "basis": "Provisional interpretation of the task request",
+            "checker": "nonempty",
+            "description": "The delivered collection is nonempty",
+            "id": "usable",
+            "origin": "derived",
+            "parameters": {},
+            "required": true,
+            "scope": "collection",
+            "target": null
+          }
+        ],
+        "effects": [
+          "read",
+          "reason",
+          "write"
+        ],
+        "goal": "Produce a short checked report",
+        "governance": [],
+        "governance_scope": [],
+        "provisional": false,
+        "request": "Prepare a grounded delivery receipt",
+        "required_roles": [
+          "report"
+        ],
+        "resources": {
+          "fingerprint": "067ca221caf04841171803ee378ad2a3ed631382c6ef92c24cd6c48b8f74e884",
+          "policy": {
+            "format": 1,
+            "warning_calls": 128,
+            "work_calls": 1024
+          }
+        }
+      },
+      "task": "871f43760e55443e9d9e84c5d3c470ed",
+      "unresolved_failures": []
+    },
+    "canonical_sha256": "25032ff0e38a50d0e826bfcd45ce8197ac9ecd29483f7ca2ef72730594088086"
+  },
+  "task": "871f43760e55443e9d9e84c5d3c470ed"
+}

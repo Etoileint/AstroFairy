@@ -1,6 +1,6 @@
 # 当前开发状态
 
-核对日期：2026-11-05。本文件是新接手者的导航；Issue 的实时状态以 GitHub 为准，
+核对日期：2026-11-08。本文件是新接手者的导航；Issue 的实时状态以 GitHub 为准，
 版本事实以标签、发布说明及其对应源码为准。它不代替协议或设计规范。
 
 ## 从这里接手
@@ -16,7 +16,8 @@
 
 - [0.1.0a2 Alpha](https://github.com/Etoileint/AstroFairy/releases/tag/v0.1.0a2)，2026-11-03 发布。
 - 源提交：`1574ce89dd2e29e9a3b0be5997302b32b0bfe335`；技能目录和调用名为 `fairy`。
-- 协议及存储格式10，文档归档格式1；开发期没有旧库迁移或接口兼容负担。
+- 0.1.0a2 的发布事实为协议及存储格式10、文档归档格式1；当前开发工作树已推进到协议11、
+  阶段包2、回执投影2、存储10、归档1。开发期没有旧库迁移或接口兼容负担。
 - [本版双语说明](docs/releases/v0.1.0a2.md)、[项目逻辑讲解](docs/guides/understanding-astrofairy.md)。
 - 发布时主分支及标签 CI 通过；附件下载、校验和、固定版本安装及新依赖环境验证通过。
   [主分支 CI](https://github.com/Etoileint/AstroFairy/actions/runs/41628414958)与
@@ -24,18 +25,49 @@
 
 ## 当前收到的问题
 
-以下为核对日的公开反馈快照，**均未在本次仓库筹备中独立验证，也未修复或关闭**。
-Issue 中的复现步骤和建议是待核实材料，不自动成为实现要求。
+四条公开反馈**保持开放**。W1–W5实现与三轮定向返工已回交；最新W6独立复验确认已登记整改发现闭合，
+**本轮定向整改技术复验通过**。原生/集成验证仍有缺口，专项未整体验收；维护者最终接受、提交/推送/发布未发生。
+Issue中的复现步骤和建议是待核实材料，不自动成为实现要求。
 
-| 入口 | 报告范围 | 接续要求 |
+| 入口 | 已确认根因 | 仍须观察 |
 |---|---|---|
-| [#1](https://github.com/Etoileint/AstroFairy/issues/1) | Windows 检索依赖锁可能缺少平台条件依赖 | 核实锁生成的 marker 求值、目标平台与安装承诺 |
-| [#2](https://github.com/Etoileint/AstroFairy/issues/2) | 空资产库 refresh 可能未按说明预热固定模型 | 核实显式准备入口、空库行为与文档契约 |
-| [#3](https://github.com/Etoileint/AstroFairy/issues/3) | Windows BagIt 清单路径比较可能导致交付失败 | 核实上游路径表示与本项目规范路径之间的边界 |
-| [#4](https://github.com/Etoileint/AstroFairy/issues/4) | 导出失败后 next 可能仍显示 delivered | 核实关闭事实、实际导出与恢复引导之间的关系 |
+| [#1](https://github.com/Etoileint/AstroFairy/issues/1) | 宿主marker求值导致Windows条件依赖遗漏 | 本候选原生Windows哈希安装与完整任务 |
+| [#2](https://github.com/Etoileint/AstroFairy/issues/2) | 空活跃库显式refresh跳过准备，doctor只看依赖元数据 | 冷下载/中断恢复、跨进程缓存准备；不能用已有缓存推理替代 |
+| [#3](https://github.com/Etoileint/AstroFairy/issues/3) | BagIt上游路径表示与项目POSIX分类边界不一致 | 原生Windows完整BagIt及junction/reparse负例 |
+| [#4](https://github.com/Etoileint/AstroFairy/issues/4) | close/晚到事实提交后导出失败仍被推断为delivered，不限于Windows | 原生平台及真实host按准确控制接续；本机关闭/导出/恢复回归已通过 |
 
-#3 与 #4 存在报告关联，后者声称影响不限于 Windows；复现时分别确定成立条件。
-当前没有由本文件额外授予的问题修复、外部消息、提交或发布权限。
+[专项供料](docs/repairs/2026-11-platform-readiness-delivery/supply.md)保留根因试验与权威依据，
+[方案入口](docs/repairs/2026-11-platform-readiness-delivery/README.md)、
+[ADR-0012](docs/adr/0012-platform-readiness-and-delivery-observation.md)与
+[实施计划](docs/repairs/2026-11-platform-readiness-delivery/plan.md)分别承担设计、机制与分派。
+实施同时覆盖历史receipt/当前checker分责、交付redirect拒绝、模型六文件完整消费义务及显式重复验证。
+
+最新[第三次返工独立复验](docs/repairs/2026-11-platform-readiness-delivery/acceptance-recheck3-2026-11-08/README.md)：
+STD01实际工具摘要、F1完整交付进度、F2事务体原生异常确定性、F3未知invoked调用身份均闭合；
+STD02–06、SPEC01–03、GAP01/T35及原REG02保持通过。规范轴0项open，方案轴0项open。
+主验收者独立完整检查249项运行（默认1skip）＋42项开发、真实E5既有缓存推理通过；
+两轴定向测试、原始探针、分发源码核对与封存wheel交付通过。计数重叠，不合计唯一覆盖。
+
+原T04/T10/T11/T13/T14/T32/T34仍partial，见
+[剩余验证与收口](docs/repairs/2026-11-platform-readiness-delivery/acceptance-recheck3-2026-11-08/remaining-validation.md)。
+最低必需矩阵中Linux x86_64、Windows x64尚未取得本候选执行证据；macOS等也未被本轮认证。
+冷下载/中断、跨进程缓存锁、完整skills CLI矩阵、真实host交互尚未验证；配置矩阵、模拟和暖缓存均不能抵销。
+本轮不新增代码返工单，转入原计划剩余验证；不发布跨平台修复声明或关闭Issue。
+维护者提供Windows开发机后，已完成[Windows验证移交包准备](docs/audit/changes/2026-11-08_windows-validation-handoff.md)：
+固定未提交源码、必要Git历史、三制品及原生任务单已封装，本机恢复演练通过；Windows端尚未执行，待回交原始证据。
+
+| 历史关口 | 冻结结论 |
+|---|---|
+| [W1–W5实施回交](docs/audit/changes/2026-11-08_platform-readiness-implementation.md) | 实现与执行者自检完成，交原会话W6验收 |
+| [首轮独立验收](docs/repairs/2026-11-platform-readiness-delivery/acceptance-2026-11-08/README.md) | 确认规范、实现及范围内遗漏，需返工 |
+| [首轮返工独立复验](docs/repairs/2026-11-platform-readiness-delivery/acceptance-recheck-2026-11-08/README.md) | 部分闭合，仍有缺口及返工回归 |
+| [第二次返工独立复验](docs/repairs/2026-11-platform-readiness-delivery/acceptance-recheck2-2026-11-08/README.md) | 多项闭合，剩4类P2 |
+| [第三次返工回交](docs/audit/changes/2026-11-08_platform-readiness-rework3.md) | 执行者完成4类机制修复与自检；独立结论以上述最新复验为准 |
+
+最新回交证据在本机忽略的`.evaluation/issue-repair-implementation/rework3-2026-11-08/`，
+独立复验在`.evaluation/issue-repair-acceptance/recheck3-20261108/`；普通clone不含，转交须附原件与哈希。
+旧回交与旧验收不改写；各自的未执行范围不能因新测试通过而自动消失。
+维护者曾指示另一agent实施、原会话最终独立验收；该分派不包含外部消息、提交、推送、发布、关闭Issue或兄弟仓写入。
 
 ## 已完成批次与仍待观察的效果
 

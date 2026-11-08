@@ -15,6 +15,7 @@ dependencies = [
   "jsonpointer==3.6",
   "jsonschema==4.26.0",
   "jsonschema-specifications==2025.9.1",
+  "packaging==26.3",
   "pathvalidate==3.3.1",
   "referencing==0.37.0",
   "rpds-py==2026.9.1",
@@ -43,11 +44,12 @@ include = ["astrofairy*"]
 exclude = ["astrofairy.tests*"]
 
 [tool.setuptools.package-data]
-astrofairy = ["_runtime_dependencies.json"]
+astrofairy = ["_dependency_manifest.json"]
 
 [tool.ruff]
 target-version = "py312"
 line-length = 110
+extend-exclude = ["dev/model_profiles/fastembed-0.9.1"]  # Verbatim upstream consumer sources; audited by hash, never edited.
 
 [tool.ruff.lint]
 select = ["ALL"]

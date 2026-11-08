@@ -1,2 +1,3 @@
 * text=auto eol=lf
 dev/runtime_snapshots/*.source -text
+dev/search_snapshots/*.source -text

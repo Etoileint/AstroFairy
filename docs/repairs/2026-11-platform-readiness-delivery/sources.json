@@ -1,0 +1,186 @@
+{
+  "format": 1,
+  "retrieved_on": "2026-11-08",
+  "sources": [
+    {
+      "id": "bagit-rfc8493",
+      "url": "https://www.rfc-editor.org/rfc/rfc8493.txt",
+      "resolved_url": "https://www.rfc-editor.org/rfc/rfc8493.txt",
+      "snapshot": ".reference/2026-11-platform-readiness-delivery/bagit-rfc8493.source",
+      "bytes": 48783,
+      "sha256": "4964147d2e6e16442d4a6dbfbe68178a8f33c3e791c06d68a8b33f51ad821537",
+      "retrieved_at": "2026-11-08T01:29:58.349157+00:00",
+      "use": "BagIt1.0路径语法、完整与有效包定义"
+    },
+    {
+      "id": "event-sourcing",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/event-sourcing",
+      "resolved_url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/event-sourcing",
+      "snapshot": ".reference/2026-11-platform-readiness-delivery/event-sourcing.source",
+      "bytes": 79808,
+      "sha256": "f300ca545d31304368f57640d96fe5cc8dbfca4f1b4bdd17845ad410f74bada8",
+      "retrieved_at": "2026-11-08T01:29:58.381734+00:00",
+      "use": "权威事件与可重建投影、延迟与循环风险"
+    },
+    {
+      "id": "github-matrix",
+      "url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/run-job-variations",
+      "resolved_url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/run-job-variations",
+      "snapshot": ".reference/2026-11-platform-readiness-delivery/github-matrix.source",
+      "bytes": 390612,
+      "sha256": "ecd3a81922d1bdcb121d54e521e7a10b44a0fac18199792dadaa2157ec564bcb",
+      "retrieved_at": "2026-11-08T01:29:59.425840+00:00",
+      "use": "原生平台验证通道"
+    },
+    {
+      "id": "hf-download",
+      "url": "https://huggingface.co/docs/huggingface_hub/package_reference/file_download",
+      "resolved_url": "https://huggingface.co/docs/huggingface_hub/package_reference/file_download",
+      "snapshot": ".reference/2026-11-platform-readiness-delivery/hf-download.source",
+      "bytes": 291233,
+      "sha256": "243237b505d2a6c867ba9cdd75dcd344e0cf6106466fd68eb63843815469b558",
+      "retrieved_at": "2026-11-08T01:29:58.996752+00:00",
+      "use": "显式固定 revision 下载与本地缓存接口"
+    },
+    {
+      "id": "packaging-markers",
+      "url": "https://packaging.pypa.io/en/stable/markers.html",
+      "resolved_url": "https://packaging.pypa.io/en/stable/markers.html",
+      "snapshot": ".reference/2026-11-platform-readiness-delivery/packaging-markers.source",
+      "bytes": 57588,
+      "sha256": "04963f74cc8e3dd26049733810c1698cd6c52ab5f8725197f099f022d46ef850",
+      "retrieved_at": "2026-11-08T01:31:51.499150+00:00",
+      "use": "环境 marker 默认值及显式环境覆盖"
+    },
+    {
+      "id": "pip-secure-installs",
+      "url": "https://pip.pypa.io/en/stable/topics/secure-installs/",
+      "resolved_url": "https://pip.pypa.io/en/stable/topics/secure-installs/",
+      "snapshot": ".reference/2026-11-platform-readiness-delivery/pip-secure-installs.source",
+      "bytes": 40203,
+      "sha256": "441f71e701157fa12d184a50e7e1b019731ac0ab5c9035d5361631335c72bc45",
+      "retrieved_at": "2026-11-08T01:31:51.791332+00:00",
+      "use": "全闭包 pin/hash 与 wheel-only 安装"
+    },
+    {
+      "id": "pylock-spec",
+      "url": "https://packaging.python.org/en/latest/specifications/pylock-toml/",
+      "resolved_url": "https://packaging.python.org/en/latest/specifications/pylock-toml/",
+      "snapshot": ".reference/2026-11-platform-readiness-delivery/pylock-spec.source",
+      "bytes": 111500,
+      "sha256": "d1ff1bd69ade2103276527ed9ceeb0759e007ebf103a3097723feb67e0220747",
+      "retrieved_at": "2026-11-08T01:31:52.215803+00:00",
+      "use": "PEP 751 标准锁格式的对照与取舍"
+    },
+    {
+      "id": "python-pathlib",
+      "url": "https://docs.python.org/3.12/library/pathlib.html",
+      "resolved_url": "https://docs.python.org/3.12/library/pathlib.html",
+      "snapshot": ".reference/2026-11-platform-readiness-delivery/python-pathlib.source",
+      "bytes": 210454,
+      "sha256": "7f0bc9f819ef99fa7059b452e563646546b839bd8ce50d7e4884d68feeb143ab",
+      "retrieved_at": "2026-11-08T01:29:58.685311+00:00",
+      "use": "宿主路径与 POSIX 表示边界"
+    },
+    {
+      "id": "uv-cli",
+      "url": "https://docs.astral.sh/uv/reference/cli/",
+      "resolved_url": "https://docs.astral.sh/uv/reference/cli/",
+      "snapshot": ".reference/2026-11-platform-readiness-delivery/uv-cli.source",
+      "bytes": 1183167,
+      "sha256": "27f557cb804f1b8f8f52d0f262b9f20930896970ecb9862cfcb297917f88ec34",
+      "retrieved_at": "2026-11-08T01:31:52.256360+00:00",
+      "use": "--universal/--python-version/--generate-hashes/--only-binary 等具体接口"
+    },
+    {
+      "id": "uv-pip-compile",
+      "url": "https://docs.astral.sh/uv/pip/compile/",
+      "resolved_url": "https://docs.astral.sh/uv/pip/compile/",
+      "snapshot": ".reference/2026-11-platform-readiness-delivery/uv-pip-compile.source",
+      "bytes": 82083,
+      "sha256": "aa867d07ede34fd632294b5f46d2d58cf0a0e17dcd14f07d5296db19abe9e13f",
+      "retrieved_at": "2026-11-08T01:31:51.944366+00:00",
+      "use": "成熟依赖编译与标准输出"
+    },
+    {
+      "id": "uv-pypi",
+      "url": "https://pypi.org/pypi/uv/json",
+      "resolved_url": "https://pypi.org/pypi/uv/json",
+      "snapshot": ".reference/2026-11-platform-readiness-delivery/uv-pypi.source",
+      "bytes": 5096977,
+      "sha256": "d76968f28f0192acb52316a9718b613fea587ca38c55175d1559d1c9a01e2a13",
+      "retrieved_at": "2026-11-08T01:30:01.192524+00:00",
+      "use": "候选解析器版本与官方制品哈希"
+    },
+    {
+      "id": "uv-resolution",
+      "url": "https://docs.astral.sh/uv/concepts/resolution/",
+      "resolved_url": "https://docs.astral.sh/uv/concepts/resolution/",
+      "snapshot": ".reference/2026-11-platform-readiness-delivery/uv-resolution.source",
+      "bytes": 159978,
+      "sha256": "e4f05e2bb78c7777eda914220693c35a62019a4fe699ffac07fa7624c9b20245",
+      "retrieved_at": "2026-11-08T01:31:51.980388+00:00",
+      "use": "universal resolution、Python 下界与环境分支"
+    },
+    {
+      "id": "packaging-pylock",
+      "url": "https://packaging.pypa.io/en/stable/pylock.html",
+      "resolved_url": "https://packaging.pypa.io/en/stable/pylock.html",
+      "snapshot": ".reference/2026-11-platform-readiness-delivery/packaging-pylock.source",
+      "bytes": 45516,
+      "sha256": "bc7a35daa1203ad36bca74409fd116e59ca9aa8fd76024070973096c80bedb8c",
+      "retrieved_at": "2026-11-08T01:38:45.736055+00:00",
+      "use": "标准pylock的成熟解析与环境选择API，避免自写锁格式解释器"
+    },
+    {
+      "id": "python-stat",
+      "url": "https://docs.python.org/3.12/library/stat.html",
+      "resolved_url": "https://docs.python.org/3.12/library/stat.html",
+      "snapshot": ".reference/2026-11-platform-readiness-delivery/python-stat.source",
+      "bytes": 61953,
+      "sha256": "c68183930a4a7f50dcb46f605f5652a52ee807a3681c6a5c64a696e86107c358",
+      "retrieved_at": "2026-11-08T01:49:44.640181+00:00",
+      "use": "Windows reparse属性与不跟随链接的文件状态检查"
+    },
+    {
+      "id": "fastembed-wheel",
+      "url": "https://files.pythonhosted.org/packages/25/9f/04650110be2c2554655e8b2c216567e6028cc767a2a0ad26f84972829c60/fastembed-0.9.1-py3-none-any.whl",
+      "resolved_url": "https://files.pythonhosted.org/packages/25/9f/04650110be2c2554655e8b2c216567e6028cc767a2a0ad26f84972829c60/fastembed-0.9.1-py3-none-any.whl",
+      "snapshot": ".reference/2026-11-platform-readiness-delivery/fastembed-wheel.source",
+      "bytes": 150228,
+      "sha256": "95042ac7f685bda6697861066d49f8b119fbde8b75ed5162bbb7e84e2dad0e1d",
+      "retrieved_at": "2026-11-08T01:49:44.676096+00:00",
+      "use": "固定FastEmbed0.9.1真实模型文件消费者"
+    },
+    {
+      "id": "model-config",
+      "url": "https://huggingface.co/Qdrant/multilingual-e5-large-onnx/resolve/ac6781cd1cf88b8306a536d7c9d18a5bd57cc14b/config.json",
+      "resolved_url": "https://huggingface.co/api/resolve-cache/models/Qdrant/multilingual-e5-large-onnx/ac6781cd1cf88b8306a536d7c9d18a5bd57cc14b/config.json?%2FQdrant%2Fmultilingual-e5-large-onnx%2Fresolve%2Fac6781cd1cf88b8306a536d7c9d18a5bd57cc14b%2Fconfig.json=&etag=%22b9d6ebb5b66df1653165235124db9611a4a72c5c%22",
+      "snapshot": ".reference/2026-11-platform-readiness-delivery/model-config.source",
+      "bytes": 716,
+      "sha256": "1de8c3be1f344c0eefa4962480a006f8639f416dfafaa95a770e3cf4bceae6a4",
+      "retrieved_at": "2026-11-08T01:49:44.698917+00:00",
+      "use": "固定revision的真实消费配置内容"
+    },
+    {
+      "id": "model-tokenizer_config",
+      "url": "https://huggingface.co/Qdrant/multilingual-e5-large-onnx/resolve/ac6781cd1cf88b8306a536d7c9d18a5bd57cc14b/tokenizer_config.json",
+      "resolved_url": "https://huggingface.co/api/resolve-cache/models/Qdrant/multilingual-e5-large-onnx/ac6781cd1cf88b8306a536d7c9d18a5bd57cc14b/tokenizer_config.json?%2FQdrant%2Fmultilingual-e5-large-onnx%2Fresolve%2Fac6781cd1cf88b8306a536d7c9d18a5bd57cc14b%2Ftokenizer_config.json=&etag=%2231cf25a6c1a3e2f4183a314ad8252cd2919f6968%22",
+      "snapshot": ".reference/2026-11-platform-readiness-delivery/model-tokenizer_config.source",
+      "bytes": 1147,
+      "sha256": "f90024142df07163e5e6c5b9a6ad7c8c68b22a9112af11e3db4559a9ff90f737",
+      "retrieved_at": "2026-11-08T01:49:44.708059+00:00",
+      "use": "固定revision的真实消费配置内容"
+    },
+    {
+      "id": "model-special_tokens_map",
+      "url": "https://huggingface.co/Qdrant/multilingual-e5-large-onnx/resolve/ac6781cd1cf88b8306a536d7c9d18a5bd57cc14b/special_tokens_map.json",
+      "resolved_url": "https://huggingface.co/api/resolve-cache/models/Qdrant/multilingual-e5-large-onnx/ac6781cd1cf88b8306a536d7c9d18a5bd57cc14b/special_tokens_map.json?%2FQdrant%2Fmultilingual-e5-large-onnx%2Fresolve%2Fac6781cd1cf88b8306a536d7c9d18a5bd57cc14b%2Fspecial_tokens_map.json=&etag=%22b1879d702821e753ffe4245048eee415d54a9385%22",
+      "snapshot": ".reference/2026-11-platform-readiness-delivery/model-special_tokens_map.source",
+      "bytes": 964,
+      "sha256": "8c785abebea9ae3257b61681b4e6fd8365ceafde980c21970d001e834cf10835",
+      "retrieved_at": "2026-11-08T01:49:45.274004+00:00",
+      "use": "固定revision的真实消费配置内容"
+    }
+  ]
+}

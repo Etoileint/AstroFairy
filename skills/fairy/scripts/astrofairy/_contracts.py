@@ -22,7 +22,9 @@ if TYPE_CHECKING:
     from jsonschema.protocols import Validator
     from referencing import Registry, Specification
 
-PROTOCOL_VERSION = 10
+PROTOCOL_VERSION = 11
+STAGE_PACKET_VERSION = 2
+RECEIPT_PROJECTION_FORMAT = 2
 MODEL_CAPABILITY = "host.model"
 EFFECTS = frozenset({"reason", "read", "write"})
 MAX_BLOB_BYTES = LIMITS.blob_bytes
@@ -477,6 +479,8 @@ def command_value(value: Any) -> dict[str, Any]:
 def schema() -> dict[str, Any]:
     return {
         "protocol_version": PROTOCOL_VERSION,
+        "stage_packet_version": STAGE_PACKET_VERSION,
+        "receipt_projection_format": RECEIPT_PROJECTION_FORMAT,
         "response_bytes": LIMITS.response_bytes,
         "resource_limits": LIMITS.manifest(),
         "resource_policy": {
@@ -503,19 +507,67 @@ def schema() -> dict[str, Any]:
     }
 
 
-def dependency_issues() -> dict[str, Any]:
-    pins = object_value(
-        parse_json(files("astrofairy").joinpath("_runtime_dependencies.json").read_text(encoding="utf-8"))
+@cache
+def dependency_manifest() -> dict[str, Any]:
+    manifest = object_value(
+        parse_json(files("astrofairy").joinpath("_dependency_manifest.json").read_text(encoding="utf-8"))
     )
-    issues = {}
-    for name, required in pins.items():
+    if manifest.get("format") != 2:
+        raise FairyError("integrity", "Unsupported dependency manifest format")
+    object_value(manifest.get("profiles"))
+    return manifest
+
+
+def _profile_requirements(profile: str) -> list[dict[str, Any]]:
+    profiles = object_value(dependency_manifest()["profiles"])
+    entry = profiles.get(profile)
+    if not isinstance(entry, dict):
+        raise FairyError("invalid", "Unknown dependency profile")
+    requirements = entry.get("requirements")
+    if not isinstance(requirements, list):
+        raise FairyError("integrity", "Dependency profile has no requirement list")
+    return [object_value(item) for item in requirements]
+
+
+def _active_requirements(profile: str) -> list[dict[str, Any]]:
+    requirements = _profile_requirements(profile)
+    try:
+        from packaging.markers import Marker  # noqa: PLC0415 - readiness must work before dependency imports.
+    except ImportError:
+        return requirements
+    active = []
+    for item in requirements:
+        marker = item.get("marker")
+        if marker is None or Marker(str(marker)).evaluate():
+            active.append(item)
+    return active
+
+
+def dependency_observations(profile: str = "core") -> list[dict[str, Any]]:
+    observations = []
+    for item in _active_requirements(profile):
+        name = str(item["name"])
         try:
             installed = version(name)
         except PackageNotFoundError:
             installed = None
-        if installed != required:
-            issues[name] = {"required": required, "installed": installed}
-    return issues
+        observations.append(
+            {
+                "name": name,
+                "required": str(item["version"]),
+                "installed": installed,
+                "marker": item.get("marker"),
+            }
+        )
+    return sorted(observations, key=lambda item: item["name"])
+
+
+def dependency_issues(profile: str = "core") -> dict[str, Any]:
+    return {
+        item["name"]: {"required": item["required"], "installed": item["installed"]}
+        for item in dependency_observations(profile)
+        if item["installed"] != item["required"]
+    }
 
 
 @cache

@@ -53,7 +53,7 @@ class MaintenanceTests(WorkshopTest):
             self.assertFalse((new_workspace / "a.txt").exists())
             (new_workspace / "b.txt").write_text("new second", encoding="utf-8")
             restored.prepare_delivery(pending, {"members": [{"path": "b.txt", "role": "main"}]})
-            delivery = restored.submit(pending, {"op": "close", "outcome": "complete"})
+            delivery = restored.submit(pending, {"op": "close", "outcome": "complete"})["delivery"]
             self.assertEqual(Path(delivery["files"]["a.txt"]).read_text(), "captured first")
             self.assertEqual(Path(delivery["files"]["b.txt"]).read_text(), "new second")
         self.workshop.store.append(

@@ -8,7 +8,10 @@ The writer uses a stable private lock file, a finite timeout and no soft-lock fa
 must work on the approved data filesystem; unsupported locking refuses safely. Reader/audit paths do
 not acquire or create that lock. Delivery uses the same native-lock discipline on its own task directory.
 Doctor checks imports/versions, SQLite capabilities and BagIt delivery readiness; actual archive locking is
-exercised on its first writer, not certified by a read-only readiness result.
+exercised on its first writer, not certified by a read-only readiness result. Its search section keeps
+dependency metadata, model-file presence and projection state separate: presence is never `verified`, and
+default `doctor` neither opens/creates the task database nor hashes model bytes. `doctor --verify-search`
+stream-hashes the six fixed model files without downloading, indexing or inference.
 `doctor` and `schema` can run without them; a missing/broken/wrong dependency set prevents readiness and
 task creation. No command silently downloads or installs code.
 
@@ -58,13 +61,19 @@ ONNX Runtime, tokenizers and their dependencies). Prepare it from the search loc
   --only-binary=:all: -r <skill-directory>/scripts/requirements-search.lock
 ```
 
-The first explicit `assets search --refresh` prepares the fixed multilingual E5 ONNX model
-(`intfloat/multilingual-e5-large`; source, revision and file hashes are in the model profile) in the model
-cache. Set `ASTROFAIRY_MODEL_CACHE` to an approved persistent cache directory; otherwise the per-home
-`search/models` directory is used. The model is about 2.2 GB and may take time on first preparation;
-progress and failure are explicit. Ordinary search does not download or start the model and returns
-`search_not_ready` with the refresh route. `doctor` reports search dependency/model-cache status but keeps
-core task readiness separate.
+`assets prepare` explicitly prepares the fixed multilingual E5 ONNX model
+(`intfloat/multilingual-e5-large`; source, revision and the six consumed file hashes are in the model
+profile) and byte-verifies every declared file with SHA-256. It works with an empty active library, builds
+no projection and runs no inference. `assets search --refresh` composes the same preparation service with
+a projection rebuild. Set `ASTROFAIRY_MODEL_CACHE` to an approved persistent cache directory; otherwise
+the per-home `search/models` directory is used. The model is about 2.2 GB and may take time on first
+preparation; progress and failure are explicit, and competing preparations serialize on the shared cache.
+Every explicit prepare/verify performs a new streamed verification; an earlier in-process success is not
+reused after file mutation. Ordinary search does not download or start the model and returns
+`search_not_ready` with the offending stage and recovery route. An explicit refresh on an empty active
+library still prepares/verifies and returns `projection.state=empty`; a plain empty-library query does
+not load the model. `doctor` reports the layered search observations while keeping core task readiness
+separate.
 
 For the optional Python package, prepare these same locked dependencies and install the wheel with
 `pip install --no-deps <wheel>`. The standard skill folder remains the main installation unit.

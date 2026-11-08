@@ -18,8 +18,10 @@ class TaskTests(WorkshopTest):
         feedback = self.workshop.submit(
             task, {"op": "feedback", "text": "Keep this useful method", "kind": "positive"}
         )
-        self.assertNotEqual(feedback["receipt_path"], delivery["receipt_path"])
-        receipt = parse_json(Path(feedback["receipt_path"]).read_text(encoding="utf-8"))
+        feedback_delivery = feedback["delivery"]
+        self.assertEqual(feedback_delivery["state"], "validated")
+        self.assertNotEqual(feedback_delivery["receipt_path"], delivery["receipt_path"])
+        receipt = parse_json(Path(feedback_delivery["receipt_path"]).read_text(encoding="utf-8"))
         self.assertEqual(receipt["feedback"][0]["kind"], "positive")
         self.assertEqual(receipt["seq"], self.workshop.state(task).seq)
         old = parse_json(Path(delivery["receipt_path"]).read_text(encoding="utf-8"))

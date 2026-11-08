@@ -22,7 +22,7 @@ class BagDeliveryTests(WorkshopTest):
     def complete(self, task: str) -> dict[str, Any]:
         self.workshop.submit(task, {"op": "check"})
         self.semantic(task)
-        return self.workshop.submit(task, {"op": "close", "outcome": "complete"})
+        return self.workshop.submit(task, {"op": "close", "outcome": "complete"})["delivery"]
 
     def multi_member_task(self) -> tuple[str, dict[str, Any]]:
         task = self.workshop.start(
@@ -163,7 +163,7 @@ class BagDeliveryTests(WorkshopTest):
 
     def test_cancelled_task_without_snapshot_gets_valid_empty_bag(self) -> None:
         task = self.workshop.start("No artifact")
-        delivery = self.workshop.submit(task, {"op": "close", "outcome": "cancelled"})
+        delivery = self.workshop.submit(task, {"op": "close", "outcome": "cancelled"})["delivery"]
         self.assertEqual(delivery["files"], {})
         self.assertIsNone(delivery["artifact_path"])
         bag = Path(delivery["bag_path"])

@@ -25,7 +25,8 @@ from astrofairy._limits import LIMITS
 from astrofairy._maintenance import audit_state, backup_state, restore_state, verify_backup
 from astrofairy._presentation import controls, encode_response, read_document
 from astrofairy._runtime import Workshop
-from astrofairy._search import status as search_status
+from astrofairy._search import model_cache_path
+from astrofairy._search import observations as search_observations
 from astrofairy._store import sqlite_runtime
 
 
@@ -49,7 +50,12 @@ def _parser() -> argparse.ArgumentParser:
     )
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("schema")
-    commands.add_parser("doctor")
+    doctor = commands.add_parser("doctor")
+    doctor.add_argument(
+        "--verify-search",
+        action="store_true",
+        help="Stream-verify the fixed model files without downloading, indexing or inference",
+    )
     commands.add_parser("todos", help="List deferred learning decisions across all tasks")
     governance = commands.add_parser("governance", help="List adopted governance assets by scope")
     governance.add_argument("--scope", choices=["personal", "team"])
@@ -94,6 +100,13 @@ def _parser() -> argparse.ArgumentParser:
             inspection = child.add_mutually_exclusive_group()
             inspection.add_argument("--history", action="store_true")
             inspection.add_argument("--contract", help="Read one definition recorded for this task")
+        if name == "deliver":
+            child.add_argument("--expected-seq", type=int)
+            child.add_argument(
+                "--repair",
+                action="store_true",
+                help="Replace an invalid derived export after validating a fresh staging bag",
+            )
         if name == "submit":
             child.add_argument("--file", default="-", help="Read a JSON command from file or stdin")
     prepare = commands.add_parser(
@@ -104,6 +117,10 @@ def _parser() -> argparse.ArgumentParser:
     prepare.add_argument("--members", required=True, help="JSON member plan")
     prepare.add_argument("--expected-seq", type=int)
     assets = commands.add_parser("assets").add_subparsers(dest="asset_command", required=True)
+    assets.add_parser(
+        "prepare",
+        help="Explicitly prepare and verify the fixed retrieval model without building an index",
+    )
     search = assets.add_parser("search")
     search.add_argument("query", nargs="?", default="")
     search.add_argument("--limit", type=int, default=LIMITS.search_page_default_limit)
@@ -174,7 +191,7 @@ def _run(arguments: argparse.Namespace) -> dict[str, Any]:
             "runtime": runtime,
             "sqlite": sqlite,
             "delivery": delivery,
-            "search": search_status(),
+            "search": search_observations(model_cache_path(home), verify=arguments.verify_search),
             "python": sys.version.split()[0],
             "requires_python": ">=3.12",
             "home": str(home),
@@ -220,11 +237,19 @@ def _run(arguments: argparse.Namespace) -> dict[str, Any]:
                 return workshop.inspect_contract(arguments.task, arguments.contract)
             return workshop.inspect(arguments.task, history=arguments.history)
         if arguments.command == "deliver":
-            return workshop.deliver(arguments.task)
+            return workshop.deliver(
+                arguments.task, expected_seq=arguments.expected_seq, repair=arguments.repair
+            )
         if arguments.command == "submit":
             return workshop.submit(arguments.task, object_value(_input(arguments.file)))
         operation = arguments.asset_command
         library = workshop.library
+        if operation == "prepare":
+            return {
+                "preparation": library.prepare(),
+                "projection": {"state": "not_built"},
+                "recovery": "assets search --refresh",
+            }
         if operation == "search":
             return library.search_page(
                 arguments.query,
@@ -292,6 +317,9 @@ def main(argv: list[str] | None = None) -> int:
         return 1
     sys.stdout.buffer.write(encoded)
     if "error" in result:
+        return 1
+    delivery = result.get("delivery")
+    if isinstance(delivery, dict) and delivery.get("state") == "failed":
         return 1
     if result.get("status") in {"failed", "unknown"}:
         return 1

@@ -247,9 +247,11 @@ class ReconciliationTests(WorkshopTest):
         closed = self.finish(task)
         with patch("astrofairy._delivery.atomic_write", side_effect=OSError("Fixture export failure")):
             self.release.set()
-            with self.assertRaises(FairyError) as caught:
-                future.result(timeout=5)
-        self.assertEqual(caught.exception.code, "integrity")
+            late = future.result(timeout=5)
+        self.assertEqual(late["status"], "ok")
+        self.assertEqual(late["delivery"]["state"], "failed")
+        self.assertTrue(late["delivery"]["committed"])
+        self.assertEqual(late["delivery"]["error"]["error"], "integrity")
         state = self.workshop.state(task)
         self.assertEqual(state.outcome, "complete")
         self.assertTrue(state.execution_conflicts())

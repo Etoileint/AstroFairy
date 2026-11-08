@@ -183,7 +183,11 @@ class WorkshopTest(unittest.TestCase):
         self.refine(task)
         self.workshop.submit(task, {"op": "check"})
         self.semantic(task, criterion)
-        return self.workshop.submit(task, {"op": "close", "outcome": "complete"})
+        response = self.workshop.submit(task, {"op": "close", "outcome": "complete"})
+        delivery = response.get("delivery")
+        if not isinstance(delivery, dict) or delivery.get("state") != "validated":
+            raise AssertionError(f"close did not validate its delivery: {response}")
+        return delivery
 
     def proposal(self, content: str = "Use concrete evidence and state applicability") -> dict[str, Any]:
         return {

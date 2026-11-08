@@ -55,7 +55,7 @@ class AvailableActionTests(WorkshopTest):
         self.semantic(task)
         self.assertEqual(self.workshop.next(task)["action"], "close")
         self.workshop.submit(task, {"op": "close", "outcome": "complete"})
-        self.assertEqual(self.workshop.next(task)["action"], "delivered")
+        self.assertEqual(self.workshop.next(task)["action"], "verify_delivery")
         self.assertEqual(len(self.workshop.state(task).calls), 1)
 
     def test_answer_and_explicit_reassessment_remain_available_at_zero_budget(self) -> None:

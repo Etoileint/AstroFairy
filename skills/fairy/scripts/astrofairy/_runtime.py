@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import mimetypes
+import sqlite3
 import uuid
 from contextlib import AbstractContextManager, contextmanager
 from types import MappingProxyType
@@ -32,6 +33,7 @@ from astrofairy._contracts import (
     text_value,
 )
 from astrofairy._delivery import deliver as deliver_bag
+from astrofairy._delivery import observe as observe_delivery
 from astrofairy._documents import freeze
 from astrofairy._errors import FairyError
 from astrofairy._kernel import (
@@ -53,6 +55,84 @@ from astrofairy._store import Store
 if TYPE_CHECKING:
     from collections.abc import Iterator, Mapping
     from pathlib import Path
+
+
+def _observation_failure(
+    exc: FairyError | sqlite3.Error,
+    *,
+    task: str,
+    call: str,
+    operation: str,
+    invoked_seq: int | None,
+    effect_state: str,
+) -> FairyError:
+    if isinstance(exc, FairyError):
+        details = dict(exc.details or {})
+        commit = details.pop("commit", None)
+        code = exc.code
+        message = exc.message
+    else:
+        details = {
+            "sqlite_code": getattr(exc, "sqlite_errorcode", None),
+            "sqlite_name": getattr(exc, "sqlite_errorname", None),
+        }
+        commit = None
+        code = "storage_failed"
+        message = "The observation could not be recorded; inspect the invocation before retrying"
+    details.update(
+        {
+            "task": task,
+            "call": call,
+            "operation": operation,
+            "stage": "observed",
+            "committed": True,
+            "committed_seq": invoked_seq,
+            "invoked": True,
+            "effect_state": effect_state,
+            "observed": "unknown" if commit == "unknown" else False,
+            "recovery": {
+                "action": "Inspect the recorded invocation and any external effect; do not repeat the write",
+                "command": f"inspect {task} --history",
+            },
+        }
+    )
+    return FairyError(code, message, details=details)
+
+
+def _invocation_failure(
+    exc: FairyError, *, task: str, call: str, operation: str, known_seq: int | None
+) -> FairyError:
+    wrapped = _stage_failure(exc, task=task, operation=operation, seq=known_seq, stage="invoked")
+    details = dict(wrapped.details or {})
+    details["call"] = call
+    details["known_seq"] = known_seq
+    if known_seq is not None:
+        details["attempted_seq"] = known_seq + 1
+    details.setdefault(
+        "recovery",
+        {
+            "action": "Inspect the recorded invocation and task history before retrying",
+            "command": f"inspect {task} --history",
+        },
+    )
+    return FairyError(wrapped.code, wrapped.message, details=details)
+
+
+def _stage_failure(
+    exc: FairyError, *, task: str, operation: str, seq: int | None = None, stage: str
+) -> FairyError:
+    details = dict(exc.details or {})
+    certainty = details.pop("commit", None)
+    if certainty == "not_committed":
+        details.setdefault("committed", False)
+    elif certainty == "unknown":
+        details.setdefault("committed", "unknown")
+    details.setdefault("task", task)
+    details.setdefault("operation", operation)
+    if seq is not None:
+        details.setdefault("seq", seq)
+    details.setdefault("stage", stage)
+    return FairyError(exc.code, exc.message, details=details)
 
 
 class Workshop(AbstractContextManager["Workshop"]):
@@ -105,7 +185,50 @@ class Workshop(AbstractContextManager["Workshop"]):
     def state(self, task: str) -> State:
         state = replay(task, self.store.events(task))
         state.checker_contracts = self._checker_contracts()
+        state.live_checkers = True
         return state
+
+    def _historical_state(self, task: str) -> State:
+        return replay(task, self.store.events(task))
+
+    def _export_after_commit(self, task: str, *, operation: str, committed_seq: int) -> dict[str, Any]:
+        selected: int | None = None
+        try:
+            state = self._historical_state(task)
+            selected = state.seq
+            if state.outcome is None:
+                return {"state": "not_applicable", "task": task, "seq": None}
+            inspection = self._inspection(state)
+            result = deliver_bag(self.store.home, state, self.store, inspection)
+            return {**result, "operation": operation, "committed_seq": committed_seq}
+        except (FairyError, OSError, sqlite3.Error) as exc:
+            if isinstance(exc, FairyError):
+                diagnostic = exc.as_dict()
+            elif isinstance(exc, sqlite3.Error):
+                diagnostic = {
+                    "error": "storage_failed",
+                    "message": "Delivery export failed; recorded state is preserved",
+                    "sqlite_code": getattr(exc, "sqlite_errorcode", None),
+                    "sqlite_name": getattr(exc, "sqlite_errorname", None),
+                }
+            else:
+                diagnostic = {
+                    "error": "storage_failed",
+                    "message": "Delivery export failed; recorded state is preserved",
+                }
+            target = None if selected is None else str(self.store.home / "deliveries" / task / str(selected))
+            return {
+                "state": "failed",
+                "task": task,
+                "operation": operation,
+                "committed": True,
+                "committed_seq": committed_seq,
+                "selection": "unknown" if selected is None else "selected",
+                "selected_seq": selected,
+                "target": target,
+                "error": diagnostic,
+                "recovery": {"command": f"deliver {task}", "repeats_effect": False},
+            }
 
     def todos(self) -> list[dict[str, Any]]:
         rows = self.store.connection.execute("SELECT DISTINCT task FROM events ORDER BY task").fetchall()
@@ -255,60 +378,71 @@ class Workshop(AbstractContextManager["Workshop"]):
                 raise FairyError("invalid_contract", "Reconciler must be a registered read capability")
             verifier.validate_input({"call": identity})
             verifier_definition = verifier.definition(handler.reconciler)
-        with self._admitted(task, expected_seq) as state:
-            admit_call(state, handler.effect, operation, counted=handler.counted)
-            reconciles: str | None = None
-            if any((call.get("reconciler") or {}).get("name") == capability for call in state.calls.values()):
-                target_id = parameters.get("call")
-                target = state.calls.get(target_id) if isinstance(target_id, str) else None
-                if (
-                    set(parameters) != {"call"}
-                    or target is None
-                    or handler.effect != "read"
-                    or target.get("reconciler")
-                    != {"name": capability, "contract_ref": digest(canonical(definition))}
+        known_seq: int | None = None
+        try:
+            with self._admitted(task, expected_seq) as state:
+                known_seq = state.seq
+                admit_call(state, handler.effect, operation, counted=handler.counted)
+                reconciles: str | None = None
+                if any(
+                    (call.get("reconciler") or {}).get("name") == capability for call in state.calls.values()
                 ):
-                    raise FairyError(
-                        "permission", "Reconciler must match the exact pinned target and contract"
-                    )
-                reconciles = target_id
-            if handler.prepare is not None:
-                try:
-                    handler.prepare(Context(self.store, state), parameters)
-                except FairyError:
-                    raise
-                except Exception as exc:
-                    raise FairyError(
-                        "preflight_failed", "Tool preflight failed; inspect its definition before retrying"
-                    ) from exc
-                if canonical(parameters) != encoded:
-                    raise FairyError("invalid_contract", "Preflight must not mutate input parameters")
-            contract_ref = self.store.put(canonical(definition))
-            reconciler = (
-                None
-                if verifier_definition is None
-                else {
-                    "name": handler.reconciler,
-                    "contract_ref": self.store.put(canonical(verifier_definition)),
-                }
-            )
-            self._append(
-                state,
-                "invoked",
-                {
-                    "id": identity,
-                    "capability": capability,
-                    "effect": handler.effect,
-                    "revision": state.revision,
-                    "parameters": parameters,
-                    "contract_ref": contract_ref,
-                    "reconciler": reconciler,
-                    "reconciles": reconciles,
-                    "operation": operation,
-                    "counted": handler.counted,
-                    "origin": "runner",
-                },
-            )
+                    target_id = parameters.get("call")
+                    target = state.calls.get(target_id) if isinstance(target_id, str) else None
+                    if (
+                        set(parameters) != {"call"}
+                        or target is None
+                        or handler.effect != "read"
+                        or target.get("reconciler")
+                        != {"name": capability, "contract_ref": digest(canonical(definition))}
+                    ):
+                        raise FairyError(
+                            "permission", "Reconciler must match the exact pinned target and contract"
+                        )
+                    reconciles = target_id
+                if handler.prepare is not None:
+                    try:
+                        handler.prepare(Context(self.store, state), parameters)
+                    except FairyError:
+                        raise
+                    except Exception as exc:
+                        raise FairyError(
+                            "preflight_failed",
+                            "Tool preflight failed; inspect its definition before retrying",
+                        ) from exc
+                    if canonical(parameters) != encoded:
+                        raise FairyError("invalid_contract", "Preflight must not mutate input parameters")
+                contract_ref = self.store.put(canonical(definition))
+                reconciler = (
+                    None
+                    if verifier_definition is None
+                    else {
+                        "name": handler.reconciler,
+                        "contract_ref": self.store.put(canonical(verifier_definition)),
+                    }
+                )
+                self._append(
+                    state,
+                    "invoked",
+                    {
+                        "id": identity,
+                        "capability": capability,
+                        "effect": handler.effect,
+                        "revision": state.revision,
+                        "parameters": parameters,
+                        "contract_ref": contract_ref,
+                        "reconciler": reconciler,
+                        "reconciles": reconciles,
+                        "operation": operation,
+                        "counted": handler.counted,
+                        "origin": "runner",
+                    },
+                )
+        except FairyError as exc:
+            raise _invocation_failure(
+                exc, task=task, call=identity, operation=operation, known_seq=known_seq
+            ) from exc
+        observation: dict[str, Any]
         try:
             result = object_value(
                 handler.handler(Context(self.store, state, identity, self.library.search_index), parameters)
@@ -350,14 +484,30 @@ class Workshop(AbstractContextManager["Workshop"]):
                 },
                 "origin": "tool",
             }
-        with self.store.transaction():
-            current = self.state(task)
-            self._append(current, "observed", observation)
-            if observation["status"] == "ok" and "asset_ref" in result:
+            if observation["status"] == "unknown":
+                observation["effect_state"] = "unknown"
+        observed_seq = 0
+        try:
+            with self.store.transaction():
                 current = self.state(task)
-                self._append(current, "asset_used", {"ref": result["asset_ref"], "origin": "runner"})
+                self._append(current, "observed", observation)
+                observed_seq = current.seq + 1
+                if observation["status"] == "ok" and "asset_ref" in result:
+                    current = self.state(task)
+                    self._append(current, "asset_used", {"ref": result["asset_ref"], "origin": "runner"})
+        except (FairyError, sqlite3.Error) as exc:
+            raise _observation_failure(
+                exc,
+                task=task,
+                call=identity,
+                operation=operation,
+                invoked_seq=None if known_seq is None else known_seq + 1,
+                effect_state=observation["status"],
+            ) from exc
         if current.outcome is not None:
-            observation["receipt_path"] = self.deliver(task)["receipt_path"]
+            observation["delivery"] = self._export_after_commit(
+                task, operation="invoke", committed_seq=observed_seq
+            )
         return observation
 
     def _review_target(self, state: State, criterion: dict[str, Any], selector: Any) -> dict[str, Any]:
@@ -560,183 +710,215 @@ class Workshop(AbstractContextManager["Workshop"]):
                 if command.get("basis")
                 else "Host decision after delivery"
             )
-            with self._admitted(task, command.get("expected_seq")) as current:
-                if current.outcome is None:
-                    raise FairyError("not_ready", "Learning decisions follow delivery")
-                record = {"decision": decision, "note": note, "basis": basis}
-                reply = {"decision": decision, "task": task}
-                if decision == "maintain":
-                    learning = self._learning_task(current)
-                    record["learning_task"] = learning
-                    reply["learning_task"] = learning
-                self._append(current, "learning_decision", record)
-                seq = current.seq + 1
-            return {**reply, "seq": seq}
+            learn_seq: int | None = None
+            try:
+                with self._admitted(task, command.get("expected_seq")) as current:
+                    learn_seq = current.seq
+                    if current.outcome is None:
+                        raise FairyError("not_ready", "Learning decisions follow delivery")
+                    record = {"decision": decision, "note": note, "basis": basis}
+                    reply = {"decision": decision, "task": task}
+                    if decision == "maintain":
+                        learning = self._learning_task(current)
+                        record["learning_task"] = learning
+                        reply["learning_task"] = learning
+                    self._append(current, "learning_decision", record)
+                    seq = current.seq + 1
+            except FairyError as exc:
+                raise _stage_failure(
+                    exc, task=task, operation="learn", seq=learn_seq, stage="admission"
+                ) from exc
+            delivery = self._export_after_commit(task, operation="learn", committed_seq=seq)
+            return {**reply, "seq": seq, "delivery": delivery}
         result: dict[str, Any] = {}
-        with self._admitted(task, command.get("expected_seq")) as state:
-            if operation not in {"report", "feedback"}:
-                require_open(state)
-            if operation == "request":
-                result = self._request(state, command)
-            elif operation == "report":
-                call = state.calls.get(text_value(command["call"], "call id"))
-                if call is None or call["capability"] != MODEL_CAPABILITY or call["status"] != "pending":
-                    raise FairyError("permission", "A model report needs a pending model request")
-                data = text_value(command["text"], "model output", LIMITS.blob_bytes).encode("utf-8")
-                ref = self.store.put(data)
-                Context(self.store, state).check_capture_limit(ref, len(data))
-                output = {
-                    "ref": ref,
-                    "path": relative_path(command.get("path", "result.md"), "output path"),
-                    "bytes": len(data),
-                    "media_type": text_value(command.get("media_type", "text/markdown"), "media type"),
-                }
-                self._append(
-                    state,
-                    "observed",
-                    {"call": command["call"], "status": "ok", "outputs": [output], "origin": "model"},
-                )
-                result = output
-            elif operation == "publish":
-                members = members_value(command["members"])
-                available: dict[tuple[str, str, str], int] = {
-                    (item["ref"], item["path"], item["media_type"]): item["bytes"] for item in state.outputs
-                }
-                for snapshot in state.snapshots:
-                    for item in snapshot["members"]:
-                        available[(item["ref"], item["path"], item["media_type"])] = item["bytes"]
-                for member in members:
-                    key = (member["ref"], member["path"], member["media_type"])
-                    if key not in available or available[key] != member["bytes"]:
-                        raise FairyError(
-                            "permission",
-                            "Every member must be an observed output or explicit snapshot member",
-                        )
-                    if self.store.length(member["ref"]) != member["bytes"]:
-                        raise FairyError("integrity", "Member byte count does not match stored content")
-                snapshot = snapshot_value(members)
-                self.store.put(canonical({"format": 1, "members": snapshot["members"]}))
-                self._append(
-                    state,
-                    "published",
-                    {
-                        "format": 1,
-                        "ref": snapshot["ref"],
-                        "members": snapshot["members"],
-                        "origin": "runner",
-                    },
-                )
-            elif operation == "review":
-                self._review(state, command)
-            elif operation == "revise":
-                criteria = criteria_value(command["criteria"])
-                protected = {
-                    item["id"]: item
-                    for item in state.spec["criteria"]
-                    if item["origin"] in {"user", "policy"}
-                }
-                proposed = {item["id"]: item for item in criteria}
-                if any(
-                    proposed.get(key) != item for key, item in protected.items() if item["origin"] == "policy"
-                ):
-                    raise FairyError("permission", "Task strategy cannot weaken runtime policy criteria")
-                if any(proposed.get(key) != item for key, item in protected.items()):
-                    user_basis = command.get("user_basis")
-                    events = self.store.events(task)
-                    revised_at = max((item["seq"] for item in events if item["kind"] == "revised"), default=0)
-                    if not any(
-                        item["seq"] == user_basis and item["kind"] == "answered" and item["seq"] > revised_at
-                        for item in events
-                    ):
-                        raise FairyError(
-                            "permission",
-                            "Changing explicit requirements needs a new forwarded user instruction",
-                        )
-                governance: list[str] = list(state.spec.get("governance", []))
-                if "governance" in command:
-                    governance = [
-                        content_ref(item, "governance asset reference") for item in command["governance"]
-                    ]
-                governance_scope = list(state.spec.get("governance_scope", []))
-                if "governance_scope" in command:
-                    governance_scope = task_spec_value(
-                        "scope", {"governance_scope": command["governance_scope"]}
-                    )["governance_scope"]
-                    governance = sorted(
-                        set(governance)
-                        | {
-                            item["ref"]
-                            for scope in governance_scope
-                            for item in self.library.governance(scope)
-                        }
+        known_seq: int | None = None
+        try:
+            with self._admitted(task, command.get("expected_seq")) as state:
+                known_seq = state.seq
+                if operation not in {"report", "feedback"}:
+                    require_open(state)
+                if operation == "request":
+                    result = self._request(state, command)
+                elif operation == "report":
+                    call = state.calls.get(text_value(command["call"], "call id"))
+                    if call is None or call["capability"] != MODEL_CAPABILITY or call["status"] != "pending":
+                        raise FairyError("permission", "A model report needs a pending model request")
+                    data = text_value(command["text"], "model output", LIMITS.blob_bytes).encode("utf-8")
+                    ref = self.store.put(data)
+                    Context(self.store, state).check_capture_limit(ref, len(data))
+                    output = {
+                        "ref": ref,
+                        "path": relative_path(command.get("path", "result.md"), "output path"),
+                        "bytes": len(data),
+                        "media_type": text_value(command.get("media_type", "text/markdown"), "media type"),
+                    }
+                    self._append(
+                        state,
+                        "observed",
+                        {"call": command["call"], "status": "ok", "outputs": [output], "origin": "model"},
                     )
-                for ref in governance:
-                    if self.library.status(ref) not in {"trial", "stable"}:
-                        raise FairyError(
-                            "not_ready",
-                            "Governance assets must be adopted before revision",
+                    result = output
+                elif operation == "publish":
+                    members = members_value(command["members"])
+                    available: dict[tuple[str, str, str], int] = {
+                        (item["ref"], item["path"], item["media_type"]): item["bytes"]
+                        for item in state.outputs
+                    }
+                    for snapshot in state.snapshots:
+                        for item in snapshot["members"]:
+                            available[(item["ref"], item["path"], item["media_type"])] = item["bytes"]
+                    for member in members:
+                        key = (member["ref"], member["path"], member["media_type"])
+                        if key not in available or available[key] != member["bytes"]:
+                            raise FairyError(
+                                "permission",
+                                "Every member must be an observed output or explicit snapshot member",
+                            )
+                        if self.store.length(member["ref"]) != member["bytes"]:
+                            raise FairyError("integrity", "Member byte count does not match stored content")
+                    snapshot = snapshot_value(members)
+                    self.store.put(canonical({"format": 1, "members": snapshot["members"]}))
+                    self._append(
+                        state,
+                        "published",
+                        {
+                            "format": 1,
+                            "ref": snapshot["ref"],
+                            "members": snapshot["members"],
+                            "origin": "runner",
+                        },
+                    )
+                elif operation == "review":
+                    self._review(state, command)
+                elif operation == "revise":
+                    criteria = criteria_value(command["criteria"])
+                    protected = {
+                        item["id"]: item
+                        for item in state.spec["criteria"]
+                        if item["origin"] in {"user", "policy"}
+                    }
+                    proposed = {item["id"]: item for item in criteria}
+                    if any(
+                        proposed.get(key) != item
+                        for key, item in protected.items()
+                        if item["origin"] == "policy"
+                    ):
+                        raise FairyError("permission", "Task strategy cannot weaken runtime policy criteria")
+                    if any(proposed.get(key) != item for key, item in protected.items()):
+                        user_basis = command.get("user_basis")
+                        events = self.store.events(task)
+                        revised_at = max(
+                            (item["seq"] for item in events if item["kind"] == "revised"), default=0
                         )
-                spec = {
-                    **state.spec,
-                    "goal": text_value(command["goal"], "goal"),
-                    "criteria": criteria,
-                    "assumptions": strings(command.get("assumptions", []), "assumptions"),
-                    "required_roles": required_roles_value(command["required_roles"])
-                    if "required_roles" in command
-                    else state.spec.get("required_roles", []),
-                    "governance": governance,
-                    "governance_scope": governance_scope,
-                    "provisional": False,
-                }
-                self._append(
-                    state,
-                    "revised",
-                    {
-                        "spec": spec,
-                        "reason": text_value(command["reason"], "revision reason"),
-                        "user_basis": command.get("user_basis"),
-                        "origin": "model",
-                    },
-                )
-            elif operation == "ask":
-                admit_question(state)
-                self._append(
-                    state,
-                    "asked",
-                    {
-                        "question": text_value(command["question"], "question"),
-                        "recommendation": text_value(command["recommendation"], "recommendation"),
-                        "options": strings(command.get("options", []), "question options"),
-                        "origin": "model",
-                    },
-                )
-            elif operation == "answer":
-                self._append(
-                    state,
-                    "answered",
-                    {"text": text_value(command["text"], "forwarded user answer"), "origin": "user_report"},
-                )
-            elif operation == "feedback":
-                self._append(
-                    state,
-                    "feedback",
-                    {
-                        "text": text_value(command["text"], "feedback"),
-                        "kind": text_value(command.get("kind", "observation"), "feedback kind"),
-                        "origin": "user_report",
-                    },
-                )
-            elif operation == "close":
-                outcome = text_value(command["outcome"], "outcome")
-                admit_close(state, outcome)
-                self._append(
-                    state, "closed", {"outcome": outcome, "note": command.get("note", ""), "origin": "runner"}
-                )
+                        if not any(
+                            item["seq"] == user_basis
+                            and item["kind"] == "answered"
+                            and item["seq"] > revised_at
+                            for item in events
+                        ):
+                            raise FairyError(
+                                "permission",
+                                "Changing explicit requirements needs a new forwarded user instruction",
+                            )
+                    governance: list[str] = list(state.spec.get("governance", []))
+                    if "governance" in command:
+                        governance = [
+                            content_ref(item, "governance asset reference") for item in command["governance"]
+                        ]
+                    governance_scope = list(state.spec.get("governance_scope", []))
+                    if "governance_scope" in command:
+                        governance_scope = task_spec_value(
+                            "scope", {"governance_scope": command["governance_scope"]}
+                        )["governance_scope"]
+                        governance = sorted(
+                            set(governance)
+                            | {
+                                item["ref"]
+                                for scope in governance_scope
+                                for item in self.library.governance(scope)
+                            }
+                        )
+                    for ref in governance:
+                        if self.library.status(ref) not in {"trial", "stable"}:
+                            raise FairyError(
+                                "not_ready",
+                                "Governance assets must be adopted before revision",
+                            )
+                    spec = {
+                        **state.spec,
+                        "goal": text_value(command["goal"], "goal"),
+                        "criteria": criteria,
+                        "assumptions": strings(command.get("assumptions", []), "assumptions"),
+                        "required_roles": required_roles_value(command["required_roles"])
+                        if "required_roles" in command
+                        else state.spec.get("required_roles", []),
+                        "governance": governance,
+                        "governance_scope": governance_scope,
+                        "provisional": False,
+                    }
+                    self._append(
+                        state,
+                        "revised",
+                        {
+                            "spec": spec,
+                            "reason": text_value(command["reason"], "revision reason"),
+                            "user_basis": command.get("user_basis"),
+                            "origin": "model",
+                        },
+                    )
+                elif operation == "ask":
+                    admit_question(state)
+                    self._append(
+                        state,
+                        "asked",
+                        {
+                            "question": text_value(command["question"], "question"),
+                            "recommendation": text_value(command["recommendation"], "recommendation"),
+                            "options": strings(command.get("options", []), "question options"),
+                            "origin": "model",
+                        },
+                    )
+                elif operation == "answer":
+                    self._append(
+                        state,
+                        "answered",
+                        {
+                            "text": text_value(command["text"], "forwarded user answer"),
+                            "origin": "user_report",
+                        },
+                    )
+                elif operation == "feedback":
+                    self._append(
+                        state,
+                        "feedback",
+                        {
+                            "text": text_value(command["text"], "feedback"),
+                            "kind": text_value(command.get("kind", "observation"), "feedback kind"),
+                            "origin": "user_report",
+                        },
+                    )
+                elif operation == "close":
+                    outcome = text_value(command["outcome"], "outcome")
+                    admit_close(state, outcome)
+                    self._append(
+                        state,
+                        "closed",
+                        {"outcome": outcome, "note": command.get("note", ""), "origin": "runner"},
+                    )
+        except FairyError as exc:
+            raise _stage_failure(
+                exc, task=task, operation=operation, seq=known_seq, stage="admission"
+            ) from exc
         if operation == "close":
-            return self.deliver(task)
+            committed_seq = state.seq + 1
+            delivery = self._export_after_commit(task, operation="close", committed_seq=committed_seq)
+            return {"task": task, "seq": committed_seq, "outcome": outcome, "delivery": delivery}
+        response = {**result, "task": task, "seq": state.seq + 1}
         if operation in {"report", "feedback"} and state.outcome is not None:
-            result["receipt_path"] = self.deliver(task)["receipt_path"]
-        return {**result, "task": task, "seq": state.seq + 1}
+            response["delivery"] = self._export_after_commit(
+                task, operation=operation, committed_seq=response["seq"]
+            )
+        return response
 
     def _record_delivery_progress(self, task: str, member: dict[str, Any]) -> None:
         with self.store.transaction():
@@ -995,7 +1177,12 @@ class Workshop(AbstractContextManager["Workshop"]):
                 return None
         return None
 
-    def _completion(self, state: State) -> dict[str, Any]:
+    def _acceptance(self, state: State) -> dict[str, Any]:
+        required_checkers = {
+            "snapshot.check" if criterion["scope"] == "collection" else "content.check"
+            for criterion in state.spec["criteria"]
+            if criterion["checker"] != "semantic"
+        }
         return {
             "complete": state.complete(),
             "provisional_refined": not state.spec.get("provisional", False),
@@ -1023,7 +1210,22 @@ class Workshop(AbstractContextManager["Workshop"]):
             ],
             "question_pending": state.question is not None,
             "execution_settled": state.execution_settled(),
+            "assessment": {
+                "checker_contracts": state.checker_contracts,
+                "missing_checkers": sorted(required_checkers - set(state.checker_contracts)),
+            },
         }
+
+    def _delivery_observation(self, state: State) -> dict[str, Any]:
+        if state.outcome is None:
+            return {
+                "state": "not_closed",
+                "task": state.task,
+                "seq": state.seq,
+                "target": None,
+                "validation": "not_checked",
+            }
+        return observe_delivery(self.store.home, state.task, state.seq)
 
     def _recovery(self, state: State) -> dict[str, Any]:
         return {
@@ -1046,16 +1248,29 @@ class Workshop(AbstractContextManager["Workshop"]):
         events = self.store.events(task)
         state = replay(task, events)
         state.checker_contracts = self._checker_contracts()
+        state.live_checkers = True
         action = state.next_action()
+        delivery = self._delivery_observation(state)
+        if action == "closed":
+            action = {
+                "absent": "deliver",
+                "unverified": "verify_delivery",
+                "unsafe": "inspect_delivery",
+            }[delivery["state"]]
+        inspect_command = None
+        if action in {"inspect_conflict", "inspect_delivery"}:
+            inspect_command = f"inspect {task} --history"
         return {
-            "stage_packet_version": 1,
+            "stage_packet_version": 2,
             "task": task,
             "seq": state.seq,
             "revision": state.revision,
             "action": action,
             "payload": self._payload(state, action),
-            "inspect_command": f"inspect {task} --history" if action == "inspect_conflict" else None,
-            "completion": self._completion(state),
+            "deliver_command": f"deliver {task}" if action in {"deliver", "verify_delivery"} else None,
+            "inspect_command": inspect_command,
+            "acceptance": self._acceptance(state),
+            "delivery": delivery,
             "recovery": self._recovery(state),
             "goal": state.spec["goal"],
             "criteria": state.spec["criteria"],
@@ -1151,6 +1366,7 @@ class Workshop(AbstractContextManager["Workshop"]):
         events = self.store.events(task)
         state = replay(task, events)
         state.checker_contracts = self._checker_contracts()
+        state.live_checkers = True
         result = self._inspection(state)
         if history:
             result["events"] = events
@@ -1196,12 +1412,15 @@ class Workshop(AbstractContextManager["Workshop"]):
         definition = object_value(parse_json(self.store.get(ref).decode("utf-8")))
         return {"task": task, "seq": state.seq, "contract_ref": ref, "definition": definition}
 
-    def deliver(self, task: str) -> dict[str, Any]:
-        return self._delivery(task)
+    def deliver(self, task: str, *, expected_seq: int | None = None, repair: bool = False) -> dict[str, Any]:
+        return self._delivery(task, expected_seq=expected_seq, repair=repair)
 
-    def _delivery(self, task: str) -> dict[str, Any]:
-        state = self.state(task)
-        return deliver_bag(self.store.home, state, self.store, self._inspection(state))
+    def _delivery(
+        self, task: str, *, expected_seq: int | None = None, repair: bool = False
+    ) -> dict[str, Any]:
+        state = self._historical_state(task)
+        require_sequence(state, expected_seq)
+        return deliver_bag(self.store.home, state, self.store, self._inspection(state), repair=repair)
 
     def validation_task(self, ref: str) -> str:
         with self.store.transaction():
@@ -1239,7 +1458,22 @@ class Workshop(AbstractContextManager["Workshop"]):
     def _learning_task(self, source: State) -> str:
         if not self.store.connection.in_transaction:
             raise FairyError("invalid", "Learning task creation requires an admitted transaction")
-        summary = freeze(self.store.home, self.inspect(source.task, history=True), task=source.task)
+        historical = self._historical_state(source.task)
+        current = self.state(source.task)
+        summary = freeze(
+            self.store.home,
+            {
+                **self._inspection(historical),
+                "events": self.store.events(source.task),
+                "current_assessment": {
+                    "checker_contracts": self._checker_contracts(),
+                    "issues": current.issues(),
+                    "unresolved_failures": current.unresolved_failures(),
+                    "acceptance_complete": current.complete(),
+                },
+            },
+            task=source.task,
+        )
         data = canonical(summary)
         ref = self.store.put(data)
         spec = task_spec_value(

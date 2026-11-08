@@ -1,0 +1,273 @@
+{
+  "format": 2,
+  "profiles": {
+    "core": {
+      "requirements": [
+        {
+          "marker": null,
+          "name": "attrs",
+          "version": "26.1.0"
+        },
+        {
+          "marker": null,
+          "name": "filelock",
+          "version": "4.2.6"
+        },
+        {
+          "marker": null,
+          "name": "jsonpointer",
+          "version": "3.6"
+        },
+        {
+          "marker": null,
+          "name": "jsonschema",
+          "version": "4.26.0"
+        },
+        {
+          "marker": null,
+          "name": "jsonschema-specifications",
+          "version": "2025.9.1"
+        },
+        {
+          "marker": null,
+          "name": "packaging",
+          "version": "26.3"
+        },
+        {
+          "marker": null,
+          "name": "pathvalidate",
+          "version": "3.3.1"
+        },
+        {
+          "marker": null,
+          "name": "referencing",
+          "version": "0.37.0"
+        },
+        {
+          "marker": null,
+          "name": "rpds-py",
+          "version": "2026.9.1"
+        },
+        {
+          "marker": null,
+          "name": "typing-extensions",
+          "version": "4.16.0"
+        }
+      ]
+    },
+    "search": {
+      "requirements": [
+        {
+          "marker": null,
+          "name": "annotated-types",
+          "version": "0.8.0"
+        },
+        {
+          "marker": null,
+          "name": "anyio",
+          "version": "4.16.0"
+        },
+        {
+          "marker": null,
+          "name": "certifi",
+          "version": "2026.10.23"
+        },
+        {
+          "marker": null,
+          "name": "charset-normalizer",
+          "version": "3.5.2"
+        },
+        {
+          "marker": null,
+          "name": "click",
+          "version": "8.5.0"
+        },
+        {
+          "marker": "sys_platform == 'win32'",
+          "name": "colorama",
+          "version": "0.4.6"
+        },
+        {
+          "marker": null,
+          "name": "deprecation",
+          "version": "2.1.0"
+        },
+        {
+          "marker": null,
+          "name": "fastembed",
+          "version": "0.9.1"
+        },
+        {
+          "marker": null,
+          "name": "filelock",
+          "version": "4.2.6"
+        },
+        {
+          "marker": null,
+          "name": "flatbuffers",
+          "version": "25.12.19"
+        },
+        {
+          "marker": null,
+          "name": "fsspec",
+          "version": "2026.9.0"
+        },
+        {
+          "marker": null,
+          "name": "h11",
+          "version": "0.16.0"
+        },
+        {
+          "marker": null,
+          "name": "hf-xet",
+          "version": "1.8.0"
+        },
+        {
+          "marker": null,
+          "name": "httpcore",
+          "version": "1.0.9"
+        },
+        {
+          "marker": null,
+          "name": "httpx",
+          "version": "0.28.1"
+        },
+        {
+          "marker": null,
+          "name": "huggingface-hub",
+          "version": "1.33.0"
+        },
+        {
+          "marker": null,
+          "name": "idna",
+          "version": "3.20"
+        },
+        {
+          "marker": null,
+          "name": "lance-namespace",
+          "version": "0.13.0"
+        },
+        {
+          "marker": null,
+          "name": "lance-namespace-urllib3-client",
+          "version": "0.13.0"
+        },
+        {
+          "marker": null,
+          "name": "lancedb",
+          "version": "0.41.0"
+        },
+        {
+          "marker": null,
+          "name": "loguru",
+          "version": "0.7.3"
+        },
+        {
+          "marker": null,
+          "name": "mmh3",
+          "version": "5.3.1"
+        },
+        {
+          "marker": null,
+          "name": "numpy",
+          "version": "2.5.4"
+        },
+        {
+          "marker": null,
+          "name": "onnxruntime",
+          "version": "1.31.1"
+        },
+        {
+          "marker": null,
+          "name": "packaging",
+          "version": "26.3"
+        },
+        {
+          "marker": null,
+          "name": "pillow",
+          "version": "13.0.0"
+        },
+        {
+          "marker": null,
+          "name": "protobuf",
+          "version": "7.36.2"
+        },
+        {
+          "marker": null,
+          "name": "py-rust-stemmers",
+          "version": "0.1.8"
+        },
+        {
+          "marker": null,
+          "name": "pyarrow",
+          "version": "26.0.0"
+        },
+        {
+          "marker": null,
+          "name": "pydantic",
+          "version": "2.14.2"
+        },
+        {
+          "marker": null,
+          "name": "pydantic-core",
+          "version": "2.50.2"
+        },
+        {
+          "marker": null,
+          "name": "python-dateutil",
+          "version": "4.0.0"
+        },
+        {
+          "marker": null,
+          "name": "pyyaml",
+          "version": "6.0.3"
+        },
+        {
+          "marker": null,
+          "name": "requests",
+          "version": "2.34.2"
+        },
+        {
+          "marker": null,
+          "name": "tokenizers",
+          "version": "0.23.3"
+        },
+        {
+          "marker": null,
+          "name": "tqdm",
+          "version": "4.70.1"
+        },
+        {
+          "marker": null,
+          "name": "typing-extensions",
+          "version": "4.16.0"
+        },
+        {
+          "marker": null,
+          "name": "typing-inspection",
+          "version": "0.4.4"
+        },
+        {
+          "marker": null,
+          "name": "tzdata",
+          "version": "2026.6"
+        },
+        {
+          "marker": null,
+          "name": "urllib3",
+          "version": "2.8.0"
+        },
+        {
+          "marker": "sys_platform == 'win32'",
+          "name": "win32-setctime",
+          "version": "1.2.1"
+        }
+      ]
+    }
+  },
+  "python": ">=3.12",
+  "recovery": {
+    "core": "Install the hash-locked runtime requirements in a virtual environment",
+    "search": "assets prepare"
+  }
+}

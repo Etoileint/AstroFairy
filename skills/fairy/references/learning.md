@@ -5,8 +5,9 @@ Silence is not success; frequency is not proof of usefulness. Retain evidence an
 Keep task facts, personal preferences and behavioral constraints distinct. Apply SCHF-style scope, failure mode,
 hardening and explanatory function to constraints; ordinary facts and transient task state are not constraints.
 
-After closure, `feedback` records actual user feedback (`text`, optional `kind`). The delivered task's
-`next` exposes `maintain`, `defer` and `no_change` choices. `defer` records a visible todo for a later
+After closure, `feedback` records actual user feedback (`text`, optional `kind`). The closed task's
+`next` exposes `maintain`, `defer` and `no_change` choices whether or not the local export currently
+validates; learning decisions do not wait for a derived file. `defer` records a visible todo for a later
 session; `no_change` is an explicit evidence-backed conclusion; `{"op":"learn","decision":"maintain"}`
 records the source decision, creates a separate maintenance task with a performance snapshot and links
 the child id. `todos` (or `Workshop.todos()`) discovers unresolved deferred decisions across tasks without
@@ -20,8 +21,10 @@ conflicts. Requests without this precondition, or with a newly read sequence, ca
 the sequence is a freshness precondition rather than a durable idempotency token.
 The maintenance input is a small JSON locator with `document`, source `task` and `seq`. Read it, then use
 the free document route from the [host protocol](host.md), for example `read DOCUMENT --task SOURCE_TASK
---pointer /feedback` or `/events`. The source snapshot includes raw events, so forwarded answers and
-their order remain available along with calls, reviews and feedback. Read only relevant sections and
+--pointer /feedback` or `/events`. The source snapshot includes the recorded facts and raw events under
+one labelled history; a separate `current_assessment` carries the live checker-contract identity and
+current issues, so changed installed checkers do not rewrite the historical record. Forwarded answers
+and their order remain available along with calls, reviews and feedback. Read only relevant sections and
 all necessary supporting evidence. A snapshot exceeding the ordinary 16 MiB blob limit still uses this
 locator contract; it is not silently truncated. Later feedback does not alter the captured document.
 Document files and SQLite are separate resources: child rollback may leave an unreferenced derived
@@ -72,11 +75,14 @@ candidate requiring local validation.
 Search projects the current adopted head of each scope/name family into a local LanceDB index. Chunks cover
 name, summary, tags, applicability/inputs/parameters, workflow steps, body and evidence; BM25 with bundled
 ICU segmentation, exact-vector multilingual E5 results and weighted RRF (full-text 2:1) are fused. The fixed profile records the
-model source/revision/file SHA256, tokenizer, prefixes, normalization and field/chunking scope. Each query
-returns the source generation, profile and table version; a stale or unavailable projection returns
-`search_not_ready` with `assets search --refresh` as the explicit preparation route, which downloads and
-SHA256-verifies the fixed revision. Ordinary search uses the fixed local directory, does not download or
-start another model. Empty queries browse active heads; `asset.search` defaults to 8, ordinary CLI
+model source/revision, the six actually consumed files with SHA-256 (ONNX model, external data, tokenizer
+and three tokenizer/config JSON files), tokenizer, prefixes, normalization and field/chunking scope. Each
+query returns the source generation, profile and table version; a stale or unavailable projection returns
+`search_not_ready` with the offending stage and an explicit recovery route. `assets prepare` downloads when
+absent and SHA-256-verifies all six files without building an index or running inference;
+`assets search --refresh` composes the same preparation with a projection rebuild, and an empty active
+library returns `projection.state=empty` with the preparation result. Ordinary search uses the fixed local
+directory, does not download or start another model. Empty queries browse active heads; `asset.search` defaults to 8, ordinary CLI
 pages default to 50, and either accepts up to 200 plus an opaque `cursor` from `next_cursor` (the agent
 capability also uses `cursor` in its parameters). A cursor binds the
 query, scope, kind, source generation, profile, table and version; changed state returns a conflict or

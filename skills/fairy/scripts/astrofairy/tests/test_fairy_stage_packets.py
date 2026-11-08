@@ -23,10 +23,10 @@ class FairyStagePacketTests(WorkshopTest):
     def test_next_stage_packet_templates_and_completion(self) -> None:
         task = self.workshop.start("Stage packet")
         packet = self.workshop.next(task)
-        self.assertEqual(packet["stage_packet_version"], 1)
+        self.assertEqual(packet["stage_packet_version"], 2)
         self.assertEqual(packet["action"], "refine")
         self.assertEqual(packet["payload"]["op"], "revise")
-        self.assertFalse(packet["completion"]["provisional_refined"])
+        self.assertFalse(packet["acceptance"]["provisional_refined"])
         self.assertEqual(packet["recovery"]["task"], task)
         self.assertEqual(packet["recovery"]["seq"], packet["seq"])
         self.workshop.submit(
@@ -53,7 +53,7 @@ class FairyStagePacketTests(WorkshopTest):
         self.assertEqual((packet["action"], packet["payload"]["op"]), ("review", "review"))
         self.assertEqual(packet["payload"]["criterion"], "goal")
         self.assertGreaterEqual(len(packet["payload"]["evidence"]), 1)
-        self.assertFalse(packet["completion"]["complete"])
+        self.assertFalse(packet["acceptance"]["complete"])
 
     def test_mechanical_issue_payload_is_check_not_a_model_pass(self) -> None:
         task = self.workshop.start(
@@ -107,7 +107,9 @@ class FairyStagePacketTests(WorkshopTest):
         self.assertEqual([check["result"]["verdict"] for check in result["checks"]], ["pass"])
         self.assertFalse(self.workshop.state(task).complete())
         self.semantic(task)
-        delivery = self.workshop.submit(task, {"op": "close", "outcome": "complete"})
+        response = self.workshop.submit(task, {"op": "close", "outcome": "complete"})
+        delivery = response["delivery"]
+        self.assertEqual(delivery["state"], "validated")
         self.assertEqual(sorted(delivery["files"]), ["data.csv", "report.md"])
 
     def test_prepare_delivery_resume_reuses_committed_members(self) -> None:

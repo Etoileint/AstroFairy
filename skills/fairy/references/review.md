@@ -15,7 +15,9 @@
 - Unresolved calls block complete delivery. Reopen the same home to recover the ledger. Fulfil a pending model
   request using its original call id; do not issue duplicate work. An interrupted tool call remains pending or
   unknown. Inspect the original attempt and its pinned reconciliation declaration before choosing a next step.
-- Closed tasks reject new work but retain late reports, tool receipts and feedback. Follow-up work starts a new task.
+- Closed tasks reject new work but retain late reports, tool receipts and feedback. `next` reports `closed`
+  facts through the separate `delivery` observation; a closed outcome never implies a validated local bag.
+  Follow-up work starts a new task.
 - Invocation budgets count registered calls and model requests. They do not measure real model tokens or wall time;
   the host still controls those resources. Stop unproductive work before the hard count is exhausted.
   At zero budget, existing results can still be reported/published, answers forwarded and semantic reviews
@@ -46,10 +48,19 @@ means stop asserting complete and inspect the evidence. This release has no forc
 Closed tasks stay closed; their recorded outcome is historical. New receipts disclose current dispute,
 and future adoption cannot use a conflicted validation. Existing sent files/adopted assets are not globally revoked.
 
-Late facts commit before receipt refresh. Export failure preserves the ledger; `deliver` regenerates the
-projection. A receipt's `seq` identifies its snapshot and can lag the ledger. Read `next`/`inspect` for current
-facts, and check integrity fields as well as the historical outcome. Never advertise a disputed complete
-as an unqualified current success.
+Late facts commit before the shared receipt refresh; export failure preserves the ledger and returns
+`committed=true` with a `deliver` recovery command. Retry only the derived export, never the recorded
+effect, close, report, feedback or learning decision. A receipt's `seq` identifies its snapshot and can lag
+the ledger. The receipt projection (format 2) is regenerated from recorded facts and recorded checker
+identities; changing the installed checker registry changes the current assessment, not historical receipt
+bytes. Read `next`/`inspect` for current facts, and check integrity fields as well as the historical
+outcome. Never advertise a disputed complete as an unqualified current success. An existing invalid or
+unsupported derived export is refused by ordinary `deliver`; `deliver --repair --expected-seq S` validates
+a replacement first and quarantines the old directory without deleting it. Redirects and unsafe descendants
+are `unsafe_delivery` refusals, never moved or followed. A later failure reports completed repair actions
+and the quarantine identity. Current acceptance requires the installed checker registry to match every
+required mechanical criterion; a missing current checker fails current applicability closed without
+invalidating the historical receipt.
 
 Database hashes detect altered records and blobs. They are local integrity checks, not protection against a host
 that controls the database, code and hashes. Checkpoints and exports do not assert independent audit certification.

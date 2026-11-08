@@ -1,3 +1,7 @@
+# Explicit profile pins preserve the tested 0.1.0a2 search closure. The
+# universal resolver remains responsible for conditional branches and any
+# newly required transitive dependency; changing a pin needs an explicit
+# update decision, not an incidental resolution drift.
 annotated-types==0.8.0
 anyio==4.16.0
 certifi==2026.10.23

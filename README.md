@@ -96,7 +96,7 @@ automatic selection depends on the host application.
 1. **Define:** capture the request and materials; derive the goal, checks, delivery roles and important assumptions. Refine the provisional default agreement for the actual task.
 2. **Produce:** retrieve relevant assets and execute an appropriate workflow until every formal member exists.
 3. **Check:** run applicable mechanical checks and review the current snapshot against its semantic criteria.
-4. **Deliver:** return every formal member in a fully validated BagIt directory plus its receipt, with an honest complete, partial, failed or cancelled outcome.
+4. **Deliver:** close with an honest complete, partial, failed or cancelled outcome. The runner keeps that committed fact and records a separate delivery observation; a successful export returns every formal member in a fully validated BagIt directory plus its receipt. If export fails, the fact remains committed and the response gives a bounded error and a `deliver` recovery command without asking to repeat the work.
 
 Original inputs and member bytes are retained. A member has a canonical relative path, media type and role;
 a snapshot is the sorted, immutable member list. Reviews bind the agreement revision, criterion definition,
@@ -104,8 +104,12 @@ scope and exact target, so a changed snapshot needs fresh semantic or collection
 mechanical checks may be reused under identical identity. Unreplaced failures remain visible and require
 explicit disposition. Tool observations and model judgments remain distinguishable.
 The receipt records the goal, assumptions, inputs, snapshot members, actions and review basis for inspection.
-This release uses protocol/store format 10. Old stores are refused without migration; the agent
-should use a fresh approved state directory for new tasks.
+Receipt projection 2 is generated from recorded facts and recorded checker identities, so the same task
+sequence keeps identical receipt bytes across restarts and checker-registry changes; the current assessment
+is reported separately. This release uses protocol 11, stage packet 2 and store format 10. Old stores are
+refused without migration; the agent should use a fresh approved state directory for new tasks. An invalid
+or unsupported derived export is rebuilt only by an explicit repair that quarantines (never deletes) the
+old directory.
 
 Agent-facing CLI responses have a fixed byte budget. Larger records remain available through immutable
 documents and free selected fragments, so the agent can inspect the relevant details without repeating
@@ -128,8 +132,11 @@ file-format engine.
 Successful approaches, corrections, feedback and repeated task structures can support improvements
 to an external asset library. Methods and workflows are retrieved as needed rather than accumulated
 in always-loaded instructions. Discovery uses a local hybrid BM25/vector index over adopted heads;
-candidates and retired versions are excluded, and `assets search --refresh` explicitly prepares the fixed
-model/projection instead of downloading silently.
+candidates and retired versions are excluded. `assets prepare` explicitly downloads the fixed revision
+when absent and SHA-256-verifies its six consumed files without building an index or running inference;
+`assets search --refresh` composes that preparation with a projection rebuild. Ordinary search never
+downloads silently, and an explicit refresh on an empty library reports an empty projection plus the
+preparation result.
 
 After delivery, the agent can propose a reusable asset, validate it through a separate task and adopt
 it for trial or stable use. Assets can be revised or retired. Maintenance can also conclude that no

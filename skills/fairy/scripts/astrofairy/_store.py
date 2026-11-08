@@ -27,6 +27,31 @@ if TYPE_CHECKING:
 STORE_VERSION = 10
 
 
+def _transaction_failure(
+    exc: sqlite3.Error,
+    *,
+    stage: str,
+    certainty: str,
+    rollback: dict[str, Any] | None = None,
+) -> FairyError:
+    details: dict[str, Any] = {
+        "transaction": stage,
+        "commit": certainty,
+        "committed": False if certainty == "not_committed" else "unknown",
+        "sqlite_code": getattr(exc, "sqlite_errorcode", None),
+        "sqlite_name": getattr(exc, "sqlite_errorname", None),
+    }
+    if rollback:
+        details["rollback"] = rollback
+    if certainty == "unknown":
+        message = "The recorded-state transaction could not be confirmed; inspect before retrying"
+    elif stage == "begin":
+        message = "The recorded-state transaction could not begin"
+    else:
+        message = "The recorded-state transaction failed and was rolled back"
+    return FairyError("storage_failed", message, details=details)
+
+
 def _search_text(name: str, summary: str, tags: str) -> str:
     return " ".join([name, summary, *strings(parse_json(tags), "asset tags")]).casefold()
 
@@ -151,13 +176,55 @@ class Store:
 
     @contextmanager
     def transaction(self) -> Iterator[None]:
-        self.connection.execute("BEGIN IMMEDIATE")
+        try:
+            self.connection.execute("BEGIN IMMEDIATE")
+        except sqlite3.Error as exc:
+            raise _transaction_failure(exc, stage="begin", certainty="not_committed") from exc
         try:
             yield
-            self.connection.execute("COMMIT")
-        except BaseException:
-            self.connection.execute("ROLLBACK")
+        except BaseException as exc:
+            certainty = "not_committed"
+            rollback: dict[str, Any] = {}
+            try:
+                self.connection.execute("ROLLBACK")
+            except sqlite3.Error as retry:
+                certainty = "unknown"
+                rollback = {
+                    "sqlite_code": getattr(retry, "sqlite_errorcode", None),
+                    "sqlite_name": getattr(retry, "sqlite_errorname", None),
+                }
+            else:
+                rollback = {"state": "rolled_back"}
+            if isinstance(exc, FairyError):
+                details = dict(exc.details or {})
+                details.setdefault("commit", certainty)
+                details.setdefault("committed", False if certainty == "not_committed" else "unknown")
+                details.setdefault("rollback", rollback)
+                exc.details = details
+                raise
+            if isinstance(exc, sqlite3.Error):
+                raise _transaction_failure(exc, stage="body", certainty=certainty, rollback=rollback) from exc
             raise
+        try:
+            self.connection.execute("COMMIT")
+        except sqlite3.Error as exc:
+            active = self.connection.in_transaction
+            certainty = "not_committed" if active else "unknown"
+            commit_rollback: dict[str, Any] = {}
+            if active:
+                try:
+                    self.connection.execute("ROLLBACK")
+                except sqlite3.Error as retry:
+                    certainty = "unknown"
+                    commit_rollback = {
+                        "sqlite_code": getattr(retry, "sqlite_errorcode", None),
+                        "sqlite_name": getattr(retry, "sqlite_errorname", None),
+                    }
+                else:
+                    commit_rollback = {"state": "rolled_back"}
+            raise _transaction_failure(
+                exc, stage="commit", certainty=certainty, rollback=commit_rollback
+            ) from exc
 
     def put(self, data: bytes) -> str:
         if len(data) > LIMITS.blob_bytes:

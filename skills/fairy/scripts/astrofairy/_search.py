@@ -6,13 +6,21 @@ import os
 import re
 import shutil
 import sqlite3
+import threading
 import uuid
 from contextlib import contextmanager
 from dataclasses import dataclass
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Protocol, cast
 
-from astrofairy._contracts import canonical, digest, object_value, parse_json
+from astrofairy._contracts import (
+    canonical,
+    dependency_observations,
+    digest,
+    object_value,
+    parse_json,
+)
 from astrofairy._errors import FairyError
 from astrofairy._limits import LIMITS
 from astrofairy._pagination import encode_cursor, offset_cursor
@@ -29,6 +37,17 @@ MODEL_FILES = {
     "model.onnx": "1c09780c907c8a91a77a6ab1fd231f79e090d2907ca431223703dfebeed3d36c",
     "model.onnx_data": "0cf1883fee81c63819a44e2ba0efa51d4043d9759685a4ebebbde97e0623d15c",
     "tokenizer.json": "f59925fcb90c92b894cb93e51bb9b4a6105c5c249fe54ce1c704420ac39b81af",
+    "config.json": "1de8c3be1f344c0eefa4962480a006f8639f416dfafaa95a770e3cf4bceae6a4",
+    "tokenizer_config.json": "f90024142df07163e5e6c5b9a6ad7c8c68b22a9112af11e3db4559a9ff90f737",
+    "special_tokens_map.json": "8c785abebea9ae3257b61681b4e6fd8365ceafde980c21970d001e834cf10835",
+}
+MODEL_FILE_SIZES = {
+    "model.onnx": 545851,
+    "model.onnx_data": 2235363328,
+    "tokenizer.json": 17082756,
+    "config.json": 716,
+    "tokenizer_config.json": 1147,
+    "special_tokens_map.json": 964,
 }
 MODEL_DIMENSION = 1024
 MODEL_MAX_TOKENS = 512
@@ -134,6 +153,43 @@ class CharTokenizer:
         return [text[start : start + max_tokens] for start in range(0, len(text), max_tokens) if text]
 
 
+_PREPARE_LOCKS: dict[str, threading.Lock] = {}
+_PREPARE_LOCKS_GUARD = threading.Lock()
+
+
+def model_cache_path(home: Path) -> Path:
+    return Path(os.environ.get("ASTROFAIRY_MODEL_CACHE", str(home / "search" / "models"))).resolve()
+
+
+def _prepare_thread_lock(key: str) -> threading.Lock:
+    with _PREPARE_LOCKS_GUARD:
+        return _PREPARE_LOCKS.setdefault(key, threading.Lock())
+
+
+def _prepare_recovery() -> dict[str, Any]:
+    return {
+        "command": "assets prepare",
+        "downloads": True,
+        "verifies": "sha256 of the six fixed model files",
+        "builds_index": False,
+        "runs_inference": False,
+    }
+
+
+def _model_error(message: str, **details: Any) -> FairyError:
+    return FairyError(
+        "search_not_ready",
+        message,
+        details={
+            "stage": "model",
+            "model": MODEL_NAME,
+            "revision": MODEL_REVISION,
+            "recovery": _prepare_recovery(),
+            **details,
+        },
+    )
+
+
 class FastEmbedder:
     dimension = MODEL_DIMENSION
 
@@ -142,96 +198,154 @@ class FastEmbedder:
         self.threads = threads
         self._model: Any | None = None
         self._verified_dir: Path | None = None
+        self._verified_stats: tuple[tuple[str, int, int], ...] | None = None
 
-    def model_dir(self) -> Path:
-        if self._verified_dir is not None:
-            return self._verified_dir
-        path = self.cache_dir / MODEL_CACHE_REPO / "snapshots" / MODEL_REVISION
-        if not path.is_dir():
-            raise FairyError(
-                "search_not_ready",
-                "Prepare the fixed multilingual retrieval model before searching",
-                details={
-                    "model": MODEL_NAME,
-                    "revision": MODEL_REVISION,
-                    "prepare_via": "assets search --refresh",
-                },
-            )
+    def _snapshot_path(self) -> Path:
+        return self.cache_dir / MODEL_CACHE_REPO / "snapshots" / MODEL_REVISION
+
+    def _file_stats(self, path: Path) -> tuple[tuple[str, int, int], ...] | None:
+        result = []
+        for name in MODEL_FILES:
+            try:
+                stat = (path / name).stat()
+            except OSError:
+                return None
+            result.append((name, stat.st_size, stat.st_mtime_ns))
+        return tuple(result)
+
+    def _verify_files(self, path: Path) -> dict[str, dict[str, Any]]:
+        files: dict[str, dict[str, Any]] = {}
         for name, expected in MODEL_FILES.items():
             file = path / name
-            if not file.is_file():
-                raise FairyError(
-                    "search_not_ready",
-                    "The fixed model revision is incomplete; prepare it explicitly",
-                    details={"model": MODEL_NAME, "revision": MODEL_REVISION, "missing": name},
-                )
             try:
+                stat = file.stat()
+                if not file.is_file():
+                    raise IsADirectoryError(str(file))
                 with file.open("rb") as stream:
                     actual = hashlib.file_digest(stream, "sha256").hexdigest()
             except OSError as exc:
-                raise FairyError(
-                    "search_not_ready",
-                    "The fixed model revision could not be read; prepare it explicitly",
-                    details={"model": MODEL_NAME, "revision": MODEL_REVISION, "file": name},
+                raise _model_error(
+                    "The fixed model revision is incomplete; prepare it explicitly", missing=name
                 ) from exc
-            if actual != expected:
-                raise FairyError(
-                    "search_not_ready",
+            if actual != expected or stat.st_size != MODEL_FILE_SIZES[name]:
+                raise _model_error(
                     "The fixed model revision does not match the locked files",
-                    details={"model": MODEL_NAME, "revision": MODEL_REVISION, "file": name},
+                    file=name,
+                    expected_sha256=expected,
+                    observed_sha256=actual,
+                    expected_bytes=MODEL_FILE_SIZES[name],
+                    observed_bytes=stat.st_size,
                 )
-        self._verified_dir = path
-        return path
+            files[name] = {"bytes": stat.st_size, "sha256": actual}
+        return files
 
-    def prepare(self) -> dict[str, Any]:
-        try:
-            from huggingface_hub import snapshot_download  # noqa: PLC0415 - lazy search dependency.
-        except Exception as exc:
-            raise FairyError("search_not_ready", "Prepare the locked model download dependency") from exc
+    @contextmanager
+    def _cache_lock(self) -> Iterator[None]:
         self.cache_dir.mkdir(mode=0o700, parents=True, exist_ok=True)
-        path = self.cache_dir / MODEL_CACHE_REPO / "snapshots" / MODEL_REVISION
-        if path.is_dir():
-            try:
-                return {
-                    "model": MODEL_NAME,
-                    "revision": MODEL_REVISION,
-                    "path": str(self.model_dir()),
-                }
-            except FairyError:
-                self._verified_dir = None
+        thread = _prepare_thread_lock(str(self.cache_dir))
+        if not thread.acquire(timeout=LIMITS.model_prepare_lock_seconds):
+            raise FairyError(
+                "search_busy",
+                "Another preparation is using the shared model cache; retry later",
+                details={"stage": "model", "recovered_via": "assets prepare"},
+            )
         try:
-            downloaded = snapshot_download(
-                repo_id=MODEL_SOURCE,
-                revision=MODEL_REVISION,
-                cache_dir=str(self.cache_dir),
-                allow_patterns=[
-                    "model.onnx",
-                    "model.onnx_data",
-                    "tokenizer.json",
-                    "config.json",
-                    "tokenizer_config.json",
-                    "special_tokens_map.json",
-                ],
-                local_files_only=False,
-                force_download=path.is_dir(),
+            try:
+                from filelock import FileLock, Timeout  # noqa: PLC0415 - lazy native lock.
+            except Exception as exc:
+                raise FairyError(
+                    "runtime_setup_required", "Prepare the locked native file lock dependency"
+                ) from exc
+            lock = FileLock(
+                str(self.cache_dir / ".prepare.lock"),
+                timeout=LIMITS.model_prepare_lock_seconds,
+                mode=0o600,
+                fallback_to_soft=False,
+                preserve_lock_file=True,
             )
-        except Exception as exc:
-            raise FairyError(
-                "search_not_ready",
-                "The fixed multilingual model could not be prepared; retry the explicit refresh",
-                details={"model": MODEL_NAME, "revision": MODEL_REVISION},
-            ) from exc
-        if Path(downloaded) != path:
-            raise FairyError(
-                "search_not_ready",
-                "The prepared model is not the fixed revision",
-                details={"model": MODEL_NAME, "revision": MODEL_REVISION},
+            try:
+                lock.acquire()
+            except Timeout as exc:
+                raise FairyError(
+                    "search_busy",
+                    "Another process is preparing the shared model cache; retry later",
+                    details={"stage": "model", "recovered_via": "assets prepare"},
+                ) from exc
+            try:
+                yield
+            finally:
+                lock.release()
+        finally:
+            thread.release()
+
+    def verify(self) -> dict[str, Any]:
+        self._verified_dir = None
+        self._verified_stats = None
+        path = self._snapshot_path()
+        if not path.is_dir():
+            raise _model_error(
+                "Prepare the fixed multilingual retrieval model before searching", state="absent"
             )
+        files = self._verify_files(path)
+        self._verified_dir = path
+        self._verified_stats = self._file_stats(path)
         return {
             "model": MODEL_NAME,
             "revision": MODEL_REVISION,
-            "path": str(self.model_dir()),
+            "path": str(path),
+            "profile": PROFILE_ID,
+            "files": files,
+            "verification": {"depth": "sha256", "at": datetime.now(UTC).isoformat()},
+            "downloaded": False,
         }
+
+    def model_dir(self) -> Path:
+        path = self._snapshot_path()
+        current = self._file_stats(path) if path.is_dir() else None
+        if self._verified_dir is not None and current is not None and current == self._verified_stats:
+            return self._verified_dir
+        if not path.is_dir():
+            raise _model_error(
+                "Prepare the fixed multilingual retrieval model before searching", state="absent"
+            )
+        self._verify_files(path)
+        self._verified_dir = path
+        self._verified_stats = current
+        return path
+
+    def prepare(self) -> dict[str, Any]:
+        with self._cache_lock():
+            self._verified_dir = None
+            self._verified_stats = None
+            path = self._snapshot_path()
+            if path.is_dir():
+                try:
+                    return self.verify()
+                except FairyError:
+                    pass
+            try:
+                from huggingface_hub import snapshot_download  # noqa: PLC0415 - lazy search dependency.
+            except Exception as exc:
+                raise FairyError("search_not_ready", "Prepare the locked model download dependency") from exc
+            try:
+                downloaded = snapshot_download(
+                    repo_id=MODEL_SOURCE,
+                    revision=MODEL_REVISION,
+                    cache_dir=str(self.cache_dir),
+                    allow_patterns=list(MODEL_FILES),
+                    local_files_only=False,
+                    force_download=path.is_dir(),
+                )
+            except Exception as exc:
+                raise _model_error(
+                    "The fixed multilingual model could not be prepared; retry the explicit preparation",
+                    state="download_failed",
+                ) from exc
+            if Path(downloaded) != path:
+                raise _model_error("The prepared model is not the fixed revision", state="wrong_revision")
+            record = self.verify()
+            record["downloaded"] = True
+            return record
 
     def _load(self) -> Any:
         if self._model is not None:
@@ -435,10 +549,7 @@ class SearchIndex:
         self.store = store
         self.profile = PROFILE if profile is None else profile
         self.profile_id = digest(canonical(self.profile))
-        self.model_cache = (
-            model_cache
-            or Path(os.environ.get("ASTROFAIRY_MODEL_CACHE", str(store.home / "search" / "models")))
-        ).resolve()
+        self.model_cache = (model_cache or model_cache_path(store.home)).resolve()
         self.embedder = embedder or FastEmbedder(self.model_cache)
         self._tokenizer = tokenizer
         self.search_dir = store.home / "search"
@@ -447,8 +558,48 @@ class SearchIndex:
         return FairyError(
             "search_not_ready",
             message,
-            details={**details, "prepare_via": "assets search --refresh"},
+            details={
+                **details,
+                "prepare_via": "assets prepare",
+                "refresh_via": "assets search --refresh",
+            },
         )
+
+    def _check_dependencies(self) -> None:
+        issues = {
+            item["name"]: {"required": item["required"], "installed": item["installed"]}
+            for item in dependency_observations("search")
+            if item["installed"] != item["required"]
+        }
+        if issues:
+            raise FairyError(
+                "search_not_ready",
+                "Prepare the locked search dependencies in the environment",
+                details={
+                    "stage": "dependencies",
+                    "dependencies": issues,
+                    "recovery": {
+                        "command": "install the search requirements lock",
+                        "downloads": False,
+                        "verifies": "distribution metadata",
+                        "builds_index": False,
+                        "runs_inference": False,
+                    },
+                },
+            )
+
+    def prepare(self) -> dict[str, Any]:
+        self._check_dependencies()
+        prepare = getattr(self.embedder, "prepare", None)
+        if not callable(prepare):
+            return {
+                "model": MODEL_NAME,
+                "revision": MODEL_REVISION,
+                "profile": self.profile_id,
+                "verification": {"depth": "external"},
+                "downloaded": False,
+            }
+        return cast("dict[str, Any]", prepare())
 
     def _tokenizer_for_search(self) -> Tokenizer:
         if self._tokenizer is not None:
@@ -524,6 +675,7 @@ class SearchIndex:
         )
 
     def refresh(self) -> dict[str, Any]:
+        preparation = self.prepare()
         with self._lock():
             snapshot = _read_snapshot(self.store)
             generation = int(snapshot["generation"])
@@ -532,9 +684,17 @@ class SearchIndex:
             if not heads:
                 with self.store.transaction():
                     self.store.connection.execute("DELETE FROM search_projection WHERE id = 1")
-                return {"generation": generation, "assets": 0, "chunks": 0, "ready": True}
-            prepare = getattr(self.embedder, "prepare", None)
-            prepared = prepare() if callable(prepare) else None
+                return {
+                    "generation": generation,
+                    "assets": 0,
+                    "chunks": 0,
+                    "projection": {
+                        "state": "empty",
+                        "generation": generation,
+                        "profile": self.profile_id,
+                    },
+                    "preparation": preparation,
+                }
             tokenizer = self._tokenizer_for_search()
             chunks: list[tuple[str, str, _Chunk]] = []
             for head in heads:
@@ -563,10 +723,14 @@ class SearchIndex:
                             "generation": generation,
                             "assets": len(heads),
                             "chunks": len(chunks),
-                            "ready": True,
-                            "table": pointer["table_name"],
-                            "version": table.version,
-                            "model": prepared,
+                            "projection": {
+                                "state": "current",
+                                "generation": generation,
+                                "profile": self.profile_id,
+                                "table": pointer["table_name"],
+                                "version": table.version,
+                            },
+                            "preparation": preparation,
                         }
                 except FairyError:
                     pass
@@ -639,10 +803,14 @@ class SearchIndex:
                 "generation": generation,
                 "assets": len(heads),
                 "chunks": len(rows),
-                "ready": True,
-                "table": table_name,
-                "version": version,
-                "model": prepared,
+                "projection": {
+                    "state": "current",
+                    "generation": generation,
+                    "profile": self.profile_id,
+                    "table": table_name,
+                    "version": version,
+                },
+                "preparation": preparation,
             }
 
     def page(
@@ -655,8 +823,7 @@ class SearchIndex:
         cursor: str | None = None,
         refresh: bool = False,
     ) -> dict[str, Any]:
-        if refresh:
-            self.refresh()
+        refreshed = self.refresh() if refresh else None
         if cursor is not None and refresh:
             raise FairyError("invalid", "A cursor cannot be combined with an explicit refresh")
         snapshot = _read_snapshot(self.store)
@@ -667,7 +834,11 @@ class SearchIndex:
             if (scope is None or head["scope"] == scope) and (kind is None or head["kind"] == kind)
         ]
         if not heads:
-            return {"matches": [], "total": 0}
+            result: dict[str, Any] = {"matches": [], "total": 0}
+            if refreshed is not None:
+                result["projection"] = refreshed["projection"]
+                result["preparation"] = refreshed["preparation"]
+            return result
         pointer = snapshot["pointer"]
         if pointer is None:
             raise self._not_ready(
@@ -796,7 +967,10 @@ class SearchIndex:
                 )
             total = len(ordered)
             rows = ordered[offset : offset + limit]
-        result: dict[str, Any] = {"matches": rows, "total": total}
+        result = {"matches": rows, "total": total}
+        if refreshed is not None:
+            result["projection"] = refreshed["projection"]
+            result["preparation"] = refreshed["preparation"]
         if offset + len(rows) < total:
             result["next_cursor"] = encode_cursor({"offset": offset + len(rows), **identity})
         return result
@@ -816,22 +990,86 @@ class SearchIndex:
         )
 
 
-def status() -> dict[str, Any]:
-    checks: dict[str, str | None] = {}
-    for name in ("lancedb", "fastembed", "onnxruntime", "tokenizers", "numpy"):
-        try:
-            from importlib.metadata import version  # noqa: PLC0415 - diagnosis must not import search stacks.
-
-            checks[name] = version(name)
-        except Exception:  # noqa: BLE001 - an absent optional search dependency is reported, not raised.
-            checks[name] = None
-    return {
-        "backend": "lancedb",
+def _model_observation(cache: Path, *, verify: bool) -> dict[str, Any]:
+    path = cache / MODEL_CACHE_REPO / "snapshots" / MODEL_REVISION
+    observation: dict[str, Any] = {
         "model": MODEL_NAME,
         "revision": MODEL_REVISION,
-        "profile": PROFILE_ID,
-        "dependencies": checks,
-        "ready": all(value is not None for value in checks.values()),
+        "path": str(path),
+        "declared_files": sorted(MODEL_FILES),
+    }
+    if not path.is_dir():
+        return {**observation, "state": "absent", "verification": {"depth": "presence"}}
+    problems: list[dict[str, Any]] = []
+    for name, expected in MODEL_FILE_SIZES.items():
+        file = path / name
+        try:
+            stat = file.stat()
+        except OSError:
+            problems.append({"file": name, "problem": "missing"})
+            continue
+        if not file.is_file():
+            problems.append({"file": name, "problem": "not_a_file"})
+        elif stat.st_size != expected:
+            problems.append({"file": name, "problem": "size", "expected": expected, "observed": stat.st_size})
+    if problems:
+        return {
+            **observation,
+            "state": "invalid",
+            "problems": problems,
+            "verification": {"depth": "presence"},
+        }
+    if not verify:
+        return {**observation, "state": "present_unverified", "verification": {"depth": "presence"}}
+    try:
+        files = FastEmbedder(cache)._verify_files(path)  # noqa: SLF001 - shared declaration audit.
+    except FairyError as exc:
+        return {
+            **observation,
+            "state": "invalid",
+            "problems": [exc.as_dict()],
+            "verification": {"depth": "sha256", "at": datetime.now(UTC).isoformat()},
+        }
+    return {
+        **observation,
+        "state": "verified",
+        "files": {name: item["bytes"] for name, item in files.items()},
+        "verification": {"depth": "sha256", "at": datetime.now(UTC).isoformat()},
+    }
+
+
+def observations(model_cache: Path, *, verify: bool = False) -> dict[str, Any]:
+    dependencies = dependency_observations("search")
+    issues = [item for item in dependencies if item["installed"] != item["required"]]
+    return {
+        "backend": "lancedb",
+        "identity": {"model": MODEL_NAME, "revision": MODEL_REVISION, "profile": PROFILE_ID},
+        "dependencies": {"ready": not issues, "observations": dependencies, "issues": issues},
+        "model": _model_observation(model_cache, verify=verify),
+        "projection": {"state": "not_checked"},
+        "recovery": [
+            {
+                "command": "assets prepare",
+                "downloads": True,
+                "verifies": "sha256 of the six fixed model files",
+                "builds_index": False,
+                "runs_inference": False,
+            },
+            {
+                "command": "assets search --refresh",
+                "downloads": "only when the model is absent",
+                "verifies": "sha256 of the six fixed model files",
+                "builds_index": True,
+                "runs_inference": True,
+            },
+            {
+                "command": "doctor --verify-search",
+                "downloads": False,
+                "verifies": "sha256 of the six fixed model files",
+                "builds_index": False,
+                "runs_inference": False,
+            },
+        ],
     }
 
 

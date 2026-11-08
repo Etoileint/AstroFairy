@@ -69,11 +69,12 @@ class SearchContractTests(WorkshopTest):
         self.assertIn("prepare_via", caught.exception.details)
         projection = index.refresh()
         self.assertEqual(projection["assets"], 1)
-        self.assertGreaterEqual(projection["version"], 1)
+        self.assertEqual(projection["projection"]["state"], "current")
+        self.assertGreaterEqual(projection["projection"]["version"], 1)
         rows = self.library(index).search("evidence")
         self.assertEqual(rows[0]["ref"], ref)
         self.assertEqual(rows[0]["source_generation"], projection["generation"])
-        self.assertEqual(rows[0]["table_version"], projection["version"])
+        self.assertEqual(rows[0]["table_version"], projection["projection"]["version"])
         self.assertTrue(rows[0]["index_epoch"])
 
     def test_candidates_and_retired_heads_do_not_enter_discovery(self) -> None:
@@ -159,11 +160,11 @@ class SearchContractTests(WorkshopTest):
         first = index.refresh()
         first_count = embedder.embedded
         second = index.refresh()
-        self.assertEqual(second["table"], first["table"])
+        self.assertEqual(second["projection"]["table"], first["projection"]["table"])
         self.assertEqual(embedder.embedded, first_count)
         self.approved(summary="Second", tags=[])
         third = index.refresh()
-        self.assertNotEqual(third["table"], first["table"])
+        self.assertNotEqual(third["projection"]["table"], first["projection"]["table"])
         self.assertGreater(embedder.embedded, first_count)
 
     def test_missing_table_version_requires_rebuild(self) -> None:

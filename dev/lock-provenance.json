@@ -1,0 +1,29 @@
+{
+  "diagnostics_sha256": "941e759b26a26e0e52c5eb90b5fbf66fb372e14e2398e06b518aaf34b207eaa3",
+  "format": 1,
+  "generated_at": "2026-11-08T10:00:05.989510+00:00",
+  "policy": {
+    "index_url": "https://pypi.org/simple",
+    "only_binary": ":all:",
+    "python": "3.12"
+  },
+  "profiles": {
+    "core": {
+      "lock_sha256": "121c791ad28cdf132066b1e969b3a41cf61da252d9744917ea11b2e787ec330d",
+      "pins": 10,
+      "roots_sha256": "30fb15946a0819e51c455a797b7387d42c434365acc6cc016d780ee1058319c3",
+      "snapshots_sha256": "bf2ea0681b83830393c2fb194697b1230efe6d5d25566ca92a67d4f66c7f8cfa"
+    },
+    "search": {
+      "lock_sha256": "a466f96a3b928c63173368cdf70e69f54226c980d6ce70d9b7ea6fa6ea484887",
+      "pins": 41,
+      "roots_sha256": "bebe9f5ab49fc2bbe651fca6a4d35b19bd51b96192ad2e5cb29e52b6489b751c",
+      "snapshots_sha256": "0a59965677e76022adca3207de14b24555db0069b4b046699216d5eb0fe74a35"
+    }
+  },
+  "tool": {
+    "name": "uv",
+    "sha256": "553b3a3a31484ef9e4f220085ca672cc71c851f92a92d984646a9d1c814b02c3",
+    "version": "0.13.7"
+  }
+}

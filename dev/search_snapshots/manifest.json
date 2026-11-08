@@ -1,197 +1,210 @@
 {
-  "annotated-types": {
-    "retrieved_at": "2026-11-02T20:35:31.437509+00:00",
-    "sha256": "a6e8e5b10c8fd2f596bba53e015cd37f6279fb5cec26ce0c5e9968625be4fefa",
-    "url": "https://pypi.org/pypi/annotated-types/0.8.0/json"
-  },
-  "anyio": {
-    "retrieved_at": "2026-11-02T20:35:31.834286+00:00",
-    "sha256": "0ea1314e4706d64fe828b76006f7c790b193979f9fb18c6ce416939a89fca1ff",
-    "url": "https://pypi.org/pypi/anyio/4.16.0/json"
-  },
-  "certifi": {
-    "retrieved_at": "2026-11-02T20:35:32.220462+00:00",
-    "sha256": "546ce90e02c152f5ff565baca6bc2a8f43c355855f637756f49a0143e312bdb2",
-    "url": "https://pypi.org/pypi/certifi/2026.10.23/json"
-  },
-  "charset-normalizer": {
-    "retrieved_at": "2026-11-02T20:35:32.863211+00:00",
-    "sha256": "9fda300857ae6a0486b4cd2d2fec7817ed2d45657249a6dfc0c2bbd1a44267b6",
-    "url": "https://pypi.org/pypi/charset-normalizer/3.5.2/json"
-  },
-  "click": {
-    "retrieved_at": "2026-11-02T20:35:33.238685+00:00",
-    "sha256": "4e36adc9b46f837e10ce801b7a478f9146fefdfb287292b7668fc64b1474e41d",
-    "url": "https://pypi.org/pypi/click/8.5.0/json"
-  },
-  "deprecation": {
-    "retrieved_at": "2026-11-02T20:35:33.772015+00:00",
-    "sha256": "a86184b8cfda6838017c5ace8c471ea0c4dff97de64abc5476b1f14156ce47fb",
-    "url": "https://pypi.org/pypi/deprecation/2.1.0/json"
-  },
-  "fastembed": {
-    "retrieved_at": "2026-11-02T20:35:34.250626+00:00",
-    "sha256": "17953f6e9bd683fade11cebe66e400e6e8731bf9340d122d199690d5d38e6f79",
-    "url": "https://pypi.org/pypi/fastembed/0.9.1/json"
-  },
-  "filelock": {
-    "retrieved_at": "2026-11-02T20:35:34.659500+00:00",
-    "sha256": "eef6a048275b7444d9cdeba395c3d04cec37030a62893307ec0a719aa211bb63",
-    "url": "https://pypi.org/pypi/filelock/4.2.6/json"
-  },
-  "flatbuffers": {
-    "retrieved_at": "2026-11-02T20:35:35.106846+00:00",
-    "sha256": "3800bcba3177624044bb53f06f4a588061c10034f93467a0d163549b0928045a",
-    "url": "https://pypi.org/pypi/flatbuffers/25.12.19/json"
-  },
-  "fsspec": {
-    "retrieved_at": "2026-11-02T20:35:35.530033+00:00",
-    "sha256": "4a93a853911936a59262f3ccc1a36a42cfbff106beec53d6e247d00f7a3aa1e9",
-    "url": "https://pypi.org/pypi/fsspec/2026.9.0/json"
-  },
-  "h11": {
-    "retrieved_at": "2026-11-02T20:35:35.899546+00:00",
-    "sha256": "97f4efb9cc00826f0408076983adc1a1e48e8f2cabf403aaf250f724e081440d",
-    "url": "https://pypi.org/pypi/h11/0.16.0/json"
-  },
-  "hf-xet": {
-    "retrieved_at": "2026-11-02T20:35:36.366359+00:00",
-    "sha256": "80b2cd269ee7e7907b0565cb2c89733eab049f5263dfaffca608bf6965f0d075",
-    "url": "https://pypi.org/pypi/hf-xet/1.8.0/json"
-  },
-  "httpcore": {
-    "retrieved_at": "2026-11-02T20:35:36.752627+00:00",
-    "sha256": "e26eca5c3d288fe9e6446af9bcbca1038ba688629d5c8a2886c47d74718d87a2",
-    "url": "https://pypi.org/pypi/httpcore/1.0.9/json"
-  },
-  "httpx": {
-    "retrieved_at": "2026-11-02T20:35:37.162283+00:00",
-    "sha256": "293bfab7bf587fcd0825f1bd8eed8e6303285ba14801b15659853827cbe30796",
-    "url": "https://pypi.org/pypi/httpx/0.28.1/json"
-  },
-  "huggingface-hub": {
-    "retrieved_at": "2026-11-02T20:35:37.584657+00:00",
-    "sha256": "cbb5c8feeaa6e5bb95c5dd4c95cb8e0277c7279892476bde6c3dad53e1beefca",
-    "url": "https://pypi.org/pypi/huggingface-hub/1.33.0/json"
-  },
-  "idna": {
-    "retrieved_at": "2026-11-02T20:35:37.960300+00:00",
-    "sha256": "e7cbd26e23ce60f6cb3a151d2adf3b1b087bb8f10ac2d9d6db70fdccbf3bb041",
-    "url": "https://pypi.org/pypi/idna/3.20/json"
-  },
-  "lance-namespace": {
-    "retrieved_at": "2026-11-02T20:35:38.398622+00:00",
-    "sha256": "02d945f018e32bc3547032f4e5f9824cfcd357a08a0ad11d99fb6f32bba3653b",
-    "url": "https://pypi.org/pypi/lance-namespace/0.13.0/json"
-  },
-  "lance-namespace-urllib3-client": {
-    "retrieved_at": "2026-11-02T20:35:38.844165+00:00",
-    "sha256": "2777405f7405553811713b7c36a03fb5fa6ddfae1c1c4eb4792fbf44a67b8ce3",
-    "url": "https://pypi.org/pypi/lance-namespace-urllib3-client/0.13.0/json"
-  },
-  "lancedb": {
-    "retrieved_at": "2026-11-02T20:35:39.309064+00:00",
-    "sha256": "91e4ed8cd925aca2f83bbbbbc4da7d3849ab54351136b65b01abc3f5f6ff2848",
-    "url": "https://pypi.org/pypi/lancedb/0.41.0/json"
-  },
-  "loguru": {
-    "retrieved_at": "2026-11-02T20:35:39.786172+00:00",
-    "sha256": "ee7b27c01867c9a870e3f432f1fce5a5c3baaccacd0d66e347b733e81f5b2045",
-    "url": "https://pypi.org/pypi/loguru/0.7.3/json"
-  },
-  "mmh3": {
-    "retrieved_at": "2026-11-02T20:35:40.526171+00:00",
-    "sha256": "200956b1df56ac105d6869c1a4870cf57ce36465b0488efd4bc8cadf2fb60a0e",
-    "url": "https://pypi.org/pypi/mmh3/5.3.1/json"
-  },
-  "numpy": {
-    "retrieved_at": "2026-11-02T20:35:41.086029+00:00",
-    "sha256": "3d5ab646290a0954f48ca6139bccb402377e54165b064b567d50c1106ce5678f",
-    "url": "https://pypi.org/pypi/numpy/2.5.4/json"
-  },
-  "onnxruntime": {
-    "retrieved_at": "2026-11-02T20:35:41.554759+00:00",
-    "sha256": "b97e9ff4899fa15e3850ee02831d93ca55710e7a09b16098096ef27d0c3b49cf",
-    "url": "https://pypi.org/pypi/onnxruntime/1.31.1/json"
-  },
-  "packaging": {
-    "retrieved_at": "2026-11-02T20:35:41.949322+00:00",
-    "sha256": "4f190d2f0b312b3086058cee64ab4333bf3ce67fb78b4c2bdb43899049b29f4d",
-    "url": "https://pypi.org/pypi/packaging/26.3/json"
-  },
-  "pillow": {
-    "retrieved_at": "2026-11-02T20:35:42.466950+00:00",
-    "sha256": "183d4151cbc909acf39d4d5d48469d6bc66d5516e7f506854241839d0611b69e",
-    "url": "https://pypi.org/pypi/pillow/13.0.0/json"
-  },
-  "protobuf": {
-    "retrieved_at": "2026-11-02T20:35:42.823637+00:00",
-    "sha256": "090d6bb0e21b26299221770a798ec48c5d45dc4d71a374b44b5e0e7c3a7c47f1",
-    "url": "https://pypi.org/pypi/protobuf/7.36.2/json"
-  },
-  "py-rust-stemmers": {
-    "retrieved_at": "2026-11-02T20:35:43.424741+00:00",
-    "sha256": "3996205edda29aa97b3e18dd487af1924c1bfd7c380c54206b15483cb63192c2",
-    "url": "https://pypi.org/pypi/py-rust-stemmers/0.1.8/json"
-  },
-  "pyarrow": {
-    "retrieved_at": "2026-11-02T20:35:43.968398+00:00",
-    "sha256": "820e0086a99265aeb261219e687d72eae106dba6290a66683315b4fe85276be5",
-    "url": "https://pypi.org/pypi/pyarrow/26.0.0/json"
-  },
-  "pydantic": {
-    "retrieved_at": "2026-11-02T20:35:44.629178+00:00",
-    "sha256": "752f55c1d193bf51db156f3a72040605b80f6edfef7c530a0fa45382ff3e6cca",
-    "url": "https://pypi.org/pypi/pydantic/2.14.2/json"
-  },
-  "pydantic-core": {
-    "retrieved_at": "2026-11-02T20:35:45.233827+00:00",
-    "sha256": "47d8d66946499711fad9e5610aa1ee7651a630185f395659483cc03ba7624a5b",
-    "url": "https://pypi.org/pypi/pydantic-core/2.50.2/json"
-  },
-  "python-dateutil": {
-    "retrieved_at": "2026-11-02T20:35:45.730277+00:00",
-    "sha256": "b13eb57b123adf7f9268e59818dd21bd119d1c55e0f3a2bcceb7057e37c36436",
-    "url": "https://pypi.org/pypi/python-dateutil/4.0.0/json"
-  },
-  "pyyaml": {
-    "retrieved_at": "2026-11-02T20:35:46.267165+00:00",
-    "sha256": "c3f35597bc2f08cc990c2a5fe57bef6687b3a3d7c61d8b0ba4cc067777eb1def",
-    "url": "https://pypi.org/pypi/pyyaml/6.0.3/json"
-  },
-  "requests": {
-    "retrieved_at": "2026-11-02T20:35:46.621716+00:00",
-    "sha256": "8622e50ffd295ed759ec793f2a009172a4ed0204bbc5e948de23111bc3d2aeae",
-    "url": "https://pypi.org/pypi/requests/2.34.2/json"
-  },
-  "tokenizers": {
-    "retrieved_at": "2026-11-02T20:35:47.122394+00:00",
-    "sha256": "c08480d45857e1c4d1174f000a98e74f542a875d07130d19b9c500090214487e",
-    "url": "https://pypi.org/pypi/tokenizers/0.23.3/json"
-  },
-  "tqdm": {
-    "retrieved_at": "2026-11-02T20:35:47.608464+00:00",
-    "sha256": "0589819a1bc3437c8f215d95f3f64ff24d602dc6a62598eb8d2e420c8e6a0b25",
-    "url": "https://pypi.org/pypi/tqdm/4.70.1/json"
-  },
-  "typing-extensions": {
-    "retrieved_at": "2026-11-02T20:35:48.477215+00:00",
-    "sha256": "2140da00d62dde967f52d0be0ae28444f1d6a3fe603f52c83c23988c32122d5a",
-    "url": "https://pypi.org/pypi/typing-extensions/4.16.0/json"
-  },
-  "typing-inspection": {
-    "retrieved_at": "2026-11-02T20:35:48.005776+00:00",
-    "sha256": "0605416f2f37f2df04e45360cf5ce4ca5eeca6d414bb6ddb1ec5a9893c62ac30",
-    "url": "https://pypi.org/pypi/typing-inspection/0.4.4/json"
-  },
-  "tzdata": {
-    "retrieved_at": "2026-11-02T20:35:48.831252+00:00",
-    "sha256": "82888ae1ccdc2ed984ce983353520631122c4504e5af2dc40b8eddf8398206a0",
-    "url": "https://pypi.org/pypi/tzdata/2026.6/json"
-  },
-  "urllib3": {
-    "retrieved_at": "2026-11-02T20:35:49.193192+00:00",
-    "sha256": "5315e7401db3cacccd0c2ce5daf81f752a9cc3614b18c37f2b79930b7159ce2f",
-    "url": "https://pypi.org/pypi/urllib3/2.8.0/json"
+  "format": 2,
+  "sources": {
+    "annotated-types==0.8.0": {
+      "retrieved_at": "2026-11-02T20:35:31.437509+00:00",
+      "sha256": "a6e8e5b10c8fd2f596bba53e015cd37f6279fb5cec26ce0c5e9968625be4fefa",
+      "url": "https://pypi.org/pypi/annotated-types/0.8.0/json"
+    },
+    "anyio==4.16.0": {
+      "retrieved_at": "2026-11-02T20:35:31.834286+00:00",
+      "sha256": "0ea1314e4706d64fe828b76006f7c790b193979f9fb18c6ce416939a89fca1ff",
+      "url": "https://pypi.org/pypi/anyio/4.16.0/json"
+    },
+    "certifi==2026.10.23": {
+      "retrieved_at": "2026-11-02T20:35:32.220462+00:00",
+      "sha256": "546ce90e02c152f5ff565baca6bc2a8f43c355855f637756f49a0143e312bdb2",
+      "url": "https://pypi.org/pypi/certifi/2026.10.23/json"
+    },
+    "charset-normalizer==3.5.2": {
+      "retrieved_at": "2026-11-02T20:35:32.863211+00:00",
+      "sha256": "9fda300857ae6a0486b4cd2d2fec7817ed2d45657249a6dfc0c2bbd1a44267b6",
+      "url": "https://pypi.org/pypi/charset-normalizer/3.5.2/json"
+    },
+    "click==8.5.0": {
+      "retrieved_at": "2026-11-02T20:35:33.238685+00:00",
+      "sha256": "4e36adc9b46f837e10ce801b7a478f9146fefdfb287292b7668fc64b1474e41d",
+      "url": "https://pypi.org/pypi/click/8.5.0/json"
+    },
+    "colorama==0.4.6": {
+      "retrieved_at": "2026-11-08T10:00:05.483531+00:00",
+      "sha256": "43fb351344384a44c2b7d7fff1c63496b89ac830aea714301525c1f3718addd1",
+      "url": "https://pypi.org/pypi/colorama/0.4.6/json"
+    },
+    "deprecation==2.1.0": {
+      "retrieved_at": "2026-11-02T20:35:33.772015+00:00",
+      "sha256": "a86184b8cfda6838017c5ace8c471ea0c4dff97de64abc5476b1f14156ce47fb",
+      "url": "https://pypi.org/pypi/deprecation/2.1.0/json"
+    },
+    "fastembed==0.9.1": {
+      "retrieved_at": "2026-11-02T20:35:34.250626+00:00",
+      "sha256": "17953f6e9bd683fade11cebe66e400e6e8731bf9340d122d199690d5d38e6f79",
+      "url": "https://pypi.org/pypi/fastembed/0.9.1/json"
+    },
+    "filelock==4.2.6": {
+      "retrieved_at": "2026-11-02T20:35:34.659500+00:00",
+      "sha256": "eef6a048275b7444d9cdeba395c3d04cec37030a62893307ec0a719aa211bb63",
+      "url": "https://pypi.org/pypi/filelock/4.2.6/json"
+    },
+    "flatbuffers==25.12.19": {
+      "retrieved_at": "2026-11-02T20:35:35.106846+00:00",
+      "sha256": "3800bcba3177624044bb53f06f4a588061c10034f93467a0d163549b0928045a",
+      "url": "https://pypi.org/pypi/flatbuffers/25.12.19/json"
+    },
+    "fsspec==2026.9.0": {
+      "retrieved_at": "2026-11-02T20:35:35.530033+00:00",
+      "sha256": "4a93a853911936a59262f3ccc1a36a42cfbff106beec53d6e247d00f7a3aa1e9",
+      "url": "https://pypi.org/pypi/fsspec/2026.9.0/json"
+    },
+    "h11==0.16.0": {
+      "retrieved_at": "2026-11-02T20:35:35.899546+00:00",
+      "sha256": "97f4efb9cc00826f0408076983adc1a1e48e8f2cabf403aaf250f724e081440d",
+      "url": "https://pypi.org/pypi/h11/0.16.0/json"
+    },
+    "hf-xet==1.8.0": {
+      "retrieved_at": "2026-11-02T20:35:36.366359+00:00",
+      "sha256": "80b2cd269ee7e7907b0565cb2c89733eab049f5263dfaffca608bf6965f0d075",
+      "url": "https://pypi.org/pypi/hf-xet/1.8.0/json"
+    },
+    "httpcore==1.0.9": {
+      "retrieved_at": "2026-11-02T20:35:36.752627+00:00",
+      "sha256": "e26eca5c3d288fe9e6446af9bcbca1038ba688629d5c8a2886c47d74718d87a2",
+      "url": "https://pypi.org/pypi/httpcore/1.0.9/json"
+    },
+    "httpx==0.28.1": {
+      "retrieved_at": "2026-11-02T20:35:37.162283+00:00",
+      "sha256": "293bfab7bf587fcd0825f1bd8eed8e6303285ba14801b15659853827cbe30796",
+      "url": "https://pypi.org/pypi/httpx/0.28.1/json"
+    },
+    "huggingface-hub==1.33.0": {
+      "retrieved_at": "2026-11-02T20:35:37.584657+00:00",
+      "sha256": "cbb5c8feeaa6e5bb95c5dd4c95cb8e0277c7279892476bde6c3dad53e1beefca",
+      "url": "https://pypi.org/pypi/huggingface-hub/1.33.0/json"
+    },
+    "idna==3.20": {
+      "retrieved_at": "2026-11-02T20:35:37.960300+00:00",
+      "sha256": "e7cbd26e23ce60f6cb3a151d2adf3b1b087bb8f10ac2d9d6db70fdccbf3bb041",
+      "url": "https://pypi.org/pypi/idna/3.20/json"
+    },
+    "lance-namespace-urllib3-client==0.13.0": {
+      "retrieved_at": "2026-11-02T20:35:38.844165+00:00",
+      "sha256": "2777405f7405553811713b7c36a03fb5fa6ddfae1c1c4eb4792fbf44a67b8ce3",
+      "url": "https://pypi.org/pypi/lance-namespace-urllib3-client/0.13.0/json"
+    },
+    "lance-namespace==0.13.0": {
+      "retrieved_at": "2026-11-02T20:35:38.398622+00:00",
+      "sha256": "02d945f018e32bc3547032f4e5f9824cfcd357a08a0ad11d99fb6f32bba3653b",
+      "url": "https://pypi.org/pypi/lance-namespace/0.13.0/json"
+    },
+    "lancedb==0.41.0": {
+      "retrieved_at": "2026-11-02T20:35:39.309064+00:00",
+      "sha256": "91e4ed8cd925aca2f83bbbbbc4da7d3849ab54351136b65b01abc3f5f6ff2848",
+      "url": "https://pypi.org/pypi/lancedb/0.41.0/json"
+    },
+    "loguru==0.7.3": {
+      "retrieved_at": "2026-11-02T20:35:39.786172+00:00",
+      "sha256": "ee7b27c01867c9a870e3f432f1fce5a5c3baaccacd0d66e347b733e81f5b2045",
+      "url": "https://pypi.org/pypi/loguru/0.7.3/json"
+    },
+    "mmh3==5.3.1": {
+      "retrieved_at": "2026-11-02T20:35:40.526171+00:00",
+      "sha256": "200956b1df56ac105d6869c1a4870cf57ce36465b0488efd4bc8cadf2fb60a0e",
+      "url": "https://pypi.org/pypi/mmh3/5.3.1/json"
+    },
+    "numpy==2.5.4": {
+      "retrieved_at": "2026-11-02T20:35:41.086029+00:00",
+      "sha256": "3d5ab646290a0954f48ca6139bccb402377e54165b064b567d50c1106ce5678f",
+      "url": "https://pypi.org/pypi/numpy/2.5.4/json"
+    },
+    "onnxruntime==1.31.1": {
+      "retrieved_at": "2026-11-02T20:35:41.554759+00:00",
+      "sha256": "b97e9ff4899fa15e3850ee02831d93ca55710e7a09b16098096ef27d0c3b49cf",
+      "url": "https://pypi.org/pypi/onnxruntime/1.31.1/json"
+    },
+    "packaging==26.3": {
+      "retrieved_at": "2026-11-02T20:35:41.949322+00:00",
+      "sha256": "4f190d2f0b312b3086058cee64ab4333bf3ce67fb78b4c2bdb43899049b29f4d",
+      "url": "https://pypi.org/pypi/packaging/26.3/json"
+    },
+    "pillow==13.0.0": {
+      "retrieved_at": "2026-11-02T20:35:42.466950+00:00",
+      "sha256": "183d4151cbc909acf39d4d5d48469d6bc66d5516e7f506854241839d0611b69e",
+      "url": "https://pypi.org/pypi/pillow/13.0.0/json"
+    },
+    "protobuf==7.36.2": {
+      "retrieved_at": "2026-11-02T20:35:42.823637+00:00",
+      "sha256": "090d6bb0e21b26299221770a798ec48c5d45dc4d71a374b44b5e0e7c3a7c47f1",
+      "url": "https://pypi.org/pypi/protobuf/7.36.2/json"
+    },
+    "py-rust-stemmers==0.1.8": {
+      "retrieved_at": "2026-11-02T20:35:43.424741+00:00",
+      "sha256": "3996205edda29aa97b3e18dd487af1924c1bfd7c380c54206b15483cb63192c2",
+      "url": "https://pypi.org/pypi/py-rust-stemmers/0.1.8/json"
+    },
+    "pyarrow==26.0.0": {
+      "retrieved_at": "2026-11-02T20:35:43.968398+00:00",
+      "sha256": "820e0086a99265aeb261219e687d72eae106dba6290a66683315b4fe85276be5",
+      "url": "https://pypi.org/pypi/pyarrow/26.0.0/json"
+    },
+    "pydantic-core==2.50.2": {
+      "retrieved_at": "2026-11-02T20:35:45.233827+00:00",
+      "sha256": "47d8d66946499711fad9e5610aa1ee7651a630185f395659483cc03ba7624a5b",
+      "url": "https://pypi.org/pypi/pydantic-core/2.50.2/json"
+    },
+    "pydantic==2.14.2": {
+      "retrieved_at": "2026-11-02T20:35:44.629178+00:00",
+      "sha256": "752f55c1d193bf51db156f3a72040605b80f6edfef7c530a0fa45382ff3e6cca",
+      "url": "https://pypi.org/pypi/pydantic/2.14.2/json"
+    },
+    "python-dateutil==4.0.0": {
+      "retrieved_at": "2026-11-02T20:35:45.730277+00:00",
+      "sha256": "b13eb57b123adf7f9268e59818dd21bd119d1c55e0f3a2bcceb7057e37c36436",
+      "url": "https://pypi.org/pypi/python-dateutil/4.0.0/json"
+    },
+    "pyyaml==6.0.3": {
+      "retrieved_at": "2026-11-02T20:35:46.267165+00:00",
+      "sha256": "c3f35597bc2f08cc990c2a5fe57bef6687b3a3d7c61d8b0ba4cc067777eb1def",
+      "url": "https://pypi.org/pypi/pyyaml/6.0.3/json"
+    },
+    "requests==2.34.2": {
+      "retrieved_at": "2026-11-02T20:35:46.621716+00:00",
+      "sha256": "8622e50ffd295ed759ec793f2a009172a4ed0204bbc5e948de23111bc3d2aeae",
+      "url": "https://pypi.org/pypi/requests/2.34.2/json"
+    },
+    "tokenizers==0.23.3": {
+      "retrieved_at": "2026-11-02T20:35:47.122394+00:00",
+      "sha256": "c08480d45857e1c4d1174f000a98e74f542a875d07130d19b9c500090214487e",
+      "url": "https://pypi.org/pypi/tokenizers/0.23.3/json"
+    },
+    "tqdm==4.70.1": {
+      "retrieved_at": "2026-11-02T20:35:47.608464+00:00",
+      "sha256": "0589819a1bc3437c8f215d95f3f64ff24d602dc6a62598eb8d2e420c8e6a0b25",
+      "url": "https://pypi.org/pypi/tqdm/4.70.1/json"
+    },
+    "typing-extensions==4.16.0": {
+      "retrieved_at": "2026-11-02T20:35:48.477215+00:00",
+      "sha256": "2140da00d62dde967f52d0be0ae28444f1d6a3fe603f52c83c23988c32122d5a",
+      "url": "https://pypi.org/pypi/typing-extensions/4.16.0/json"
+    },
+    "typing-inspection==0.4.4": {
+      "retrieved_at": "2026-11-02T20:35:48.005776+00:00",
+      "sha256": "0605416f2f37f2df04e45360cf5ce4ca5eeca6d414bb6ddb1ec5a9893c62ac30",
+      "url": "https://pypi.org/pypi/typing-inspection/0.4.4/json"
+    },
+    "tzdata==2026.6": {
+      "retrieved_at": "2026-11-02T20:35:48.831252+00:00",
+      "sha256": "82888ae1ccdc2ed984ce983353520631122c4504e5af2dc40b8eddf8398206a0",
+      "url": "https://pypi.org/pypi/tzdata/2026.6/json"
+    },
+    "urllib3==2.8.0": {
+      "retrieved_at": "2026-11-02T20:35:49.193192+00:00",
+      "sha256": "5315e7401db3cacccd0c2ce5daf81f752a9cc3614b18c37f2b79930b7159ce2f",
+      "url": "https://pypi.org/pypi/urllib3/2.8.0/json"
+    },
+    "win32-setctime==1.2.1": {
+      "retrieved_at": "2026-11-08T10:00:05.942836+00:00",
+      "sha256": "d26a88dcabea72f06b3f9d296f89655fd5d5d77a59b334421e7847c6a4f9d263",
+      "url": "https://pypi.org/pypi/win32-setctime/1.2.1/json"
+    }
   }
 }

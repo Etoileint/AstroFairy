@@ -269,6 +269,15 @@ class Library:
             self.get(ref)
             self._event(ref, "retired", None)
 
+    def prepare(self) -> dict[str, Any]:
+        prepare = getattr(self.search_index, "prepare", None)
+        if not callable(prepare):
+            raise FairyError(
+                "search_not_ready",
+                "The configured search backend does not implement explicit preparation",
+            )
+        return cast("dict[str, Any]", prepare())
+
     def search_page(
         self,
         query: str,
